@@ -2,10 +2,10 @@ name: Daily build
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # 07:00 JST（UTC 22:00）
+    - cron: '0 22 * * *'   # 07:00 JST
   workflow_dispatch:
 
-# ★ これがないと GITHUB_TOKEN で commit/push できません
+# これが無いと GITHUB_TOKEN で push できません
 permissions:
   contents: write
 
@@ -29,10 +29,19 @@ jobs:
       - name: Build HTML
         run: python build.py
 
+      # ★ 生成できたかをここで厳密チェック（無いなら失敗にして原因を見える化）
+      - name: Verify artifact
+        run: |
+          if [ ! -f index.html ]; then
+            echo "::error::index.html が生成されていません。build.py の実行ログを確認してください。"
+            exit 1
+          fi
+          echo "index.html found."
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add -A
           git commit -m "chore: update index.html [skip ci]" || echo "no changes"
           git push

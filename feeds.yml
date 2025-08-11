@@ -1,0 +1,12 @@
+Business:
+  - https://ai.googleblog.com/feeds/posts/default
+  - https://www.microsoft.com/en-us/research/feed/
+  - https://openai.com/blog/rss
+
+Tools:
+  - https://huggingface.co/blog/feed
+  - https://pytorch.org/feed.xml
+  - https://www.tensorflow.org/feed
+
+Posts:
+  - http://export.arxiv.org/rss/cs.AI

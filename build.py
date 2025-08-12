@@ -1,81 +1,240 @@
 # -*- coding: utf-8 -*-
 """
-AIニュース用 index.html をRSSから生成するスクリプト（堅牢版）
-- カテゴリ: Business / Tools / Posts
-- 期間: JSTの直近 HOURS_LOOKBACK 時間
-- 出力: ルート直下の index.html を上書き
+AIニュースをカードUIでHTML生成するスクリプト（UI強化版）
+- KPI（カテゴリ件数）/ タブ切替 / カード / 相対時刻 / 出典表示
+- 期間: 環境変数 HOURS_LOOKBACK（既定: 24 時間）
+- 件数: 環境変数 MAX_ITEMS_PER_CATEGORY（既定: 8 件）
 """
-import feedparser
 from datetime import datetime, timedelta, timezone
-import yaml
-import sys
+from urllib.parse import urlparse
+import os, re, sys, html
+import yaml, feedparser
 
-# ===== 設定（初期表示を充実させるためテスト時は大きめに） =====
-MAX_ITEMS_PER_CATEGORY = 8
-HOURS_LOOKBACK = 168  # 7日。運用時は 24 に戻すのを推奨
+# ===== 設定 =====
 JST = timezone(timedelta(hours=9))
+HOURS_LOOKBACK = int(os.environ.get("HOURS_LOOKBACK", "24"))
+MAX_ITEMS_PER_CATEGORY = int(os.environ.get("MAX_ITEMS_PER_CATEGORY", "8"))
 
-def load_feeds():
-    with open("feeds.yml", "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+# ===== ユーティリティ =====
+def strip_tags(s: str) -> str:
+    if not s: return ""
+    s = re.sub(r"<[^>]+>", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
 
-def fetch_items(url):
-    try:
-        return feedparser.parse(url).entries
-    except Exception as e:
-        print(f"[WARN] feed parse failed: {url} -> {e}", file=sys.stderr)
-        return []
+def humanize(dt: datetime, now: datetime) -> str:
+    delta = now - dt
+    sec = int(delta.total_seconds())
+    if sec < 60:   return "たった今"
+    if sec < 3600: return f"{sec // 60}分前"
+    if sec < 86400:return f"{sec // 3600}時間前"
+    days = sec // 86400
+    return f"{days}日前"
 
-def within_lookback(entry, cutoff):
-    # published_parsed または updated_parsed を見る。無ければ True（採用）
+def parse_dt(entry) -> datetime | None:
     for key in ("published_parsed", "updated_parsed"):
         t = getattr(entry, key, None) or entry.get(key)
         if t:
-            dt = datetime(*t[:6], tzinfo=timezone.utc).astimezone(JST)
-            return dt >= cutoff
-    return True
+            return datetime(*t[:6], tzinfo=timezone.utc).astimezone(JST)
+    return None
+
+def domain_of(link: str) -> str:
+    try:
+        host = urlparse(link).netloc
+        return host.replace("www.", "")
+    except Exception:
+        return ""
+
+def normalize_feeds(feeds_yaml: dict) -> dict:
+    """Business/Tools/Posts（大文字小文字どちらでも）を受け付ける"""
+    norm = {"business": [], "tools": [], "posts": []}
+    for k, v in (feeds_yaml or {}).items():
+        lk = (k or "").strip().lower()
+        if lk in norm:
+            norm[lk] = v or []
+    return norm
+
+# ===== 収集 =====
+def collect(feeds_cfg: dict) -> dict:
+    cutoff = datetime.now(JST) - timedelta(hours=HOURS_LOOKBACK)
+    result = {"business": [], "tools": [], "posts": []}
+    for cat in result.keys():
+        for item in feeds_cfg.get(cat, []):
+            # feeds.yml は文字列URL でも {name,url} でもOK
+            if isinstance(item, dict):
+                name, url = item.get("name") or "", item.get("url") or ""
+            else:
+                name, url = "", str(item)
+            try:
+                parsed = feedparser.parse(url)
+            except Exception as e:
+                print(f"[WARN] parse error: {url} -> {e}", file=sys.stderr)
+                continue
+            for e in parsed.entries:
+                dt = parse_dt(e) or datetime.now(JST)
+                if dt < cutoff: 
+                    continue
+                title = html.escape(getattr(e, "title", "(no title)"))
+                link  = getattr(e, "link", "#")
+                summary = strip_tags(getattr(e, "summary", ""))[:220] + ("…" if getattr(e, "summary", "") and len(strip_tags(getattr(e,"summary",""))) > 220 else "")
+                result[cat].append({
+                    "title": title,
+                    "link": link,
+                    "summary": summary,
+                    "dt": dt,
+                    "source": name or domain_of(link)
+                })
+    # 新しい順/件数制限
+    for cat in result:
+        result[cat].sort(key=lambda x: x["dt"], reverse=True)
+        result[cat] = result[cat][:MAX_ITEMS_PER_CATEGORY]
+    return result
+
+# ===== HTMLレンダリング =====
+PAGE_TMPL = """<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Daily AI News — {updated}</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">📰 Daily AI News</div>
+    <div class="updated">最終更新：{updated}</div>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">今日の最新AI情報</h1>
+    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近{hours}時間の更新を配信します。</p>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value">{n_business}件</div>
+        <div class="kpi-label">ビジネスニュース</div>
+        <div class="kpi-note">重要度高め</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">{n_tools}件</div>
+        <div class="kpi-label">ツールニュース</div>
+        <div class="kpi-note">開発者向け</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">{n_posts}件</div>
+        <div class="kpi-label">SNS/論文ポスト</div>
+        <div class="kpi-note">検証系</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">{date_jst}</div>
+        <div class="kpi-label">最終更新</div>
+        <div class="kpi-note">JST</div>
+      </div>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-target="#business" aria-selected="true">🏢 ビジネスニュース</button>
+      <button class="tab" data-target="#tools" aria-selected="false">⚡ ツールニュース</button>
+      <button class="tab" data-target="#posts" aria-selected="false">🧪 SNS/論文ポスト</button>
+    </nav>
+
+    {sections}
+
+    <section class="note">
+      <p>方針：一次情報（公式ブログ/プレス/論文）を優先。各カード末尾に<strong>出典URL</strong>を明記。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>Generated by <code>build.py</code> · Timezone: JST</div>
+    <div><a href="https://github.com/">Hosted on GitHub Pages</a></div>
+  </footer>
+
+  <script>
+    // タブ切替（依存ライブラリなし）
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(btn => btn.addEventListener('click', () => {
+      tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      const target = document.querySelector(btn.dataset.target);
+      if (target) target.classList.remove('hidden');
+    }));
+  </script>
+</body>
+</html>"""
+
+SECTION_TMPL = """
+<section id="{id}" class="tab-panel {hidden}">
+  {cards}
+</section>"""
+
+CARD_TMPL = """
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="{link}" target="_blank" rel="noopener">{title}</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">{summary}</p>
+    <div class="chips">
+      <span class="chip">{source}</span>
+      <span class="chip ghost">{timeago}</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="{link}" target="_blank" rel="noopener">{link}</a>
+  </div>
+</article>"""
+
+EMPTY_TMPL = '<div class="empty">新着なし（期間を広げるかフィードを追加してください）</div>'
+
+def render_cards(items, now) -> str:
+    if not items:
+        return EMPTY_TMPL
+    htmls = []
+    for it in items:
+        htmls.append(CARD_TMPL.format(
+            link=it["link"],
+            title=it["title"],
+            summary=html.escape(it["summary"]),
+            source=html.escape(it["source"] or ""),
+            timeago=humanize(it["dt"], now),
+        ))
+    return "\n".join(htmls)
+
+def render_page(collected: dict) -> str:
+    now = datetime.now(JST)
+    sections = []
+    # business
+    sections.append(SECTION_TMPL.format(
+        id="business", hidden="", cards=render_cards(collected["business"], now)
+    ))
+    # tools
+    sections.append(SECTION_TMPL.format(
+        id="tools", hidden="hidden", cards=render_cards(collected["tools"], now)
+    ))
+    # posts
+    sections.append(SECTION_TMPL.format(
+        id="posts", hidden="hidden", cards=render_cards(collected["posts"], now)
+    ))
+    return PAGE_TMPL.format(
+        updated=now.strftime("%Y-%m-%d %H:%M JST"),
+        hours=HOURS_LOOKBACK,
+        n_business=len(collected["business"]),
+        n_tools=len(collected["tools"]),
+        n_posts=len(collected["posts"]),
+        date_jst=now.strftime("%Y年%m月%d日 %H:%M"),
+        sections="\n".join(sections)
+    )
 
 def main():
-    now = datetime.now(JST)
-    cutoff = now - timedelta(hours=HOURS_LOOKBACK)
-    feeds = load_feeds()
-
-    html = []
-    html.append(f"<!doctype html><html lang='ja'><head><meta charset='utf-8'>"
-                f"<meta name='viewport' content='width=device-width, initial-scale=1'>"
-                f"<title>Daily AI News — {now.strftime('%Y-%m-%d %H:%M %Z')}</title>"
-                f"<style>body{{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans JP',sans-serif;max-width:980px;margin:20px auto;padding:0 16px;}}h1{{margin:0 0 8px}}h2{{margin-top:28px}}ul{{line-height:1.7}}small{{color:#555}}</style>"
-                f"</head><body>")
-    html.append(f"<h1>Daily AI News</h1><p>最終更新：{now.strftime('%Y-%m-%d %H:%M %Z')}</p>")
-    html.append("<p>方針：一次情報（公式ブログ/プレス/論文）へのリンクを優先。各項目末尾に出典URLを明記。</p>")
-
-    if not feeds:
-        html.append("<p><strong>feeds.yml が空です。</strong></p>")
-    else:
-        for category, urls in feeds.items():
-            html.append(f"<h2>{category}</h2><ul>")
-            shown = 0
-            for url in urls:
-                for entry in fetch_items(url):
-                    if not within_lookback(entry, cutoff):
-                        continue
-                    title = getattr(entry, "title", "(no title)")
-                    link = getattr(entry, "link", "#")
-                    html.append(f"<li><a href='{link}' target='_blank' rel='noopener'>{title}</a> "
-                                f"<br><small>出典: <a href='{link}' target='_blank' rel='noopener'>{link}</a></small></li>")
-                    shown += 1
-                    if shown >= MAX_ITEMS_PER_CATEGORY:
-                        break
-                if shown >= MAX_ITEMS_PER_CATEGORY:
-                    break
-            if shown == 0:
-                html.append("<li>新着なし（期間を広げるかフィードを追加してください）</li>")
-            html.append("</ul>")
-
-    html.append("</body></html>")
-
+    with open("feeds.yml", "r", encoding="utf-8") as f:
+        raw = yaml.safe_load(f) or {}
+    feeds = normalize_feeds(raw)
+    data = collect(feeds)
+    html_out = render_page(data)
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write("\n".join(html))
+        f.write(html_out)
     print("wrote index.html")
 
 if __name__ == "__main__":

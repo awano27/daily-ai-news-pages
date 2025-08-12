@@ -1,4 +1,4 @@
-name: Daily build
+name: Daily build (LibreTranslate)
 
 on:
   schedule:
@@ -15,29 +15,25 @@ jobs:
       TZ: Asia/Tokyo
       HOURS_LOOKBACK: '24'
       MAX_ITEMS_PER_CATEGORY: '8'
-      TRANSLATE_TO_JA: '1'           # ← 要約を日本語化
-      DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}  # ← Secrets に登録が必要
+      TRANSLATE_TO_JA: '1'
+      USE_LIBRE: '1'
+      LIBRE_URL: 'https://libretranslate.com'
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: |
           python -V
           pip install --upgrade pip
-          pip install feedparser pyyaml deepl
-
+          pip install feedparser pyyaml deep-translator
       - name: Build HTML
         run: python build.py
-
-      - name: Commit and push (including cache)
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "chore: update index.html & cache [skip ci]" || echo "no changes"
+          git commit -m "chore: update index.html [skip ci]" || echo "no changes"
           git push

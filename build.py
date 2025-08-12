@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-AIニュース HTML 生成（UI強化＋一般ニュースAI抽出＋要約の日本語化対応）
-- ソースリンクは原文のまま、ページに表示する要約は日本語化（DeepL API を利用・任意）
+AIニュース HTML 生成（UI＋一般ニュースAI抽出＋要約の日本語化・LibreTranslate版）
+- ソースへのリンクは原文のまま、サイト表示の要約だけ日本語化
+- 翻訳: LibreTranslate（無料・鍵不要）/ DeepL（任意の鍵あり時のみ）/ キャッシュ
 - カードUI / タブ / KPI / 相対時刻
 - 一般ニュース（general: true）は AIキーワードにヒットしたものだけ採用
 - 期間: HOURS_LOOKBACK(既定24h) / 件数: MAX_ITEMS_PER_CATEGORY(既定8)
-- テンプレート: string.Template（JS/CSSの{}衝突回避）
+- string.Template を使用（JS/CSSの{}と衝突しない）
 """
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
@@ -18,8 +19,12 @@ JST = timezone(timedelta(hours=9))
 HOURS_LOOKBACK = int(os.environ.get("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.environ.get("MAX_ITEMS_PER_CATEGORY", "8"))
 
-# 日本語要約を生成するか（DEEPL_API_KEY が必要）
-TRANSLATE_TO_JA = os.environ.get("TRANSLATE_TO_JA", "0").lower() in ("1","true","yes")
+# ===== 翻訳の設定 =====
+TRANSLATE_TO_JA = os.environ.get("TRANSLATE_TO_JA", "1").lower() in ("1","true","yes")
+# LibreTranslate（無料・鍵不要・デフォルトON）
+USE_LIBRE = os.environ.get("USE_LIBRE", "1").lower() in ("1","true","yes")
+LIBRE_URL = os.environ.get("LIBRE_URL", "https://libretranslate.com")
+# DeepL（任意。キーがあれば最優先・品質高）
 DEEPL_API_KEY = os.environ.get("DEEPL_API_KEY", "")
 
 # ===== AI関連キーワード =====
@@ -75,6 +80,7 @@ def normalize_feeds(feeds_yaml: dict) -> dict:
         lk = (k or "").strip().lower()
         if lk in norm:
             norm[lk] = v or []
+    # 互換: 先頭大文字キーに対応
     for old, new in (("Business","business"),("Tools","tools"),("Posts","posts")):
         if old in (feeds_yaml or {}):
             norm[new] = feeds_yaml.get(old) or norm[new]
@@ -87,7 +93,7 @@ def matches_keywords(text: str, keywords: list[str]) -> bool:
             return True
     return False
 
-# ===== 翻訳（DeepL）＋キャッシュ =====
+# ===== 翻訳＋キャッシュ =====
 def _cache_path():
     os.makedirs("_cache", exist_ok=True)
     return os.path.join("_cache", "translations.json")
@@ -103,27 +109,53 @@ def _save_cache(cache: dict):
     with open(_cache_path(), "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
-def translate_to_ja(text: str) -> str | None:
-    """DeepL APIで日本語訳。キー未設定や失敗時は None を返す。"""
-    if not (TRANSLATE_TO_JA and DEEPL_API_KEY and text):
-        return None
+def _ja_from_cache(text: str) -> str | None:
     h = hashlib.sha1(text.encode("utf-8")).hexdigest()
     cache = _load_cache()
-    if h in cache:
-        return cache[h]
+    return cache.get(h)
+
+def _save_to_cache(text: str, ja: str):
+    h = hashlib.sha1(text.encode("utf-8")).hexdigest()
+    cache = _load_cache()
+    cache[h] = ja
+    _save_cache(cache)
+
+def _translate_deepl(text: str) -> str | None:
+    if not DEEPL_API_KEY:
+        return None
     try:
         import deepl
         translator = deepl.Translator(DEEPL_API_KEY)
-        # 文章が長い場合は適度に切る（コスト抑制）
-        src = text[:1200]
-        ja = translator.translate_text(src, target_lang="JA").text
-        cache[h] = ja
-        _save_cache(cache)
-        time.sleep(0.2)  # レート控えめ
-        return ja
+        return translator.translate_text(text[:1000], target_lang="JA").text
     except Exception as e:
         print(f"[WARN] DeepL translation failed: {e}", file=sys.stderr)
         return None
+
+def _translate_libre(text: str) -> str | None:
+    try:
+        from deep_translator import LibreTranslateTranslator
+        return LibreTranslateTranslator(source="auto", target="ja", url=LIBRE_URL).translate(text[:1000])
+    except Exception as e:
+        print(f"[WARN] LibreTranslate failed: {e}", file=sys.stderr)
+        return None
+
+def translate_to_ja(text: str) -> str | None:
+    """優先順位: キャッシュ → DeepL(キーあり) → LibreTranslate"""
+    if not (TRANSLATE_TO_JA and text):
+        return None
+    cached = _ja_from_cache(text)
+    if cached:
+        return cached
+
+    ja = None
+    if DEEPL_API_KEY:
+        ja = _translate_deepl(text)
+    if (not ja) and USE_LIBRE:
+        ja = _translate_libre(text)
+
+    if ja:
+        _save_to_cache(text, ja)
+    return ja
 
 # ===== 収集（AIフィルタ＋日本語要約） =====
 def collect(feeds_cfg: dict) -> dict:
@@ -133,6 +165,7 @@ def collect(feeds_cfg: dict) -> dict:
 
     for cat in result.keys():
         for item in feeds_cfg.get(cat, []):
+            # feeds.yml: 文字列URL or {name,url,general,include}
             if isinstance(item, dict):
                 name = item.get("name") or ""
                 url  = item.get("url") or ""
@@ -147,6 +180,7 @@ def collect(feeds_cfg: dict) -> dict:
                 print(f"[WARN] parse error: {url} -> {e}", file=sys.stderr)
                 continue
 
+            # キーワード
             if cat == "business":
                 kw = KEYWORDS_COMMON + KEYWORDS_BUSINESS + include_extra
             elif cat == "tools":
@@ -164,6 +198,7 @@ def collect(feeds_cfg: dict) -> dict:
                 summary_raw = getattr(e, "summary", "")
                 text = f"{title} {strip_tags(summary_raw)}"
 
+                # 一般ニュースはAI関連にヒットしたものだけ採用
                 if is_general:
                     if any(neg in text for neg in NEGATIVE_HINTS):
                         continue
@@ -174,7 +209,6 @@ def collect(feeds_cfg: dict) -> dict:
                     continue
                 seen_links.add(link)
 
-                # 英語ベースの要約（フィードに要約が無い場合はタイトル）
                 en_summary = strip_tags(summary_raw) or title
                 if len(en_summary) > 220:
                     en_summary = en_summary[:220] + "…"
@@ -196,6 +230,7 @@ def collect(feeds_cfg: dict) -> dict:
                     "lang": lang,
                 })
 
+    # 新しい順＆上限
     for cat in result:
         result[cat].sort(key=lambda x: x["dt"], reverse=True)
         result[cat] = result[cat][:MAX_ITEMS_PER_CATEGORY]
@@ -218,7 +253,7 @@ PAGE_TMPL = Template("""<!doctype html>
 
   <main class="container">
     <h1 class="page-title">今日の最新AI情報</h1>
-    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近${hours}時間の更新を配信します。ソースは原文（英語等）のまま、要約のみ日本語化。</p>
+    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近${hours}時間の更新を配信します。ソースは原文、要約のみ日本語化。</p>
 
     <section class="kpi-grid">
       <div class="kpi-card">

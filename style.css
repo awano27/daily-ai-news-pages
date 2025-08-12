@@ -1,0 +1,39 @@
+:root{
+  --fg:#0b0f14; --bg:#fff; --muted:#667788; --line:#e6eef5;
+  --brand:#2c7be5; --brand-weak:#edf4ff; --chip:#eef2f7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans JP',sans-serif}
+.container{max-width:1000px;margin:0 auto;padding:24px 16px}
+.site-header,.site-footer{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.site-footer{border-top:1px solid var(--line);border-bottom:none;color:var(--muted)}
+.brand{font-weight:700}
+.updated{color:var(--muted);font-size:14px}
+.page-title{margin:12px 0 8px 0;font-size:28px}
+.lead{color:var(--muted);margin:0 0 16px 0}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0 20px}
+.kpi-card{background:var(--brand-weak);border:1px solid #d6e7ff;border-radius:12px;padding:14px}
+.kpi-value{font-size:22px;font-weight:700}
+.kpi-label{color:#174a89}
+.kpi-note{color:var(--muted);font-size:12px}
+
+.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin:12px 0}
+.tab{appearance:none;background:#fff;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;padding:8px 12px;cursor:pointer;color:#334}
+.tab.active{background:#f7fbff;border-color:#cfe2ff;color:#123}
+
+.tab-panel{padding:16px 0}
+.hidden{display:none}
+
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0;background:#fff}
+.card-header{margin-bottom:6px}
+.card-title{color:#0a3d8f;text-decoration:none;font-weight:700}
+.card-title:hover{text-decoration:underline}
+.card-summary{margin:8px 0;color:#26323f}
+.card-footer{margin-top:8px;color:var(--muted);font-size:13px;word-break:break-all}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:#334}
+.chip.ghost{background:#fafbfc}
+.empty{padding:16px 12px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);margin-top:12px}
+.note{color:var(--muted);font-size:14px;margin-top:16px}
+@media (max-width: 840px){ .kpi-grid{grid-template-columns:repeat(2,1fr)} }

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-AIニュースをカードUIでHTML生成するスクリプト（UI強化版・Template版）
-- KPI（カテゴリ件数）/ タブ切替 / カード / 相対時刻 / 出典表示
+AIニュース HTML 生成スクリプト（UI強化＋一般ニュースからAI記事のみ抽出）
+- カードUI / タブ / KPI / 相対時刻
+- Business / Tools で一般ニュース（general: true）は AI関連キーワードにマッチした記事のみ採用
 - 期間: 環境変数 HOURS_LOOKBACK（既定: 24 時間）
 - 件数: 環境変数 MAX_ITEMS_PER_CATEGORY（既定: 8 件）
-- 重要: Pythonのstr.formatによる `{}` 衝突を避けるため、string.Template（${...}）で埋め込みます。
+- テンプレート: string.Template を使用（JS/CSSの{}と衝突しない）
 """
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
@@ -12,11 +13,29 @@ from string import Template
 import os, re, sys, html
 import yaml, feedparser
 
-# ===== 設定 =====
+# ===== 基本設定 =====
 JST = timezone(timedelta(hours=9))
 HOURS_LOOKBACK = int(os.environ.get("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.environ.get("MAX_ITEMS_PER_CATEGORY", "8"))
 
+# ===== AI関連キーワード =====
+KEYWORDS_COMMON = [
+    "AI","人工知能","生成AI","生成型AI","大規模言語モデル","LLM","機械学習","深層学習",
+    "chatgpt","gpt","openai","anthropic","claude","llama","gemini","copilot",
+    "stable diffusion","midjourney","mistral","cohere","perplexity","hugging face","langchain",
+    "rag","ベンチマーク","推論","微調整","ファインチューニング","画像生成","動画生成","sora","nemo","nim","blackwell"
+]
+KEYWORDS_BUSINESS = [
+    "規制","法規制","ガイドライン","政府","省庁","投資","資金調達","ipo","買収","m&a",
+    "提携","合意","価格","料金","企業導入","商用利用","市場","売上","収益","雇用","監督","規制当局","コンプライアンス"
+]
+KEYWORDS_TOOLS = [
+    "api","sdk","モデル","リリース","アップデート","ベータ","プレビュー","オープンソース","oss",
+    "サンプル","チュートリアル","パッケージ","ライブラリ","バージョン","benchmark","throughput","latency","性能","推論速度"
+]
+NEGATIVE_HINTS = ["スポーツ","天気","為替","相場","観光","レシピ","占い"]
+
+# ===== ユーティリティ =====
 def strip_tags(s: str) -> str:
     if not s: return ""
     s = re.sub(r"<[^>]+>", " ", s)
@@ -58,41 +77,82 @@ def normalize_feeds(feeds_yaml: dict) -> dict:
             norm[new] = feeds_yaml.get(old) or norm[new]
     return norm
 
+def matches_keywords(text: str, keywords: list[str]) -> bool:
+    s = text.lower()
+    for kw in keywords:
+        if kw.lower() in s:
+            return True
+    return False
+
+# ===== 収集（AIフィルタ対応） =====
 def collect(feeds_cfg: dict) -> dict:
     cutoff = datetime.now(JST) - timedelta(hours=HOURS_LOOKBACK)
     result = {"business": [], "tools": [], "posts": []}
+    seen_links = set()
+
     for cat in result.keys():
         for item in feeds_cfg.get(cat, []):
+            # feeds.yml: 文字列URL or {name,url,general,include}
             if isinstance(item, dict):
-                name, url = item.get("name") or "", item.get("url") or ""
+                name = item.get("name") or ""
+                url  = item.get("url") or ""
+                is_general = bool(item.get("general", False))
+                include_extra = item.get("include") or []
             else:
-                name, url = "", str(item)
+                name, url, is_general, include_extra = "", str(item), False, []
+
             try:
                 parsed = feedparser.parse(url)
             except Exception as e:
                 print(f"[WARN] parse error: {url} -> {e}", file=sys.stderr)
                 continue
+
+            if cat == "business":
+                kw = KEYWORDS_COMMON + KEYWORDS_BUSINESS + include_extra
+            elif cat == "tools":
+                kw = KEYWORDS_COMMON + KEYWORDS_TOOLS + include_extra
+            else:
+                kw = KEYWORDS_COMMON + include_extra
+
             for e in parsed.entries:
                 dt = parse_dt(e) or datetime.now(JST)
-                if dt < cutoff: 
+                if dt < cutoff:
                     continue
-                title = html.escape(getattr(e, "title", "(no title)"))
+
+                title = getattr(e, "title", "(no title)")
                 link  = getattr(e, "link", "#")
                 summary_raw = getattr(e, "summary", "")
-                summary_stripped = strip_tags(summary_raw)
-                summary = (summary_stripped[:220] + "…") if len(summary_stripped) > 220 else summary_stripped
+                text = f"{title} {strip_tags(summary_raw)}"
+
+                # 一般ニュースは AI キーワードにヒットしたものだけ採用
+                if is_general:
+                    if any(neg in text for neg in NEGATIVE_HINTS):
+                        continue
+                    if not matches_keywords(text, kw):
+                        continue
+
+                if link in seen_links:
+                    continue
+                seen_links.add(link)
+
+                summary = strip_tags(summary_raw)
+                if len(summary) > 220:
+                    summary = summary[:220] + "…"
+
                 result[cat].append({
-                    "title": title,
+                    "title": html.escape(title),
                     "link": link,
-                    "summary": summary,
+                    "summary": html.escape(summary),
                     "dt": dt,
-                    "source": name or domain_of(link)
+                    "source": name or domain_of(link),
                 })
+
     for cat in result:
         result[cat].sort(key=lambda x: x["dt"], reverse=True)
         result[cat] = result[cat][:MAX_ITEMS_PER_CATEGORY]
     return result
 
+# ===== HTMLレンダリング =====
 PAGE_TMPL = Template("""<!doctype html>
 <html lang="ja">
 <head>
@@ -143,7 +203,7 @@ PAGE_TMPL = Template("""<!doctype html>
     ${sections}
 
     <section class="note">
-      <p>方針：一次情報（公式ブログ/プレス/論文）を優先。各カード末尾に<strong>出典URL</strong>を明記。</p>
+      <p>方針：一次情報（公式ブログ/プレス/論文）を優先。一般ニュースは AI キーワードで抽出。各カード末尾に<strong>出典URL</strong>を明記。</p>
     </section>
   </main>
 
@@ -198,7 +258,7 @@ def render_cards(items, now) -> str:
         htmls.append(CARD_TMPL.substitute(
             link=it["link"],
             title=it["title"],
-            summary=html.escape(it["summary"]),
+            summary=it["summary"],
             source=html.escape(it["source"] or ""),
             timeago=humanize(it["dt"], now),
         ))

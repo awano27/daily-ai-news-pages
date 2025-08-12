@@ -1,12 +1,35 @@
 Business:
-  - https://ai.googleblog.com/feeds/posts/default
-  - https://www.microsoft.com/en-us/research/feed/
-  - https://openai.com/blog/rss
+  - name: Google AI Blog
+    url: https://ai.googleblog.com/feeds/posts/default?alt=rss
+  - name: Microsoft Research Blog
+    url: https://www.microsoft.com/en-us/research/feed/
+  - name: Reuters Tech
+    url: https://feeds.reuters.com/reuters/technologyNews
+    general: true
+  - name: Bloomberg Technology
+    url: https://www.bloomberg.com/feeds/technology.rss
+    general: true
+  - name: "Google News: 規制 or 投資 (AI, 日本語)"
+    url: "https://news.google.com/rss/search?q=AI+OR+%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD+%28%E8%A6%8F%E5%88%B6+OR+%E6%8A%95%E8%B3%87+OR+M%26A+OR+%E4%BE%A1%E6%A0%BC%29&hl=ja&gl=JP&ceid=JP:ja"
+    general: true
 
 Tools:
-  - https://huggingface.co/blog/feed
-  - https://pytorch.org/feed.xml
-  - https://www.tensorflow.org/feed
+  - name: Hugging Face Blog
+    url: https://huggingface.co/blog/feed.xml
+  - name: PyTorch Blog
+    url: https://pytorch.org/feed.xml
+  - name: TensorFlow Blog
+    url: https://blog.tensorflow.org/feeds/posts/default
+  - name: TechCrunch
+    url: https://techcrunch.com/feed/
+    general: true
+  - name: The Verge
+    url: https://www.theverge.com/rss/index.xml
+    general: true
+  - name: "Google News: API/SDK/model (AI, 英語)"
+    url: "https://news.google.com/rss/search?q=(AI%20OR%20%22large%20language%20model%22)%20(API%20OR%20SDK%20OR%20model%20OR%20open%20source)&hl=en-US&gl=US&ceid=US:en"
+    general: true
 
 Posts:
-  - http://export.arxiv.org/rss/cs.AI
+  - name: arXiv cs.AI
+    url: https://export.arxiv.org/rss/cs.AI

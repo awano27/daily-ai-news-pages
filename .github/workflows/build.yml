@@ -5,7 +5,6 @@ on:
     - cron: '0 22 * * *'   # 07:00 JST
   workflow_dispatch:
 
-# これが無いと GITHUB_TOKEN で push できません
 permissions:
   contents: write
 
@@ -14,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Tokyo
+      HOURS_LOOKBACK: '24'
+      MAX_ITEMS_PER_CATEGORY: '8'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,19 +25,16 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install feedparser pyyaml
+        run: |
+          python -V
+          pip install --upgrade pip
+          pip install feedparser pyyaml
 
       - name: Build HTML
         run: python build.py
 
-      # ★ 生成できたかをここで厳密チェック（無いなら失敗にして原因を見える化）
       - name: Verify artifact
-        run: |
-          if [ ! -f index.html ]; then
-            echo "::error::index.html が生成されていません。build.py の実行ログを確認してください。"
-            exit 1
-          fi
-          echo "index.html found."
+        run: test -f index.html && echo "index.html found"
 
       - name: Commit and push
         run: |

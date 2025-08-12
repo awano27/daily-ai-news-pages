@@ -1,21 +1,20 @@
-# Daily AI News（UI＋AIフィルタ版）
-- 直近24時間の AI ニュースを **ビジネス / ツール / ポスト** に分類してカードUIで表示
-- 一般ニュースRSSは `general: true` を付けると **AI関連キーワードにヒットした記事のみ採用**
+# 日本語要約対応（DeepL）版
+- ソースリンクは原文のまま、ページに掲載する **要約のみ日本語化** します（DeepL API Free/Pro）。
+- 一般ニュースは `general: true` で AI 関連キーワードにマッチしたものだけ採用します。
 
-## 使い方
-1. 本リポジトリ直下に `build.py` と `style.css` を置く
-2. `feeds.yml` を編集（一般ニュースは `general: true` を付ける）
-3. ローカルで生成 → コミット
-   ```bash
-   pip install feedparser pyyaml
-   python build.py
-   git add build.py style.css feeds.yml index.html
-   git commit -m "feat: ui + ai filter"
-   git push
-   ```
-4. GitHub Pages は `main / /(root)` を選択
-5. Actions（同梱の `build.yml`）で毎朝 07:00 JST に自動更新
+## セットアップ
+1. **DeepL APIキー** を取得して GitHub Secrets に `DEEPL_API_KEY` として登録  
+   - Repository → *Settings → Secrets and variables → Actions* → **New repository secret**
+2. 本リポジトリに `build.py`（本ファイル）と `style.css`、`feeds.yml` を置く
+3. 同梱の `.github/workflows/build.yml` を使う（`TRANSLATE_TO_JA='1'` が有効）
 
-## 環境変数
-- `HOURS_LOOKBACK`（既定=24）
-- `MAX_ITEMS_PER_CATEGORY`（既定=8）
+## ローカル実行
+```bash
+pip install feedparser pyyaml deepl
+set DEEPL_API_KEY=xxxxxxxxxxxxxxxx  # Windows PowerShell は $env:DEEPL_API_KEY="..."
+set TRANSLATE_TO_JA=1               # PowerShell: $env:TRANSLATE_TO_JA="1"
+python build.py
+```
+
+## キャッシュ
+- `_cache/translations.json` に英→日訳を保存し、次回以降は再利用します（Actions のコミットに含めます）。

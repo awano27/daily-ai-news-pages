@@ -1,22 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-AIニュース HTML 生成スクリプト（UI強化＋一般ニュースからAI記事のみ抽出）
+AIニュース HTML 生成（UI強化＋一般ニュースAI抽出＋要約の日本語化対応）
+- ソースリンクは原文のまま、ページに表示する要約は日本語化（DeepL API を利用・任意）
 - カードUI / タブ / KPI / 相対時刻
-- Business / Tools で一般ニュース（general: true）は AI関連キーワードにマッチした記事のみ採用
-- 期間: 環境変数 HOURS_LOOKBACK（既定: 24 時間）
-- 件数: 環境変数 MAX_ITEMS_PER_CATEGORY（既定: 8 件）
-- テンプレート: string.Template を使用（JS/CSSの{}と衝突しない）
+- 一般ニュース（general: true）は AIキーワードにヒットしたものだけ採用
+- 期間: HOURS_LOOKBACK(既定24h) / 件数: MAX_ITEMS_PER_CATEGORY(既定8)
+- テンプレート: string.Template（JS/CSSの{}衝突回避）
 """
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
 from string import Template
-import os, re, sys, html
+import os, re, sys, html, json, hashlib, time
 import yaml, feedparser
 
 # ===== 基本設定 =====
 JST = timezone(timedelta(hours=9))
 HOURS_LOOKBACK = int(os.environ.get("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.environ.get("MAX_ITEMS_PER_CATEGORY", "8"))
+
+# 日本語要約を生成するか（DEEPL_API_KEY が必要）
+TRANSLATE_TO_JA = os.environ.get("TRANSLATE_TO_JA", "0").lower() in ("1","true","yes")
+DEEPL_API_KEY = os.environ.get("DEEPL_API_KEY", "")
 
 # ===== AI関連キーワード =====
 KEYWORDS_COMMON = [
@@ -71,7 +75,6 @@ def normalize_feeds(feeds_yaml: dict) -> dict:
         lk = (k or "").strip().lower()
         if lk in norm:
             norm[lk] = v or []
-    # 互換: 先頭大文字キーに対応
     for old, new in (("Business","business"),("Tools","tools"),("Posts","posts")):
         if old in (feeds_yaml or {}):
             norm[new] = feeds_yaml.get(old) or norm[new]
@@ -84,7 +87,45 @@ def matches_keywords(text: str, keywords: list[str]) -> bool:
             return True
     return False
 
-# ===== 収集（AIフィルタ対応） =====
+# ===== 翻訳（DeepL）＋キャッシュ =====
+def _cache_path():
+    os.makedirs("_cache", exist_ok=True)
+    return os.path.join("_cache", "translations.json")
+
+def _load_cache():
+    try:
+        with open(_cache_path(), "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+def _save_cache(cache: dict):
+    with open(_cache_path(), "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
+
+def translate_to_ja(text: str) -> str | None:
+    """DeepL APIで日本語訳。キー未設定や失敗時は None を返す。"""
+    if not (TRANSLATE_TO_JA and DEEPL_API_KEY and text):
+        return None
+    h = hashlib.sha1(text.encode("utf-8")).hexdigest()
+    cache = _load_cache()
+    if h in cache:
+        return cache[h]
+    try:
+        import deepl
+        translator = deepl.Translator(DEEPL_API_KEY)
+        # 文章が長い場合は適度に切る（コスト抑制）
+        src = text[:1200]
+        ja = translator.translate_text(src, target_lang="JA").text
+        cache[h] = ja
+        _save_cache(cache)
+        time.sleep(0.2)  # レート控えめ
+        return ja
+    except Exception as e:
+        print(f"[WARN] DeepL translation failed: {e}", file=sys.stderr)
+        return None
+
+# ===== 収集（AIフィルタ＋日本語要約） =====
 def collect(feeds_cfg: dict) -> dict:
     cutoff = datetime.now(JST) - timedelta(hours=HOURS_LOOKBACK)
     result = {"business": [], "tools": [], "posts": []}
@@ -92,7 +133,6 @@ def collect(feeds_cfg: dict) -> dict:
 
     for cat in result.keys():
         for item in feeds_cfg.get(cat, []):
-            # feeds.yml: 文字列URL or {name,url,general,include}
             if isinstance(item, dict):
                 name = item.get("name") or ""
                 url  = item.get("url") or ""
@@ -124,7 +164,6 @@ def collect(feeds_cfg: dict) -> dict:
                 summary_raw = getattr(e, "summary", "")
                 text = f"{title} {strip_tags(summary_raw)}"
 
-                # 一般ニュースは AI キーワードにヒットしたものだけ採用
                 if is_general:
                     if any(neg in text for neg in NEGATIVE_HINTS):
                         continue
@@ -135,16 +174,26 @@ def collect(feeds_cfg: dict) -> dict:
                     continue
                 seen_links.add(link)
 
-                summary = strip_tags(summary_raw)
-                if len(summary) > 220:
-                    summary = summary[:220] + "…"
+                # 英語ベースの要約（フィードに要約が無い場合はタイトル）
+                en_summary = strip_tags(summary_raw) or title
+                if len(en_summary) > 220:
+                    en_summary = en_summary[:220] + "…"
+
+                ja_summary = translate_to_ja(en_summary)
+                if ja_summary:
+                    summary = html.escape(ja_summary)
+                    lang = "ja"
+                else:
+                    summary = html.escape(en_summary)  # フォールバックは英語
+                    lang = "en"
 
                 result[cat].append({
                     "title": html.escape(title),
                     "link": link,
-                    "summary": html.escape(summary),
+                    "summary": summary,
                     "dt": dt,
                     "source": name or domain_of(link),
+                    "lang": lang,
                 })
 
     for cat in result:
@@ -169,7 +218,7 @@ PAGE_TMPL = Template("""<!doctype html>
 
   <main class="container">
     <h1 class="page-title">今日の最新AI情報</h1>
-    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近${hours}時間の更新を配信します。</p>
+    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近${hours}時間の更新を配信します。ソースは原文（英語等）のまま、要約のみ日本語化。</p>
 
     <section class="kpi-grid">
       <div class="kpi-card">
@@ -203,7 +252,7 @@ PAGE_TMPL = Template("""<!doctype html>
     ${sections}
 
     <section class="note">
-      <p>方針：一次情報（公式ブログ/プレス/論文）を優先。一般ニュースは AI キーワードで抽出。各カード末尾に<strong>出典URL</strong>を明記。</p>
+      <p>方針：一次情報（公式ブログ/プレス/論文）を優先。一般ニュースは AI キーワードで抽出。要約は日本語化し、<strong>出典リンクは原文</strong>のまま。</p>
     </section>
   </main>
 
@@ -213,7 +262,6 @@ PAGE_TMPL = Template("""<!doctype html>
   </footer>
 
   <script>
-    // タブ切替（依存ライブラリなし）
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(btn => btn.addEventListener('click', () => {
       tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
@@ -240,6 +288,7 @@ CARD_TMPL = Template("""
     <p class="card-summary">${summary}</p>
     <div class="chips">
       <span class="chip">${source}</span>
+      <span class="chip ghost">${langlabel}</span>
       <span class="chip ghost">${timeago}</span>
     </div>
   </div>
@@ -255,11 +304,13 @@ def render_cards(items, now) -> str:
         return EMPTY_TMPL
     htmls = []
     for it in items:
+        langlabel = "要約: 日本語" if it.get("lang") == "ja" else "要約: 英語"
         htmls.append(CARD_TMPL.substitute(
             link=it["link"],
             title=it["title"],
             summary=it["summary"],
             source=html.escape(it["source"] or ""),
+            langlabel=langlabel,
             timeago=humanize(it["dt"], now),
         ))
     return "\n".join(htmls)

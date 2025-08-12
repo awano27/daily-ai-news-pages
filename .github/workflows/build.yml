@@ -1,33 +1,27 @@
-name: Daily build (LibreTranslate)
-
+name: Daily build (JA summaries fixed)
 on:
   schedule:
-    - cron: '0 22 * * *'   # 07:00 JST
+    - cron: "0 22 * * *"   # 07:00 JST
   workflow_dispatch:
-
-permissions:
-  contents: write
-
+permissions: { contents: write }
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Tokyo
-      HOURS_LOOKBACK: '24'
-      MAX_ITEMS_PER_CATEGORY: '8'
-      TRANSLATE_TO_JA: '1'
-      USE_LIBRE: '1'
-      LIBRE_URL: 'https://libretranslate.com'
+      HOURS_LOOKBACK: "24"
+      MAX_ITEMS_PER_CATEGORY: "8"
+      TRANSLATE_TO_JA: "1"
+      TRANSLATE_ENGINE: "google"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+        with: { python-version: "3.11" }
       - name: Install dependencies
         run: |
           python -V
           pip install --upgrade pip
-          pip install feedparser pyyaml deep-translator
+          pip install feedparser pyyaml deep-translator==1.11.4
       - name: Build HTML
         run: python build.py
       - name: Commit and push

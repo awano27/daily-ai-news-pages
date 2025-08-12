@@ -1,278 +1,143 @@
 # -*- coding: utf-8 -*-
 """
-AIニュース HTML 生成（UI＋一般ニュースAI抽出＋要約の日本語化・LibreTranslate版）
-- ソースへのリンクは原文のまま、サイト表示の要約だけ日本語化
-- 翻訳: LibreTranslate（無料・鍵不要）/ DeepL（任意の鍵あり時のみ）/ キャッシュ
-- カードUI / タブ / KPI / 相対時刻
-- 一般ニュース（general: true）は AIキーワードにヒットしたものだけ採用
-- 期間: HOURS_LOOKBACK(既定24h) / 件数: MAX_ITEMS_PER_CATEGORY(既定8)
-- string.Template を使用（JS/CSSの{}と衝突しない）
+Daily AI News - static site generator (JST)
+- Summaries are translated to Japanese (no API key) using deep-translator.
+- Primary engine: GoogleTranslator (unofficial). Fallback: MyMemory (ja-JP).
+- Caches translations to _cache/translations.json to avoid repeated calls.
+- Reads RSS list from feeds.yml with categories: Business, Tools, Posts.
+
+Env (optional):
+  HOURS_LOOKBACK=24        # Fetch window in hours
+  MAX_ITEMS_PER_CATEGORY=8 # Max cards per tab
+  TRANSLATE_TO_JA=1        # 1=enable JA summaries, 0=disable
+  TRANSLATE_ENGINE=google  # google|mymemory
+  TZ=Asia/Tokyo            # for timestamps
 """
-from datetime import datetime, timedelta, timezone
-from urllib.parse import urlparse
-from string import Template
-import os, re, sys, html, json, hashlib, time
-import yaml, feedparser
+import os, re, sys, json, time, html
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
 
-# ===== 基本設定 =====
+import yaml
+import feedparser
+
+# ---------- config ----------
+HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
+MAX_ITEMS_PER_CATEGORY = int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8"))
+TRANSLATE_TO_JA = os.getenv("TRANSLATE_TO_JA", "1") == "1"
+TRANSLATE_ENGINE = os.getenv("TRANSLATE_ENGINE", "google").lower()
+
 JST = timezone(timedelta(hours=9))
-HOURS_LOOKBACK = int(os.environ.get("HOURS_LOOKBACK", "24"))
-MAX_ITEMS_PER_CATEGORY = int(os.environ.get("MAX_ITEMS_PER_CATEGORY", "8"))
+NOW = datetime.now(JST)
 
-# ===== 翻訳の設定 =====
-TRANSLATE_TO_JA = os.environ.get("TRANSLATE_TO_JA", "1").lower() in ("1","true","yes")
-# LibreTranslate（無料・鍵不要・デフォルトON）
-USE_LIBRE = os.environ.get("USE_LIBRE", "1").lower() in ("1","true","yes")
-LIBRE_URL = os.environ.get("LIBRE_URL", "https://libretranslate.com")
-# DeepL（任意。キーがあれば最優先・品質高）
-DEEPL_API_KEY = os.environ.get("DEEPL_API_KEY", "")
+CACHE_DIR = Path("_cache")
+CACHE_DIR.mkdir(exist_ok=True)
+CACHE_FILE = CACHE_DIR / "translations.json"
 
-# ===== AI関連キーワード =====
-KEYWORDS_COMMON = [
-    "AI","人工知能","生成AI","生成型AI","大規模言語モデル","LLM","機械学習","深層学習",
-    "chatgpt","gpt","openai","anthropic","claude","llama","gemini","copilot",
-    "stable diffusion","midjourney","mistral","cohere","perplexity","hugging face","langchain",
-    "rag","ベンチマーク","推論","微調整","ファインチューニング","画像生成","動画生成","sora","nemo","nim","blackwell"
-]
-KEYWORDS_BUSINESS = [
-    "規制","法規制","ガイドライン","政府","省庁","投資","資金調達","ipo","買収","m&a",
-    "提携","合意","価格","料金","企業導入","商用利用","市場","売上","収益","雇用","監督","規制当局","コンプライアンス"
-]
-KEYWORDS_TOOLS = [
-    "api","sdk","モデル","リリース","アップデート","ベータ","プレビュー","オープンソース","oss",
-    "サンプル","チュートリアル","パッケージ","ライブラリ","バージョン","benchmark","throughput","latency","性能","推論速度"
-]
-NEGATIVE_HINTS = ["スポーツ","天気","為替","相場","観光","レシピ","占い"]
-
-# ===== ユーティリティ =====
-def strip_tags(s: str) -> str:
-    if not s: return ""
-    s = re.sub(r"<[^>]+>", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
-
-def humanize(dt: datetime, now: datetime) -> str:
-    delta = now - dt
-    sec = int(delta.total_seconds())
-    if sec < 60:   return "たった今"
-    if sec < 3600: return f"{sec // 60}分前"
-    if sec < 86400:return f"{sec // 3600}時間前"
-    days = sec // 86400
-    return f"{days}日前"
-
-def parse_dt(entry):
-    for key in ("published_parsed", "updated_parsed"):
-        t = getattr(entry, key, None) or entry.get(key)
-        if t:
-            return datetime(*t[:6], tzinfo=timezone.utc).astimezone(JST)
-    return None
-
-def domain_of(link: str) -> str:
+def load_cache():
     try:
-        host = urlparse(link).netloc
-        return host.replace("www.", "")
+        if CACHE_FILE.exists():
+            return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
     except Exception:
-        return ""
+        pass
+    return {}
 
-def normalize_feeds(feeds_yaml: dict) -> dict:
-    norm = {"business": [], "tools": [], "posts": []}
-    for k, v in (feeds_yaml or {}).items():
-        lk = (k or "").strip().lower()
-        if lk in norm:
-            norm[lk] = v or []
-    # 互換: 先頭大文字キーに対応
-    for old, new in (("Business","business"),("Tools","tools"),("Posts","posts")):
-        if old in (feeds_yaml or {}):
-            norm[new] = feeds_yaml.get(old) or norm[new]
-    return norm
-
-def matches_keywords(text: str, keywords: list[str]) -> bool:
-    s = text.lower()
-    for kw in keywords:
-        if kw.lower() in s:
-            return True
-    return False
-
-# ===== 翻訳＋キャッシュ =====
-def _cache_path():
-    os.makedirs("_cache", exist_ok=True)
-    return os.path.join("_cache", "translations.json")
-
-def _load_cache():
+def save_cache(cache):
     try:
-        with open(_cache_path(), "r", encoding="utf-8") as f:
-            return json.load(f)
+        CACHE_DIR.mkdir(exist_ok=True)
+        CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception:
-        return {}
+        pass
 
-def _save_cache(cache: dict):
-    with open(_cache_path(), "w", encoding="utf-8") as f:
-        json.dump(cache, f, ensure_ascii=False, indent=2)
+# ---------- translation ----------
+def looks_japanese(s: str) -> bool:
+    if not s:
+        return False
+    # Hiragana, Katakana, CJK
+    return re.search(r"[\u3040-\u30ff\u3400-\u9fff]", s) is not None
 
-def _ja_from_cache(text: str) -> str | None:
-    h = hashlib.sha1(text.encode("utf-8")).hexdigest()
-    cache = _load_cache()
-    return cache.get(h)
+class JaTranslator:
+    def __init__(self, engine="google"):
+        self.engine = engine
+        self._gt = None
+        self._mm = None
+        self.warned = False
 
-def _save_to_cache(text: str, ja: str):
-    h = hashlib.sha1(text.encode("utf-8")).hexdigest()
-    cache = _load_cache()
-    cache[h] = ja
-    _save_cache(cache)
+    def _google(self, text: str) -> str:
+        if self._gt is None:
+            from deep_translator import GoogleTranslator
+            self._gt = GoogleTranslator(source="auto", target="ja")
+        return self._gt.translate(text)
 
-def _translate_deepl(text: str) -> str | None:
-    if not DEEPL_API_KEY:
-        return None
-    try:
-        import deepl
-        translator = deepl.Translator(DEEPL_API_KEY)
-        return translator.translate_text(text[:1000], target_lang="JA").text
-    except Exception as e:
-        print(f"[WARN] DeepL translation failed: {e}", file=sys.stderr)
-        return None
+    def _mymemory(self, text: str) -> str:
+        # deep-translator >=1.11.0 expects region code 'ja-JP' for MyMemory
+        if self._mm is None:
+            from deep_translator import MyMemoryTranslator
+            self._mm = MyMemoryTranslator(source="en-GB", target="ja-JP")
+        return self._mm.translate(text)
 
-def _translate_libre(text: str) -> str | None:
-    try:
-        from deep_translator import LibreTranslateTranslator
-        return LibreTranslateTranslator(source="auto", target="ja", url=LIBRE_URL).translate(text[:1000])
-    except Exception as e:
-        print(f"[WARN] LibreTranslate failed: {e}", file=sys.stderr)
-        return None
-
-def translate_to_ja(text: str) -> str | None:
-    """優先順位: キャッシュ → DeepL(キーあり) → LibreTranslate"""
-    if not (TRANSLATE_TO_JA and text):
-        return None
-    cached = _ja_from_cache(text)
-    if cached:
-        return cached
-
-    ja = None
-    if DEEPL_API_KEY:
-        ja = _translate_deepl(text)
-    if (not ja) and USE_LIBRE:
-        ja = _translate_libre(text)
-
-    if ja:
-        _save_to_cache(text, ja)
-    return ja
-
-# ===== 収集（AIフィルタ＋日本語要約） =====
-def collect(feeds_cfg: dict) -> dict:
-    cutoff = datetime.now(JST) - timedelta(hours=HOURS_LOOKBACK)
-    result = {"business": [], "tools": [], "posts": []}
-    seen_links = set()
-
-    for cat in result.keys():
-        for item in feeds_cfg.get(cat, []):
-            # feeds.yml: 文字列URL or {name,url,general,include}
-            if isinstance(item, dict):
-                name = item.get("name") or ""
-                url  = item.get("url") or ""
-                is_general = bool(item.get("general", False))
-                include_extra = item.get("include") or []
+    def translate(self, text: str) -> str:
+        if not text or looks_japanese(text):
+            return text
+        try:
+            if self.engine == "google":
+                try:
+                    return self._google(text)
+                except Exception:
+                    return self._mymemory(text)
+            elif self.engine == "mymemory":
+                try:
+                    return self._mymemory(text)
+                except Exception:
+                    return self._google(text)
             else:
-                name, url, is_general, include_extra = "", str(item), False, []
+                # unknown -> google then mymemory
+                try:
+                    return self._google(text)
+                except Exception:
+                    return self._mymemory(text)
+        except Exception as e:
+            if not self.warned:
+                print(f"[WARN] translation disabled due to error: {e.__class__.__name__}: {e}")
+                self.warned = True
+            return text
 
-            try:
-                parsed = feedparser.parse(url)
-            except Exception as e:
-                print(f"[WARN] parse error: {url} -> {e}", file=sys.stderr)
-                continue
-
-            # キーワード
-            if cat == "business":
-                kw = KEYWORDS_COMMON + KEYWORDS_BUSINESS + include_extra
-            elif cat == "tools":
-                kw = KEYWORDS_COMMON + KEYWORDS_TOOLS + include_extra
-            else:
-                kw = KEYWORDS_COMMON + include_extra
-
-            for e in parsed.entries:
-                dt = parse_dt(e) or datetime.now(JST)
-                if dt < cutoff:
-                    continue
-
-                title = getattr(e, "title", "(no title)")
-                link  = getattr(e, "link", "#")
-                summary_raw = getattr(e, "summary", "")
-                text = f"{title} {strip_tags(summary_raw)}"
-
-                # 一般ニュースはAI関連にヒットしたものだけ採用
-                if is_general:
-                    if any(neg in text for neg in NEGATIVE_HINTS):
-                        continue
-                    if not matches_keywords(text, kw):
-                        continue
-
-                if link in seen_links:
-                    continue
-                seen_links.add(link)
-
-                en_summary = strip_tags(summary_raw) or title
-                if len(en_summary) > 220:
-                    en_summary = en_summary[:220] + "…"
-
-                ja_summary = translate_to_ja(en_summary)
-                if ja_summary:
-                    summary = html.escape(ja_summary)
-                    lang = "ja"
-                else:
-                    summary = html.escape(en_summary)  # フォールバックは英語
-                    lang = "en"
-
-                result[cat].append({
-                    "title": html.escape(title),
-                    "link": link,
-                    "summary": summary,
-                    "dt": dt,
-                    "source": name or domain_of(link),
-                    "lang": lang,
-                })
-
-    # 新しい順＆上限
-    for cat in result:
-        result[cat].sort(key=lambda x: x["dt"], reverse=True)
-        result[cat] = result[cat][:MAX_ITEMS_PER_CATEGORY]
-    return result
-
-# ===== HTMLレンダリング =====
-PAGE_TMPL = Template("""<!doctype html>
+# ---------- HTML template ----------
+PAGE_TMPL = """<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Daily AI News — ${updated}</title>
+  <title>Daily AI News — {updated_title}</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <header class="site-header">
     <div class="brand">📰 Daily AI News</div>
-    <div class="updated">最終更新：${updated}</div>
+    <div class="updated">最終更新：{updated_full}</div>
   </header>
 
   <main class="container">
     <h1 class="page-title">今日の最新AI情報</h1>
-    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近${hours}時間の更新を配信します。ソースは原文、要約のみ日本語化。</p>
+    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近{lookback}時間の更新を配信します。ソースは原文、要約のみ日本語化。</p>
 
     <section class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-value">${n_business}件</div>
+        <div class="kpi-value">{cnt_business}件</div>
         <div class="kpi-label">ビジネスニュース</div>
         <div class="kpi-note">重要度高め</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">${n_tools}件</div>
+        <div class="kpi-value">{cnt_tools}件</div>
         <div class="kpi-label">ツールニュース</div>
         <div class="kpi-note">開発者向け</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">${n_posts}件</div>
+        <div class="kpi-value">{cnt_posts}件</div>
         <div class="kpi-label">SNS/論文ポスト</div>
         <div class="kpi-note">検証系</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">${date_jst}</div>
+        <div class="kpi-value">{updated_full}</div>
         <div class="kpi-label">最終更新</div>
         <div class="kpi-note">JST</div>
       </div>
@@ -284,8 +149,7 @@ PAGE_TMPL = Template("""<!doctype html>
       <button class="tab" data-target="#posts" aria-selected="false">🧪 SNS/論文ポスト</button>
     </nav>
 
-    ${sections}
-
+    {sections}
     <section class="note">
       <p>方針：一次情報（公式ブログ/プレス/論文）を優先。一般ニュースは AI キーワードで抽出。要約は日本語化し、<strong>出典リンクは原文</strong>のまま。</p>
     </section>
@@ -298,82 +162,181 @@ PAGE_TMPL = Template("""<!doctype html>
 
   <script>
     const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(btn => btn.addEventListener('click', () => {
-      tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    tabs.forEach(btn => btn.addEventListener('click', () => {{
+      tabs.forEach(b => {{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); }});
       btn.classList.add('active'); btn.setAttribute('aria-selected','true');
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       const target = document.querySelector(btn.dataset.target);
       if (target) target.classList.remove('hidden');
-    }));
+    }}));
   </script>
 </body>
-</html>""")
+</html>
+"""
 
-SECTION_TMPL = Template("""
-<section id="${id}" class="tab-panel ${hidden}">
-  ${cards}
-</section>""")
+SECTION_TMPL = """
+<section id="{sec_id}" class="tab-panel {extra_class}">
+{cards}
+</section>
+"""
 
-CARD_TMPL = Template("""
+CARD_TMPL = """
 <article class="card">
   <div class="card-header">
-    <a class="card-title" href="${link}" target="_blank" rel="noopener">${title}</a>
+    <a class="card-title" href="{link}" target="_blank" rel="noopener">{title}</a>
   </div>
   <div class="card-body">
-    <p class="card-summary">${summary}</p>
+    <p class="card-summary">{summary}</p>
     <div class="chips">
-      <span class="chip">${source}</span>
-      <span class="chip ghost">${langlabel}</span>
-      <span class="chip ghost">${timeago}</span>
+      <span class="chip">{source_name}</span>
+      <span class="chip ghost">{summary_lang}</span>
+      <span class="chip ghost">{ago}</span>
     </div>
   </div>
   <div class="card-footer">
-    出典: <a href="${link}" target="_blank" rel="noopener">${link}</a>
+    出典: <a href="{link}" target="_blank" rel="noopener">{link}</a>
   </div>
-</article>""")
+</article>
+"""
 
 EMPTY_TMPL = '<div class="empty">新着なし（期間を広げるかフィードを追加してください）</div>'
 
-def render_cards(items, now) -> str:
-    if not items:
-        return EMPTY_TMPL
-    htmls = []
-    for it in items:
-        langlabel = "要約: 日本語" if it.get("lang") == "ja" else "要約: 英語"
-        htmls.append(CARD_TMPL.substitute(
-            link=it["link"],
-            title=it["title"],
-            summary=it["summary"],
-            source=html.escape(it["source"] or ""),
-            langlabel=langlabel,
-            timeago=humanize(it["dt"], now),
-        ))
-    return "\n".join(htmls)
+def ago_str(dt: datetime) -> str:
+    delta = NOW - dt
+    secs = int(delta.total_seconds())
+    if secs < 60: return f"{secs}秒前"
+    mins = secs // 60
+    if mins < 60: return f"{mins}分前"
+    hrs = mins // 60
+    if hrs < 24: return f"{hrs}時間前"
+    days = hrs // 24
+    return f"{days}日前"
 
-def render_page(collected: dict) -> str:
-    now = datetime.now(JST)
-    sections = []
-    sections.append(SECTION_TMPL.substitute(id="business", hidden="", cards=render_cards(collected["business"], now)))
-    sections.append(SECTION_TMPL.substitute(id="tools", hidden="hidden", cards=render_cards(collected["tools"], now)))
-    sections.append(SECTION_TMPL.substitute(id="posts", hidden="hidden", cards=render_cards(collected["posts"], now)))
-    return PAGE_TMPL.substitute(
-        updated=now.strftime("%Y-%m-%d %H:%M JST"),
-        hours=HOURS_LOOKBACK,
-        n_business=len(collected["business"]),
-        n_tools=len(collected["tools"]),
-        n_posts=len(collected["posts"]),
-        date_jst=now.strftime("%Y年%m月%d日 %H:%M"),
-        sections="\n".join(sections)
-    )
+def clean_html(s: str) -> str:
+    if not s: return ""
+    # strip tags very lightly
+    s = re.sub(r"<.*?>", "", s)
+    s = s.replace("&nbsp;", " ").strip()
+    return html.escape(s, quote=False)
+
+def pick_summary(entry) -> str:
+    for key in ("summary", "subtitle", "description"):
+        if key in entry and entry[key]:
+            return clean_html(entry[key])
+    return clean_html(entry.get("title", ""))
+
+def parse_feeds():
+    raw = yaml.safe_load(Path("feeds.yml").read_text(encoding="utf-8"))
+    return raw or {}
+
+def within_window(published_parsed):
+    if not published_parsed: 
+        return True  # keep if unknown
+    dt = datetime.fromtimestamp(time.mktime(published_parsed), tz=timezone.utc).astimezone(JST)
+    return (NOW - dt) <= timedelta(hours=HOURS_LOOKBACK), dt
+
+def build_cards(items, translator):
+    cards = []
+    for it in items[:MAX_ITEMS_PER_CATEGORY]:
+        title = it.get("title") or "(no title)"
+        link = it.get("link") or "#"
+        src  = it.get("_source") or ""
+        dt   = it.get("_dt") or NOW
+        raw_summary = it.get("_summary") or ""
+        ja_summary = raw_summary
+        did_translate = False
+
+        if TRANSLATE_TO_JA and raw_summary and not looks_japanese(raw_summary):
+            # cache key: stable on link+hash(summary)
+            cache_key = f"{link}::{hash(raw_summary)}"
+            cached = TRANSLATION_CACHE.get(cache_key)
+            if cached:
+                ja_summary = cached
+                did_translate = True
+            else:
+                ja = translator.translate(raw_summary)
+                if ja and ja != raw_summary:
+                    ja_summary = ja
+                    TRANSLATION_CACHE[cache_key] = ja_summary
+                    did_translate = True
+
+        cards.append(CARD_TMPL.format(
+            link=html.escape(link, quote=True),
+            title=html.escape(title, quote=False),
+            summary=(ja_summary if did_translate else raw_summary),
+            source_name=html.escape(src, quote=False),
+            summary_lang=("要約: 日本語" if did_translate else "要約: 英語"),
+            ago=ago_str(dt),
+        ))
+    return "\n".join(cards) if cards else EMPTY_TMPL
+
+def gather_items(feeds, category_name):
+    items = []
+    for f in feeds:
+        url = f.get("url")
+        name = f.get("name", url)
+        if not url: 
+            continue
+        try:
+            d = feedparser.parse(url)
+        except Exception as e:
+            print(f"[WARN] feed parse error: {name}: {e}")
+            continue
+        for e in d.entries:
+            ok, dt = within_window(e.get("published_parsed") or e.get("updated_parsed"))
+            if not ok:
+                continue
+            items.append({
+                "title": e.get("title", ""),
+                "link": e.get("link", ""),
+                "_summary": pick_summary(e),
+                "_source": name,
+                "_dt": dt,
+            })
+    # sort by time desc
+    items.sort(key=lambda x: x["_dt"], reverse=True)
+    return items
 
 def main():
-    with open("feeds.yml", "r", encoding="utf-8") as f:
-        raw = yaml.safe_load(f) or {}
-    feeds = normalize_feeds(raw)
-    data = collect(feeds)
-    html_out = render_page(data)
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html_out)
+    global TRANSLATION_CACHE
+    TRANSLATION_CACHE = load_cache()
+
+    feeds_conf = parse_feeds()
+    business = gather_items(feeds_conf.get("Business", []), "Business")
+    tools    = gather_items(feeds_conf.get("Tools", []), "Tools")
+    posts    = gather_items(feeds_conf.get("Posts", []), "Posts")
+
+    translator = JaTranslator(engine=TRANSLATE_ENGINE)
+
+    sections_html = []
+    sections_html.append(SECTION_TMPL.format(
+        sec_id="business",
+        extra_class="",
+        cards=build_cards(business, translator)
+    ))
+    sections_html.append(SECTION_TMPL.format(
+        sec_id="tools",
+        extra_class="hidden",
+        cards=build_cards(tools, translator)
+    ))
+    sections_html.append(SECTION_TMPL.format(
+        sec_id="posts",
+        extra_class="hidden",
+        cards=build_cards(posts, translator)
+    ))
+
+    html_out = PAGE_TMPL.format(
+        updated_title=NOW.strftime("%Y-%m-%d %H:%M JST"),
+        updated_full=NOW.strftime("%Y-%m-%d %H:%M JST"),
+        lookback=HOURS_LOOKBACK,
+        cnt_business=len(business[:MAX_ITEMS_PER_CATEGORY]),
+        cnt_tools=len(tools[:MAX_ITEMS_PER_CATEGORY]),
+        cnt_posts=len(posts[:MAX_ITEMS_PER_CATEGORY]),
+        sections="".join(sections_html)
+    )
+
+    Path("index.html").write_text(html_out, encoding="utf-8")
+    save_cache(TRANSLATION_CACHE)
     print("wrote index.html")
 
 if __name__ == "__main__":

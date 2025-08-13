@@ -1,0 +1,8 @@
+# Cache files
+_cache/
+
+# Generated files
+index.html
+
+# OS-specific
+.DS_Store

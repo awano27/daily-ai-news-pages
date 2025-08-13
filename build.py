@@ -137,7 +137,7 @@ def _extract_x_urls_from_csv(raw: bytes) -> list[str]:
         pass
 
     if not urls:
-        urls = re.findall(r'https?://(?:x|twitter)\\.com/[^\\s,"]+', txt)
+        urls = re.findall(r'https?://(?:x|twitter)\.com/[^\s,"]+', txt)
 
     # 正規化 & 重複除去（順序維持）
     seen, out = set(), []
@@ -160,10 +160,12 @@ def gather_x_posts(csv_path: str) -> list[dict]:
         print(f"[INFO] X posts CSV not found at: {csv_path}")
         return []
     
+    print(f"[INFO] Loading X posts from: {csv_path}")
     items = []
     try:
         raw = _read_csv_bytes(csv_path)
         urls = _extract_x_urls_from_csv(raw)
+        print(f"[INFO] Extracted {len(urls)} X URLs from CSV.")
         for url in urls:
             author = _author_from_url(url)
             items.append({
@@ -173,6 +175,7 @@ def gather_x_posts(csv_path: str) -> list[dict]:
                 "_source": "X / SNS",
                 "_dt": NOW, # Use current time for X posts
             })
+        print(f"[INFO] Created {len(items)} X post items.")
     except Exception as e:
         print(f"[WARN] Failed to process X posts CSV: {e}")
     return items
@@ -307,7 +310,7 @@ def parse_feeds():
 
 def within_window(published_parsed):
     if not published_parsed: 
-        return True  # keep if unknown
+        return True, NOW  # keep if unknown, use current time
     dt = datetime.fromtimestamp(time.mktime(published_parsed), tz=timezone.utc).astimezone(JST)
     return (NOW - dt) <= timedelta(hours=HOURS_LOOKBACK), dt
 

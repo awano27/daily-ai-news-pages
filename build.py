@@ -418,6 +418,7 @@ def main():
         cards=build_cards(posts, translator)
     ))
 
+    print(f"[DEBUG] Final post count: business={len(business)}, tools={len(tools)}, posts={len(posts)}")
     html_out = PAGE_TMPL.format(
         updated_title=NOW.strftime("%Y-%m-%d %H:%M JST"),
         updated_full=NOW.strftime("%Y-%m-%d %H:%M JST"),

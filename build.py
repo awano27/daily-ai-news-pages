@@ -5,17 +5,21 @@ Daily AI News - static site generator (JST)
 - Primary engine: GoogleTranslator (unofficial). Fallback: MyMemory (ja-JP).
 - Caches translations to _cache/translations.json to avoid repeated calls.
 - Reads RSS list from feeds.yml with categories: Business, Tools, Posts.
+- Injects X posts from a CSV file into the 'Posts' category.
 
 Env (optional):
   HOURS_LOOKBACK=24        # Fetch window in hours
   MAX_ITEMS_PER_CATEGORY=8 # Max cards per tab
   TRANSLATE_TO_JA=1        # 1=enable JA summaries, 0=disable
   TRANSLATE_ENGINE=google  # google|mymemory
+  X_POSTS_CSV=_sources/x_favorites.csv # Path to X posts CSV
   TZ=Asia/Tokyo            # for timestamps
 """
-import os, re, sys, json, time, html
+import os, re, sys, json, time, html, csv, io
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from urllib.parse import urlparse
+from urllib.request import urlopen
 
 import yaml
 import feedparser
@@ -25,6 +29,7 @@ HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8"))
 TRANSLATE_TO_JA = os.getenv("TRANSLATE_TO_JA", "1") == "1"
 TRANSLATE_ENGINE = os.getenv("TRANSLATE_ENGINE", "google").lower()
+X_POSTS_CSV = os.getenv("X_POSTS_CSV", "_sources/x_favorites.csv")
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
@@ -100,6 +105,77 @@ class JaTranslator:
                 print(f"[WARN] translation disabled due to error: {e.__class__.__name__}: {e}")
                 self.warned = True
             return text
+
+# ---------- X (Twitter) post injection ----------
+def _read_csv_bytes(path_or_url: str) -> bytes:
+    if re.match(r'^https?://', path_or_url, re.I):
+        with urlopen(path_or_url) as r:
+            return r.read()
+    with open(path_or_url, 'rb') as f:
+        return f.read()
+
+def _extract_x_urls_from_csv(raw: bytes) -> list[str]:
+    # 文字コード自動判定(UTF-8 BOM優先→UTF-8→CP932)
+    for enc in ('utf-8-sig','utf-8','cp932'):
+        try:
+            txt = raw.decode(enc)
+            break
+        except Exception:
+            continue
+    else:
+        txt = raw.decode('utf-8', errors='ignore')
+
+    # 1) CSV列に URL があればそれを使う 2) なければ全体から正規表現抽出
+    urls: list[str] = []
+    try:
+        rdr = csv.reader(io.StringIO(txt))
+        for row in rdr:
+            for cell in row:
+                m = re.findall(r'https?://(?:x|twitter)\\.com/[^\\s,"]+', cell)
+                if m: urls.extend(m)
+    except Exception:
+        pass
+
+    if not urls:
+        urls = re.findall(r'https?://(?:x|twitter)\\.com/[^\\s,"]+', txt)
+
+    # 正規化 & 重複除去（順序維持）
+    seen, out = set(), []
+    for u in urls:
+        u = u.replace('x.com/','twitter.com/')  # 正規化
+        if u not in seen:
+            seen.add(u); out.append(u)
+    return out
+
+def _author_from_url(u: str) -> str:
+    try:
+        p = urlparse(u)
+        parts = p.path.strip('/').split('/')
+        return '@'+parts[0] if parts and parts[0] else 'X'
+    except Exception:
+        return 'X'
+
+def gather_x_posts(csv_path: str) -> list[dict]:
+    if not Path(csv_path).exists():
+        print(f"[INFO] X posts CSV not found at: {csv_path}")
+        return []
+    
+    items = []
+    try:
+        raw = _read_csv_bytes(csv_path)
+        urls = _extract_x_urls_from_csv(raw)
+        for url in urls:
+            author = _author_from_url(url)
+            items.append({
+                "title": f"Xポスト {author}",
+                "link": url,
+                "_summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+                "_source": "X / SNS",
+                "_dt": NOW, # Use current time for X posts
+            })
+    except Exception as e:
+        print(f"[WARN] Failed to process X posts CSV: {e}")
+    return items
 
 # ---------- HTML template ----------
 PAGE_TMPL = """<!doctype html>
@@ -305,6 +381,20 @@ def main():
     business = gather_items(feeds_conf.get("Business", []), "Business")
     tools    = gather_items(feeds_conf.get("Tools", []), "Tools")
     posts    = gather_items(feeds_conf.get("Posts", []), "Posts")
+    
+    # Inject X posts
+    if X_POSTS_CSV:
+        x_posts = gather_x_posts(X_POSTS_CSV)
+        posts.extend(x_posts)
+        # Remove duplicates and sort again
+        seen_links = set()
+        unique_posts = []
+        for post in posts:
+            if post['link'] not in seen_links:
+                unique_posts.append(post)
+                seen_links.add(post['link'])
+        posts = sorted(unique_posts, key=lambda x: x['_dt'], reverse=True)
+
 
     translator = JaTranslator(engine=TRANSLATE_ENGINE)
 

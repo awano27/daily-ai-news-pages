@@ -80,24 +80,20 @@ def _build_card(url: str) -> str:
 </article>"""
 
 def _update_kpi(html: str, new_count: int) -> str:
-    # 「SNS/論文ポスト」の KPI 値だけを安全に更新
-    pattern = re.compile(
-        r'(<div class="kpi-label">SNS/論文ポスト</div>\s*<div class="kpi-note">.*?</div>\s*</div>)',
-        re.S)
+    """
+    KPIカードのうち「SNS/論文ポスト」の value だけを更新する。
+    例: <div class="kpi-card"> ... <div class="kpi-value">8件</div> ... <div class="kpi-label">SNS/論文ポスト</div> ... </div>
+    """
+    pat = re.compile(
+        r'(<div class="kpi-card">.*?<div class="kpi-value">)(\d+)(件</div>\s*<div class="kpi-label">SNS/論文ポスト</div>.*?</div>)',
+        re.S
+    )
     def repl(m):
-        # 直前の kpi-card を取り直して value 部分のみ置換
-        card_start = html.rfind('<div class="kpi-card">', 0, m.start())
-        if card_start < 0: return m.group(0)
-        # そのカード領域
-        card_end = m.end()
-        card_html = html[card_start:card_end]
-        card_html2 = re.sub(r'(<div class="kpi-value">)\d+件(</div>)',
-                            rf'\1{new_count}件\2', card_html)
-        return html[:card_start] + card_html2 + html[card_end:]
-    # 1回だけ置換した新HTMLを返したいので、直接扱う
-    pos = pattern.search(html)
-    if not pos: return html
-    return _update_kpi.__wrapped__(html, new_count) if hasattr(_update_kpi,'__wrapped__') else repl(pos)  # type: ignore
+        # \g<1> を使う代わりに安全に文字列を合成
+        return f"{m.group(1)}{new_count}{m.group(3)}"
+    new_html, n = pat.subn(repl, html, count=1)
+    return new_html if n else html  # 見つからなければ元のまま
+
 
 def main():
     ap = argparse.ArgumentParser()

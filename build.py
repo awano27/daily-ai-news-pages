@@ -325,7 +325,7 @@ def build_cards(items, translator):
         ja_summary = raw_summary
         did_translate = False
 
-        if TRANSLATE_TO_JA and raw_summary and not looks_japanese(raw_summary):
+        if TRANSLATE_TO_JA and translator and raw_summary and not looks_japanese(raw_summary):
             # cache key: stable on link+hash(summary)
             cache_key = f"{link}::{hash(raw_summary)}"
             cached = TRANSLATION_CACHE.get(cache_key)
@@ -333,11 +333,14 @@ def build_cards(items, translator):
                 ja_summary = cached
                 did_translate = True
             else:
-                ja = translator.translate(raw_summary)
-                if ja and ja != raw_summary:
-                    ja_summary = ja
-                    TRANSLATION_CACHE[cache_key] = ja_summary
-                    did_translate = True
+                try:
+                    ja = translator.translate(raw_summary)
+                    if ja and ja != raw_summary:
+                        ja_summary = ja
+                        TRANSLATION_CACHE[cache_key] = ja_summary
+                        did_translate = True
+                except Exception as e:
+                    print(f"[WARN] Translation failed for {link[:50]}: {e}")
 
         cards.append(CARD_TMPL.format(
             link=html.escape(link, quote=True),
@@ -351,20 +354,27 @@ def build_cards(items, translator):
 
 def gather_items(feeds, category_name):
     items = []
+    print(f"[INFO] Processing {len(feeds)} feeds for {category_name}")
     for f in feeds:
         url = f.get("url")
         name = f.get("name", url)
         if not url: 
+            print(f"[WARN] No URL for feed: {name}")
             continue
         try:
+            print(f"[INFO] Fetching: {name}")
             d = feedparser.parse(url)
+            if d.bozo:
+                print(f"[WARN] Feed parse warning for {name}: {getattr(d, 'bozo_exception', 'unknown')}")
         except Exception as e:
-            print(f"[WARN] feed parse error: {name}: {e}")
+            print(f"[ERROR] feed parse error: {name}: {e}")
             continue
+        entry_count = 0
         for e in d.entries:
             ok, dt = within_window(e.get("published_parsed") or e.get("updated_parsed"))
             if not ok:
                 continue
+            entry_count += 1
             items.append({
                 "title": e.get("title", ""),
                 "link": e.get("link", ""),
@@ -372,53 +382,124 @@ def gather_items(feeds, category_name):
                 "_source": name,
                 "_dt": dt,
             })
+        if entry_count > 0:
+            print(f"[INFO] Found {entry_count} recent items from {name}")
     # sort by time desc
     items.sort(key=lambda x: x["_dt"], reverse=True)
+    print(f"[INFO] {category_name}: Total {len(items)} items found")
     return items
 
 def main():
+    print(f"[INFO] Starting build at {NOW.strftime('%Y-%m-%d %H:%M JST')}")
+    print(f"[INFO] HOURS_LOOKBACK={HOURS_LOOKBACK}, MAX_ITEMS_PER_CATEGORY={MAX_ITEMS_PER_CATEGORY}")
+    print(f"[INFO] TRANSLATE_TO_JA={TRANSLATE_TO_JA}, TRANSLATE_ENGINE={TRANSLATE_ENGINE}")
+    
     global TRANSLATION_CACHE
     TRANSLATION_CACHE = load_cache()
+    print(f"[INFO] Loaded {len(TRANSLATION_CACHE)} cached translations")
 
-    feeds_conf = parse_feeds()
-    business = gather_items(feeds_conf.get("Business", []), "Business")
-    tools    = gather_items(feeds_conf.get("Tools", []), "Tools")
-    posts    = gather_items(feeds_conf.get("Posts", []), "Posts")
+    try:
+        feeds_conf = parse_feeds()
+        print(f"[INFO] Loaded {sum(len(v) for v in feeds_conf.values())} feeds from feeds.yml")
+    except Exception as e:
+        print(f"[ERROR] Failed to parse feeds.yml: {e}")
+        feeds_conf = {}
+    # Case-insensitive category lookup
+    def get_category(conf, category_name):
+        # Try exact match first
+        if category_name in conf:
+            return conf[category_name]
+        # Try case-insensitive match
+        for key, value in conf.items():
+            if key.lower() == category_name.lower():
+                return value
+        return []
+    
+    # Gather items with error handling
+    try:
+        business = gather_items(get_category(feeds_conf, "Business"), "Business")
+        print(f"[INFO] Gathered {len(business)} Business items")
+    except Exception as e:
+        print(f"[ERROR] Failed to gather Business items: {e}")
+        business = []
+    
+    try:
+        tools = gather_items(get_category(feeds_conf, "Tools"), "Tools")
+        print(f"[INFO] Gathered {len(tools)} Tools items")
+    except Exception as e:
+        print(f"[ERROR] Failed to gather Tools items: {e}")
+        tools = []
+    
+    try:
+        posts = gather_items(get_category(feeds_conf, "Posts"), "Posts")
+        print(f"[INFO] Gathered {len(posts)} Posts items")
+    except Exception as e:
+        print(f"[ERROR] Failed to gather Posts items: {e}")
+        posts = []
     
     # Inject X posts
     if X_POSTS_CSV:
-        x_posts = gather_x_posts(X_POSTS_CSV)
-        posts.extend(x_posts)
-        # Remove duplicates and sort again
-        seen_links = set()
-        unique_posts = []
-        for post in posts:
-            if post['link'] not in seen_links:
-                unique_posts.append(post)
-                seen_links.add(post['link'])
-        posts = sorted(unique_posts, key=lambda x: x['_dt'], reverse=True)
+        try:
+            x_posts = gather_x_posts(X_POSTS_CSV)
+            if x_posts:
+                print(f"[INFO] Adding {len(x_posts)} X posts")
+                posts.extend(x_posts)
+            else:
+                print(f"[INFO] No X posts to add")
+            # Remove duplicates and sort again
+            seen_links = set()
+            unique_posts = []
+            for post in posts:
+                if post.get('link') and post['link'] not in seen_links:
+                    unique_posts.append(post)
+                    seen_links.add(post['link'])
+            posts = sorted(unique_posts, key=lambda x: x.get('_dt', NOW), reverse=True)
+        except Exception as e:
+            print(f"[WARN] Failed to process X posts: {e}")
 
 
-    translator = JaTranslator(engine=TRANSLATE_ENGINE)
+    try:
+        translator = JaTranslator(engine=TRANSLATE_ENGINE)
+    except Exception as e:
+        print(f"[WARN] Failed to initialize translator: {e}")
+        translator = None
 
     sections_html = []
-    sections_html.append(SECTION_TMPL.format(
-        sec_id="business",
-        extra_class="",
-        cards=build_cards(business, translator)
-    ))
-    sections_html.append(SECTION_TMPL.format(
-        sec_id="tools",
-        extra_class="hidden",
-        cards=build_cards(tools, translator)
-    ))
-    sections_html.append(SECTION_TMPL.format(
-        sec_id="posts",
-        extra_class="hidden",
-        cards=build_cards(posts, translator)
-    ))
+    try:
+        sections_html.append(SECTION_TMPL.format(
+            sec_id="business",
+            extra_class="",
+            cards=build_cards(business[:MAX_ITEMS_PER_CATEGORY], translator)
+        ))
+    except Exception as e:
+        print(f"[ERROR] Failed to build Business section: {e}")
+        sections_html.append(SECTION_TMPL.format(sec_id="business", extra_class="", cards=EMPTY_TMPL))
+    
+    try:
+        sections_html.append(SECTION_TMPL.format(
+            sec_id="tools",
+            extra_class="hidden",
+            cards=build_cards(tools[:MAX_ITEMS_PER_CATEGORY], translator)
+        ))
+    except Exception as e:
+        print(f"[ERROR] Failed to build Tools section: {e}")
+        sections_html.append(SECTION_TMPL.format(sec_id="tools", extra_class="hidden", cards=EMPTY_TMPL))
+    
+    try:
+        sections_html.append(SECTION_TMPL.format(
+            sec_id="posts",
+            extra_class="hidden",
+            cards=build_cards(posts[:MAX_ITEMS_PER_CATEGORY], translator)
+        ))
+    except Exception as e:
+        print(f"[ERROR] Failed to build Posts section: {e}")
+        sections_html.append(SECTION_TMPL.format(sec_id="posts", extra_class="hidden", cards=EMPTY_TMPL))
 
-    print(f"[DEBUG] Final post count: business={len(business)}, tools={len(tools)}, posts={len(posts)}")
+    print(f"[INFO] Final counts after limiting to {MAX_ITEMS_PER_CATEGORY} per category:")
+    print(f"  Business: {len(business[:MAX_ITEMS_PER_CATEGORY])} items")
+    print(f"  Tools: {len(tools[:MAX_ITEMS_PER_CATEGORY])} items")
+    print(f"  Posts: {len(posts[:MAX_ITEMS_PER_CATEGORY])} items")
+    print(f"[INFO] Total items to display: {len(business[:MAX_ITEMS_PER_CATEGORY]) + len(tools[:MAX_ITEMS_PER_CATEGORY]) + len(posts[:MAX_ITEMS_PER_CATEGORY])}")
     html_out = PAGE_TMPL.format(
         updated_title=NOW.strftime("%Y-%m-%d %H:%M JST"),
         updated_full=NOW.strftime("%Y-%m-%d %H:%M JST"),
@@ -429,9 +510,18 @@ def main():
         sections="".join(sections_html)
     )
 
-    Path("index.html").write_text(html_out, encoding="utf-8")
-    save_cache(TRANSLATION_CACHE)
-    print("wrote index.html")
+    try:
+        Path("index.html").write_text(html_out, encoding="utf-8")
+        print(f"[SUCCESS] Wrote index.html ({len(html_out)} bytes)")
+    except Exception as e:
+        print(f"[ERROR] Failed to write index.html: {e}")
+        raise
+    
+    try:
+        save_cache(TRANSLATION_CACHE)
+        print(f"[SUCCESS] Saved {len(TRANSLATION_CACHE)} translations to cache")
+    except Exception as e:
+        print(f"[WARN] Failed to save cache: {e}")
 
 if __name__ == "__main__":
     main()

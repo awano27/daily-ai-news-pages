@@ -47,7 +47,7 @@ Tools:
   - name: Machine Learning Mastery
     url: https://machinelearningmastery.com/feed/
 
-posts:
+Posts:
   - name: arXiv cs.AI
     url: https://export.arxiv.org/rss/cs.AI
   - name: BAIR Blog

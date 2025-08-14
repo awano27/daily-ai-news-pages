@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir)",
+      "Bash(gh workflow view:*)",
+      "Bash(python:*)",
+      "Bash(powershell:*)",
+      "Bash(pip install:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:awano27.github.io)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

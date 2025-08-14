@@ -215,8 +215,9 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             post_date = data['datetime']
             text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
             
-            # 24時間以内の投稿のみ含める（他のニュースと同じフィルタリング）
-            if (NOW - post_date) <= timedelta(hours=HOURS_LOOKBACK):
+                        # 8/14以降の投稿のみ含める
+            aug14_jst = datetime(2025, 8, 14, 0, 0, 0, tzinfo=JST)
+            if post_date >= aug14_jst and (NOW - post_date) <= timedelta(hours=HOURS_LOOKBACK):
                 items.append({
                     "title": f"Xポスト {username}",
                     "link": url,
@@ -242,6 +243,9 @@ PAGE_TMPL = """<!doctype html>
 <body>
   <header class="site-header">
     <div class="brand">📰 Daily AI News</div>
+    <nav class="nav-links">
+      <a href="ai_news_dashboard.html" class="nav-link">📊 ダッシュボード</a>
+    </nav>
     <div class="updated">最終更新：{updated_full}</div>
   </header>
 

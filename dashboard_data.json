@@ -1,282 +1,288 @@
 {
-  "timestamp": "2025-08-14T14:24:21.802380",
-  "date": "2025-08-14",
+  "timestamp": "2025-08-15T08:33:04.727602",
+  "date": "2025-08-15",
   "categories": {
     "business": {
-      "count": 22,
+      "count": 19,
       "top_sources": {
         "Meta AI Blog": 10,
-        "AWS AI Blog": 6,
-        "Nvidia Developer Blog": 4,
-        "VentureBeat AI": 2
+        "AWS AI Blog": 5,
+        "VentureBeat AI": 3,
+        "Nvidia Developer Blog": 1
       },
       "top_keywords": {
-        "ai": 12,
+        "ai": 8,
         "meta": 5,
-        "llm": 3,
-        "nvidia": 2,
         "openai": 2,
         "google": 2,
-        "reinforcement learning": 1,
-        "anthropic": 1,
-        "gpt": 1
+        "anthropic": 2,
+        "gpt": 1,
+        "nvidia": 1
       },
       "recent_topics": [
         {
           "title": "How generational differences affect consumer attitudes towards ads",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with so..."
         },
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our ca..."
         },
         {
           "title": "How a non-traditional background led to cutting-edge XR tech",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "How a non-traditional background led to cutting-edge XR tech"
         },
         {
           "title": "A new, unique AI dataset for animating amateur drawings",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "A new, unique AI dataset for animating amateur drawings"
         },
         {
           "title": "How the metaverse can transform education",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "How the metaverse can transform education"
         },
         {
           "title": "Build faster with Buck2: Our open source build system",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "Build faster with Buck2: Our open source build system"
         },
         {
           "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "..."
         },
         {
           "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "Introducing Segment Anything: Working toward the first foundation model for image segmentation"
         },
         {
           "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we ann..."
         },
         {
           "title": "Two meta sustainability grant and scholarship recipients share impact",
           "source": "Meta AI Blog",
-          "time": "14:24",
+          "time": "08:33",
           "summary": "Two meta sustainability grant and scholarship recipients share impact"
         }
       ]
     },
     "tools": {
-      "count": 6,
+      "count": 9,
       "top_sources": {
-        "MarkTechPost": 2,
-        "TechCrunch": 2,
-        "Towards Data Science": 1,
-        "The Verge": 1
+        "Google News: AIツール・フレームワーク": 3,
+        "TechCrunch": 3,
+        "MarkTechPost": 1,
+        "Machine Learning Mastery": 1,
+        "Towards Data Science": 1
       },
       "top_keywords": {
-        "llm": 4,
-        "ai": 4,
-        "microsoft": 1,
-        "reinforcement learning": 1,
-        "anthropic": 1
+        "ai": 6,
+        "meta": 2,
+        "google": 1,
+        "computer vision": 1,
+        "llm": 1,
+        "nvidia": 1,
+        "gpt": 1,
+        "chatgpt": 1,
+        "machine learning": 1
       },
       "recent_topics": [
         {
-          "title": "Microsoft Releases POML (Prompt Orchestration Markup Language): Bringing Modularity and Scalability to LLM Prompts",
-          "source": "MarkTechPost",
-          "time": "05:17",
-          "summary": "Prompt engineering has become foundational in the development of advanced applications powered by La..."
+          "title": "Google unveils ultra-small and efficient open source AI model Gemma 3 270M that can run on smartphones - VentureBeat",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "18:21",
+          "summary": "Google unveils ultra-small and efficient open source AI model Gemma 3 270M that can run on smartphon..."
         },
         {
-          "title": "ByteDance Unveils ToolTrain: A New Tool-Integrated Reinforcement Learning RL Framework that Redefines Repo Deep Search",
+          "title": "Meta AI Just Released DINOv3: A State-of-the-Art Computer Vision Model Trained with Self-Supervised Learning, Generating High-Resolution Image Features",
           "source": "MarkTechPost",
-          "time": "04:58",
-          "summary": "Issue localization involves identifying exact code locations that require modification to fix softwa..."
+          "time": "18:06",
+          "summary": "Meta AI has just released DINOv3, a breakthrough self-supervised computer vision model that sets new..."
         },
         {
-          "title": "How to Use LLMs for Powerful Automatic Evaluations",
+          "title": "Cohere hits a $6.8B valuation as investors AMD, Nvidia, and Salesforce double down",
+          "source": "TechCrunch",
+          "time": "17:40",
+          "summary": "Cohere's market proposition has always been to offer secure LLMs specifically geared for enterprise ..."
+        },
+        {
+          "title": "Artificial Intelligence to the Rescue: Student-Built Tool Could Revolutionize Credit Card Fraud Detection - CardRates.com",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "16:50",
+          "summary": "Artificial Intelligence to the Rescue: Student-Built Tool Could Revolutionize Credit Card Fraud Dete..."
+        },
+        {
+          "title": "ChatGPT: Everything you need to know about the AI-powered chatbot",
+          "source": "TechCrunch",
+          "time": "15:50",
+          "summary": "A timeline of ChatGPT product updates and releases, starting with the latest, which we’ve been updat..."
+        },
+        {
+          "title": "7 Matplotlib Tricks to Better Visualize Your Machine Learning Models",
+          "source": "Machine Learning Mastery",
+          "time": "15:11",
+          "summary": "Visualizing model performance is an essential piece of the machine learning workflow puzzle."
+        },
+        {
+          "title": "Cohere hires long-time Meta research head Joelle Pineau as its chief AI officer",
+          "source": "TechCrunch",
+          "time": "14:00",
+          "summary": "Cohere has hired Joelle Pineau, Meta's former VP of AI research who previously oversaw the tech gian..."
+        },
+        {
+          "title": "“My biggest lesson was realizing that domain expertise matters more than algorithmic complexity.“",
           "source": "Towards Data Science",
-          "time": "19:46",
-          "summary": "A beginner-friendly introduction to LLM-as-a-Judge\nThe post How to Use LLMs for Powerful Automatic E..."
+          "time": "13:59",
+          "summary": "Claudia Ng reflects on real-world ML lessons, mentoring newcomers, and her journey from corporate ML..."
         },
         {
-          "title": "Apple&#8217;s plan for AI could make Siri the animated center of your smart home",
-          "source": "The Verge",
-          "time": "19:41",
-          "summary": "Apple is developing a bunch of products and features to deliver its vision of AI, including multiple..."
-        },
-        {
-          "title": "Pocket FM gives its writers an AI tool to transform narratives, write cliffhangers, and more",
-          "source": "TechCrunch",
-          "time": "16:48",
-          "summary": "Pocket FM is building LLM to help users write faster and in turn, produce more audio shows."
-        },
-        {
-          "title": "Anthropic nabs Humanloop team as competition for enterprise AI talent heats up",
-          "source": "TechCrunch",
-          "time": "16:17",
-          "summary": "While an Anthropic spokesperson confirmed that the AI firm did not acquire Humanloop or its IP, that..."
+          "title": "GSA to unveil USAi, a new tool for federal agencies to experiment with AI models - FedScoop",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "12:08",
+          "summary": "GSA to unveil USAi, a new tool for federal agencies to experiment with AI models  FedScoop"
         }
       ]
     },
     "posts": {
-      "count": 543,
+      "count": 9,
       "top_sources": {
-        "arXiv cs.AI": 283,
-        "arXiv cs.LG (Machine Learning)": 255,
-        "Google News: AI論文・研究": 5
+        "Google News: AI論文・研究": 9
       },
       "top_keywords": {
-        "ai": 501,
-        "llm": 138,
-        "neural network": 74,
-        "reinforcement learning": 50,
-        "transformer": 50,
-        "machine learning": 49,
-        "deep learning": 43,
-        "gpt": 27,
-        "meta": 25,
-        "nlp": 10
+        "ai": 8,
+        "meta": 2,
+        "nvidia": 1
       },
       "recent_topics": [
         {
-          "title": "Value Function Initialization for Knowledge Transfer and Jump-start in Deep Reinforcement Learning",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09277v1 Announce Type: new \nAbstract: Value function initialization (VFI) is an effective..."
+          "title": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team (META:NASDAQ) - Seeking Alpha",
+          "source": "Google News: AI論文・研究",
+          "time": "17:48",
+          "summary": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team (META:NASDA..."
         },
         {
-          "title": "The Othello AI Arena: Evaluating Intelligent Systems Through Limited-Time Adaptation to Unseen Boards",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09292v1 Announce Type: new \nAbstract: The ability to rapidly adapt to novel and unforesee..."
+          "title": "Workato Launches AI Research Lab and Accelerates as an AI-First Enterprise - Business Wire",
+          "source": "Google News: AI論文・研究",
+          "time": "16:00",
+          "summary": "Workato Launches AI Research Lab and Accelerates as an AI-First Enterprise  Business Wire"
         },
         {
-          "title": "An Automated Multi-Modal Evaluation Framework for Mobile Intelligent Assistants",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09507v1 Announce Type: new \nAbstract: With the rapid development of mobile intelligent as..."
+          "title": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 2025-2035 - MarketReports.us",
+          "source": "Google News: AI論文・研究",
+          "time": "15:14",
+          "summary": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 202..."
         },
         {
-          "title": "EvoCurr: Self-evolving Curriculum with Behavior Code Generation for Complex Decision-making",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09586v1 Announce Type: new \nAbstract: Large Language Models (LLMs) have demonstrated rema..."
+          "title": "Using generative AI, researchers design compounds that can kill drug-resistant bacteria - MIT News",
+          "source": "Google News: AI論文・研究",
+          "time": "15:00",
+          "summary": "Using generative AI, researchers design compounds that can kill drug-resistant bacteria  MIT News"
         },
         {
-          "title": "UbiQTree: Uncertainty Quantification in XAI with Tree Ensembles",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09639v1 Announce Type: new \nAbstract: Explainable Artificial Intelligence (XAI) technique..."
+          "title": "Generative AI models build new antibiotics starting from a single atom - Fierce Biotech",
+          "source": "Google News: AI論文・研究",
+          "time": "15:00",
+          "summary": "Generative AI models build new antibiotics starting from a single atom  Fierce Biotech"
         },
         {
-          "title": "MEML-GRPO: Heterogeneous Multi-Expert Mutual Learning for RLVR Advancement",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09670v1 Announce Type: new \nAbstract: Recent advances demonstrate that reinforcement lear..."
+          "title": "Forget Ray-Ban Meta — HTC just unveiled Vive Eagle smart glasses that look like a stylish AI breakthrough - Tom's Guide",
+          "source": "Google News: AI論文・研究",
+          "time": "14:41",
+          "summary": "Forget Ray-Ban Meta — HTC just unveiled Vive Eagle smart glasses that look like a stylish AI breakth..."
         },
         {
-          "title": "UDA: Unsupervised Debiasing Alignment for Pair-wise LLM-as-a-Judge",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09724v1 Announce Type: new \nAbstract: Pairwise evaluation of Large Language Models (LLMs)..."
+          "title": "AI model predicts ER admissions earlier, Mount Sinai study finds - DOTmed",
+          "source": "Google News: AI論文・研究",
+          "time": "14:30",
+          "summary": "AI model predicts ER admissions earlier, Mount Sinai study finds  DOTmed"
         },
         {
-          "title": "The PacifAIst Benchmark:Would an Artificial Intelligence Choose to Sacrifice Itself for Human Safety?",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09762v1 Announce Type: new \nAbstract: As Large Language Models (LLMs) become increasingly..."
+          "title": "New Study from Program for Public Consultation at the University of Maryland Finds Majorities of Republicans and Democrats Overwhelmingly Favor the Government Regulating Artificial Intelligence - Morningstar",
+          "source": "Google News: AI論文・研究",
+          "time": "14:17",
+          "summary": "New Study from Program for Public Consultation at the University of Maryland Finds Majorities of Rep..."
         },
         {
-          "title": "Reasoning About Knowledge on Regular Expressions is 2EXPTIME-complete",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09784v1 Announce Type: new \nAbstract: Logics for reasoning about knowledge and actions ha..."
-        },
-        {
-          "title": "Human-Aligned Procedural Level Generation Reinforcement Learning via Text-Level-Sketch Shared Representation",
-          "source": "arXiv cs.AI",
-          "time": "04:00",
-          "summary": "arXiv:2508.09860v1 Announce Type: new \nAbstract: Human-aligned AI is a critical component of co-crea..."
+          "title": "NSF and NVIDIA partnership enables Ai2 to develop fully open AI models to fuel U.S. scientific innovation - NSF - National Science Foundation (.gov)",
+          "source": "Google News: AI論文・研究",
+          "time": "12:07",
+          "summary": "NSF and NVIDIA partnership enables Ai2 to develop fully open AI models to fuel U.S. scientific innov..."
         }
       ]
     }
   },
   "trends": {
     "hot_keywords": {
-      "ai": 517,
-      "llm": 145,
-      "neural network": 74,
-      "reinforcement learning": 52,
-      "transformer": 50,
-      "machine learning": 49,
-      "deep learning": 43,
-      "meta": 30
+      "ai": 22,
+      "meta": 9,
+      "google": 3,
+      "nvidia": 3,
+      "openai": 2,
+      "anthropic": 2,
+      "gpt": 2,
+      "computer vision": 1
     },
     "category_distribution": {
-      "business": 22,
-      "tools": 6,
-      "posts": 543
+      "business": 19,
+      "tools": 9,
+      "posts": 9
     }
   },
   "highlights": [
-    "📈 最もアクティブなソース: arXiv cs.AI (283件)",
-    "🔥 トレンドキーワード: ai (517回言及)",
-    "📊 最多カテゴリ: Posts (543件)",
-    "💬 SNS投稿: 52件の最新投稿"
+    "📈 最もアクティブなソース: Meta AI Blog (10件)",
+    "🔥 トレンドキーワード: ai (22回言及)",
+    "📊 最多カテゴリ: Business (19件)",
+    "💬 SNS投稿: 75件の最新投稿"
   ],
   "stats": {
-    "total_items": 623,
-    "total_sources": 6,
+    "total_items": 112,
+    "total_sources": 7,
     "update_frequency": "24時間",
-    "last_updated": "2025-08-14 14:24 JST"
+    "last_updated": "2025-08-15 08:33 JST"
   },
   "x_posts": {
-    "count": 52,
+    "count": 75,
     "recent": [
       {
         "title": "Xポスト @pop_ikeda",
         "summary": "💡ついに解決！「上司が忙しくて相談できない」問題\n三井住友銀行の「AI-CEO」導入で、日本企業の古......",
-        "time": "14:24"
+        "time": "08:33"
       },
       {
-        "title": "Xポスト @firecrawl_dev",
-        "summary": "Announcing Open Lovable 🔥\n\nWe've built an open-sou......",
-        "time": "15:59"
+        "title": "Xポスト @7_eito_7",
+        "summary": "海外の有名起業家が公開した、GPT-5特化の最強プロンプト10選を紹介します。これらは日常やビジネス......",
+        "time": "08:36"
       },
       {
-        "title": "Xポスト @googleaidevs",
-        "summary": "Gemini CLI now integrates into VS Code. Get intell......",
-        "time": "17:04"
+        "title": "Xポスト @masahirochaen",
+        "summary": "長文のPDF解析ならGoogle AI Studio一択。ChatGPT、Claudeよりも精度は高......",
+        "time": "09:36"
       },
       {
-        "title": "Xポスト @tom_doerr",
-        "summary": "Open-source, self-hostable browser automation libr......",
-        "time": "14:40"
+        "title": "Xポスト @AIMIRAI46487",
+        "summary": "MuleRun(おそらくアリババ系)は、世界初のAIエージェントマーケット「Mule Run」のベー......",
+        "time": "09:18"
       },
       {
-        "title": "Xポスト @vaaaaanquish",
-        "summary": "最近登壇資料公開してなかったんですがしておいて欲しいと言われたので久々にpost\n\n生成AIによるソ......",
-        "time": "17:27"
+        "title": "Xポスト @0317_hiroya",
+        "summary": "あ、すごい、\n\nObsidian Baseで、プロジェクトノートの管理 と\n\n振り返りで、学んだこと......",
+        "time": "09:37"
       }
     ]
   }

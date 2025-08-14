@@ -8,7 +8,9 @@
       "Bash(pip install:*)",
       "Bash(curl:*)",
       "WebFetch(domain:awano27.github.io)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(C:)",
+      "Bash(set PYTHONPATH=C:Usersyoshitakadaily-ai-news)"
     ],
     "deny": [],
     "ask": []

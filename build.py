@@ -249,6 +249,9 @@ PAGE_TMPL = """<!doctype html>
     <h1 class="page-title">今日の最新AI情報</h1>
     <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近{lookback}時間の更新を配信します。ソースは原文、要約のみ日本語化。</p>
 
+    <!-- 検索ボックス: タイトルや要約で絞り込み -->
+    <input type="search" id="searchBox" class="search-box" placeholder="キーワード検索…"/>
+
     <section class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-value">{cnt_business}件</div>
@@ -298,6 +301,21 @@ PAGE_TMPL = """<!doctype html>
       const target = document.querySelector(btn.dataset.target);
       if (target) target.classList.remove('hidden');
     }}));
+
+    // 検索ボックスによるカードの絞り込み
+    const searchBox = document.getElementById('searchBox');
+    if (searchBox) {{
+      searchBox.addEventListener('input', () => {{
+        const q = searchBox.value.toLowerCase();
+        // すべてのカードを対象に検索
+        document.querySelectorAll('.tab-panel .card').forEach(card => {{
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          const summary = card.querySelector('.card-summary').textContent.toLowerCase();
+          const match = title.includes(q) || summary.includes(q);
+          card.style.display = match ? '' : 'none';
+        }});
+      }});
+    }}
   </script>
 </body>
 </html>

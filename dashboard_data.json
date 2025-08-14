@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-15T08:33:04.727602",
+  "timestamp": "2025-08-15T08:58:52.699630",
   "date": "2025-08-15",
   "categories": {
     "business": {
@@ -23,61 +23,61 @@
         {
           "title": "How generational differences affect consumer attitudes towards ads",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with so..."
         },
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our ca..."
         },
         {
           "title": "How a non-traditional background led to cutting-edge XR tech",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "How a non-traditional background led to cutting-edge XR tech"
         },
         {
           "title": "A new, unique AI dataset for animating amateur drawings",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "A new, unique AI dataset for animating amateur drawings"
         },
         {
           "title": "How the metaverse can transform education",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "How the metaverse can transform education"
         },
         {
           "title": "Build faster with Buck2: Our open source build system",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "Build faster with Buck2: Our open source build system"
         },
         {
           "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "..."
         },
         {
           "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "Introducing Segment Anything: Working toward the first foundation model for image segmentation"
         },
         {
           "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we ann..."
         },
         {
           "title": "Two meta sustainability grant and scholarship recipients share impact",
           "source": "Meta AI Blog",
-          "time": "08:33",
+          "time": "08:58",
           "summary": "Two meta sustainability grant and scholarship recipients share impact"
         }
       ]
@@ -160,12 +160,12 @@
       ]
     },
     "posts": {
-      "count": 9,
+      "count": 8,
       "top_sources": {
-        "Google News: AI論文・研究": 9
+        "Google News: AI論文・研究": 8
       },
       "top_keywords": {
-        "ai": 8,
+        "ai": 7,
         "meta": 2,
         "nvidia": 1
       },
@@ -181,12 +181,6 @@
           "source": "Google News: AI論文・研究",
           "time": "16:00",
           "summary": "Workato Launches AI Research Lab and Accelerates as an AI-First Enterprise  Business Wire"
-        },
-        {
-          "title": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 2025-2035 - MarketReports.us",
-          "source": "Google News: AI論文・研究",
-          "time": "15:14",
-          "summary": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 202..."
         },
         {
           "title": "Using generative AI, researchers design compounds that can kill drug-resistant bacteria - MIT News",
@@ -229,7 +223,7 @@
   },
   "trends": {
     "hot_keywords": {
-      "ai": 22,
+      "ai": 21,
       "meta": 9,
       "google": 3,
       "nvidia": 3,
@@ -241,33 +235,28 @@
     "category_distribution": {
       "business": 19,
       "tools": 9,
-      "posts": 9
+      "posts": 8
     }
   },
   "highlights": [
     "📈 最もアクティブなソース: Meta AI Blog (10件)",
-    "🔥 トレンドキーワード: ai (22回言及)",
+    "🔥 トレンドキーワード: ai (21回言及)",
     "📊 最多カテゴリ: Business (19件)",
-    "💬 SNS投稿: 75件の最新投稿"
+    "💬 SNS投稿: 74件の最新投稿"
   ],
   "stats": {
-    "total_items": 112,
+    "total_items": 110,
     "total_sources": 7,
     "update_frequency": "24時間",
-    "last_updated": "2025-08-15 08:33 JST"
+    "last_updated": "2025-08-15 08:59 JST"
   },
   "x_posts": {
-    "count": 75,
+    "count": 74,
     "recent": [
       {
         "title": "Xポスト @pop_ikeda",
         "summary": "💡ついに解決！「上司が忙しくて相談できない」問題\n三井住友銀行の「AI-CEO」導入で、日本企業の古......",
-        "time": "08:33"
-      },
-      {
-        "title": "Xポスト @7_eito_7",
-        "summary": "海外の有名起業家が公開した、GPT-5特化の最強プロンプト10選を紹介します。これらは日常やビジネス......",
-        "time": "08:36"
+        "time": "08:58"
       },
       {
         "title": "Xポスト @masahirochaen",
@@ -283,6 +272,11 @@
         "title": "Xポスト @0317_hiroya",
         "summary": "あ、すごい、\n\nObsidian Baseで、プロジェクトノートの管理 と\n\n振り返りで、学んだこと......",
         "time": "09:37"
+      },
+      {
+        "title": "Xポスト @kinopee_ai",
+        "summary": "みのるんの MCP のしくみ、良記事ですよ。図解や実例が豊富でわかりやすい。私にピッタリ(笑) ht......",
+        "time": "09:34"
       }
     ]
   }

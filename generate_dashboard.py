@@ -17,7 +17,7 @@ def analyze_ai_news():
     os.environ['TRANSLATE_TO_JA'] = '1'
     os.environ['TRANSLATE_ENGINE'] = 'google'
     os.environ['HOURS_LOOKBACK'] = '24'
-    os.environ['MAX_ITEMS_PER_CATEGORY'] = '20'  # 分析用に多めに取得
+    os.environ['MAX_ITEMS_PER_CATEGORY'] = '8'  # メインサイトと同じ件数に統一
     
     # ビルドシステムから最新データを取得
     import build

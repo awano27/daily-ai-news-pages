@@ -278,6 +278,11 @@ PAGE_TMPL = """<!doctype html>
       <button class="tab" data-target="#posts" aria-selected="false">🧪 SNS/論文ポスト</button>
     </nav>
 
+    <!-- 検索ボックス: タイトルや要約に含まれるキーワードでフィルタリングします -->
+    <div class="search-container">
+      <input id="searchBox" type="text" placeholder="キーワードで記事を検索..." aria-label="検索" />
+    </div>
+
     {sections}
     <section class="note">
       <p>方針：一次情報（公式ブログ/プレス/論文）を優先。一般ニュースは AI キーワードで抽出。要約は日本語化し、<strong>出典リンクは原文</strong>のまま。</p>
@@ -298,6 +303,26 @@ PAGE_TMPL = """<!doctype html>
       const target = document.querySelector(btn.dataset.target);
       if (target) target.classList.remove('hidden');
     }}));
+
+    // 検索ボックスの入力に応じてカードをフィルタリングする
+    const searchBox = document.getElementById('searchBox');
+    if (searchBox) {{
+      searchBox.addEventListener('input', () => {{
+        const query = searchBox.value.toLowerCase();
+        // すべてのカードを対象にキーワードを検索
+        document.querySelectorAll('.card').forEach(card => {{
+          const titleEl = card.querySelector('.card-title');
+          const summaryEl = card.querySelector('.card-summary');
+          const title = titleEl ? titleEl.textContent.toLowerCase() : '';
+          const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
+          if (!query || title.includes(query) || summary.includes(query)) {{
+            card.style.display = '';
+          }} else {{
+            card.style.display = 'none';
+          }}
+        }});
+      }});
+    }}
   </script>
 </body>
 </html>

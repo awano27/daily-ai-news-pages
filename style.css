@@ -72,6 +72,21 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
 }
 .tab:hover:not(.active){background:var(--chip);color:var(--fg)}
 
+/* 検索ボックスエリア */
+.search-container{
+  display:flex;
+  justify-content:flex-end;
+  margin:0 0 20px 0;
+}
+#searchBox{
+  width:100%;
+  max-width:400px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:16px;
+}
+
 .tab-panel{padding:16px 0}
 .hidden{display:none}
 

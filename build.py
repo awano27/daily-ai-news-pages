@@ -29,7 +29,9 @@ HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8"))
 TRANSLATE_TO_JA = os.getenv("TRANSLATE_TO_JA", "1") == "1"
 TRANSLATE_ENGINE = os.getenv("TRANSLATE_ENGINE", "google").lower()
-X_POSTS_CSV = os.getenv("X_POSTS_CSV", "_sources/x_favorites.csv")
+# Google Sheets CSV URL for live X posts data
+GOOGLE_SHEETS_URL = "https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0"
+X_POSTS_CSV = os.getenv("X_POSTS_CSV", GOOGLE_SHEETS_URL)
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
@@ -114,7 +116,7 @@ def _read_csv_bytes(path_or_url: str) -> bytes:
     with open(path_or_url, 'rb') as f:
         return f.read()
 
-def _extract_x_urls_from_csv(raw: bytes) -> list[str]:
+def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
     # 文字コード自動判定(UTF-8 BOM優先→UTF-8→CP932)
     for enc in ('utf-8-sig','utf-8','cp932'):
         try:
@@ -125,24 +127,58 @@ def _extract_x_urls_from_csv(raw: bytes) -> list[str]:
     else:
         txt = raw.decode('utf-8', errors='ignore')
 
-    # 1) CSV列に URL があればそれを使う 2) なければ全体から正規表現抽出
-    urls: list[str] = []
+    # CSV形式: "日付", "@ユーザー", "テキスト", "画像URL", "ツイートURL"
+    data = []
     try:
         rdr = csv.reader(io.StringIO(txt))
         for row in rdr:
-            for cell in row:
-                m = re.findall(r'https?://(?:x|twitter)\\.com/[^\\s,"]+', cell)
-                if m: urls.extend(m)
-    except Exception:
+            if len(row) >= 5:
+                date_str = row[0].strip('"')
+                username = row[1].strip('"')
+                text = row[2].strip('"')
+                tweet_url = row[4].strip('"')
+                
+                # URLがX/Twitterのものかチェック
+                if re.match(r'https?://(?:x|twitter)\.com/', tweet_url):
+                    # 日付をパース
+                    try:
+                        # "August 10, 2025 at 02:41AM" -> datetime
+                        dt = datetime.strptime(date_str, "%B %d, %Y at %I:%M%p")
+                        dt = dt.replace(tzinfo=JST)  # JSTとして扱う
+                    except:
+                        dt = NOW  # パースに失敗した場合は現在時刻
+                    
+                    data.append({
+                        'url': tweet_url,
+                        'username': username,
+                        'text': text,
+                        'datetime': dt
+                    })
+    except Exception as e:
+        print(f"[WARN] CSV parsing error: {e}")
         pass
 
-    if not urls:
+    # 古い形式のフォールバック（URL抽出のみ）
+    if not data:
         urls = re.findall(r'https?://(?:x|twitter)\.com/[^\s,"]+', txt)
+        for url in urls:
+            data.append({
+                'url': url,
+                'username': '',
+                'text': '',
+                'datetime': NOW
+            })
+    
+    return data
 
+def _extract_x_urls_from_csv(raw: bytes) -> list[str]:
+    # 後方互換性のため
+    data = _extract_x_data_from_csv(raw)
+    
     # 正規化 & 重複除去（順序維持）
     seen, out = set(), []
-    for u in urls:
-        u = u.replace('x.com/','twitter.com/')  # 正規化
+    for item in data:
+        u = item['url'].replace('x.com/','twitter.com/')  # 正規化
         if u not in seen:
             seen.add(u); out.append(u)
     return out
@@ -156,26 +192,40 @@ def _author_from_url(u: str) -> str:
         return 'X'
 
 def gather_x_posts(csv_path: str) -> list[dict]:
-    if not Path(csv_path).exists():
+    # Check if it's a URL or local file
+    is_url = csv_path.startswith('http')
+    
+    if not is_url and not Path(csv_path).exists():
         print(f"[INFO] X posts CSV not found at: {csv_path}")
         return []
     
-    print(f"[INFO] Loading X posts from: {csv_path}")
+    if is_url:
+        print(f"[INFO] Loading X posts from Google Sheets: {csv_path}")
+    else:
+        print(f"[INFO] Loading X posts from local file: {csv_path}")
     items = []
     try:
         raw = _read_csv_bytes(csv_path)
-        urls = _extract_x_urls_from_csv(raw)
-        print(f"[INFO] Extracted {len(urls)} X URLs from CSV.")
-        for url in urls:
-            author = _author_from_url(url)
-            items.append({
-                "title": f"Xポスト {author}",
-                "link": url,
-                "_summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-                "_source": "X / SNS",
-                "_dt": NOW, # Use current time for X posts
-            })
-        print(f"[INFO] Created {len(items)} X post items.")
+        x_data = _extract_x_data_from_csv(raw)
+        print(f"[INFO] Extracted {len(x_data)} X posts from CSV.")
+        
+        for data in x_data:
+            url = data['url']
+            username = data['username'] or _author_from_url(url)
+            post_date = data['datetime']
+            text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
+            
+            # 24時間以内の投稿のみ含める（他のニュースと同じフィルタリング）
+            if (NOW - post_date) <= timedelta(hours=HOURS_LOOKBACK):
+                items.append({
+                    "title": f"Xポスト {username}",
+                    "link": url,
+                    "_summary": text_preview or "手動で「いいね」したポストから自動抽出（要約なし）",
+                    "_source": "X / SNS", 
+                    "_dt": post_date,  # 実際の投稿日時を使用
+                })
+        
+        print(f"[INFO] Created {len(items)} X post items (filtered to last {HOURS_LOOKBACK} hours).")
     except Exception as e:
         print(f"[WARN] Failed to process X posts CSV: {e}")
     return items

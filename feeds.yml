@@ -9,20 +9,26 @@
     url: https://research.fb.com/feed
   - name: Nvidia Developer Blog
     url: https://developer.nvidia.com/blog/feed/
+  - name: Anthropic Blog
+    url: https://www.anthropic.com/news.rss
+  - name: DeepMind Blog
+    url: https://deepmind.google/discover/blog/rss.xml
+  - name: AWS AI Blog
+    url: https://aws.amazon.com/blogs/machine-learning/feed/
   - name: Reuters Tech
     url: https://feeds.reuters.com/reuters/technologyNews
     general: true
   - name: Bloomberg Technology
     url: https://www.bloomberg.com/feeds/technology.rss
     general: true
-  - name: "Google News: 規制 or 投資 (AI, 日本語)"
-    url: "https://news.google.com/rss/search?q=AI+OR+%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD+%28%E8%A6%8F%E5%88%B6+OR+%E6%8A%95%E8%B3%87+OR+M%26A+OR+%E4%BE%A1%E6%A0%BC%29&hl=ja&gl=JP&ceid=JP:ja"
-    general: true
-  - name: AI News
-    url: https://www.artificialintelligence-news.com/feed/rss/
+  - name: "Google News: AI企業・投資 (日本語)"
+    url: "https://news.google.com/rss/search?q=AI+OR+%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD+%28%E8%A6%8F%E5%88%B6+OR+%E6%8A%95%E8%B3%87+OR+M%26A+OR+IPO+OR+%E8%B5%B7%E6%A5%AD%29&hl=ja&gl=JP&ceid=JP:ja"
     general: true
   - name: VentureBeat AI
     url: https://venturebeat.com/category/ai/feed/
+    general: true
+  - name: MIT Technology Review AI
+    url: https://www.technologyreview.com/feed/
     general: true
 
 Tools:
@@ -32,23 +38,42 @@ Tools:
     url: https://pytorch.org/feed.xml
   - name: TensorFlow Blog
     url: https://blog.tensorflow.org/feeds/posts/default
+  - name: LangChain Blog
+    url: https://blog.langchain.dev/feed/
+  - name: Weights & Biases Blog
+    url: https://wandb.ai/blog/rss.xml
+  - name: Papers With Code
+    url: https://paperswithcode.com/feed.xml
   - name: TechCrunch
     url: https://techcrunch.com/feed/
     general: true
   - name: The Verge
     url: https://www.theverge.com/rss/index.xml
     general: true
-  - name: "Google News: API/SDK/model (AI, English)"
-    url: "https://news.google.com/rss/search?q=(AI%20OR%20%22large%20language%20model%22)%20(API%20OR%20SDK%20OR%20model%20OR%20open%20source)&hl=en-US&gl=US&ceid=US:en"
+  - name: "Google News: AIツール・フレームワーク"
+    url: "https://news.google.com/rss/search?q=(AI%20OR%20%22machine%20learning%22)%20(tool%20OR%20framework%20OR%20library%20OR%20%22open%20source%22%20OR%20GitHub)&hl=en-US&gl=US&ceid=US:en"
     general: true
   - name: MarkTechPost
     url: https://marktechpost.com/feed
     general: true
   - name: Machine Learning Mastery
     url: https://machinelearningmastery.com/feed/
+  - name: Towards Data Science
+    url: https://towardsdatascience.com/feed
+    general: true
 
 Posts:
   - name: arXiv cs.AI
     url: https://export.arxiv.org/rss/cs.AI
+  - name: arXiv cs.LG (Machine Learning)
+    url: https://export.arxiv.org/rss/cs.LG
   - name: BAIR Blog
     url: http://bair.berkeley.edu/blog/feed.xml
+  - name: Distill
+    url: https://distill.pub/rss.xml
+  - name: AI Research News
+    url: https://www.airesearch.news/feed
+    general: true
+  - name: "Google News: AI論文・研究"
+    url: "https://news.google.com/rss/search?q=(AI%20OR%20%22artificial%20intelligence%22)%20(research%20OR%20paper%20OR%20study%20OR%20breakthrough%20OR%20%22peer%20reviewed%22)&hl=en-US&gl=US&ceid=US:en"
+    general: true

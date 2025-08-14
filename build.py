@@ -364,6 +364,62 @@ def within_window(published_parsed):
     dt = datetime.fromtimestamp(time.mktime(published_parsed), tz=timezone.utc).astimezone(JST)
     return (NOW - dt) <= timedelta(hours=HOURS_LOOKBACK), dt
 
+def is_ai_relevant(title: str, summary: str) -> bool:
+    """
+    AIに関連性の高いコンテンツかどうかを判定
+    より厳格なフィルタリングで質の高いニュースのみを選別
+    """
+    content = f"{title} {summary}".lower()
+    
+    # 高関連度キーワード（これらがあれば必ず含める）
+    high_relevance = [
+        'artificial intelligence', 'machine learning', 'deep learning', 'neural network',
+        'gpt', 'llm', 'large language model', 'transformer', 'bert', 'claude',
+        'chatgpt', 'gemini', 'copilot', 'anthropic', 'openai', 'deepmind',
+        'computer vision', 'natural language processing', 'nlp', 'reinforcement learning',
+        'generative ai', 'ai model', 'ai research', 'ai breakthrough',
+        '人工知能', '機械学習', 'ディープラーニング', 'ニューラルネット',
+        'ＡＩ', 'AI', 'ML', 'DL'
+    ]
+    
+    # 中関連度キーワード（複数あれば含める）
+    medium_relevance = [
+        'algorithm', 'automation', 'robot', 'autonomous', 'prediction',
+        'data science', 'analytics', 'intelligent', 'smart system',
+        'cognitive', 'inference', 'classification', 'recognition',
+        'generation', 'synthesis', 'optimization', 'recommendation',
+        'アルゴリズム', '自動化', 'ロボット', '自律', '予測',
+        'データサイエンス', '分析', 'インテリジェント', 'スマート',
+        '認識', '生成', '最適化', 'レコメンド'
+    ]
+    
+    # 除外キーワード（これらがあれば除外）
+    exclude_keywords = [
+        'cryptocurrency', 'crypto', 'blockchain', 'bitcoin', 'nft',
+        'gaming', 'game', 'sports', 'entertainment', 'music', 'movie',
+        'politics', 'political', 'election', 'government policy',
+        'weather', 'climate change', 'environmental',
+        '暗号通貨', 'ゲーム', 'スポーツ', '娯楽', '音楽', '映画',
+        '政治', '選挙', '天気', '気候変動', '環境'
+    ]
+    
+    # 除外キーワードチェック
+    for keyword in exclude_keywords:
+        if keyword in content:
+            return False
+    
+    # 高関連度キーワードチェック
+    high_score = sum(1 for keyword in high_relevance if keyword in content)
+    if high_score >= 1:
+        return True
+    
+    # 中関連度キーワードチェック（2つ以上で採用）
+    medium_score = sum(1 for keyword in medium_relevance if keyword in content)
+    if medium_score >= 2:
+        return True
+    
+    return False
+
 def build_cards(items, translator):
     cards = []
     for it in items[:MAX_ITEMS_PER_CATEGORY]:
@@ -420,20 +476,35 @@ def gather_items(feeds, category_name):
             print(f"[ERROR] feed parse error: {name}: {e}")
             continue
         entry_count = 0
+        filtered_count = 0
         for e in d.entries:
             ok, dt = within_window(e.get("published_parsed") or e.get("updated_parsed"))
             if not ok:
                 continue
+            
+            title = e.get("title", "")
+            summary = pick_summary(e)
+            
+            # generalフィードの場合はAI関連度をチェック
+            is_general_feed = f.get("general", False)
+            if is_general_feed:
+                if not is_ai_relevant(title, summary):
+                    filtered_count += 1
+                    continue
+            
             entry_count += 1
             items.append({
-                "title": e.get("title", ""),
+                "title": title,
                 "link": e.get("link", ""),
-                "_summary": pick_summary(e),
+                "_summary": summary,
                 "_source": name,
                 "_dt": dt,
             })
         if entry_count > 0:
-            print(f"[INFO] Found {entry_count} recent items from {name}")
+            if filtered_count > 0:
+                print(f"[INFO] Found {entry_count} recent items from {name} (filtered out {filtered_count} non-AI items)")
+            else:
+                print(f"[INFO] Found {entry_count} recent items from {name}")
     # sort by time desc
     items.sort(key=lambda x: x["_dt"], reverse=True)
     print(f"[INFO] {category_name}: Total {len(items)} items found")

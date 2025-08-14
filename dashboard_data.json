@@ -1,0 +1,283 @@
+{
+  "timestamp": "2025-08-14T14:24:21.802380",
+  "date": "2025-08-14",
+  "categories": {
+    "business": {
+      "count": 22,
+      "top_sources": {
+        "Meta AI Blog": 10,
+        "AWS AI Blog": 6,
+        "Nvidia Developer Blog": 4,
+        "VentureBeat AI": 2
+      },
+      "top_keywords": {
+        "ai": 12,
+        "meta": 5,
+        "llm": 3,
+        "nvidia": 2,
+        "openai": 2,
+        "google": 2,
+        "reinforcement learning": 1,
+        "anthropic": 1,
+        "gpt": 1
+      },
+      "recent_topics": [
+        {
+          "title": "How generational differences affect consumer attitudes towards ads",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with so..."
+        },
+        {
+          "title": "Every tree counts",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our ca..."
+        },
+        {
+          "title": "How a non-traditional background led to cutting-edge XR tech",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "How a non-traditional background led to cutting-edge XR tech"
+        },
+        {
+          "title": "A new, unique AI dataset for animating amateur drawings",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "A new, unique AI dataset for animating amateur drawings"
+        },
+        {
+          "title": "How the metaverse can transform education",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "How the metaverse can transform education"
+        },
+        {
+          "title": "Build faster with Buck2: Our open source build system",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "Build faster with Buck2: Our open source build system"
+        },
+        {
+          "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "..."
+        },
+        {
+          "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "Introducing Segment Anything: Working toward the first foundation model for image segmentation"
+        },
+        {
+          "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we ann..."
+        },
+        {
+          "title": "Two meta sustainability grant and scholarship recipients share impact",
+          "source": "Meta AI Blog",
+          "time": "14:24",
+          "summary": "Two meta sustainability grant and scholarship recipients share impact"
+        }
+      ]
+    },
+    "tools": {
+      "count": 6,
+      "top_sources": {
+        "MarkTechPost": 2,
+        "TechCrunch": 2,
+        "Towards Data Science": 1,
+        "The Verge": 1
+      },
+      "top_keywords": {
+        "llm": 4,
+        "ai": 4,
+        "microsoft": 1,
+        "reinforcement learning": 1,
+        "anthropic": 1
+      },
+      "recent_topics": [
+        {
+          "title": "Microsoft Releases POML (Prompt Orchestration Markup Language): Bringing Modularity and Scalability to LLM Prompts",
+          "source": "MarkTechPost",
+          "time": "05:17",
+          "summary": "Prompt engineering has become foundational in the development of advanced applications powered by La..."
+        },
+        {
+          "title": "ByteDance Unveils ToolTrain: A New Tool-Integrated Reinforcement Learning RL Framework that Redefines Repo Deep Search",
+          "source": "MarkTechPost",
+          "time": "04:58",
+          "summary": "Issue localization involves identifying exact code locations that require modification to fix softwa..."
+        },
+        {
+          "title": "How to Use LLMs for Powerful Automatic Evaluations",
+          "source": "Towards Data Science",
+          "time": "19:46",
+          "summary": "A beginner-friendly introduction to LLM-as-a-Judge\nThe post How to Use LLMs for Powerful Automatic E..."
+        },
+        {
+          "title": "Apple&#8217;s plan for AI could make Siri the animated center of your smart home",
+          "source": "The Verge",
+          "time": "19:41",
+          "summary": "Apple is developing a bunch of products and features to deliver its vision of AI, including multiple..."
+        },
+        {
+          "title": "Pocket FM gives its writers an AI tool to transform narratives, write cliffhangers, and more",
+          "source": "TechCrunch",
+          "time": "16:48",
+          "summary": "Pocket FM is building LLM to help users write faster and in turn, produce more audio shows."
+        },
+        {
+          "title": "Anthropic nabs Humanloop team as competition for enterprise AI talent heats up",
+          "source": "TechCrunch",
+          "time": "16:17",
+          "summary": "While an Anthropic spokesperson confirmed that the AI firm did not acquire Humanloop or its IP, that..."
+        }
+      ]
+    },
+    "posts": {
+      "count": 543,
+      "top_sources": {
+        "arXiv cs.AI": 283,
+        "arXiv cs.LG (Machine Learning)": 255,
+        "Google News: AI論文・研究": 5
+      },
+      "top_keywords": {
+        "ai": 501,
+        "llm": 138,
+        "neural network": 74,
+        "reinforcement learning": 50,
+        "transformer": 50,
+        "machine learning": 49,
+        "deep learning": 43,
+        "gpt": 27,
+        "meta": 25,
+        "nlp": 10
+      },
+      "recent_topics": [
+        {
+          "title": "Value Function Initialization for Knowledge Transfer and Jump-start in Deep Reinforcement Learning",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09277v1 Announce Type: new \nAbstract: Value function initialization (VFI) is an effective..."
+        },
+        {
+          "title": "The Othello AI Arena: Evaluating Intelligent Systems Through Limited-Time Adaptation to Unseen Boards",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09292v1 Announce Type: new \nAbstract: The ability to rapidly adapt to novel and unforesee..."
+        },
+        {
+          "title": "An Automated Multi-Modal Evaluation Framework for Mobile Intelligent Assistants",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09507v1 Announce Type: new \nAbstract: With the rapid development of mobile intelligent as..."
+        },
+        {
+          "title": "EvoCurr: Self-evolving Curriculum with Behavior Code Generation for Complex Decision-making",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09586v1 Announce Type: new \nAbstract: Large Language Models (LLMs) have demonstrated rema..."
+        },
+        {
+          "title": "UbiQTree: Uncertainty Quantification in XAI with Tree Ensembles",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09639v1 Announce Type: new \nAbstract: Explainable Artificial Intelligence (XAI) technique..."
+        },
+        {
+          "title": "MEML-GRPO: Heterogeneous Multi-Expert Mutual Learning for RLVR Advancement",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09670v1 Announce Type: new \nAbstract: Recent advances demonstrate that reinforcement lear..."
+        },
+        {
+          "title": "UDA: Unsupervised Debiasing Alignment for Pair-wise LLM-as-a-Judge",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09724v1 Announce Type: new \nAbstract: Pairwise evaluation of Large Language Models (LLMs)..."
+        },
+        {
+          "title": "The PacifAIst Benchmark:Would an Artificial Intelligence Choose to Sacrifice Itself for Human Safety?",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09762v1 Announce Type: new \nAbstract: As Large Language Models (LLMs) become increasingly..."
+        },
+        {
+          "title": "Reasoning About Knowledge on Regular Expressions is 2EXPTIME-complete",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09784v1 Announce Type: new \nAbstract: Logics for reasoning about knowledge and actions ha..."
+        },
+        {
+          "title": "Human-Aligned Procedural Level Generation Reinforcement Learning via Text-Level-Sketch Shared Representation",
+          "source": "arXiv cs.AI",
+          "time": "04:00",
+          "summary": "arXiv:2508.09860v1 Announce Type: new \nAbstract: Human-aligned AI is a critical component of co-crea..."
+        }
+      ]
+    }
+  },
+  "trends": {
+    "hot_keywords": {
+      "ai": 517,
+      "llm": 145,
+      "neural network": 74,
+      "reinforcement learning": 52,
+      "transformer": 50,
+      "machine learning": 49,
+      "deep learning": 43,
+      "meta": 30
+    },
+    "category_distribution": {
+      "business": 22,
+      "tools": 6,
+      "posts": 543
+    }
+  },
+  "highlights": [
+    "📈 最もアクティブなソース: arXiv cs.AI (283件)",
+    "🔥 トレンドキーワード: ai (517回言及)",
+    "📊 最多カテゴリ: Posts (543件)",
+    "💬 SNS投稿: 52件の最新投稿"
+  ],
+  "stats": {
+    "total_items": 623,
+    "total_sources": 6,
+    "update_frequency": "24時間",
+    "last_updated": "2025-08-14 14:24 JST"
+  },
+  "x_posts": {
+    "count": 52,
+    "recent": [
+      {
+        "title": "Xポスト @pop_ikeda",
+        "summary": "💡ついに解決！「上司が忙しくて相談できない」問題\n三井住友銀行の「AI-CEO」導入で、日本企業の古......",
+        "time": "14:24"
+      },
+      {
+        "title": "Xポスト @firecrawl_dev",
+        "summary": "Announcing Open Lovable 🔥\n\nWe've built an open-sou......",
+        "time": "15:59"
+      },
+      {
+        "title": "Xポスト @googleaidevs",
+        "summary": "Gemini CLI now integrates into VS Code. Get intell......",
+        "time": "17:04"
+      },
+      {
+        "title": "Xポスト @tom_doerr",
+        "summary": "Open-source, self-hostable browser automation libr......",
+        "time": "14:40"
+      },
+      {
+        "title": "Xポスト @vaaaaanquish",
+        "summary": "最近登壇資料公開してなかったんですがしておいて欲しいと言われたので久々にpost\n\n生成AIによるソ......",
+        "time": "17:27"
+      }
+    ]
+  }
+}

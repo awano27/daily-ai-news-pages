@@ -358,6 +358,17 @@ def parse_feeds():
     raw = yaml.safe_load(Path("feeds.yml").read_text(encoding="utf-8"))
     return raw or {}
 
+def get_category(conf, category_name):
+    """Case-insensitive category lookup"""
+    # Try exact match first
+    if category_name in conf:
+        return conf[category_name]
+    # Try case-insensitive match
+    for key, value in conf.items():
+        if key.lower() == category_name.lower():
+            return value
+    return []
+
 def within_window(published_parsed):
     if not published_parsed: 
         return True, NOW  # keep if unknown, use current time
@@ -525,16 +536,6 @@ def main():
     except Exception as e:
         print(f"[ERROR] Failed to parse feeds.yml: {e}")
         feeds_conf = {}
-    # Case-insensitive category lookup
-    def get_category(conf, category_name):
-        # Try exact match first
-        if category_name in conf:
-            return conf[category_name]
-        # Try case-insensitive match
-        for key, value in conf.items():
-            if key.lower() == category_name.lower():
-                return value
-        return []
     
     # Gather items with error handling
     try:

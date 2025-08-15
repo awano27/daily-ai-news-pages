@@ -472,6 +472,90 @@ def is_ai_relevant(title: str, summary: str) -> bool:
     
     return False
 
+
+def calculate_importance_score(item):
+    """
+    ニュースの重要度スコアを計算
+    大きなニュースほど高いスコアを返す
+    """
+    title = item.get("title", "").lower()
+    summary = item.get("_summary", "").lower()
+    source = item.get("_source", "").lower()
+    content = f"{title} {summary}"
+    
+    score = 0
+    
+    # 1. 企業・組織の重要度（大手企業ほど高スコア）
+    major_companies = {
+        'openai': 100, 'anthropic': 100, 'google': 90, 'microsoft': 90,
+        'meta': 85, 'nvidia': 85, 'apple': 80, 'amazon': 80,
+        'tesla': 75, 'deepmind': 95, 'cohere': 70, 'hugging face': 70,
+        'mistral': 65, 'stability ai': 65, 'midjourney': 60
+    }
+    
+    for company, points in major_companies.items():
+        if company in content:
+            score += points
+            break  # 最高スコアのみ適用
+    
+    # 2. 重要キーワード（画期的な発表ほど高スコア）
+    high_impact_keywords = {
+        'breakthrough': 80, 'launch': 70, 'release': 65, 'announce': 60,
+        'unveil': 75, 'introduce': 60, 'partnership': 55, 'acquisition': 85,
+        'funding': 70, 'investment': 65, 'ipo': 90, 'valuation': 60,
+        'gpt-5': 100, 'gpt-4': 80, 'claude': 70, 'gemini': 70,
+        'billion': 75, 'million': 50, 'record': 65, 'first': 60
+    }
+    
+    for keyword, points in high_impact_keywords.items():
+        if keyword in content:
+            score += points * 0.5  # 重複を避けるため0.5倍
+    
+    # 3. ソースの信頼性・影響力
+    source_credibility = {
+        'techcrunch': 80, 'bloomberg': 90, 'reuters': 85, 'wsj': 85,
+        'financial times': 80, 'the verge': 70, 'wired': 70,
+        'mit technology review': 85, 'nature': 95, 'science': 95,
+        'anthropic': 90, 'openai': 90, 'google': 85, 'meta': 80
+    }
+    
+    for src, points in source_credibility.items():
+        if src in source:
+            score += points * 0.3  # ソース信頼性は30%の重み
+            break
+    
+    # 4. 技術的重要度
+    tech_importance = {
+        'artificial general intelligence': 100, 'agi': 100,
+        'multimodal': 70, 'reasoning': 60, 'safety': 65,
+        'alignment': 70, 'robotics': 60, 'autonomous': 55,
+        'quantum': 70, 'neural network': 50, 'transformer': 60
+    }
+    
+    for tech, points in tech_importance.items():
+        if tech in content:
+            score += points * 0.4
+    
+    # 5. 新鮮度ボーナス（新しいニュースにボーナス）
+    dt = item.get("_dt")
+    if dt:
+        hours_old = (NOW - dt).total_seconds() / 3600
+        if hours_old < 6:  # 6時間以内
+            score += 30
+        elif hours_old < 12:  # 12時間以内
+            score += 20
+        elif hours_old < 24:  # 24時間以内
+            score += 10
+    
+    # 6. タイトルの長さ（詳細なタイトルほどニュース価値高い）
+    title_length = len(item.get("title", ""))
+    if title_length > 80:
+        score += 15
+    elif title_length > 50:
+        score += 10
+    
+    return max(score, 0)  # 負のスコアは0に
+
 def build_cards(items, translator):
     cards = []
     for it in items[:MAX_ITEMS_PER_CATEGORY]:
@@ -557,8 +641,14 @@ def gather_items(feeds, category_name):
                 print(f"[INFO] Found {entry_count} recent items from {name} (filtered out {filtered_count} non-AI items)")
             else:
                 print(f"[INFO] Found {entry_count} recent items from {name}")
-    # sort by time desc
-    items.sort(key=lambda x: x["_dt"], reverse=True)
+    # スマートソート: 重要度と時刻を組み合わせて並び替え
+    if category_name == "Business":
+        # ビジネスニュースは重要度順でソート
+        items.sort(key=lambda x: (calculate_importance_score(x), x["_dt"]), reverse=True)
+        print(f"[INFO] {category_name}: Sorted by importance score")
+    else:
+        # その他のカテゴリは時刻順
+        items.sort(key=lambda x: x["_dt"], reverse=True)
     print(f"[INFO] {category_name}: Total {len(items)} items found")
     return items
 

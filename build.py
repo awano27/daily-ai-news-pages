@@ -140,20 +140,32 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                 
                 # URLがX/Twitterのものかチェック
                 if re.match(r'https?://(?:x|twitter)\.com/', tweet_url):
-                    # 日付をパース
-                    try:
-                        # "August 10, 2025 at 02:41AM" -> datetime
-                        dt = datetime.strptime(date_str, "%B %d, %Y at %I:%M%p")
-                        dt = dt.replace(tzinfo=JST)  # JSTとして扱う
-                    except:
-                        dt = NOW  # パースに失敗した場合は現在時刻
+                    # 日付をパース（複数フォーマットに対応）
+                    dt = None
+                    # 複数の日付フォーマットを試す
+                    date_formats = [
+                        "%B %d, %Y at %I:%M%p",  # "August 10, 2025 at 02:41AM"
+                        "%B %d, %Y"               # "August 13, 2025"
+                    ]
+                    for fmt in date_formats:
+                        try:
+                            dt = datetime.strptime(date_str, fmt)
+                            dt = dt.replace(tzinfo=JST)  # JSTとして扱う
+                            break
+                        except:
+                            continue
                     
-                    data.append({
-                        'url': tweet_url,
-                        'username': username,
-                        'text': text,
-                        'datetime': dt
-                    })
+                    # パースに失敗した場合はスキップ（現在時刻にしない）
+                    if dt is None:
+                        continue
+                    
+                    if dt is not None:  # 日付が正しくパースできた場合のみ追加
+                        data.append({
+                            'url': tweet_url,
+                            'username': username,
+                            'text': text,
+                            'datetime': dt
+                        })
     except Exception as e:
         print(f"[WARN] CSV parsing error: {e}")
         pass

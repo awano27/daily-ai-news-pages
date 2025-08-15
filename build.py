@@ -227,9 +227,9 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             post_date = data['datetime']
             text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
             
-                        # 8/14以降の投稿のみ含める
+                        # 8/14以降の新しい投稿のみ（より多く取得）
             aug14_jst = datetime(2025, 8, 14, 0, 0, 0, tzinfo=JST)
-            if post_date >= aug14_jst and (NOW - post_date) <= timedelta(hours=HOURS_LOOKBACK):
+            if post_date >= aug14_jst:  # 8/14以降の新しい情報のみ、期間制限なし
                 items.append({
                     "title": f"Xポスト {username}",
                     "link": url,
@@ -568,6 +568,103 @@ def calculate_importance_score(item):
     
     return max(score, 0)  # 負のスコアは0に
 
+def calculate_sns_importance_score(item):
+    """
+    SNSポストの重要度スコアを計算（8/14以降の新しい情報用）
+    企業アカウント、インフルエンサー、内容の重要度で判定
+    """
+    title = item.get("title", "").lower()
+    summary = item.get("_summary", "").lower()
+    username = ""
+    
+    # ユーザー名を抽出
+    if "xポスト" in title:
+        username = title.replace("xポスト", "").strip().lower()
+    
+    content = f"{title} {summary}"
+    score = 0
+    
+    # 1. 企業・組織アカウントの重要度（公式アカウントほど高スコア）
+    enterprise_accounts = {
+        '@openai': 100, '@anthropic': 100, '@google': 90, '@microsoft': 90,
+        '@meta': 85, '@nvidia': 85, '@apple': 80, '@amazon': 80,
+        '@deepmind': 95, '@huggingface': 80, '@langchainai': 75,
+        '@cohereai': 70, '@stabilityai': 70, '@midjourney': 65,
+        # 日本企業アカウント  
+        '@softbank': 80, '@toyota': 75, '@nttcom': 70, '@sony': 70,
+        '@hitachi_ltd': 65, '@fujitsu_global': 65, '@nec_corp': 65,
+        '@rakuten': 60, '@recruit_jp': 55, '@mercari_jp': 50,
+        # AI研究者・インフルエンサー
+        '@ylecun': 90, '@karpathy': 90, '@jeffdean': 85, '@goodfellow_ian': 85,
+        '@elonmusk': 75, '@satyanadella': 80, '@sundarpichai': 80,
+        '@sama': 95, '@darioacemoglu': 80, '@fchollet': 85,
+        '@hardmaru': 75, '@adcock_brett': 70, '@minimaxir': 65,
+        # 日本のAI研究者・インフルエンサー
+        '@karaage0703': 70, '@shi3z': 65, '@yukihiko_n': 60,
+        '@npaka': 65, '@ohtaman': 60, '@toukubo': 55,
+        # その他の著名人
+        '@windsurf': 60, '@oikon48': 55, '@godofprompt': 50,
+        '@newsfromgoogle': 70, '@suh_sunaneko': 50, '@pop_ikeda': 45
+    }
+    
+    for account, points in enterprise_accounts.items():
+        if account in username or account.replace('@', '') in username:
+            score += points
+            break  # 最高スコアのみ適用
+    
+    # 2. コンテンツの重要度（技術的な内容ほど高スコア）
+    high_value_keywords = {
+        'breakthrough': 50, 'release': 40, 'launch': 40, 'announce': 35,
+        'gpt-5': 80, 'gpt-4': 60, 'claude': 50, 'gemini': 50,
+        'research': 40, 'paper': 35, 'model': 30, 'ai': 20,
+        'artificial intelligence': 40, 'machine learning': 35,
+        'deep learning': 35, 'neural network': 30,
+        # 日本語キーワード
+        '人工知能': 35, '機械学習': 30, 'ディープラーニング': 30,
+        '生成ai': 45, 'chatgpt': 40, '大規模言語モデル': 35,
+        '研究': 30, '論文': 25, 'モデル': 20, 'ブレークスルー': 45,
+        '資金調達': 40, '投資': 35, 'スタートアップ': 30
+    }
+    
+    for keyword, points in high_value_keywords.items():
+        if keyword in content:
+            score += points * 0.3  # 重複を避けるため0.3倍
+    
+    # 3. エンゲージメント指標
+    engagement_indicators = {
+        'thread': 15, 'important': 20, 'must read': 25, 'breaking': 30,
+        'update': 10, 'new': 15, 'latest': 10, 'just': 10,
+        '重要': 20, '必見': 25, '最新': 10, '速報': 30, '更新': 10,
+        '解決': 20, 'ついに': 15, '問題': 10
+    }
+    
+    for indicator, points in engagement_indicators.items():
+        if indicator in content:
+            score += points * 0.2
+    
+    # 4. 投稿の新鮮度（8/14以降の新しさを重視）
+    dt = item.get("_dt")
+    if dt:
+        aug14_jst = datetime(2025, 8, 14, 0, 0, 0, tzinfo=JST)
+        hours_since_aug14 = (dt - aug14_jst).total_seconds() / 3600
+        
+        # 8/15の投稿に最高ボーナス
+        if hours_since_aug14 >= 24:  # 8/15以降
+            score += 30
+        elif hours_since_aug14 >= 12:  # 8/14午後
+            score += 20
+        elif hours_since_aug14 >= 0:  # 8/14朝
+            score += 10
+    
+    # 5. テキスト長ボーナス（詳細な投稿ほど高価値）
+    text_length = len(summary)
+    if text_length > 100:
+        score += 10
+    elif text_length > 50:
+        score += 5
+    
+    return max(score, 0)  # 負のスコアは0に
+
 def build_cards(items, translator):
     cards = []
     for it in items[:MAX_ITEMS_PER_CATEGORY]:
@@ -658,8 +755,12 @@ def gather_items(feeds, category_name):
         # ビジネスニュースは重要度順でソート
         items.sort(key=lambda x: (calculate_importance_score(x), x["_dt"]), reverse=True)
         print(f"[INFO] {category_name}: Sorted by importance score")
+    elif category_name == "Posts":
+        # SNS/論文ポストは重要度順でソート
+        items.sort(key=lambda x: (calculate_sns_importance_score(x), x["_dt"]), reverse=True)
+        print(f"[INFO] {category_name}: Sorted by SNS importance score")
     else:
-        # その他のカテゴリは時刻順
+        # ツールカテゴリは時刻順
         items.sort(key=lambda x: x["_dt"], reverse=True)
     print(f"[INFO] {category_name}: Total {len(items)} items found")
     return items

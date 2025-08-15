@@ -3,7 +3,7 @@
   "date": "2025-08-15",
   "categories": {
     "business": {
-      "count": 19,
+      "count": 8,
       "top_sources": {
         "Meta AI Blog": 10,
         "AWS AI Blog": 5,
@@ -55,35 +55,11 @@
           "source": "Meta AI Blog",
           "time": "09:38",
           "summary": "Build faster with Buck2: Our open source build system"
-        },
-        {
-          "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "..."
-        },
-        {
-          "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "Introducing Segment Anything: Working toward the first foundation model for image segmentation"
-        },
-        {
-          "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we ann..."
-        },
-        {
-          "title": "Two meta sustainability grant and scholarship recipients share impact",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "Two meta sustainability grant and scholarship recipients share impact"
         }
       ]
     },
     "tools": {
-      "count": 9,
+      "count": 8,
       "top_sources": {
         "Google News: AIツール・フレームワーク": 3,
         "TechCrunch": 3,
@@ -150,12 +126,6 @@
           "source": "Towards Data Science",
           "time": "13:59",
           "summary": "Claudia Ng reflects on real-world ML lessons, mentoring newcomers, and her journey from corporate ML..."
-        },
-        {
-          "title": "GSA to unveil USAi, a new tool for federal agencies to experiment with AI models - FedScoop",
-          "source": "Google News: AIツール・フレームワーク",
-          "time": "12:08",
-          "summary": "GSA to unveil USAi, a new tool for federal agencies to experiment with AI models  FedScoop"
         }
       ]
     },
@@ -233,22 +203,22 @@
       "computer vision": 1
     },
     "category_distribution": {
-      "business": 19,
-      "tools": 9,
+      "business": 8,
+      "tools": 8,
       "posts": 8
     }
   },
   "highlights": [
     "📈 最もアクティブなソース: Meta AI Blog (10件)",
     "🔥 トレンドキーワード: ai (21回言及)",
-    "📊 最多カテゴリ: Business (19件)",
+    "📊 均等な分散: 各カテゴリ8件ずつ",
     "💬 SNS投稿: 62件の最新投稿"
   ],
   "stats": {
-    "total_items": 98,
+    "total_items": 86,
     "total_sources": 7,
     "update_frequency": "24時間",
-    "last_updated": "2025-08-15 09:38 JST"
+    "last_updated": "2025-08-15 10:15 JST"
   },
   "x_posts": {
     "count": 62,

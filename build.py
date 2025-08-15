@@ -431,7 +431,16 @@ def is_ai_relevant(title: str, summary: str) -> bool:
         'computer vision', 'natural language processing', 'nlp', 'reinforcement learning',
         'generative ai', 'ai model', 'ai research', 'ai breakthrough',
         '人工知能', '機械学習', 'ディープラーニング', 'ニューラルネット',
-        'ＡＩ', 'AI', 'ML', 'DL'
+                '人工知能', '機械学習', 'ディープラーニング', 'ニューラルネット',
+        'ＡＩ', 'AI', 'ML', 'DL', '生成AI', 'ジェネレーティブAI',
+        'チャットGPT', 'ChatGPT', 'GPT', 'LLM', '大規模言語モデル',
+        'Claude', 'Gemini', 'Copilot', 'Bard',
+        '自然言語処理', 'コンピュータビジョン', '画像認識', '音声認識',
+        'ロボティクス', '自動運転', '予測分析', 'データサイエンス',
+        'アルゴリズム', '最適化', 'レコメンデーション',
+        'スタートアップ', '資金調達', '投資', 'ファンド', 'IPO', 'M&A',
+        'ソフトバンク', 'トヨタ', 'NTT', 'ソニー', '日立', '富士通', 'NEC',
+        'パナソニック', '楽天', 'リクルート', 'メルカリ', 'LINE',
     ]
     
     # 中関連度キーワード（複数あれば含める）
@@ -452,7 +461,10 @@ def is_ai_relevant(title: str, summary: str) -> bool:
         'politics', 'political', 'election', 'government policy',
         'weather', 'climate change', 'environmental',
         '暗号通貨', 'ゲーム', 'スポーツ', '娯楽', '音楽', '映画',
-        '政治', '選挙', '天気', '気候変動', '環境'
+                '暗号通貨', 'ゲーム', 'スポーツ', '娯楽', '音楽', '映画',
+        '政治', '選挙', '天気', '気候変動', '環境',
+        'アニメ', 'マンガ', '芸能', 'タレント', 'アイドル',
+        '恋愛', '結婚', 'グルメ', '料理', '旅行', 'ファッション'
     ]
     
     # 除外キーワードチェック

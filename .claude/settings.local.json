@@ -37,7 +37,8 @@
       "Bash(cmd.exe:*)",
       "Bash(copy:*)",
       "Bash(\"deploy_403_final_fix.bat\")",
-      "Bash(.simple_deploy.bat)"
+      "Bash(.simple_deploy.bat)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []

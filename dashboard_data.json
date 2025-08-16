@@ -1,37 +1,36 @@
 {
-  "timestamp": "2025-08-16T12:00:54.236768+09:00",
+  "timestamp": "2025-08-16T12:30:54.231440+09:00",
   "date": "2025-08-16",
-  "jst_time": "12:00 JST",
+  "jst_time": "12:30 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 23,
+      "count": 16,
       "top_sources": {
-        "Meta AI Blog": 10,
         "AWS AI Blog": 5,
-        "ASCII.jp AI・IoT": 3
+        "ASCII.jp AI・IoT": 4,
+        "TechCrunch Japan": 2
       },
       "top_companies": {
-        "Meta": 5,
         "Amazon": 5,
-        "OpenAI": 2,
+        "OpenAI": 3,
         "NVIDIA": 1
       },
       "top_keywords": {
-        "GPT-5": 1,
+        "GPT-5": 2,
         "GPT-4": 1,
         "大規模言語モデル": 1
       },
       "featured_topics": [
         {
-          "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
-          "title_ja": "2022年の基礎整合性研究リクエストの受賞者を発表する提案",
-          "source": "Meta AI Blog",
-          "time": "12:00",
-          "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
-          "importance": 15,
-          "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
+          "title": "Sam Altman, over bread rolls, explores life after GPT-5",
+          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
+          "source": "TechCrunch Japan",
+          "time": "22:20",
+          "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
+          "importance": 10,
+          "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
         },
         {
           "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
@@ -43,24 +42,6 @@
           "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
         },
         {
-          "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
-          "title_ja": "2023年のMETA Research PhD Fellowship Awardの受賞者の発表",
-          "source": "Meta AI Blog",
-          "time": "12:00",
-          "summary": "...",
-          "importance": 10,
-          "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
-        },
-        {
-          "title": "Two meta sustainability grant and scholarship recipients share impact",
-          "title_ja": "2つのメタサステナビリティグラントと奨学金の受信者が影響を共有しています",
-          "source": "Meta AI Blog",
-          "time": "12:00",
-          "summary": "Two meta sustainability grant and scholarship recipients share impact",
-          "importance": 10,
-          "url": "https://sustainability.fb.com/blog/2023/03/24/two-meta-sustainability-grant-and-scholarship-recipients-share-impact/"
-        },
-        {
           "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
           "title_ja": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
           "source": "Google News: AI企業・投資 (日本語)",
@@ -70,13 +51,31 @@
           "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83U0t4Q3ZVNkNxQ0dfUjFlM3lucXNnLTFnRk0zQlZUYUNpQk9EaTRfdkhCRE53TUVoNXdjZlM4QlN1SUU2Q013LUkzVEtTaGZERTNQbEtNMkxGOThpa1JQY2hqT1pqNDdidm5oYXdIenVUWWtySXc?oc=5"
         },
         {
-          "title": "Every tree counts",
-          "title_ja": "すべての木が重要です",
-          "source": "Meta AI Blog",
-          "time": "12:00",
-          "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and m...",
+          "title": "Introducing Amazon Bedrock AgentCore Gateway: Transforming enterprise AI agent tool development",
+          "title_ja": "Amazon Bedrockの紹介エージェントコアゲートウェイ：エンタープライズAIエージェントツール開発の変革",
+          "source": "AWS AI Blog",
+          "time": "18:04",
+          "summary": "In this post, we discuss Amazon Bedrock AgentCore Gateway, a fully managed service that revolutionizes how enterprises c...",
           "importance": 10,
-          "url": "https://research.facebook.com/blog/2023/4/every-tree-counts-large-scale-mapping-of-canopy-height-at-the-resolution-of-individual-trees/"
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-bedrock-agentcore-gateway-transforming-enterprise-ai-agent-tool-development/"
+        },
+        {
+          "title": "Build a scalable containerized web application on AWS using the MERN stack with Amazon Q Developer – Part 1",
+          "title_ja": "Amazon Q開発者とMernスタックを使用して、AWSにスケーラブルなコンテナ化されたWebアプリケーションを構築します - パート1",
+          "source": "AWS AI Blog",
+          "time": "16:45",
+          "summary": "In a traditional SDLC, a lot of time is spent in the different phases researching approaches that can deliver on require...",
+          "importance": 10,
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-a-scalable-containerized-web-application-on-aws-using-the-mern-stack-with-amazon-q-developer-part-1/"
+        },
+        {
+          "title": "Optimizing Salesforce’s model endpoints with Amazon SageMaker AI inference components",
+          "title_ja": "Amazon Sagemaker AI推論コンポーネントでSalesforceのモデルエンドポイントを最適化する",
+          "source": "AWS AI Blog",
+          "time": "16:41",
+          "summary": "In this post, we share how the Salesforce AI Platform team optimized GPU utilization, improved resource efficiency and a...",
+          "importance": 10,
+          "url": "https://aws.amazon.com/blogs/machine-learning/optimizing-salesforces-model-endpoints-with-amazon-sagemaker-ai-inference-components/"
         }
       ],
       "focus_area": "market"
@@ -114,7 +113,7 @@
         },
         {
           "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発 - エグゼクティブゴブ",
+          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
           "source": "Google News: AIツール・フレームワーク",
           "time": "20:00",
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
@@ -150,7 +149,7 @@
         },
         {
           "title": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds - Gizmodo",
-          "title_ja": "オープンソースのAIモデルは、長期的にはよりコストがかかる可能性がある、と研究はGizmodo",
+          "title_ja": "オープンソースのAIモデルは、長期的にはよりコストがかかる可能性がある、と学習の発見-Gizmodo",
           "source": "Google News: AIツール・フレームワーク",
           "time": "16:00",
           "summary": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds  Gizmodo",
@@ -163,9 +162,9 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 6,
+      "count": 5,
       "top_sources": {
-        "Google News: AI論文・研究": 6
+        "Google News: AI論文・研究": 5
       },
       "top_companies": {
         "NVIDIA": 1
@@ -174,7 +173,7 @@
       "featured_topics": [
         {
           "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発 - エグゼクティブゴブ",
+          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
           "source": "Google News: AI論文・研究",
           "time": "20:00",
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
@@ -189,15 +188,6 @@
           "summary": "U of T Launches Health Data Hub for AI Research  Mirage News",
           "importance": 5,
           "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYl9fcGVhYU41ZnI1azBFemJDNi1kNjhrNXJ0WlJuV0Y5ME1qVUVpMlpmd0ZuSV9URXdvNm1nM1VRbl8yNUoxQy1xX2sxV3RxOG5LWU1qMzBaY3U1M1FQUjVPTnJtWHh1WktJU0JwMEhUMnNVbXY4bkF2VHNvQnlkTkJuaVRyMGZkT3NZ?oc=5"
-        },
-        {
-          "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
-          "title_ja": "Ex -TwitterのCEO Parag Agrawalは、並列WebシステムでAI研究ツールを発表します-Indica News",
-          "source": "Google News: AI論文・研究",
-          "time": "12:01",
-          "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
-          "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdmpfSXI1eWdCc0tBb1JLRXRackZJeVg4bGk4MFMwZll4OEtuRmt0MG5XZ0M5YlVuREljRVk5aXBJbzBTMllSNzFrcWhWZzJtX212cFdjVFJiZDZrNW1oODkwa3ItUGIyQzBBQXhHNURpRmlmUThxU2FOdjBxdy12V1lfV2V5SXVyMEVQdVdYejBjN28tdDZaS0Q0RVNjaVRaaDNYalZB?oc=5"
         },
         {
           "title": "Drones, artificial intelligence combo accurately measure corn health in new study - Michigan Farm News",
@@ -236,13 +226,13 @@
     "market_sentiment": "中立",
     "key_developments": [
       {
-        "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
-        "title_ja": "2022年の基礎整合性研究リクエストの受賞者を発表する提案",
-        "source": "Meta AI Blog",
-        "time": "12:00",
-        "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
-        "importance": 15,
-        "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
+        "title": "Sam Altman, over bread rolls, explores life after GPT-5",
+        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
+        "source": "TechCrunch Japan",
+        "time": "22:20",
+        "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
+        "importance": 10,
+        "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
       },
       {
         "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
@@ -254,13 +244,13 @@
         "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
       },
       {
-        "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
-        "title_ja": "2023年のMETA Research PhD Fellowship Awardの受賞者の発表",
-        "source": "Meta AI Blog",
-        "time": "12:00",
-        "summary": "...",
+        "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
+        "title_ja": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
+        "source": "Google News: AI企業・投資 (日本語)",
+        "time": "18:20",
+        "summary": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に  Bloomberg.co.jp",
         "importance": 10,
-        "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
+        "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83U0t4Q3ZVNkNxQ0dfUjFlM3lucXNnLTFnRk0zQlZUYUNpQk9EaTRfdkhCRE53TUVoNXdjZlM4QlN1SUU2Q013LUkzVEtTaGZERTNQbEtNMkxGOThpa1JQY2hqT1pqNDdidm5oYXdIenVUWWtySXc?oc=5"
       }
     ]
   },
@@ -319,7 +309,7 @@
       },
       {
         "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-        "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発 - エグゼクティブゴブ",
+        "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
         "source": "Google News: AIツール・フレームワーク",
         "time": "20:00",
         "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
@@ -339,24 +329,14 @@
   },
   "industry_moves": {
     "most_active_companies": {
-      "Meta": 5,
       "Amazon": 5,
-      "OpenAI": 3,
+      "OpenAI": 4,
       "NVIDIA": 3,
       "Anthropic": 1
     },
     "partnerships": [],
     "regulatory_updates": [],
     "talent_moves": [
-      {
-        "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
-        "title_ja": "Ex -TwitterのCEO Parag Agrawalは、並列WebシステムでAI研究ツールを発表します-Indica News",
-        "source": "Google News: AI論文・研究",
-        "time": "12:01",
-        "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
-        "importance": 0,
-        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdmpfSXI1eWdCc0tBb1JLRXRackZJeVg4bGk4MFMwZll4OEtuRmt0MG5XZ0M5YlVuREljRVk5aXBJbzBTMllSNzFrcWhWZzJtX212cFdjVFJiZDZrNW1oODkwa3ItUGIyQzBBQXhHNURpRmlmUThxU2FOdjBxdy12V1lfV2V5SXVyMEVQdVdYejBjN28tdDZaS0Q0RVNjaVRaaDNYalZB?oc=5"
-      },
       {
         "title": "Is Artificial Intelligence Dumbing Down Cancer Doctors? - Newsweek",
         "title_ja": "人工知能はがん医師を馬鹿にしていますか？ - ニューズウィーク",
@@ -370,7 +350,7 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "GPT-5": 2,
+      "GPT-5": 3,
       "GPT-4": 1,
       "大規模言語モデル": 1,
       "Transformer": 1,
@@ -380,7 +360,7 @@
     "emerging_themes": [
       {
         "theme": "GPT-5",
-        "mentions": 2
+        "mentions": 3
       },
       {
         "theme": "GPT-4",
@@ -396,14 +376,14 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 327,
+    "total_items": 319,
     "total_sources": 7,
-    "active_companies": 5,
+    "active_companies": 4,
     "top_company": [
-      "Meta",
+      "Amazon",
       5
     ],
-    "last_updated": "2025-08-16 12:00 JST"
+    "last_updated": "2025-08-16 12:30 JST"
   },
   "x_posts": {
     "total_count": 291,
@@ -442,11 +422,11 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 327件のニュース、5社が活動",
+    "headline": "今日のAI業界: 319件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
-      "🏢 企業動向: Metaが最も活発",
+      "🏢 企業動向: Amazonが最も活発",
       "💬 SNS: 291件の関連投稿"
     ],
     "outlook": "注意深い観察期"

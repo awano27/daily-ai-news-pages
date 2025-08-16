@@ -121,7 +121,7 @@ def analyze_ai_landscape():
                 'time': item['_dt'].strftime('%H:%M'),
                 'summary': item['_summary'][:120] + '...' if len(item['_summary']) > 120 else item['_summary'],
                 'importance': importance,
-                'url': item.get('url', '#')
+                'url': item.get('link', item.get('url', '#'))
             })
         
         # 重要度でソート
@@ -719,7 +719,11 @@ def generate_comprehensive_dashboard_html(data):
                         <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
                         {''.join(f'''
                         <div class="topic-item">
-                            <div class="topic-title">{topic['title'][:65]}{'...' if len(topic['title']) > 65 else ''}</div>
+                            <div class="topic-title">
+                                <a href="{topic.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2d3748'">
+                                    {topic['title'][:65]}{'...' if len(topic['title']) > 65 else ''}
+                                </a>
+                            </div>
                             <div class="topic-meta">{topic['source']} • {topic['time']}</div>
                             <div class="topic-summary">{topic['summary'][:80]}{'...' if len(topic['summary']) > 80 else ''}</div>
                         </div>

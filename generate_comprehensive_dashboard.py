@@ -8,10 +8,38 @@ import sys
 import json
 from datetime import datetime, timezone, timedelta
 from collections import Counter, defaultdict
+
+# 翻訳機能の初期化
+translator = None
+try:
+    import build
+    translator = build.JaTranslator(engine="google")
+    print("[INFO] Japanese translator initialized")
+except Exception as e:
+    print(f"[WARN] Translation not available: {e}")
+
+def translate_title(title):
+    """タイトルを日本語に翻訳"""
+    if not translator or (hasattr(build, 'looks_japanese') and build.looks_japanese(title)):
+        return title
+    try:
+        translated = translator.translate(title)
+        return translated if translated else title
+    except Exception as e:
+        print(f"[WARN] Translation failed for '{title[:30]}...': {e}")
+        return title
 from pathlib import Path
 
 def analyze_ai_landscape():
     """今日のAI業界全体を分析してダッシュボードデータを生成"""
+    
+    # buildモジュールのインポート
+    try:
+        import build as build_module
+        global build
+        build = build_module
+    except ImportError:
+        print("[ERROR] build module not found")
     
     # 環境設定
     os.environ['TRANSLATE_TO_JA'] = '1'
@@ -115,8 +143,14 @@ def analyze_ai_landscape():
             if any(tech in text for tech in ['breakthrough', 'release', 'launch']):
                 importance += 5
             
+            # タイトルを日本語に翻訳
+            title_ja = translate_title(item['title'])
+            if title_ja != item['title']:
+                print(f"[TRANSLATE] '{item['title'][:40]}...' -> '{title_ja[:40]}...'")
+            
             topics.append({
                 'title': item['title'],
+                'title_ja': title_ja,  # 翻訳された日本語タイトル
                 'source': item['_source'],
                 'time': item['_dt'].strftime('%H:%M'),
                 'summary': item['_summary'][:120] + '...' if len(item['_summary']) > 120 else item['_summary'],
@@ -156,7 +190,8 @@ def analyze_ai_landscape():
             post_data = {
                 'username': username,
                 'summary': post['_summary'][:100] + '...',
-                'time': post['_dt'].strftime('%H:%M')
+                'time': post['_dt'].strftime('%H:%M'),
+                'url': post.get('link', '#')  # X投稿のURLを追加
             }
             
             # インフルエンサー判定
@@ -721,7 +756,7 @@ def generate_comprehensive_dashboard_html(data):
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="{topic.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2d3748'">
-                                    {topic['title'][:65]}{'...' if len(topic['title']) > 65 else ''}
+                                    {topic.get('title_ja', topic['title'])[:65]}{'...' if len(topic.get('title_ja', topic['title'])) > 65 else ''}
                                 </a>
                             </div>
                             <div class="topic-meta">{topic['source']} • {topic['time']}</div>
@@ -842,7 +877,7 @@ def generate_comprehensive_dashboard_html(data):
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">👑 インフルエンサー投稿</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</div>
+                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#2d3748'">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
                                 <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>
@@ -852,7 +887,7 @@ def generate_comprehensive_dashboard_html(data):
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">🗨️ 技術ディスカッション</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</div>
+                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#2d3748'">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
                                 <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>

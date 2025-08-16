@@ -1,22 +1,22 @@
 {
-  "timestamp": "2025-08-16T09:39:50.442862+09:00",
+  "timestamp": "2025-08-16T10:12:32.942620+09:00",
   "date": "2025-08-16",
-  "jst_time": "09:39 JST",
+  "jst_time": "10:12 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 24,
+      "count": 22,
       "top_sources": {
         "Meta AI Blog": 10,
         "AWS AI Blog": 5,
-        "MIT Technology Review AI": 2
+        "ASCII.jp AI・IoT": 3
       },
       "top_companies": {
         "Meta": 5,
         "Amazon": 5,
-        "NVIDIA": 3,
-        "OpenAI": 2
+        "OpenAI": 2,
+        "NVIDIA": 1
       },
       "top_keywords": {
         "GPT-5": 2,
@@ -27,7 +27,7 @@
         {
           "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "09:39",
+          "time": "10:12",
           "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
           "importance": 15,
           "url": "#"
@@ -43,7 +43,7 @@
         {
           "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
           "source": "Meta AI Blog",
-          "time": "09:39",
+          "time": "10:12",
           "summary": "...",
           "importance": 10,
           "url": "#"
@@ -51,7 +51,7 @@
         {
           "title": "Two meta sustainability grant and scholarship recipients share impact",
           "source": "Meta AI Blog",
-          "time": "09:39",
+          "time": "10:12",
           "summary": "Two meta sustainability grant and scholarship recipients share impact",
           "importance": 10,
           "url": "#"
@@ -67,7 +67,7 @@
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "09:39",
+          "time": "10:12",
           "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and m...",
           "importance": 10,
           "url": "#"
@@ -78,9 +78,9 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 10,
+      "count": 9,
       "top_sources": {
-        "Google News: AIツール・フレームワーク": 6,
+        "Google News: AIツール・フレームワーク": 5,
         "TechCrunch": 2,
         "MarkTechPost": 1
       },
@@ -94,8 +94,7 @@
         "Transformer": 1,
         "企業価値": 1,
         "Claude": 1,
-        "政策": 1,
-        "生成AI": 1
+        "政策": 1
       },
       "featured_topics": [
         {
@@ -221,7 +220,7 @@
       {
         "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
         "source": "Meta AI Blog",
-        "time": "09:39",
+        "time": "10:12",
         "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
         "importance": 15,
         "url": "#"
@@ -237,7 +236,7 @@
       {
         "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
         "source": "Meta AI Blog",
-        "time": "09:39",
+        "time": "10:12",
         "summary": "...",
         "importance": 10,
         "url": "#"
@@ -314,8 +313,8 @@
     "most_active_companies": {
       "Meta": 5,
       "Amazon": 5,
-      "NVIDIA": 5,
       "OpenAI": 3,
+      "NVIDIA": 3,
       "Anthropic": 1
     },
     "partnerships": [],
@@ -359,17 +358,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 312,
+    "total_items": 310,
     "total_sources": 7,
     "active_companies": 5,
     "top_company": [
       "Meta",
       5
     ],
-    "last_updated": "2025-08-16 09:39 JST"
+    "last_updated": "2025-08-16 10:12 JST"
   },
   "x_posts": {
-    "total_count": 271,
+    "total_count": 272,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -400,12 +399,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 312件のニュース、5社が活動",
+    "headline": "今日のAI業界: 310件のニュース、5社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
       "🏢 企業動向: Metaが最も活発",
-      "💬 SNS: 271件の関連投稿"
+      "💬 SNS: 272件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

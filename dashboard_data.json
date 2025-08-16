@@ -1,253 +1,412 @@
 {
-  "timestamp": "2025-08-15T09:38:37.886604",
-  "date": "2025-08-15",
+  "timestamp": "2025-08-16T09:39:50.442862+09:00",
+  "date": "2025-08-16",
+  "jst_time": "09:39 JST",
   "categories": {
     "business": {
-      "count": 8,
+      "name": "ビジネス・投資",
+      "icon": "💼",
+      "count": 24,
       "top_sources": {
         "Meta AI Blog": 10,
         "AWS AI Blog": 5,
-        "VentureBeat AI": 3,
-        "Nvidia Developer Blog": 1
+        "MIT Technology Review AI": 2
+      },
+      "top_companies": {
+        "Meta": 5,
+        "Amazon": 5,
+        "NVIDIA": 3,
+        "OpenAI": 2
       },
       "top_keywords": {
-        "ai": 8,
-        "meta": 5,
-        "openai": 2,
-        "google": 2,
-        "anthropic": 2,
-        "gpt": 1,
-        "nvidia": 1
+        "GPT-5": 2,
+        "GPT-4": 2,
+        "大規模言語モデル": 1
       },
-      "recent_topics": [
+      "featured_topics": [
         {
-          "title": "How generational differences affect consumer attitudes towards ads",
+          "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with so..."
+          "time": "09:39",
+          "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
+          "importance": 15,
+          "url": "#"
+        },
+        {
+          "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
+          "source": "VentureBeat AI",
+          "time": "19:19",
+          "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
+          "importance": 10,
+          "url": "#"
+        },
+        {
+          "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
+          "source": "Meta AI Blog",
+          "time": "09:39",
+          "summary": "...",
+          "importance": 10,
+          "url": "#"
+        },
+        {
+          "title": "Two meta sustainability grant and scholarship recipients share impact",
+          "source": "Meta AI Blog",
+          "time": "09:39",
+          "summary": "Two meta sustainability grant and scholarship recipients share impact",
+          "importance": 10,
+          "url": "#"
+        },
+        {
+          "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
+          "source": "Google News: AI企業・投資 (日本語)",
+          "time": "18:20",
+          "summary": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に  Bloomberg.co.jp",
+          "importance": 10,
+          "url": "#"
         },
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our ca..."
-        },
-        {
-          "title": "How a non-traditional background led to cutting-edge XR tech",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "How a non-traditional background led to cutting-edge XR tech"
-        },
-        {
-          "title": "A new, unique AI dataset for animating amateur drawings",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "A new, unique AI dataset for animating amateur drawings"
-        },
-        {
-          "title": "How the metaverse can transform education",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "How the metaverse can transform education"
-        },
-        {
-          "title": "Build faster with Buck2: Our open source build system",
-          "source": "Meta AI Blog",
-          "time": "09:38",
-          "summary": "Build faster with Buck2: Our open source build system"
+          "time": "09:39",
+          "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and m...",
+          "importance": 10,
+          "url": "#"
         }
-      ]
+      ],
+      "focus_area": "market"
     },
     "tools": {
-      "count": 8,
+      "name": "テクノロジー・ツール",
+      "icon": "⚡",
+      "count": 10,
       "top_sources": {
-        "Google News: AIツール・フレームワーク": 3,
-        "TechCrunch": 3,
-        "MarkTechPost": 1,
-        "Machine Learning Mastery": 1,
-        "Towards Data Science": 1
+        "Google News: AIツール・フレームワーク": 6,
+        "TechCrunch": 2,
+        "MarkTechPost": 1
+      },
+      "top_companies": {
+        "OpenAI": 1,
+        "NVIDIA": 1,
+        "Anthropic": 1
       },
       "top_keywords": {
-        "ai": 6,
-        "meta": 2,
-        "google": 1,
-        "computer vision": 1,
-        "llm": 1,
-        "nvidia": 1,
-        "gpt": 1,
-        "chatgpt": 1,
-        "machine learning": 1
+        "GPT-5": 1,
+        "Transformer": 1,
+        "企業価値": 1,
+        "Claude": 1,
+        "政策": 1,
+        "生成AI": 1
       },
-      "recent_topics": [
+      "featured_topics": [
         {
-          "title": "Google unveils ultra-small and efficient open source AI model Gemma 3 270M that can run on smartphones - VentureBeat",
-          "source": "Google News: AIツール・フレームワーク",
-          "time": "18:21",
-          "summary": "Google unveils ultra-small and efficient open source AI model Gemma 3 270M that can run on smartphon..."
+          "title": "Sam Altman, over bread rolls, explores life after GPT-5",
+          "source": "TechCrunch",
+          "time": "22:20",
+          "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
+          "importance": 10,
+          "url": "#"
         },
         {
-          "title": "Meta AI Just Released DINOv3: A State-of-the-Art Computer Vision Model Trained with Self-Supervised Learning, Generating High-Resolution Image Features",
+          "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "20:00",
+          "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
+          "importance": 10,
+          "url": "#"
+        },
+        {
+          "title": "Anthropic has new rules for a more dangerous AI landscape",
+          "source": "The Verge",
+          "time": "17:05",
+          "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
+          "importance": 10,
+          "url": "#"
+        },
+        {
+          "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
           "source": "MarkTechPost",
-          "time": "18:06",
-          "summary": "Meta AI has just released DINOv3, a breakthrough self-supervised computer vision model that sets new..."
+          "time": "20:27",
+          "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
+          "importance": 5,
+          "url": "#"
         },
         {
-          "title": "Cohere hits a $6.8B valuation as investors AMD, Nvidia, and Salesforce double down",
-          "source": "TechCrunch",
-          "time": "17:40",
-          "summary": "Cohere's market proposition has always been to offer secure LLMs specifically geared for enterprise ..."
-        },
-        {
-          "title": "Artificial Intelligence to the Rescue: Student-Built Tool Could Revolutionize Credit Card Fraud Detection - CardRates.com",
+          "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
           "source": "Google News: AIツール・フレームワーク",
-          "time": "16:50",
-          "summary": "Artificial Intelligence to the Rescue: Student-Built Tool Could Revolutionize Credit Card Fraud Dete..."
+          "time": "20:53",
+          "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+          "importance": 0,
+          "url": "#"
         },
         {
-          "title": "ChatGPT: Everything you need to know about the AI-powered chatbot",
-          "source": "TechCrunch",
-          "time": "15:50",
-          "summary": "A timeline of ChatGPT product updates and releases, starting with the latest, which we’ve been updat..."
-        },
-        {
-          "title": "7 Matplotlib Tricks to Better Visualize Your Machine Learning Models",
-          "source": "Machine Learning Mastery",
-          "time": "15:11",
-          "summary": "Visualizing model performance is an essential piece of the machine learning workflow puzzle."
-        },
-        {
-          "title": "Cohere hires long-time Meta research head Joelle Pineau as its chief AI officer",
-          "source": "TechCrunch",
-          "time": "14:00",
-          "summary": "Cohere has hired Joelle Pineau, Meta's former VP of AI research who previously oversaw the tech gian..."
-        },
-        {
-          "title": "“My biggest lesson was realizing that domain expertise matters more than algorithmic complexity.“",
-          "source": "Towards Data Science",
-          "time": "13:59",
-          "summary": "Claudia Ng reflects on real-world ML lessons, mentoring newcomers, and her journey from corporate ML..."
+          "title": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows - WebProNews",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "19:32",
+          "summary": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows  WebProNews",
+          "importance": 0,
+          "url": "#"
         }
-      ]
+      ],
+      "focus_area": "tech"
     },
     "posts": {
-      "count": 8,
+      "name": "SNS・論文",
+      "icon": "🧪",
+      "count": 7,
       "top_sources": {
-        "Google News: AI論文・研究": 8
+        "Google News: AI論文・研究": 7
       },
-      "top_keywords": {
-        "ai": 7,
-        "meta": 2,
-        "nvidia": 1
+      "top_companies": {
+        "NVIDIA": 1
       },
-      "recent_topics": [
+      "top_keywords": {},
+      "featured_topics": [
         {
-          "title": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team (META:NASDAQ) - Seeking Alpha",
+          "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
           "source": "Google News: AI論文・研究",
-          "time": "17:48",
-          "summary": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team (META:NASDA..."
+          "time": "20:00",
+          "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
+          "importance": 10,
+          "url": "#"
         },
         {
-          "title": "Workato Launches AI Research Lab and Accelerates as an AI-First Enterprise - Business Wire",
+          "title": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers - University of Toronto",
           "source": "Google News: AI論文・研究",
-          "time": "16:00",
-          "summary": "Workato Launches AI Research Lab and Accelerates as an AI-First Enterprise  Business Wire"
+          "time": "14:19",
+          "summary": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers  University of Toronto",
+          "importance": 0,
+          "url": "#"
         },
         {
-          "title": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 2025-2035 - MarketReports.us",
+          "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
           "source": "Google News: AI論文・研究",
-          "time": "15:14",
-          "summary": "Global Generative Artificial Intelligence (Gen AI) in Healthcare Industry Study: Market Analysis 202..."
+          "time": "12:01",
+          "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
+          "importance": 0,
+          "url": "#"
         },
         {
-          "title": "Using generative AI, researchers design compounds that can kill drug-resistant bacteria - MIT News",
+          "title": "Drones, artificial intelligence combo accurately measure corn health in new study - Michigan Farm News",
           "source": "Google News: AI論文・研究",
-          "time": "15:00",
-          "summary": "Using generative AI, researchers design compounds that can kill drug-resistant bacteria  MIT News"
+          "time": "18:36",
+          "summary": "Drones, artificial intelligence combo accurately measure corn health in new study  Michigan Farm News",
+          "importance": 0,
+          "url": "#"
         },
         {
-          "title": "Forget Ray-Ban Meta — HTC just unveiled Vive Eagle smart glasses that look like a stylish AI breakthrough - Tom's Guide",
+          "title": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows - WebProNews",
           "source": "Google News: AI論文・研究",
-          "time": "14:41",
-          "summary": "Forget Ray-Ban Meta — HTC just unveiled Vive Eagle smart glasses that look like a stylish AI breakth..."
+          "time": "19:32",
+          "summary": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows  WebProNews",
+          "importance": 0,
+          "url": "#"
         },
         {
-          "title": "AI model predicts ER admissions earlier, Mount Sinai study finds - DOTmed",
+          "title": "News - Marines Pilot Artificial Intelligence Fellowship at NPS - DVIDS",
           "source": "Google News: AI論文・研究",
-          "time": "14:30",
-          "summary": "AI model predicts ER admissions earlier, Mount Sinai study finds  DOTmed"
-        },
-        {
-          "title": "New Study from Program for Public Consultation at the University of Maryland Finds Majorities of Republicans and Democrats Overwhelmingly Favor the Government Regulating Artificial Intelligence - Morningstar",
-          "source": "Google News: AI論文・研究",
-          "time": "14:17",
-          "summary": "New Study from Program for Public Consultation at the University of Maryland Finds Majorities of Rep..."
-        },
-        {
-          "title": "NSF and NVIDIA partnership enables Ai2 to develop fully open AI models to fuel U.S. scientific innovation - NSF - National Science Foundation (.gov)",
-          "source": "Google News: AI論文・研究",
-          "time": "12:07",
-          "summary": "NSF and NVIDIA partnership enables Ai2 to develop fully open AI models to fuel U.S. scientific innov..."
+          "time": "20:02",
+          "summary": "News - Marines Pilot Artificial Intelligence Fellowship at NPS  DVIDS",
+          "importance": 0,
+          "url": "#"
         }
-      ]
+      ],
+      "focus_area": "research"
     }
   },
-  "trends": {
-    "hot_keywords": {
-      "ai": 21,
-      "meta": 9,
-      "google": 3,
-      "nvidia": 3,
-      "openai": 2,
-      "anthropic": 2,
-      "gpt": 2,
-      "computer vision": 1
-    },
-    "category_distribution": {
-      "business": 8,
-      "tools": 8,
-      "posts": 8
-    }
-  },
-  "highlights": [
-    "📈 最もアクティブなソース: Meta AI Blog (10件)",
-    "🔥 トレンドキーワード: ai (21回言及)",
-    "📊 均等な分散: 各カテゴリ8件ずつ",
-    "💬 SNS投稿: 62件の最新投稿"
-  ],
-  "stats": {
-    "total_items": 86,
-    "total_sources": 7,
-    "update_frequency": "24時間",
-    "last_updated": "2025-08-15 10:15 JST"
-  },
-  "x_posts": {
-    "count": 62,
-    "recent": [
+  "market_insights": {
+    "funding_activities": [],
+    "valuation_changes": [],
+    "market_sentiment": "中立",
+    "key_developments": [
       {
-        "title": "Xポスト @Scottish_Fold",
-        "summary": "Notion AI、全然使ってなかったけど、\nデータベース更新できるようになったし、GPT-5も使え......",
-        "time": "09:40"
+        "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
+        "source": "Meta AI Blog",
+        "time": "09:39",
+        "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
+        "importance": 15,
+        "url": "#"
       },
       {
-        "title": "Xポスト @itm_aiplus",
-        "summary": "アクセンチュア、AI人材育成のアイデミー買収へ　リスキリングサービス強化\nhttps://t.co/......",
-        "time": "09:55"
+        "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
+        "source": "VentureBeat AI",
+        "time": "19:19",
+        "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
+        "importance": 10,
+        "url": "#"
       },
       {
-        "title": "Xポスト @koder_dev",
-        "summary": "100万人のユーザーをログアウトさせずに、新しい認証基盤に移行成し遂げたのすごい👏\n\n>  以前Bt......",
-        "time": "10:00"
-      },
-      {
-        "title": "Xポスト @aigleeson",
-        "summary": "The most in-demand skill right now isn’t coding.\n\n......",
-        "time": "10:13"
-      },
-      {
-        "title": "Xポスト @nwiizo",
-        "summary": "時間に余裕がある時期には、「Googleのソフトウェアエンジニアリング」という良書を読むことをお勧め......",
-        "time": "10:50"
+        "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
+        "source": "Meta AI Blog",
+        "time": "09:39",
+        "summary": "...",
+        "importance": 10,
+        "url": "#"
       }
     ]
+  },
+  "tech_developments": {
+    "new_releases": [
+      {
+        "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
+        "source": "MarkTechPost",
+        "time": "20:27",
+        "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
+        "importance": 5,
+        "url": "#"
+      }
+    ],
+    "breakthrough_tech": [
+      {
+        "title": "Anthropic has new rules for a more dangerous AI landscape",
+        "source": "The Verge",
+        "time": "17:05",
+        "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
+        "importance": 10,
+        "url": "#"
+      },
+      {
+        "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
+        "source": "Google News: AIツール・フレームワーク",
+        "time": "20:53",
+        "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+        "importance": 0,
+        "url": "#"
+      }
+    ],
+    "developer_tools": [
+      {
+        "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
+        "source": "Google News: AIツール・フレームワーク",
+        "time": "20:53",
+        "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+        "importance": 0,
+        "url": "#"
+      }
+    ],
+    "research_highlights": [
+      {
+        "title": "Sam Altman, over bread rolls, explores life after GPT-5",
+        "source": "TechCrunch",
+        "time": "22:20",
+        "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
+        "importance": 10,
+        "url": "#"
+      },
+      {
+        "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
+        "source": "Google News: AIツール・フレームワーク",
+        "time": "20:00",
+        "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
+        "importance": 10,
+        "url": "#"
+      },
+      {
+        "title": "Anthropic has new rules for a more dangerous AI landscape",
+        "source": "The Verge",
+        "time": "17:05",
+        "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
+        "importance": 10,
+        "url": "#"
+      }
+    ]
+  },
+  "industry_moves": {
+    "most_active_companies": {
+      "Meta": 5,
+      "Amazon": 5,
+      "NVIDIA": 5,
+      "OpenAI": 3,
+      "Anthropic": 1
+    },
+    "partnerships": [],
+    "regulatory_updates": [],
+    "talent_moves": [
+      {
+        "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
+        "source": "Google News: AI論文・研究",
+        "time": "12:01",
+        "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
+        "importance": 0,
+        "url": "#"
+      }
+    ]
+  },
+  "global_trends": {
+    "hot_technologies": {
+      "GPT-5": 3,
+      "GPT-4": 2,
+      "大規模言語モデル": 1,
+      "Transformer": 1,
+      "企業価値": 1,
+      "Claude": 1
+    },
+    "emerging_themes": [
+      {
+        "theme": "GPT-5",
+        "mentions": 3
+      },
+      {
+        "theme": "GPT-4",
+        "mentions": 2
+      },
+      {
+        "theme": "大規模言語モデル",
+        "mentions": 1
+      }
+    ],
+    "geographic_focus": {},
+    "future_outlook": "注意深い観察期"
+  },
+  "highlights": [],
+  "stats": {
+    "total_items": 312,
+    "total_sources": 7,
+    "active_companies": 5,
+    "top_company": [
+      "Meta",
+      5
+    ],
+    "last_updated": "2025-08-16 09:39 JST"
+  },
+  "x_posts": {
+    "total_count": 271,
+    "influencer_posts": [],
+    "tech_discussions": [
+      {
+        "username": "",
+        "summary": "AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に......",
+        "time": "00:00"
+      },
+      {
+        "username": "",
+        "summary": "すごい！！\n\n「AIで遊ぼうコミュニティ」メンバー大活躍✨\n@taiyo_ai_gakuse も登壇......",
+        "time": "00:14"
+      },
+      {
+        "username": "",
+        "summary": "Merge Labsの誕生は、AIをめぐる競争が「推論精度」や「大規模モデル」の範囲を超え、いよいよ......",
+        "time": "02:13"
+      },
+      {
+        "username": "",
+        "summary": "今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。\n\n実験でGPT-5と医......",
+        "time": "02:16"
+      },
+      {
+        "username": "",
+        "summary": "Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能\nhttps......",
+        "time": "00:25"
+      }
+    ]
+  },
+  "executive_summary": {
+    "headline": "今日のAI業界: 312件のニュース、5社が活動",
+    "key_points": [
+      "📈 市場動向: 中立なセンチメント",
+      "🚀 技術開発: 1件の新製品リリース",
+      "🏢 企業動向: Metaが最も活発",
+      "💬 SNS: 271件の関連投稿"
+    ],
+    "outlook": "注意深い観察期"
   }
 }

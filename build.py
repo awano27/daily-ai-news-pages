@@ -23,6 +23,10 @@ from urllib.request import urlopen
 
 import yaml
 import feedparser
+import requests
+import random
+import time
+from urllib.parse import urljoin
 
 # ---------- config ----------
 HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
@@ -54,6 +58,76 @@ def save_cache(cache):
         CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception:
         pass
+
+def advanced_feed_fetch(url, name):
+    """高度なHTTPリクエストでフィード取得 - Google News 403エラー対策"""
+    
+    # 複数のUser-Agentを用意
+    user_agents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/121.0'
+    ]
+    
+    for i, user_agent in enumerate(user_agents):
+        try:
+            print(f"[INFO] Advanced fetch attempt {i+1}/{len(user_agents)} for {name}")
+            
+            # セッションを作成して詳細ヘッダーを設定
+            session = requests.Session()
+            session.headers.update({
+                'User-Agent': user_agent,
+                'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+                'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'DNT': '1',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Cache-Control': 'max-age=0'
+            })
+            
+            # Google NewsまたはGoogle系のURLの場合、追加のヘッダーを設定
+            if 'google.com' in url or 'news.google.com' in url:
+                session.headers.update({
+                    'Referer': 'https://news.google.com/',
+                    'Origin': 'https://news.google.com',
+                    'Sec-Fetch-User': '?1'
+                })
+            
+            # Google系サービスの場合、追加の遅延
+            if 'google.com' in url:
+                delay = random.uniform(2, 5)  # 2-5秒のランダム遅延
+                print(f"[INFO] Google service detected, applying {delay:.1f}s delay")
+                time.sleep(delay)
+            
+            # リクエスト実行
+            response = session.get(url, timeout=30, allow_redirects=True)
+            
+            if response.status_code == 200:
+                print(f"[SUCCESS] {name} fetched successfully with User-Agent {i+1}")
+                # feedparserに渡すためにBytesIOオブジェクトを作成
+                import io
+                feed_data = io.BytesIO(response.content)
+                d = feedparser.parse(feed_data)
+                return d
+            elif response.status_code == 403:
+                print(f"[WARN] 403 Forbidden with User-Agent {i+1} for {name}")
+                continue
+            else:
+                print(f"[WARN] HTTP {response.status_code} with User-Agent {i+1} for {name}")
+                continue
+                
+        except Exception as e:
+            print(f"[WARN] Exception with User-Agent {i+1} for {name}: {e}")
+            continue
+    
+    print(f"[ERROR] All advanced fetch attempts failed for {name}")
+    return None
 
 # ---------- translation ----------
 def looks_japanese(s: str) -> bool:
@@ -736,19 +810,31 @@ def gather_items(feeds, category_name):
                     d = feedparser.parse(url, agent=headers['User-Agent'])
                     # HTTPステータスコードチェック
                     if hasattr(d, 'status') and d.status == 403:
-                        print(f"[WARN] 403 Forbidden for {name}, trying alternative approach...")
-                        # 代替User-Agentで再試行
-                        alt_agent = f'FeedBot/1.0 (+http://example.com/bot) {headers["User-Agent"]}'
-                        d = feedparser.parse(url, agent=alt_agent)
+                        print(f"[WARN] 403 Forbidden for {name}, trying advanced fetch...")
+                        # 高度なHTTPリクエストで再試行
+                        d = advanced_feed_fetch(url, name)
+                        if d is None:
+                            print(f"[ERROR] Advanced fetch also failed for {name}")
+                            break
                     break
                 except Exception as retry_e:
                     retry_count += 1
                     if retry_count <= max_retries:
                         print(f"[WARN] Retry {retry_count}/{max_retries} for {name}: {retry_e}")
+                        # 高度な取得を試行
+                        if 'google.com' in url:
+                            print(f"[INFO] Trying advanced fetch for Google service: {name}")
+                            d = advanced_feed_fetch(url, name)
+                            if d is not None:
+                                break
                         import time
-                        time.sleep(1)  # 1秒待機
+                        time.sleep(2)  # 2秒待機
                     else:
-                        raise retry_e
+                        # 最後の手段として高度な取得を試行
+                        print(f"[INFO] Final attempt with advanced fetch for {name}")
+                        d = advanced_feed_fetch(url, name)
+                        if d is None:
+                            raise retry_e
             
             if d and d.bozo:
                 print(f"[WARN] Feed parse warning for {name}: {getattr(d, 'bozo_exception', 'unknown')}")

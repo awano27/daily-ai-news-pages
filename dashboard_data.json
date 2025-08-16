@@ -1,28 +1,52 @@
 {
-  "timestamp": "2025-08-16T12:30:54.231440+09:00",
+  "timestamp": "2025-08-16T13:01:18.696217+09:00",
   "date": "2025-08-16",
-  "jst_time": "12:30 JST",
+  "jst_time": "13:01 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 16,
+      "count": 34,
       "top_sources": {
-        "AWS AI Blog": 5,
-        "ASCII.jp AI・IoT": 4,
-        "TechCrunch Japan": 2
+        "Reddit AI": 7,
+        "Hacker News": 6,
+        "AWS AI Blog": 5
       },
       "top_companies": {
+        "OpenAI": 7,
         "Amazon": 5,
-        "OpenAI": 3,
-        "NVIDIA": 1
+        "Google": 2,
+        "NVIDIA": 2,
+        "Apple": 1
       },
       "top_keywords": {
-        "GPT-5": 2,
-        "GPT-4": 1,
-        "大規模言語モデル": 1
+        "GPT-5": 4,
+        "Claude": 3,
+        "大規模言語モデル": 3,
+        "投資": 1,
+        "政策": 1,
+        "自動運転": 1,
+        "Gemini": 1
       },
       "featured_topics": [
+        {
+          "title": "🚨 Catch up with the AI industry, August 15, 2025",
+          "title_ja": "AI業界に追いつく、2025年8月15日",
+          "source": "Reddit AI",
+          "time": "18:28",
+          "summary": "OpenAI CEO weighs in on AI investment trends Grok loses government contract after chatbot's &amp;quot;MechaHitler&amp;qu...",
+          "importance": 15,
+          "url": "https://www.reddit.com/r/artificial/comments/1mr64ux/catch_up_with_the_ai_industry_august_15_2025/"
+        },
+        {
+          "title": "OpenAI API injects hidden instructions for GPT-5",
+          "title_ja": "Openai APIは、GPT-5の非表示命令を注入します",
+          "source": "Reddit AI",
+          "time": "15:24",
+          "summary": "&amp;#32; submitted by &amp;#32;  /u/Agitated_Space_672   [link] &amp;#32; [comments]",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/artificial/comments/1mr10kf/openai_api_injects_hidden_instructions_for_gpt5/"
+        },
         {
           "title": "Sam Altman, over bread rolls, explores life after GPT-5",
           "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
@@ -31,6 +55,15 @@
           "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
           "importance": 10,
           "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
+        },
+        {
+          "title": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活 - au Webポータル",
+          "title_ja": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活 - au Webポータル",
+          "source": "Google News: 生成AI・ChatGPT 日本",
+          "time": "22:39",
+          "summary": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活  au Webポータル",
+          "importance": 10,
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5oeW9oRWhhRGlZc2JpdEVFajBNWU90cGc2Rk1WYzdmU2FBZzB4Tk9QWWFQc0hBX2gyVlF2MW82STV0RGo0WkVVYm5BZjRaSGo4LW5ta1hZU0k4OUhPeXNPUnZ5eU5BWVdNOS01bzhURGlSS08wLWlJOGFfSQ?oc=5"
         },
         {
           "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
@@ -42,40 +75,13 @@
           "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
         },
         {
-          "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
-          "title_ja": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
-          "source": "Google News: AI企業・投資 (日本語)",
-          "time": "18:20",
-          "summary": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に  Bloomberg.co.jp",
+          "title": "Autonomous Presence Systems for OpenAI/Grok/etc",
+          "title_ja": "Openai/Grok/などの自律的な存在システム",
+          "source": "Reddit AI",
+          "time": "14:47",
+          "summary": "I was curious if this was something on any of their tables. Ive been trying to find any reference to timelines or even t...",
           "importance": 10,
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83U0t4Q3ZVNkNxQ0dfUjFlM3lucXNnLTFnRk0zQlZUYUNpQk9EaTRfdkhCRE53TUVoNXdjZlM4QlN1SUU2Q013LUkzVEtTaGZERTNQbEtNMkxGOThpa1JQY2hqT1pqNDdidm5oYXdIenVUWWtySXc?oc=5"
-        },
-        {
-          "title": "Introducing Amazon Bedrock AgentCore Gateway: Transforming enterprise AI agent tool development",
-          "title_ja": "Amazon Bedrockの紹介エージェントコアゲートウェイ：エンタープライズAIエージェントツール開発の変革",
-          "source": "AWS AI Blog",
-          "time": "18:04",
-          "summary": "In this post, we discuss Amazon Bedrock AgentCore Gateway, a fully managed service that revolutionizes how enterprises c...",
-          "importance": 10,
-          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-bedrock-agentcore-gateway-transforming-enterprise-ai-agent-tool-development/"
-        },
-        {
-          "title": "Build a scalable containerized web application on AWS using the MERN stack with Amazon Q Developer – Part 1",
-          "title_ja": "Amazon Q開発者とMernスタックを使用して、AWSにスケーラブルなコンテナ化されたWebアプリケーションを構築します - パート1",
-          "source": "AWS AI Blog",
-          "time": "16:45",
-          "summary": "In a traditional SDLC, a lot of time is spent in the different phases researching approaches that can deliver on require...",
-          "importance": 10,
-          "url": "https://aws.amazon.com/blogs/machine-learning/build-a-scalable-containerized-web-application-on-aws-using-the-mern-stack-with-amazon-q-developer-part-1/"
-        },
-        {
-          "title": "Optimizing Salesforce’s model endpoints with Amazon SageMaker AI inference components",
-          "title_ja": "Amazon Sagemaker AI推論コンポーネントでSalesforceのモデルエンドポイントを最適化する",
-          "source": "AWS AI Blog",
-          "time": "16:41",
-          "summary": "In this post, we share how the Salesforce AI Platform team optimized GPU utilization, improved resource efficiency and a...",
-          "importance": 10,
-          "url": "https://aws.amazon.com/blogs/machine-learning/optimizing-salesforces-model-endpoints-with-amazon-sagemaker-ai-inference-components/"
+          "url": "https://www.reddit.com/r/artificial/comments/1mqzyjs/autonomous_presence_systems_for_openaigroketc/"
         }
       ],
       "focus_area": "market"
@@ -83,42 +89,35 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 7,
+      "count": 11,
       "top_sources": {
-        "Google News: AIツール・フレームワーク": 3,
-        "TechCrunch": 2,
-        "MarkTechPost": 1
+        "Google News: AIツール・フレームワーク": 5,
+        "Reddit MachineLearning": 2,
+        "TechCrunch": 2
       },
       "top_companies": {
         "OpenAI": 1,
-        "NVIDIA": 1,
         "Anthropic": 1
       },
       "top_keywords": {
+        "Claude": 4,
+        "企業価値": 2,
+        "生成AI": 2,
+        "GPT-4": 1,
+        "大規模言語モデル": 1,
         "GPT-5": 1,
         "Transformer": 1,
-        "企業価値": 1,
-        "Claude": 1,
         "政策": 1
       },
       "featured_topics": [
         {
           "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
+          "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
           "source": "TechCrunch",
           "time": "22:20",
           "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
           "importance": 10,
           "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-        },
-        {
-          "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
-          "source": "Google News: AIツール・フレームワーク",
-          "time": "20:00",
-          "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
-          "importance": 10,
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
         },
         {
           "title": "Anthropic has new rules for a more dangerous AI landscape",
@@ -139,22 +138,31 @@
           "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
         },
         {
-          "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
-          "title_ja": "開発者のトップAIツールはgithub copilotではない、と新しいレポートは新しいスタックです",
-          "source": "Google News: AIツール・フレームワーク",
-          "time": "20:54",
-          "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+          "title": "[R] The House of Cards: New Research Shows the Entire Foundation of AI Reasoning is Unstable.",
+          "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
+          "source": "Reddit MachineLearning",
+          "time": "02:07",
+          "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 🤖 AI...",
           "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
         },
         {
-          "title": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds - Gizmodo",
-          "title_ja": "オープンソースのAIモデルは、長期的にはよりコストがかかる可能性がある、と学習の発見-Gizmodo",
-          "source": "Google News: AIツール・フレームワーク",
-          "time": "16:00",
-          "summary": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds  Gizmodo",
+          "title": "Speaker Identification / Different Tones of Voice. [R]",
+          "title_ja": "スピーカーの識別 /異なる音声トーン。 [R]",
+          "source": "Reddit MachineLearning",
+          "time": "00:33",
+          "summary": "I'm just starting out in NLP and have some knowledge on the subject. However, I was assigned a research project on speak...",
           "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQZmJXMFo4Mmtoc0NxWWJRTVAwNXdtLVZtUWFVQjcyUWhkZXRlNG9lNk5YdjY4X19NLVpZYWgxdjE1ZFlCT1BPZXF6UlNUXzEyWlhzeE1uYzF6amNCeDZrTWxSV3lmaUMxcmdkdjhOdVVzakMtdXhIVnBCWGUzc0NfYmJQRmdabWhGR0g0N3lTUUdsbU5qQnhndUM0V1JjRFZudFE?oc=5"
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrfkzg/speaker_identification_different_tones_of_voice_r/"
+        },
+        {
+          "title": "This week in AI dev tools: Claude Sonnet 4’s larger context window, ChatGPT updates, and more (August 15, 2025) - SD Times",
+          "title_ja": "今週のAI Dev Tools：Claude Sonnet 4のより大きなコンテキストウィンドウ、ChatGPTアップデートなど（2025年8月15日）-SDタイムズ",
+          "source": "Google News: AIツール・フレームワーク",
+          "time": "21:33",
+          "summary": "This week in AI dev tools: Claude Sonnet 4’s larger context window, ChatGPT updates, and more (August 15, 2025)  SD Time...",
+          "importance": 0,
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQOVYyckN2MElqN0ZnYnNRd1NYeFJNQXpOT1hFN1Y3R09nUlM2cWpnVHRkbTRicmNySFV4ZEdwWFhoWHhQdnh3cmJEZHJDdDdocWpoeTdTVmd5UlNNS1dnSUdtUUMzUkp3czdQaHlsajlOcF96QXl0WWhBR1ZYc2Zxd1JNVU1tMF93MC1nOUZCVEF2WFdqcDQtWGVFejl6WDllY053dENnZFFHR3JtVEpqcWhBbHJ6TXJ6bnU1VFJFaXM3Si1ScHRZ?oc=5"
         }
       ],
       "focus_area": "tech"
@@ -162,18 +170,30 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 5,
+      "count": 8,
       "top_sources": {
-        "Google News: AI論文・研究": 5
+        "Google News: AI論文・研究": 8
       },
       "top_companies": {
+        "Meta": 1,
         "NVIDIA": 1
       },
-      "top_keywords": {},
+      "top_keywords": {
+        "企業価値": 1
+      },
       "featured_topics": [
         {
+          "title": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team - MSN",
+          "title_ja": "Cohereは5億ドルを調達して、68億ドルの評価に達します。メタAI研究チームの元責任者を雇う-MSN",
+          "source": "Google News: AI論文・研究",
+          "time": "17:43",
+          "summary": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team  MSN",
+          "importance": 10,
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPdG1FazJyV1M4UGtnLVdQWm82ZnQwTTR6Ml9XSUdaeVduYWhvbmw0b2VhQ1RIU2xWSVVHLXlYWmN2TkFVREwweTQ1eG5adEVBRHpCN0ZBX205b3d5Xy1tR3lOVldOVHBSajM4OWJ4MGtBUVd4a2tKOGlBaUlxMWNQMWJoMVJhMjhzeTZDcHIxMWszYnB0Q0cxRGJZU1liSlJfOFd6UG9HVVd1R2dHcVhINFZUZTVPa054TUlnSG1famxlVm43SWlvSWJaUm9BNU1a?oc=5"
+        },
+        {
           "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
+          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発 - エグゼクティブゴブ",
           "source": "Google News: AI論文・研究",
           "time": "20:00",
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
@@ -190,31 +210,31 @@
           "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYl9fcGVhYU41ZnI1azBFemJDNi1kNjhrNXJ0WlJuV0Y5ME1qVUVpMlpmd0ZuSV9URXdvNm1nM1VRbl8yNUoxQy1xX2sxV3RxOG5LWU1qMzBaY3U1M1FQUjVPTnJtWHh1WktJU0JwMEhUMnNVbXY4bkF2VHNvQnlkTkJuaVRyMGZkT3NZ?oc=5"
         },
         {
-          "title": "Drones, artificial intelligence combo accurately measure corn health in new study - Michigan Farm News",
-          "title_ja": "ドローン、人工知能コンボ新しい研究でトウモロコシの健康を正確に測定 - ミシガン州ファームニュース",
+          "title": "New technology for safe self-driving: Using artificial intelligence to predict pedestrian behavior and prevent accidents - EurekAlert!",
+          "title_ja": "安全な自動運転のための新しいテクノロジー：人工知能を使用して歩行者の行動を予測し、事故を防ぐ - ユーレカラート！",
           "source": "Google News: AI論文・研究",
-          "time": "18:36",
-          "summary": "Drones, artificial intelligence combo accurately measure corn health in new study  Michigan Farm News",
+          "time": "14:11",
+          "summary": "New technology for safe self-driving: Using artificial intelligence to predict pedestrian behavior and prevent accidents...",
           "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHJhZkN6Z1JDU0lFVE9EbUdBS3NXWkJWaXE2MEFqMW5TMGRiNlVyTDRuaS1PYnJwbnBwdldwVThxTENKTE5yTmZpNy1WU3VRMkRVRXNveVVlU3RmaDVJcXE1TXN3NnRoWGZZVHRpLWkxOGdGTUJXdkhlSXhJSnBHbms5cFltSGU1cU14ZnM5eGtRWGxKbFQydEpHQ2VKcFZ3d054SzBRdk9haDQ5NHRyVjFEOA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9GdnN4azVzTmV0S2Zmb1NjMmd5WmRMLTN1SmZhSTJacWltMXN1cDJkV3RKZ2RBWUlIcGRYaUo0YTBsM0xab2RhR0xtQVMwVjUzZWx0ekNEQXVydUFK?oc=5"
         },
         {
-          "title": "News - Marines Pilot Artificial Intelligence Fellowship at NPS - DVIDS",
-          "title_ja": "ニュース - 海兵隊のパイロットNPSで人工知能フェローシップ -  DVIDS",
+          "title": "IJCAI 2025 – Artificial Intelligence for a Better World - Since 1969 - EurekAlert!",
+          "title_ja": "IJCAI 2025  - より良い世界のための人工知能 -  1969年以来 - ユーレカラート！",
           "source": "Google News: AI論文・研究",
-          "time": "20:02",
-          "summary": "News - Marines Pilot Artificial Intelligence Fellowship at NPS  DVIDS",
+          "time": "17:26",
+          "summary": "IJCAI 2025 – Artificial Intelligence for a Better World - Since 1969  EurekAlert!",
           "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNb1VERlRTTVVUQzNJUkFLNXdBSXJXcE1qZjFEa1NmR3lSRkNMOUpGNUV0QUN5bWRDSzlyYmJ5MjlUYW96bV9NclE5RkdrZnE5ZEhSQ2RRSmEwSFo1WXZqVTBoUks4eEFBWDlBMTBLRUJ2eGdQcGxfRGNyVU9EbDA0ZktLTE9YR3VrLVh2M3h3RWlrTms?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB6Z2phZGRpVzVtakhaVmdzZUplVXRYTldfNUFZWjJIT3l0OFdfZnhzVFdyeFRuX1JWbi1Zb1lEMm1Rd2d4LWs3cVZJX09vaW1oczlzc1J0dGdmcHF4?oc=5"
         },
         {
-          "title": "Is Artificial Intelligence Dumbing Down Cancer Doctors? - Newsweek",
-          "title_ja": "人工知能はがん医師を馬鹿にしていますか？ - ニューズウィーク",
+          "title": "Silicon Valley Needs Foreign AI Researchers. So Why Are They Rattled? - The Information",
+          "title_ja": "シリコンバレーには、外国のAI研究者が必要です。では、なぜ彼らはガタガタしているのでしょうか？ - 情報",
           "source": "Google News: AI論文・研究",
-          "time": "13:30",
-          "summary": "Is Artificial Intelligence Dumbing Down Cancer Doctors?  Newsweek",
+          "time": "16:04",
+          "summary": "Silicon Valley Needs Foreign AI Researchers. So Why Are They Rattled?  The Information",
           "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaGRzZ0ZheDNGczZnczR3VXQ5MW5TQ082dFhHNlFmemJSMkRLN1pza01wS0FhbGlKcDlTWTY3UFpQMHJROUhxeE5ZZGphUVdWVjk1UlVzUjg3QTZDMVQ2VmE0QkUyTUJTdWlCVE1sOUVTOG1LYzZPR05NM1Y4dXNBT2dpZEdkWENMRlp0aw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQNVFoTG9ucGZWMnFMX2xTREtfbGd0QV9jTXF1ZjI0djVZRUVWUC1scm9idldCdHVWalZwYzMzQThQX2VVREVORnVwanZGYXZKNGtVbWtEV1poYzFHd1pRSjlKQm9Ia25jVkRPa2I3bWg3X1VlTDV0Y0ZJTUZSTldjRU4yU01BZFpSTVBtN1BNd0lUUDJOTGc?oc=5"
         }
       ],
       "focus_area": "research"
@@ -226,6 +246,24 @@
     "market_sentiment": "中立",
     "key_developments": [
       {
+        "title": "🚨 Catch up with the AI industry, August 15, 2025",
+        "title_ja": "AI業界に追いつく、2025年8月15日",
+        "source": "Reddit AI",
+        "time": "18:28",
+        "summary": "OpenAI CEO weighs in on AI investment trends Grok loses government contract after chatbot's &amp;quot;MechaHitler&amp;qu...",
+        "importance": 15,
+        "url": "https://www.reddit.com/r/artificial/comments/1mr64ux/catch_up_with_the_ai_industry_august_15_2025/"
+      },
+      {
+        "title": "OpenAI API injects hidden instructions for GPT-5",
+        "title_ja": "Openai APIは、GPT-5の非表示命令を注入します",
+        "source": "Reddit AI",
+        "time": "15:24",
+        "summary": "&amp;#32; submitted by &amp;#32;  /u/Agitated_Space_672   [link] &amp;#32; [comments]",
+        "importance": 10,
+        "url": "https://www.reddit.com/r/artificial/comments/1mr10kf/openai_api_injects_hidden_instructions_for_gpt5/"
+      },
+      {
         "title": "Sam Altman, over bread rolls, explores life after GPT-5",
         "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
         "source": "TechCrunch Japan",
@@ -233,24 +271,6 @@
         "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
         "importance": 10,
         "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-      },
-      {
-        "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
-        "title_ja": "この研究者は、OpenAIのオープンウェイトモデルGPT-OSS-20Bを、整合性が低く、自由が増えて、リラックスしていない「ベース」モデルに変えました",
-        "source": "VentureBeat AI",
-        "time": "19:19",
-        "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
-        "importance": 10,
-        "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
-      },
-      {
-        "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
-        "title_ja": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
-        "source": "Google News: AI企業・投資 (日本語)",
-        "time": "18:20",
-        "summary": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に  Bloomberg.co.jp",
-        "importance": 10,
-        "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83U0t4Q3ZVNkNxQ0dfUjFlM3lucXNnLTFnRk0zQlZUYUNpQk9EaTRfdkhCRE53TUVoNXdjZlM4QlN1SUU2Q013LUkzVEtTaGZERTNQbEtNMkxGOThpa1JQY2hqT1pqNDdidm5oYXdIenVUWWtySXc?oc=5"
       }
     ]
   },
@@ -277,44 +297,35 @@
         "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
       },
       {
-        "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
-        "title_ja": "開発者のトップAIツールはgithub copilotではない、と新しいレポートは新しいスタックです",
-        "source": "Google News: AIツール・フレームワーク",
-        "time": "20:54",
-        "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+        "title": "[R] The House of Cards: New Research Shows the Entire Foundation of AI Reasoning is Unstable.",
+        "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
+        "source": "Reddit MachineLearning",
+        "time": "02:07",
+        "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 🤖 AI...",
         "importance": 0,
-        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
       }
     ],
     "developer_tools": [
       {
-        "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
-        "title_ja": "開発者のトップAIツールはgithub copilotではない、と新しいレポートは新しいスタックです",
+        "title": "This week in AI dev tools: Claude Sonnet 4’s larger context window, ChatGPT updates, and more (August 15, 2025) - SD Times",
+        "title_ja": "今週のAI Dev Tools：Claude Sonnet 4のより大きなコンテキストウィンドウ、ChatGPTアップデートなど（2025年8月15日）-SDタイムズ",
         "source": "Google News: AIツール・フレームワーク",
-        "time": "20:54",
-        "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
+        "time": "21:33",
+        "summary": "This week in AI dev tools: Claude Sonnet 4’s larger context window, ChatGPT updates, and more (August 15, 2025)  SD Time...",
         "importance": 0,
-        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
+        "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQOVYyckN2MElqN0ZnYnNRd1NYeFJNQXpOT1hFN1Y3R09nUlM2cWpnVHRkbTRicmNySFV4ZEdwWFhoWHhQdnh3cmJEZHJDdDdocWpoeTdTVmd5UlNNS1dnSUdtUUMzUkp3czdQaHlsajlOcF96QXl0WWhBR1ZYc2Zxd1JNVU1tMF93MC1nOUZCVEF2WFdqcDQtWGVFejl6WDllY053dENnZFFHR3JtVEpqcWhBbHJ6TXJ6bnU1VFJFaXM3Si1ScHRZ?oc=5"
       }
     ],
     "research_highlights": [
       {
         "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
+        "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
         "source": "TechCrunch",
         "time": "22:20",
         "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
         "importance": 10,
         "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-      },
-      {
-        "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-        "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発-ExecutiveGov",
-        "source": "Google News: AIツール・フレームワーク",
-        "time": "20:00",
-        "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
-        "importance": 10,
-        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
       },
       {
         "title": "Anthropic has new rules for a more dangerous AI landscape",
@@ -324,69 +335,91 @@
         "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
         "importance": 10,
         "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
+      },
+      {
+        "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
+        "title_ja": "Salesforce AIはMoirai 2.0をリリースします：Salesforceの最新の時系列ファンデーションモデルは、デコーダーのない変圧器アーキテクチャに基づいて構築されています",
+        "source": "MarkTechPost",
+        "time": "20:27",
+        "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
+        "importance": 5,
+        "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
+      "OpenAI": 8,
       "Amazon": 5,
-      "OpenAI": 4,
       "NVIDIA": 3,
-      "Anthropic": 1
+      "Google": 2,
+      "Apple": 1
     },
-    "partnerships": [],
+    "partnerships": [
+      {
+        "title": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team - MSN",
+        "title_ja": "Cohereは5億ドルを調達して、68億ドルの評価に達します。メタAI研究チームの元責任者を雇う-MSN",
+        "source": "Google News: AI論文・研究",
+        "time": "17:43",
+        "summary": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team  MSN",
+        "importance": 10,
+        "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPdG1FazJyV1M4UGtnLVdQWm82ZnQwTTR6Ml9XSUdaeVduYWhvbmw0b2VhQ1RIU2xWSVVHLXlYWmN2TkFVREwweTQ1eG5adEVBRHpCN0ZBX205b3d5Xy1tR3lOVldOVHBSajM4OWJ4MGtBUVd4a2tKOGlBaUlxMWNQMWJoMVJhMjhzeTZDcHIxMWszYnB0Q0cxRGJZU1liSlJfOFd6UG9HVVd1R2dHcVhINFZUZTVPa054TUlnSG1famxlVm43SWlvSWJaUm9BNU1a?oc=5"
+      }
+    ],
     "regulatory_updates": [],
     "talent_moves": [
       {
-        "title": "Is Artificial Intelligence Dumbing Down Cancer Doctors? - Newsweek",
-        "title_ja": "人工知能はがん医師を馬鹿にしていますか？ - ニューズウィーク",
+        "title": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team - MSN",
+        "title_ja": "Cohereは5億ドルを調達して、68億ドルの評価に達します。メタAI研究チームの元責任者を雇う-MSN",
         "source": "Google News: AI論文・研究",
-        "time": "13:30",
-        "summary": "Is Artificial Intelligence Dumbing Down Cancer Doctors?  Newsweek",
-        "importance": 0,
-        "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaGRzZ0ZheDNGczZnczR3VXQ5MW5TQ082dFhHNlFmemJSMkRLN1pza01wS0FhbGlKcDlTWTY3UFpQMHJROUhxeE5ZZGphUVdWVjk1UlVzUjg3QTZDMVQ2VmE0QkUyTUJTdWlCVE1sOUVTOG1LYzZPR05NM1Y4dXNBT2dpZEdkWENMRlp0aw?oc=5"
+        "time": "17:43",
+        "summary": "Cohere raises $500M to reach $6.8B valuation; hires former head of Meta AI research team  MSN",
+        "importance": 10,
+        "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPdG1FazJyV1M4UGtnLVdQWm82ZnQwTTR6Ml9XSUdaeVduYWhvbmw0b2VhQ1RIU2xWSVVHLXlYWmN2TkFVREwweTQ1eG5adEVBRHpCN0ZBX205b3d5Xy1tR3lOVldOVHBSajM4OWJ4MGtBUVd4a2tKOGlBaUlxMWNQMWJoMVJhMjhzeTZDcHIxMWszYnB0Q0cxRGJZU1liSlJfOFd6UG9HVVd1R2dHcVhINFZUZTVPa054TUlnSG1famxlVm43SWlvSWJaUm9BNU1a?oc=5"
       }
     ]
   },
   "global_trends": {
     "hot_technologies": {
-      "GPT-5": 3,
-      "GPT-4": 1,
-      "大規模言語モデル": 1,
-      "Transformer": 1,
-      "企業価値": 1,
-      "Claude": 1
+      "Claude": 7,
+      "GPT-5": 5,
+      "大規模言語モデル": 4,
+      "企業価値": 3,
+      "政策": 2,
+      "生成AI": 2
     },
     "emerging_themes": [
       {
-        "theme": "GPT-5",
-        "mentions": 3
+        "theme": "Claude",
+        "mentions": 7
       },
       {
-        "theme": "GPT-4",
-        "mentions": 1
+        "theme": "GPT-5",
+        "mentions": 5
       },
       {
         "theme": "大規模言語モデル",
-        "mentions": 1
+        "mentions": 4
       }
     ],
-    "geographic_focus": {},
+    "geographic_focus": {
+      "シリコンバレー": 1
+    },
     "future_outlook": "注意深い観察期"
   },
   "highlights": [],
   "stats": {
-    "total_items": 319,
+    "total_items": 345,
     "total_sources": 7,
-    "active_companies": 4,
+    "active_companies": 7,
     "top_company": [
-      "Amazon",
-      5
+      "OpenAI",
+      8
     ],
-    "last_updated": "2025-08-16 12:30 JST"
+    "last_updated": "2025-08-16 13:01 JST"
   },
   "x_posts": {
-    "total_count": 291,
+    "total_count": 292,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -422,12 +455,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 319件のニュース、4社が活動",
+    "headline": "今日のAI業界: 345件のニュース、7社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
-      "🏢 企業動向: Amazonが最も活発",
-      "💬 SNS: 291件の関連投稿"
+      "🏢 企業動向: OpenAIが最も活発",
+      "💬 SNS: 292件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

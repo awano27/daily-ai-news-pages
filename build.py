@@ -340,9 +340,8 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             post_date = data['datetime']
             text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
             
-                        # 8/14以降の新しい投稿のみ（より多く取得）
-            aug14_jst = datetime(2025, 8, 14, 0, 0, 0, tzinfo=JST)
-            if post_date >= aug14_jst:  # 8/14以降の新しい情報のみ、期間制限なし
+            # X投稿は48時間以内の投稿を含める（より多くの投稿を確保）
+            if (NOW - post_date) <= timedelta(hours=48):
                 items.append({
                     "title": f"Xポスト {username}",
                     "link": url,
@@ -351,7 +350,7 @@ def gather_x_posts(csv_path: str) -> list[dict]:
                     "_dt": post_date,  # 実際の投稿日時を使用
                 })
         
-        print(f"[INFO] Created {len(items)} X post items (filtered to last {HOURS_LOOKBACK} hours).")
+        print(f"[INFO] Created {len(items)} X post items (filtered to last 48 hours).")
     except Exception as e:
         print(f"[WARN] Failed to process X posts CSV: {e}")
     return items

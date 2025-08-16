@@ -827,20 +827,27 @@ def fallback_x_post_analysis(x_posts):
             'quality_score': 5
         }
         
-        # 基本的なインフルエンサー判定（より幅広い判定）
+        # 基本的なインフルエンサー判定（日本のAI界隈も含む幅広い判定）
         influencer_keywords = ['openai', 'anthropic', 'sama', 'ylecun', 'karpathy', 'jeffdean', 
                                'microsoft', 'google', 'meta', 'nvidia', 'deepmind', 'tesla',
-                               'elonmusk', 'sundarpichai', 'satyanadella']
+                               'elonmusk', 'sundarpichai', 'satyanadella',
+                               # 日本のAI関連アカウント
+                               'ai_database', 'compassinai', 'godofprompt', 'tsubame', 'kojika', 
+                               'itm_aiplus', 'k_ishi_ai', 'azukiazusa', 'matsuu', 'oss4fun',
+                               'cline', 'tetumemo', 'commte', 'kamui_qai', 'kei31', 'imai_eruel']
         
-        # ユーザー名の判定（@を除いて比較）
+        # ユーザー名の判定（@を除いて比較、部分一致で判定）
         username_check = username.lower().replace('@', '')
         
-        if any(keyword in username_check for keyword in influencer_keywords):
+        # より柔軟なマッチング（部分一致）
+        is_influencer = any(keyword in username_check for keyword in influencer_keywords)
+        
+        if is_influencer:
             influencer_posts.append(post_data)
             print(f"📢 インフルエンサー判定: {username}")
-        elif len(influencer_posts) < 3:  # インフルエンサー投稿が3件未満の場合、品質の高い投稿を追加
+        elif len(influencer_posts) < 5 and post_data.get('quality_score', 0) >= 6:  # 品質6以上の投稿を注目投稿として選出
             influencer_posts.append(post_data)
-            print(f"📢 注目投稿として選出: {username}")
+            print(f"📢 注目投稿として選出: {username} (品質:{post_data.get('quality_score')}/10)")
         else:
             tech_discussions.append(post_data)
             print(f"💬 技術ディスカッション判定: {username}")
@@ -1289,7 +1296,7 @@ def generate_comprehensive_dashboard_html(data):
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
                     <!-- インフルエンサー投稿 -->
                     <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿（最大3件表示）</h4>
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿（最大5件表示）</h4>
                         {''.join([f'''
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">

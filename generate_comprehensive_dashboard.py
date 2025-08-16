@@ -835,19 +835,19 @@ def generate_comprehensive_dashboard_html(data):
                     </div>
                     <div class="section-content">
                         <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        {''.join(f'''
+                        {''.join([f'''
                         <div class="topic-item">
                             <div class="topic-title">
-                                {f'''<a href="{topic.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2d3748'">
-                                    {topic.get('title_ja', topic['title'])[:65]}{'...' if len(topic.get('title_ja', topic['title'])) > 65 else ''}
-                                </a>''' if not is_403_url(topic.get('url', '#')) else f'''<span style="color: #2d3748; font-weight: 600;">
-                                    {topic.get('title_ja', topic['title'])[:65]}{'...' if len(topic.get('title_ja', topic['title'])) > 65 else ''}
-                                </span>'''}
+                                {('<a href="' + topic.get('url', '#') + '" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=\'#667eea\'" onmouseout="this.style.color=\'#2d3748\'">' + 
+                                    topic.get('title_ja', topic['title'])[:65] + ('...' if len(topic.get('title_ja', topic['title'])) > 65 else '') + 
+                                '</a>') if not is_403_url(topic.get('url', '#')) else ('<span style="color: #2d3748; font-weight: 600;">' + 
+                                    topic.get('title_ja', topic['title'])[:65] + ('...' if len(topic.get('title_ja', topic['title'])) > 65 else '') + 
+                                '</span>')}
                             </div>
                             <div class="topic-meta">{topic['source']} • {topic['time']}</div>
                             <div class="topic-summary">{topic['summary'][:80]}{'...' if len(topic['summary']) > 80 else ''}</div>
                         </div>
-                        ''' for topic in cat_data['featured_topics'][:4])}
+                        ''' for topic in cat_data['featured_topics'][:4]])}
                         
                         <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
                         <div class="keywords">

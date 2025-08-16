@@ -30,6 +30,17 @@ def translate_title(title):
         return title
 from pathlib import Path
 
+# URL フィルター機能をインポート
+try:
+    from url_filter import filter_403_urls, is_403_url
+    print("✅ URL フィルター機能: 有効")
+except ImportError:
+    print("⚠️ URL フィルター機能: 無効")
+    def filter_403_urls(items):
+        return items
+    def is_403_url(url):
+        return False
+
 # Gemini分析機能をインポート
 try:
     from gemini_analyzer import GeminiAnalyzer
@@ -163,13 +174,8 @@ def analyze_ai_landscape():
         }
         
         # URL フィルターを適用（403エラーURL除外）
-        try:
-            from url_filter import filter_403_urls, is_403_url
-            items = filter_403_urls(items)
-            print(f"✅ {category_name}: 403 URL除外後 {len(items)}件")
-        except ImportError:
-            print("⚠️ URL フィルターが利用できません")
-            def is_403_url(url): return False  # フォールバック関数
+        items = filter_403_urls(items)
+        print(f"✅ {category_name}: 403 URL除外後 {len(items)}件")
         
         for item in items:
             sources[item['_source']] += 1

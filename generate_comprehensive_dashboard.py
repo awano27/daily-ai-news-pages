@@ -842,21 +842,21 @@ def generate_comprehensive_dashboard_html(data):
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">👑 インフルエンサー投稿</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title">{post['username']}</div>
-                                <div class="topic-summary">{post['summary']}</div>
+                                <div class="topic-title">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</div>
+                                <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>
-                            ''' for post in data['x_posts']['influencer_posts'])}
+                            ''' for post in data['x_posts']['influencer_posts'][:4])}
                         </div>
                         <div>
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">🗨️ 技術ディスカッション</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title">{post['username']}</div>
-                                <div class="topic-summary">{post['summary']}</div>
+                                <div class="topic-title">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</div>
+                                <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>
-                            ''' for post in data['x_posts']['tech_discussions'][:3])}
+                            ''' for post in data['x_posts']['tech_discussions'][:5])}
                         </div>
                     </div>
                 </div>

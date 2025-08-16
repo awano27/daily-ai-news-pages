@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-16T10:12:32.942620+09:00",
+  "timestamp": "2025-08-16T10:44:34.163810+09:00",
   "date": "2025-08-16",
-  "jst_time": "10:12 JST",
+  "jst_time": "10:44 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 22,
+      "count": 21,
       "top_sources": {
         "Meta AI Blog": 10,
         "AWS AI Blog": 5,
@@ -19,18 +19,18 @@
         "NVIDIA": 1
       },
       "top_keywords": {
-        "GPT-5": 2,
-        "GPT-4": 2,
+        "GPT-5": 1,
+        "GPT-4": 1,
         "大規模言語モデル": 1
       },
       "featured_topics": [
         {
           "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "10:12",
+          "time": "10:44",
           "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
           "importance": 15,
-          "url": "#"
+          "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
         },
         {
           "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
@@ -38,23 +38,23 @@
           "time": "19:19",
           "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
           "importance": 10,
-          "url": "#"
+          "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
         },
         {
           "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
           "source": "Meta AI Blog",
-          "time": "10:12",
+          "time": "10:44",
           "summary": "...",
           "importance": 10,
-          "url": "#"
+          "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
         },
         {
           "title": "Two meta sustainability grant and scholarship recipients share impact",
           "source": "Meta AI Blog",
-          "time": "10:12",
+          "time": "10:44",
           "summary": "Two meta sustainability grant and scholarship recipients share impact",
           "importance": 10,
-          "url": "#"
+          "url": "https://sustainability.fb.com/blog/2023/03/24/two-meta-sustainability-grant-and-scholarship-recipients-share-impact/"
         },
         {
           "title": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に - Bloomberg.co.jp",
@@ -62,15 +62,15 @@
           "time": "18:20",
           "summary": "OpenAI、インフラに数兆ドル投資へ－アルトマン氏「遠くない将来」に  Bloomberg.co.jp",
           "importance": 10,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE83U0t4Q3ZVNkNxQ0dfUjFlM3lucXNnLTFnRk0zQlZUYUNpQk9EaTRfdkhCRE53TUVoNXdjZlM4QlN1SUU2Q013LUkzVEtTaGZERTNQbEtNMkxGOThpa1JQY2hqT1pqNDdidm5oYXdIenVUWWtySXc?oc=5"
         },
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "10:12",
+          "time": "10:44",
           "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and m...",
           "importance": 10,
-          "url": "#"
+          "url": "https://research.facebook.com/blog/2023/4/every-tree-counts-large-scale-mapping-of-canopy-height-at-the-resolution-of-individual-trees/"
         }
       ],
       "focus_area": "market"
@@ -78,9 +78,9 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 9,
+      "count": 7,
       "top_sources": {
-        "Google News: AIツール・フレームワーク": 5,
+        "Google News: AIツール・フレームワーク": 3,
         "TechCrunch": 2,
         "MarkTechPost": 1
       },
@@ -103,7 +103,7 @@
           "time": "22:20",
           "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
           "importance": 10,
-          "url": "#"
+          "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
         },
         {
           "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
@@ -111,7 +111,7 @@
           "time": "20:00",
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
           "importance": 10,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
         },
         {
           "title": "Anthropic has new rules for a more dangerous AI landscape",
@@ -119,7 +119,7 @@
           "time": "17:05",
           "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
           "importance": 10,
-          "url": "#"
+          "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
         },
         {
           "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
@@ -127,23 +127,23 @@
           "time": "20:27",
           "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
           "importance": 5,
-          "url": "#"
+          "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
         },
         {
           "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
           "source": "Google News: AIツール・フレームワーク",
-          "time": "20:53",
+          "time": "20:54",
           "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
           "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
         },
         {
-          "title": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows - WebProNews",
+          "title": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds - Gizmodo",
           "source": "Google News: AIツール・フレームワーク",
-          "time": "19:32",
-          "summary": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows  WebProNews",
+          "time": "16:00",
+          "summary": "Open-Sourced AI Models May Be More Costly in the Long Run, Study Finds  Gizmodo",
           "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQZmJXMFo4Mmtoc0NxWWJRTVAwNXdtLVZtUWFVQjcyUWhkZXRlNG9lNk5YdjY4X19NLVpZYWgxdjE1ZFlCT1BPZXF6UlNUXzEyWlhzeE1uYzF6amNCeDZrTWxSV3lmaUMxcmdkdjhOdVVzakMtdXhIVnBCWGUzc0NfYmJQRmdabWhGR0g0N3lTUUdsbU5qQnhndUM0V1JjRFZudFE?oc=5"
         }
       ],
       "focus_area": "tech"
@@ -151,9 +151,9 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 7,
+      "count": 6,
       "top_sources": {
-        "Google News: AI論文・研究": 7
+        "Google News: AI論文・研究": 6
       },
       "top_companies": {
         "NVIDIA": 1
@@ -166,7 +166,7 @@
           "time": "20:00",
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
           "importance": 10,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
         },
         {
           "title": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers - University of Toronto",
@@ -174,7 +174,7 @@
           "time": "14:19",
           "summary": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers  University of Toronto",
           "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdmMxRUtXZXloOU55VkExcDR6a1h3V1F6dmIyWm45eFlJaU9OdUJZRnNHTGhydWFMa192c3g5aVFISUs1dDBpWm14d0d5MHlpYmlHLWxUMnVsOVdkMzg3TjJIX2prZnJ6bEJ5NXFxVUZSeFU2VjNQWWJzN2hiR3pTWGpycHVVZklfbnpUa2UtbmxHYzhXUUR2Mms4eC1fektYMDFRU2JTeEFndlVU?oc=5"
         },
         {
           "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
@@ -182,7 +182,7 @@
           "time": "12:01",
           "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
           "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdmpfSXI1eWdCc0tBb1JLRXRackZJeVg4bGk4MFMwZll4OEtuRmt0MG5XZ0M5YlVuREljRVk5aXBJbzBTMllSNzFrcWhWZzJtX212cFdjVFJiZDZrNW1oODkwa3ItUGIyQzBBQXhHNURpRmlmUThxU2FOdjBxdy12V1lfV2V5SXVyMEVQdVdYejBjN28tdDZaS0Q0RVNjaVRaaDNYalZB?oc=5"
         },
         {
           "title": "Drones, artificial intelligence combo accurately measure corn health in new study - Michigan Farm News",
@@ -190,15 +190,7 @@
           "time": "18:36",
           "summary": "Drones, artificial intelligence combo accurately measure corn health in new study  Michigan Farm News",
           "importance": 0,
-          "url": "#"
-        },
-        {
-          "title": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows - WebProNews",
-          "source": "Google News: AI論文・研究",
-          "time": "19:32",
-          "summary": "Open-Source AI Models Cost 10x More to Run Than Proprietary, Study Shows  WebProNews",
-          "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTHJhZkN6Z1JDU0lFVE9EbUdBS3NXWkJWaXE2MEFqMW5TMGRiNlVyTDRuaS1PYnJwbnBwdldwVThxTENKTE5yTmZpNy1WU3VRMkRVRXNveVVlU3RmaDVJcXE1TXN3NnRoWGZZVHRpLWkxOGdGTUJXdkhlSXhJSnBHbms5cFltSGU1cU14ZnM5eGtRWGxKbFQydEpHQ2VKcFZ3d054SzBRdk9haDQ5NHRyVjFEOA?oc=5"
         },
         {
           "title": "News - Marines Pilot Artificial Intelligence Fellowship at NPS - DVIDS",
@@ -206,7 +198,15 @@
           "time": "20:02",
           "summary": "News - Marines Pilot Artificial Intelligence Fellowship at NPS  DVIDS",
           "importance": 0,
-          "url": "#"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNb1VERlRTTVVUQzNJUkFLNXdBSXJXcE1qZjFEa1NmR3lSRkNMOUpGNUV0QUN5bWRDSzlyYmJ5MjlUYW96bV9NclE5RkdrZnE5ZEhSQ2RRSmEwSFo1WXZqVTBoUks4eEFBWDlBMTBLRUJ2eGdQcGxfRGNyVU9EbDA0ZktLTE9YR3VrLVh2M3h3RWlrTms?oc=5"
+        },
+        {
+          "title": "Is Artificial Intelligence Dumbing Down Cancer Doctors? - Newsweek",
+          "source": "Google News: AI論文・研究",
+          "time": "13:30",
+          "summary": "Is Artificial Intelligence Dumbing Down Cancer Doctors?  Newsweek",
+          "importance": 0,
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaGRzZ0ZheDNGczZnczR3VXQ5MW5TQ082dFhHNlFmemJSMkRLN1pza01wS0FhbGlKcDlTWTY3UFpQMHJROUhxeE5ZZGphUVdWVjk1UlVzUjg3QTZDMVQ2VmE0QkUyTUJTdWlCVE1sOUVTOG1LYzZPR05NM1Y4dXNBT2dpZEdkWENMRlp0aw?oc=5"
         }
       ],
       "focus_area": "research"
@@ -220,10 +220,10 @@
       {
         "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
         "source": "Meta AI Blog",
-        "time": "10:12",
+        "time": "10:44",
         "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
         "importance": 15,
-        "url": "#"
+        "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
       },
       {
         "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
@@ -231,15 +231,15 @@
         "time": "19:19",
         "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
         "importance": 10,
-        "url": "#"
+        "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
       },
       {
         "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
         "source": "Meta AI Blog",
-        "time": "10:12",
+        "time": "10:44",
         "summary": "...",
         "importance": 10,
-        "url": "#"
+        "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
       }
     ]
   },
@@ -251,7 +251,7 @@
         "time": "20:27",
         "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
         "importance": 5,
-        "url": "#"
+        "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
       }
     ],
     "breakthrough_tech": [
@@ -261,25 +261,25 @@
         "time": "17:05",
         "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
         "importance": 10,
-        "url": "#"
+        "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
       },
       {
         "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
         "source": "Google News: AIツール・フレームワーク",
-        "time": "20:53",
+        "time": "20:54",
         "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
         "importance": 0,
-        "url": "#"
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
       }
     ],
     "developer_tools": [
       {
         "title": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds - The New Stack",
         "source": "Google News: AIツール・フレームワーク",
-        "time": "20:53",
+        "time": "20:54",
         "summary": "The Top AI Tool for Devs Isn’t GitHub Copilot, New Report Finds  The New Stack",
         "importance": 0,
-        "url": "#"
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVkgwbDI0NThvU3BZS09xck0tbUZaWC12RUduei1qY25rQ1JvZ0M4OHBfVXd2VmlUbWFXRnFndVRPV1c1WWFuVnhhOVBGU3VDUlB3dkpUbTI2OEllc1F0Rm1OVGJwOW1LRGw5UnZOSDZ2b3VWY1ZTNm82X01WNXg4X0poOW40bU9lZGZ4MHlB?oc=5"
       }
     ],
     "research_highlights": [
@@ -289,7 +289,7 @@
         "time": "22:20",
         "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
         "importance": 10,
-        "url": "#"
+        "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
       },
       {
         "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
@@ -297,7 +297,7 @@
         "time": "20:00",
         "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
         "importance": 10,
-        "url": "#"
+        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
       },
       {
         "title": "Anthropic has new rules for a more dangerous AI landscape",
@@ -305,7 +305,7 @@
         "time": "17:05",
         "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
         "importance": 10,
-        "url": "#"
+        "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
       }
     ]
   },
@@ -326,14 +326,22 @@
         "time": "12:01",
         "summary": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems  indica News",
         "importance": 0,
-        "url": "#"
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdmpfSXI1eWdCc0tBb1JLRXRackZJeVg4bGk4MFMwZll4OEtuRmt0MG5XZ0M5YlVuREljRVk5aXBJbzBTMllSNzFrcWhWZzJtX212cFdjVFJiZDZrNW1oODkwa3ItUGIyQzBBQXhHNURpRmlmUThxU2FOdjBxdy12V1lfV2V5SXVyMEVQdVdYejBjN28tdDZaS0Q0RVNjaVRaaDNYalZB?oc=5"
+      },
+      {
+        "title": "Is Artificial Intelligence Dumbing Down Cancer Doctors? - Newsweek",
+        "source": "Google News: AI論文・研究",
+        "time": "13:30",
+        "summary": "Is Artificial Intelligence Dumbing Down Cancer Doctors?  Newsweek",
+        "importance": 0,
+        "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQaGRzZ0ZheDNGczZnczR3VXQ5MW5TQ082dFhHNlFmemJSMkRLN1pza01wS0FhbGlKcDlTWTY3UFpQMHJROUhxeE5ZZGphUVdWVjk1UlVzUjg3QTZDMVQ2VmE0QkUyTUJTdWlCVE1sOUVTOG1LYzZPR05NM1Y4dXNBT2dpZEdkWENMRlp0aw?oc=5"
       }
     ]
   },
   "global_trends": {
     "hot_technologies": {
-      "GPT-5": 3,
-      "GPT-4": 2,
+      "GPT-5": 2,
+      "GPT-4": 1,
       "大規模言語モデル": 1,
       "Transformer": 1,
       "企業価値": 1,
@@ -342,11 +350,11 @@
     "emerging_themes": [
       {
         "theme": "GPT-5",
-        "mentions": 3
+        "mentions": 2
       },
       {
         "theme": "GPT-4",
-        "mentions": 2
+        "mentions": 1
       },
       {
         "theme": "大規模言語モデル",
@@ -358,14 +366,14 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 310,
+    "total_items": 306,
     "total_sources": 7,
     "active_companies": 5,
     "top_company": [
       "Meta",
       5
     ],
-    "last_updated": "2025-08-16 10:12 JST"
+    "last_updated": "2025-08-16 10:44 JST"
   },
   "x_posts": {
     "total_count": 272,
@@ -399,7 +407,7 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 310件のニュース、5社が活動",
+    "headline": "今日のAI業界: 306件のニュース、5社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",

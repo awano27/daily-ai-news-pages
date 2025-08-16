@@ -162,6 +162,15 @@ def analyze_ai_landscape():
             'regulation': '規制', 'policy': '政策', 'ethics': 'AI倫理'
         }
         
+        # URL フィルターを適用（403エラーURL除外）
+        try:
+            from url_filter import filter_403_urls, is_403_url
+            items = filter_403_urls(items)
+            print(f"✅ {category_name}: 403 URL除外後 {len(items)}件")
+        except ImportError:
+            print("⚠️ URL フィルターが利用できません")
+            def is_403_url(url): return False  # フォールバック関数
+        
         for item in items:
             sources[item['_source']] += 1
             
@@ -829,9 +838,11 @@ def generate_comprehensive_dashboard_html(data):
                         {''.join(f'''
                         <div class="topic-item">
                             <div class="topic-title">
-                                <a href="{topic.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2d3748'">
+                                {f'''<a href="{topic.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='#2d3748'">
                                     {topic.get('title_ja', topic['title'])[:65]}{'...' if len(topic.get('title_ja', topic['title'])) > 65 else ''}
-                                </a>
+                                </a>''' if not is_403_url(topic.get('url', '#')) else f'''<span style="color: #2d3748; font-weight: 600;">
+                                    {topic.get('title_ja', topic['title'])[:65]}{'...' if len(topic.get('title_ja', topic['title'])) > 65 else ''}
+                                </span>'''}
                             </div>
                             <div class="topic-meta">{topic['source']} • {topic['time']}</div>
                             <div class="topic-summary">{topic['summary'][:80]}{'...' if len(topic['summary']) > 80 else ''}</div>

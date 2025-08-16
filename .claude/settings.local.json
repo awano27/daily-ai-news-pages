@@ -35,7 +35,9 @@
       "Bash(git --version)",
       "Bash(cmd.exe /c \"python git_deploy.py\")",
       "Bash(cmd.exe:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(\"deploy_403_final_fix.bat\")",
+      "Bash(.simple_deploy.bat)"
     ],
     "deny": [],
     "ask": []

@@ -844,7 +844,7 @@ def generate_comprehensive_dashboard_html(data):
                         {''.join([f'''
                         <div class="topic-item">
                             <div class="topic-title">
-                                {('<a href="' + topic.get('url', '#') + '" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=\'#667eea\'" onmouseout="this.style.color=\'#2d3748\'">' + 
+                                {('<a href="' + topic.get('url', '#') + '" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">' + 
                                     topic.get('title_ja', topic['title'])[:65] + ('...' if len(topic.get('title_ja', topic['title'])) > 65 else '') + 
                                 '</a>') if not is_403_url(topic.get('url', '#')) else ('<span style="color: #2d3748; font-weight: 600;">' + 
                                     topic.get('title_ja', topic['title'])[:65] + ('...' if len(topic.get('title_ja', topic['title'])) > 65 else '') + 

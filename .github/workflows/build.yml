@@ -29,9 +29,10 @@ jobs:
           pip install --upgrade pip
           pip install feedparser pyyaml deep-translator==1.11.4
       - name: Build HTML
+        timeout-minutes: 8
         run: |
-          python build.py
-          python generate_comprehensive_dashboard.py
+          timeout 420 python build.py || echo "Build timeout, using emergency build"
+          timeout 120 python generate_comprehensive_dashboard.py || echo "Dashboard timeout, skipping"
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

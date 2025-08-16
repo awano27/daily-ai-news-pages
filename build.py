@@ -846,7 +846,14 @@ def gather_items(feeds, category_name):
             
             while retry_count <= max_retries:
                 try:
+                    # タイムアウト制限付きでフィード取得
+                    import socket
+                    original_timeout = socket.getdefaulttimeout()
+                    socket.setdefaulttimeout(8)  # 8秒タイムアウト
+                    
                     d = feedparser.parse(url, agent=headers['User-Agent'])
+                    
+                    socket.setdefaulttimeout(original_timeout)
                     # HTTPステータスコードチェック
                     if hasattr(d, 'status') and d.status == 403:
                         print(f"[WARN] 403 Forbidden for {name}, trying advanced fetch...")

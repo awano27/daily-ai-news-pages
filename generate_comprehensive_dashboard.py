@@ -33,11 +33,15 @@ from pathlib import Path
 # Gemini分析機能をインポート
 try:
     from gemini_analyzer import GeminiAnalyzer
+    from gemini_web_fetcher import GeminiWebFetcher
     gemini_analyzer = GeminiAnalyzer()
+    gemini_fetcher = GeminiWebFetcher()
     print(f"🤖 Gemini分析機能: {'有効' if gemini_analyzer.enabled else '無効'}")
-except ImportError:
-    print("⚠️ Gemini分析機能が利用できません")
+    print(f"🌐 Gemini Web Fetcher: {'有効' if gemini_fetcher.analyzer.enabled else '無効'}")
+except ImportError as e:
+    print(f"⚠️ Gemini機能が利用できません: {e}")
     gemini_analyzer = None
+    gemini_fetcher = None
 
 def analyze_ai_landscape():
     """今日のAI業界全体を分析してダッシュボードデータを生成"""
@@ -96,6 +100,36 @@ def analyze_ai_landscape():
     for category_name in ['Business', 'Tools', 'Posts']:
         feeds = build.get_category(feeds_conf, category_name)
         items = build.gather_items(feeds, category_name)
+        
+        # Gemini Web Fetcherで403エラーのソースを補完
+        if gemini_fetcher and gemini_fetcher.analyzer.enabled:
+            print(f"🤖 {category_name}カテゴリの403エラーソースをGemini APIで補完中...")
+            
+            # 403エラーのソースを特定
+            failed_sources = []
+            for feed in feeds:
+                if 'Google News' in feed.get('name', ''):
+                    failed_sources.append(feed['name'])
+            
+            if failed_sources:
+                supplemented = gemini_fetcher.supplement_403_sources(failed_sources)
+                
+                # 補完データをitemsに追加
+                for source_name, news_items in supplemented.items():
+                    for news_item in news_items:
+                        # feedparser形式に変換
+                        fake_item = {
+                            'title': news_item.get('title', ''),
+                            '_summary': news_item.get('summary', ''),
+                            'link': news_item.get('url', '#'),
+                            '_source': f"{source_name} (Gemini補完)",
+                            '_dt': news_item.get('_dt', datetime.now()),
+                            'importance': news_item.get('importance', 5)
+                        }
+                        items.append(fake_item)
+                        print(f"  ✅ Gemini補完: {fake_item['title'][:50]}...")
+                        
+                print(f"🎉 {category_name}: {len(items)}件 (Gemini補完後)")
         
         category_key = category_name.lower()
         cat_info = category_mapping[category_name]

@@ -880,6 +880,55 @@ def generate_comprehensive_dashboard_html(data):
     html_template += f"""
             </div>
             
+            <!-- X/Twitter投稿セクション -->
+            <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h2 style="color: #2d3748; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #667eea; padding-left: 12px;">
+                    🐦 X/Twitter投稿 ({data.get('x_posts', {}).get('total_count', 0)}件)
+                </h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                    <!-- インフルエンサー投稿 -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿</h4>
+                        {''.join([f'''
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #667eea; text-decoration: none;">
+                                    {post.get('author', 'Anonymous')}
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                {post.get('content', '')[:120]}{'...' if len(post.get('content', '')) > 120 else ''}
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                {post.get('created_at', '')}
+                            </div>
+                        </div>
+                        ''' for post in data.get('x_posts', {}).get('influencer_posts', [])[:5]])}
+                    </div>
+                    
+                    <!-- 技術系ディスカッション -->
+                    <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション</h4>
+                        {''.join([f'''
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
+                                    {post.get('author', 'Anonymous')}
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                {post.get('content', '')[:120]}{'...' if len(post.get('content', '')) > 120 else ''}
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                {post.get('created_at', '')}
+                            </div>
+                        </div>
+                        ''' for post in data.get('x_posts', {}).get('tech_discussions', [])[:5]])}
+                    </div>
+                </div>
+            </div>
+            
             <!-- 固定リンクセクション（毎日変わらず表示） -->
             <div style="background: #f0f9ff; border-radius: 15px; padding: 25px; margin-bottom: 25px; border: 1px solid #0ea5e9;">
                 <h2 style="color: #0c4a6e; margin-bottom: 20px; font-size: 1.3rem;">📌 AI業界定点観測（毎日更新）</h2>

@@ -1,14 +1,14 @@
 {
-  "timestamp": "2025-08-16T20:47:11.283051+09:00",
+  "timestamp": "2025-08-16T21:28:05.269636+09:00",
   "date": "2025-08-16",
-  "jst_time": "20:47 JST",
+  "jst_time": "21:28 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 8,
+      "count": 7,
       "top_sources": {
-        "Reddit AI": 4,
+        "Reddit AI": 3,
         "ASCII.jp AI・IoT": 3,
         "TechCrunch Japan": 1
       },
@@ -53,15 +53,6 @@
           "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/"
         },
         {
-          "title": "Why is Getting Consistent Characters in AI Image Generators So Difficult? They have no sense of consistency. Any one else frustrated with that",
-          "title_ja": "AI画像ジェネレーターで一貫した文字を取得するのはなぜ難しいのですか？一貫性の感覚はありません。他の誰もがイライラしています",
-          "source": "Reddit AI",
-          "time": "21:25",
-          "summary": "I've been playing around with a number of different AI image generators, and while the results can be mind-blowing, ther...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/artificial/comments/1mraw2b/why_is_getting_consistent_characters_in_ai_image/"
-        },
-        {
           "title": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
           "title_ja": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
           "source": "ASCII.jp AI・IoT",
@@ -78,6 +69,15 @@
           "summary": "Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in essence it means as the ...",
           "importance": 0,
           "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/"
+        },
+        {
+          "title": "富士通ノートPC「LIFEBOOK PH50/J3」の“キャンセル品”がいまなら17万円台！",
+          "title_ja": "富士通ノートPC「LIFEBOOK PH50/J3」の“キャンセル品”がいまなら17万円台！",
+          "source": "ASCII.jp AI・IoT",
+          "time": "01:00",
+          "summary": "富士通の直販サイト「富士通 WEB MART」では最新モデルを対象にセールを開催中。",
+          "importance": 0,
+          "url": "https://ascii.jp/elem/000/004/312/4312565/?rss"
         }
       ],
       "focus_area": "market"
@@ -85,13 +85,14 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 4,
+      "count": 5,
       "top_sources": {
         "MarkTechPost": 2,
         "Reddit MachineLearning": 1,
-        "TechCrunch": 1
+        "AI Research": 1
       },
       "top_companies": {
+        "Meta": 1,
         "OpenAI": 1
       },
       "top_keywords": {
@@ -100,6 +101,15 @@
         "GPT-5": 1
       },
       "featured_topics": [
+        {
+          "title": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine learning and bioinformatics analysis",
+          "title_ja": "機械学習とバイオインフォマティクス分析を統合することにより、歯周炎における脂質代謝関連遺伝子と免疫微小環境の役割の調査",
+          "source": "AI Research",
+          "time": "00:00",
+          "summary": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine...",
+          "importance": 10,
+          "url": "https://www.nature.com/articles/s41598-025-15330-z"
+        },
         {
           "title": "Sam Altman, over bread rolls, explores life after GPT-5",
           "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
@@ -210,6 +220,15 @@
     ],
     "research_highlights": [
       {
+        "title": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine learning and bioinformatics analysis",
+        "title_ja": "機械学習とバイオインフォマティクス分析を統合することにより、歯周炎における脂質代謝関連遺伝子と免疫微小環境の役割の調査",
+        "source": "AI Research",
+        "time": "00:00",
+        "summary": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine...",
+        "importance": 10,
+        "url": "https://www.nature.com/articles/s41598-025-15330-z"
+      },
+      {
         "title": "Sam Altman, over bread rolls, explores life after GPT-5",
         "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
         "source": "TechCrunch",
@@ -226,21 +245,12 @@
         "summary": "Large Language Models (LLMs) have revolutionized fields from natural language understanding to reasoning and code genera...",
         "importance": 0,
         "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/"
-      },
-      {
-        "title": "This AI Paper Introduces ReaGAN: A Graph Agentic Network That Empowers Nodes with Autonomous Planning and Global Semantic Retrieval",
-        "title_ja": "このAIペーパーでは、レーガンを紹介します：自律計画とグローバルなセマンティック検索でノードを強化するグラフエージェントネットワーク",
-        "source": "MarkTechPost",
-        "time": "04:06",
-        "summary": "How can we make every node in a graph its own intelligent agent—capable of personalized reasoning, adaptive retrieval, a...",
-        "importance": 0,
-        "url": "https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/"
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "Meta": 2,
+      "Meta": 3,
       "OpenAI": 2,
       "Anthropic": 1,
       "NVIDIA": 1
@@ -276,17 +286,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 361,
+    "total_items": 365,
     "total_sources": 6,
     "active_companies": 4,
     "top_company": [
       "Meta",
-      2
+      3
     ],
-    "last_updated": "2025-08-16 20:47 JST"
+    "last_updated": "2025-08-16 21:28 JST"
   },
   "x_posts": {
-    "total_count": 349,
+    "total_count": 353,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -322,12 +332,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 361件のニュース、4社が活動",
+    "headline": "今日のAI業界: 365件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 0件の新製品リリース",
       "🏢 企業動向: Metaが最も活発",
-      "💬 SNS: 349件の関連投稿"
+      "💬 SNS: 353件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

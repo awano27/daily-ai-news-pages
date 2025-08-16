@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-16T10:44:34.163810+09:00",
+  "timestamp": "2025-08-16T11:30:50.608265+09:00",
   "date": "2025-08-16",
-  "jst_time": "10:44 JST",
+  "jst_time": "11:30 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 21,
+      "count": 22,
       "top_sources": {
         "Meta AI Blog": 10,
         "AWS AI Blog": 5,
@@ -27,7 +27,7 @@
         {
           "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
           "source": "Meta AI Blog",
-          "time": "10:44",
+          "time": "11:30",
           "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
           "importance": 15,
           "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
@@ -43,7 +43,7 @@
         {
           "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
           "source": "Meta AI Blog",
-          "time": "10:44",
+          "time": "11:30",
           "summary": "...",
           "importance": 10,
           "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
@@ -51,7 +51,7 @@
         {
           "title": "Two meta sustainability grant and scholarship recipients share impact",
           "source": "Meta AI Blog",
-          "time": "10:44",
+          "time": "11:30",
           "summary": "Two meta sustainability grant and scholarship recipients share impact",
           "importance": 10,
           "url": "https://sustainability.fb.com/blog/2023/03/24/two-meta-sustainability-grant-and-scholarship-recipients-share-impact/"
@@ -67,7 +67,7 @@
         {
           "title": "Every tree counts",
           "source": "Meta AI Blog",
-          "time": "10:44",
+          "time": "11:30",
           "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and m...",
           "importance": 10,
           "url": "https://research.facebook.com/blog/2023/4/every-tree-counts-large-scale-mapping-of-canopy-height-at-the-resolution-of-individual-trees/"
@@ -169,12 +169,12 @@
           "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
         },
         {
-          "title": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers - University of Toronto",
+          "title": "U of T Launches Health Data Hub for AI Research - Mirage News",
           "source": "Google News: AI論文・研究",
-          "time": "14:19",
-          "summary": "No more ‘garbage in, garbage out’: U of T rolls out health data repository for AI researchers  University of Toronto",
-          "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNdmMxRUtXZXloOU55VkExcDR6a1h3V1F6dmIyWm45eFlJaU9OdUJZRnNHTGhydWFMa192c3g5aVFISUs1dDBpWm14d0d5MHlpYmlHLWxUMnVsOVdkMzg3TjJIX2prZnJ6bEJ5NXFxVUZSeFU2VjNQWWJzN2hiR3pTWGpycHVVZklfbnpUa2UtbmxHYzhXUUR2Mms4eC1fektYMDFRU2JTeEFndlVU?oc=5"
+          "time": "14:22",
+          "summary": "U of T Launches Health Data Hub for AI Research  Mirage News",
+          "importance": 5,
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYl9fcGVhYU41ZnI1azBFemJDNi1kNjhrNXJ0WlJuV0Y5ME1qVUVpMlpmd0ZuSV9URXdvNm1nM1VRbl8yNUoxQy1xX2sxV3RxOG5LWU1qMzBaY3U1M1FQUjVPTnJtWHh1WktJU0JwMEhUMnNVbXY4bkF2VHNvQnlkTkJuaVRyMGZkT3NZ?oc=5"
         },
         {
           "title": "Ex-Twitter CEO Parag Agrawal Unveils AI Research Tool with Parallel Web Systems - indica News",
@@ -220,7 +220,7 @@
       {
         "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
         "source": "Meta AI Blog",
-        "time": "10:44",
+        "time": "11:30",
         "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of...",
         "importance": 15,
         "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/"
@@ -236,7 +236,7 @@
       {
         "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
         "source": "Meta AI Blog",
-        "time": "10:44",
+        "time": "11:30",
         "summary": "...",
         "importance": 10,
         "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/"
@@ -366,53 +366,58 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 306,
+    "total_items": 326,
     "total_sources": 7,
     "active_companies": 5,
     "top_company": [
       "Meta",
       5
     ],
-    "last_updated": "2025-08-16 10:44 JST"
+    "last_updated": "2025-08-16 11:30 JST"
   },
   "x_posts": {
-    "total_count": 272,
+    "total_count": 291,
     "influencer_posts": [],
     "tech_discussions": [
       {
         "username": "",
         "summary": "AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に......",
-        "time": "00:00"
+        "time": "00:00",
+        "url": "https://twitter.com/Tsubame33785667/status/1955781620893671583"
       },
       {
         "username": "",
         "summary": "すごい！！\n\n「AIで遊ぼうコミュニティ」メンバー大活躍✨\n@taiyo_ai_gakuse も登壇......",
-        "time": "00:14"
+        "time": "00:14",
+        "url": "https://twitter.com/kojika_edu/status/1955785136626393305"
       },
       {
         "username": "",
         "summary": "Merge Labsの誕生は、AIをめぐる競争が「推論精度」や「大規模モデル」の範囲を超え、いよいよ......",
-        "time": "02:13"
+        "time": "02:13",
+        "url": "https://twitter.com/Tsubame33785667/status/1955815069767623170"
       },
       {
         "username": "",
         "summary": "今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。\n\n実験でGPT-5と医......",
-        "time": "02:16"
+        "time": "02:16",
+        "url": "https://twitter.com/K_Ishi_AI/status/1955815778139427220"
       },
       {
         "username": "",
         "summary": "Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能\nhttps......",
-        "time": "00:25"
+        "time": "00:25",
+        "url": "https://twitter.com/itm_aiplus/status/1955787719982113064"
       }
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 306件のニュース、5社が活動",
+    "headline": "今日のAI業界: 326件のニュース、5社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
       "🏢 企業動向: Metaが最も活発",
-      "💬 SNS: 272件の関連投稿"
+      "💬 SNS: 291件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

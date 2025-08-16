@@ -582,105 +582,107 @@ def generate_comprehensive_dashboard_html(data):
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{ 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 15px;
-            color: #1a202c;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
         }}
-        .dashboard {{ 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            background: white; 
-            border-radius: 20px; 
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        .container {{
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }}
         .header {{ 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; 
-            padding: 25px 30px; 
-            text-align: center; 
+            text-align: center;
+            margin-bottom: 40px;
         }}
-        .header h1 {{ font-size: 2.2rem; margin-bottom: 8px; font-weight: 700; }}
-        .header .subtitle {{ font-size: 1rem; opacity: 0.9; margin-bottom: 15px; }}
-        .header .update-time {{ font-size: 0.9rem; opacity: 0.8; }}
+        .header h1 {{ font-size: 2rem; margin: 0; color: #1f2937; }}
+        .header .subtitle {{ color: #6b7280; margin-top: 8px; font-size: 0.9rem; }}
+        .header .update-time {{ color: #6b7280; margin-top: 8px; font-size: 0.9rem; }}
         
-        .content {{ padding: 25px; }}
-        
-        /* エグゼクティブサマリー */
-        .exec-summary {{ 
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 25px; 
-            border-radius: 15px; 
-            margin-bottom: 25px;
-            border-left: 5px solid #667eea;
+        /* サマリーセクション */
+        .summary {{
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
         }}
-        .exec-summary h2 {{ color: #2d3748; margin-bottom: 15px; font-size: 1.3rem; }}
-        .exec-summary .headline {{ font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: #1a202c; }}
-        .key-points {{ list-style: none; }}
-        .key-points li {{ padding: 8px 0; font-size: 0.95rem; color: #4a5568; }}
-        
-        /* KPI グリッド */
-        .kpi-grid {{ 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 15px; 
-            margin-bottom: 25px; 
+        .summary h2 {{
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #111827;
+            border-left: 4px solid #3b82f6;
+            padding-left: 8px;
         }}
-        .kpi-card {{ 
-            background: white; 
-            padding: 20px; 
-            border-radius: 12px; 
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .summary p {{
+            margin: 5px 0;
+            line-height: 1.5;
+        }}
+        .kpi-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }}
+        .kpi {{
+            background-color: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
         }}
-        .kpi-number {{ font-size: 2rem; font-weight: bold; color: #667eea; margin-bottom: 5px; }}
-        .kpi-label {{ color: #64748b; font-size: 0.9rem; font-weight: 500; }}
+        .kpi-number {{
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }}
+        .kpi-label {{
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }}
         
-        /* セクショングリッド */
-        .sections-grid {{ 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 25px; 
+        /* セクション共通スタイル */
+        .section {{
+            margin-bottom: 50px;
         }}
-        .section-card {{ 
-            background: white; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 12px; 
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .section h3 {{
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1f2937;
+            border-left: 4px solid #3b82f6;
+            padding-left: 8px;
         }}
-        .section-header {{ 
-            background: #f8fafc; 
-            padding: 15px 20px; 
-            border-bottom: 1px solid #e2e8f0; 
+        .section-content {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
         }}
-        .section-title {{ font-size: 1.1rem; font-weight: 600; color: #2d3748; }}
-        .section-content {{ padding: 20px; }}
-        
-        /* カテゴリカード */
-        .categories-grid {{ 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 25px; 
+        .card {{
+            background-color: #ffffff;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }}
-        .category-card {{ 
-            background: white; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 12px; 
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .card h4 {{
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: #111827;
+            margin-bottom: 10px;
         }}
-        .category-header {{ 
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            padding: 18px 20px; 
-            border-bottom: 1px solid #e2e8f0; 
+        .card ul {{
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
         }}
-        .category-title {{ font-size: 1.2rem; font-weight: 600; color: #2d3748; }}
-        .category-count {{ color: #667eea; font-size: 1rem; margin-top: 3px; }}
+        .card li {{
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }}
+        .card .meta {{
+            color: #6b7280;
+            font-size: 0.8rem;
+        }}
         
         /* アイテムリスト */
         .topic-item {{ 
@@ -692,20 +694,33 @@ def generate_comprehensive_dashboard_html(data):
         .topic-meta {{ color: #64748b; font-size: 0.8rem; }}
         .topic-summary {{ color: #4a5568; font-size: 0.8rem; margin-top: 5px; line-height: 1.3; }}
         
-        /* キーワードタグ */
-        .keywords {{ 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 6px; 
-            margin-top: 12px; 
+        .tags {{
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }}
-        .keyword {{ 
-            background: #667eea; 
-            color: white; 
-            padding: 4px 10px; 
-            border-radius: 15px; 
-            font-size: 0.75rem; 
+        .tag {{
+            background-color: #3b82f6;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+        }}
+        .btn {{
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
             font-weight: 500;
+            margin-top: 10px;
+            margin-right: 8px;
+            transition: background-color 0.2s;
+        }}
+        .btn:hover {{
+            background-color: #1d4ed8;
         }}
         
         /* トレンドセクション */
@@ -753,43 +768,36 @@ def generate_comprehensive_dashboard_html(data):
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="header">
-            <h1>🌏 AI業界全体像ダッシュボード</h1>
-            <div class="subtitle">{exec_summary.get('headline', 'AIニュース総合分析')}</div>
-            <div class="update-time">{data['date']} | 最終更新: {data['jst_time']}</div>
-        </div>
+    <div class="container">
+        <header class="header">
+            <h1>AI業界全体像ダッシュボード</h1>
+            <p class="subtitle">{exec_summary.get('headline', 'AIニュース総合分析')}</p>
+            <p class="update-time">{data['date']} | 最終更新: {data['jst_time']}</p>
+        </header>
         
-        <div class="content">
-            <!-- エグゼクティブサマリー -->
-            <div class="exec-summary">
-                <h2>📋 エグゼクティブサマリー</h2>
-                <div class="headline">{exec_summary.get('headline', '')}</div>
-                <ul class="key-points">
-                    {''.join(f'<li>{point}</li>' for point in exec_summary.get('key_points', []))}
-                    <li>🔮 見通し: {exec_summary.get('outlook', '安定した成長期')}</li>
-                </ul>
-            </div>
-            
-            <!-- KPI統計 -->
+        <!-- エグゼクティブサマリー -->
+        <section class="summary">
+            <h2>エグゼクティブサマリー</h2>
+            <p>{exec_summary.get('headline', '')}</p>
             <div class="kpi-grid">
-                <div class="kpi-card">
+                <div class="kpi">
                     <div class="kpi-number">{data['stats']['total_items']}</div>
                     <div class="kpi-label">総ニュース数</div>
                 </div>
-                <div class="kpi-card">
-                    <div class="kpi-number">{data['stats']['active_companies']}</div>
+                <div class="kpi">
+                    <div class="kpi-number">{len(data['market_analysis']['active_companies'])}</div>
                     <div class="kpi-label">活動企業数</div>
                 </div>
-                <div class="kpi-card">
+                <div class="kpi">
                     <div class="kpi-number">{data['stats']['total_sources']}</div>
                     <div class="kpi-label">情報ソース数</div>
                 </div>
-                <div class="kpi-card">
-                    <div class="kpi-number">{data['x_posts']['total_count']}</div>
+                <div class="kpi">
+                    <div class="kpi-number">{data['stats']['x_posts_count']}</div>
                     <div class="kpi-label">SNS投稿数</div>
                 </div>
             </div>
+        </section>
             
             <!-- 主要インサイト -->
             <div class="insights-grid">

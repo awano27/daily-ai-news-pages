@@ -28,6 +28,17 @@ import random
 import time
 from urllib.parse import urljoin
 
+# URL フィルター機能をインポート
+try:
+    from url_filter import filter_403_urls, is_403_url
+    print("✅ URL フィルター機能: 有効")
+except ImportError:
+    print("⚠️ URL フィルター機能: 無効")
+    def filter_403_urls(items):
+        return items
+    def is_403_url(url):
+        return False
+
 # ---------- config ----------
 HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
 MAX_ITEMS_PER_CATEGORY = int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8"))
@@ -886,10 +897,16 @@ def gather_items(feeds, category_name):
                     filtered_count += 1
                     continue
             
+            # 403エラーURLをチェック
+            link_url = e.get("link", "")
+            if is_403_url(link_url):
+                print(f"🚫 403 URL除外: {title[:50]}...")
+                continue
+                
             entry_count += 1
             items.append({
                 "title": title,
-                "link": e.get("link", ""),
+                "link": link_url,
                 "_summary": summary,
                 "_source": name,
                 "_dt": dt,
@@ -911,6 +928,15 @@ def gather_items(feeds, category_name):
     else:
         # ツールカテゴリは時刻順
         items.sort(key=lambda x: x["_dt"], reverse=True)
+    
+    # 最終チェック: 403 URLがないことを確認
+    items_before_filter = len(items)
+    items = filter_403_urls(items)
+    items_after_filter = len(items)
+    
+    if items_before_filter != items_after_filter:
+        print(f"✅ {category_name}: 最終フィルターで{items_before_filter - items_after_filter}件の403 URLを除外")
+    
     print(f"[INFO] {category_name}: Total {len(items)} items found")
     return items
 

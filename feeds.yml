@@ -6,13 +6,13 @@ Business:
 - name: OpenAI Blog
   url: https://openai.com/news/rss.xml
 - name: Meta AI Blog
-  url: https://research.fb.com/feed
+  url: https://research.facebook.com/blog/rss/
 - name: Nvidia Developer Blog
   url: https://developer.nvidia.com/blog/feed/
 - name: Anthropic Blog
   url: https://www.anthropic.com/news.rss
 - name: DeepMind Blog
-  url: https://deepmind.google/discover/blog/rss.xml
+  url: https://www.deepmind.com/blog/rss.xml
 - name: AWS AI Blog
   url: https://aws.amazon.com/blogs/machine-learning/feed/
 - name: Reuters Tech
@@ -43,7 +43,7 @@ Business:
   url: https://ascii.jp/rss.xml
   general: true
 - name: TechCrunch Japan
-  url: https://jp.techcrunch.com/feed/
+  url: https://techcrunch.com/category/artificial-intelligence/feed/
   general: true
 - name: 'Google News: 日本AI企業ニュース'
   url: https://news.google.com/rss/search?q=(%E3%82%BD%E3%83%95%E3%83%88%E3%83%90%E3%83%B3%E3%82%AF+OR+%E3%83%88%E3%83%A8%E3%82%BF+OR+NTT+OR+%E3%83%91%E3%83%8A%E3%82%BD%E3%83%8B%E3%83%83%E3%82%AF+OR+%E3%82%BD%E3%83%8B%E3%83%BC+OR+%E6%97%A5%E7%AB%8B+OR+%E5%AF%8C%E5%A3%AB%E9%80%9A+OR+NEC+OR+%E6%A5%BD%E5%A4%A9)+AND+(AI+OR+%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD+OR+%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92)&hl=ja&gl=JP&ceid=JP:ja
@@ -84,13 +84,19 @@ Tools:
 - name: Towards Data Science
   url: https://towardsdatascience.com/feed
   general: true
+- name: AI News
+  url: https://artificialintelligence-news.com/feed/
+  general: true
+- name: AI Research
+  url: https://www.nature.com/subjects/machine-learning.rss
+  general: true
 Posts:
 - name: arXiv cs.AI
   url: https://export.arxiv.org/rss/cs.AI
 - name: arXiv cs.LG (Machine Learning)
   url: https://export.arxiv.org/rss/cs.LG
 - name: BAIR Blog
-  url: http://bair.berkeley.edu/blog/feed.xml
+  url: https://bair.berkeley.edu/blog/feed.xml
 - name: Distill
   url: https://distill.pub/rss.xml
 - name: AI Research News

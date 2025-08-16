@@ -10,8 +10,9 @@ from datetime import datetime, timezone, timedelta
 # Set environment variables
 os.environ['TRANSLATE_TO_JA'] = '1'
 os.environ['TRANSLATE_ENGINE'] = 'google'
-os.environ['HOURS_LOOKBACK'] = '72'  # Test with 72 hours to see more posts
-os.environ['MAX_ITEMS_PER_CATEGORY'] = '5'
+os.environ['HOURS_LOOKBACK'] = '48'  # 48 hours as requested
+os.environ['MAX_ITEMS_PER_CATEGORY'] = '30'  # 30 items as requested
+os.environ['X_POSTS_CSV'] = 'https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0'
 
 print("=" * 60)
 print("Testing X Posts Processing")
@@ -22,7 +23,9 @@ try:
     
     # Test gather_x_posts function directly
     print("Testing gather_x_posts function...")
-    x_posts = build.gather_x_posts("_sources/x_favorites.csv")
+    csv_url = os.environ.get('X_POSTS_CSV', '_sources/x_favorites.csv')
+    print(f"Using CSV source: {csv_url}")
+    x_posts = build.gather_x_posts(csv_url)
     
     print(f"\nFound {len(x_posts)} X posts:")
     print("-" * 40)

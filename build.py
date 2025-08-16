@@ -721,8 +721,36 @@ def gather_items(feeds, category_name):
             continue
         try:
             print(f"[INFO] Fetching: {name}")
-            d = feedparser.parse(url)
-            if d.bozo:
+            # User-Agentを設定してアクセス拒否を回避
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+            
+            # 403エラー対策: リトライ機能付きでフィード取得
+            retry_count = 0
+            max_retries = 2
+            d = None
+            
+            while retry_count <= max_retries:
+                try:
+                    d = feedparser.parse(url, agent=headers['User-Agent'])
+                    # HTTPステータスコードチェック
+                    if hasattr(d, 'status') and d.status == 403:
+                        print(f"[WARN] 403 Forbidden for {name}, trying alternative approach...")
+                        # 代替User-Agentで再試行
+                        alt_agent = f'FeedBot/1.0 (+http://example.com/bot) {headers["User-Agent"]}'
+                        d = feedparser.parse(url, agent=alt_agent)
+                    break
+                except Exception as retry_e:
+                    retry_count += 1
+                    if retry_count <= max_retries:
+                        print(f"[WARN] Retry {retry_count}/{max_retries} for {name}: {retry_e}")
+                        import time
+                        time.sleep(1)  # 1秒待機
+                    else:
+                        raise retry_e
+            
+            if d and d.bozo:
                 print(f"[WARN] Feed parse warning for {name}: {getattr(d, 'bozo_exception', 'unknown')}")
         except Exception as e:
             print(f"[ERROR] feed parse error: {name}: {e}")

@@ -742,6 +742,91 @@ def generate_comprehensive_dashboard_html(data):
     html_template += f"""
             </div>
             
+            <!-- 固定リンクセクション（毎日変わらず表示） -->
+            <div style="background: #f0f9ff; border-radius: 15px; padding: 25px; margin-bottom: 25px; border: 1px solid #0ea5e9;">
+                <h2 style="color: #0c4a6e; margin-bottom: 20px; font-size: 1.3rem;">📌 AI業界定点観測（毎日更新）</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                    <!-- LLMリーダーボード -->
+                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 1.5rem; margin-right: 10px;">🏆</span>
+                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">LLMアリーナ リーダーボード</h3>
+                        </div>
+                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
+                            世界中のLLMモデルの性能を人間の評価でランキング。ChatGPT、Claude、Gemini等の最新順位を確認
+                        </p>
+                        <a href="https://lmarena.ai/leaderboard" target="_blank" rel="noopener" style="
+                            display: inline-block;
+                            padding: 8px 16px;
+                            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            リーダーボードを見る →
+                        </a>
+                    </div>
+                    
+                    <!-- AlphaXiv論文 -->
+                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 1.5rem; margin-right: 10px;">📚</span>
+                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">AlphaXiv - AI論文ランキング</h3>
+                        </div>
+                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
+                            arXivの最新AI論文を影響度・引用数でランキング。今日の重要論文、トレンド研究分野を把握
+                        </p>
+                        <a href="https://www.alphaxiv.org/" target="_blank" rel="noopener" style="
+                            display: inline-block;
+                            padding: 8px 16px;
+                            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            論文ランキングを見る →
+                        </a>
+                    </div>
+                    
+                    <!-- トレンドワード -->
+                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 1.5rem; margin-right: 10px;">📈</span>
+                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">AIトレンドワード（日次）</h3>
+                        </div>
+                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
+                            AI業界で今日最も話題になっているキーワードをリアルタイム解析。急上昇ワードで業界動向を把握
+                        </p>
+                        <a href="https://tech-word-spikes.vercel.app/trend-word/AI?period=daily" target="_blank" rel="noopener" style="
+                            display: inline-block;
+                            padding: 8px 16px;
+                            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            トレンドワードを見る →
+                        </a>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #cbd5e1;">
+                    <p style="color: #64748b; font-size: 0.8rem; text-align: center;">
+                        💡 これらの外部サービスは毎日自動更新され、AI業界の最新動向を多角的に把握できます
+                    </p>
+                </div>
+            </div>
+            
             <!-- SNS動向セクション -->
             <div class="section-card">
                 <div class="section-header">
@@ -794,7 +879,7 @@ def main():
         html_content = generate_comprehensive_dashboard_html(dashboard_data)
         
         # HTMLファイルとして保存
-        dashboard_path = Path("ai_news_dashboard.html")
+        dashboard_path = Path("index.html")
         dashboard_path.write_text(html_content, encoding='utf-8')
         
         # JSON形式でも保存
@@ -804,7 +889,7 @@ def main():
         print("✅ AI業界全体像ダッシュボード生成完了!")
         print(f"📁 ファイル: {dashboard_path.absolute()}")
         print(f"📄 データ: {json_path.absolute()}")
-        print("\n🌐 ブラウザで ai_news_dashboard.html を開いてダッシュボードを確認してください!")
+        print("\n🌐 ブラウザで index.html を開いてダッシュボードを確認してください!")
         print("\n📋 主要ハイライト:")
         
         exec_summary = dashboard_data.get('executive_summary', {})

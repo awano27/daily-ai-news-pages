@@ -263,7 +263,14 @@ PAGE_TMPL = """<!doctype html>
 
   <main class="container">
     <h1 class="page-title">今日の最新AI情報</h1>
-    <p class="lead">ビジネスニュース・ツール情報・SNS/論文ポストに分け、直近{lookback}時間の更新を配信します。ソースは原文、要約のみ日本語化。</p>
+    <p class="lead">
+        世界のAI業界の最新動向を24時間365日モニタリング。OpenAI、Google、Meta、Anthropicなど主要企業の公式発表から、
+        arXiv論文、開発者コミュニティの技術討論まで幅広く収集。ビジネス（資金調達・M&A・戦略提携）、
+        テクノロジー（新モデル・API・フレームワーク）、研究（論文・ブレークスルー）の3カテゴリで整理し、
+        重要度順にランキング。各記事の要約は日本語に自動翻訳、原文リンクで詳細確認可能。
+        エンジニア、研究者、投資家、経営者など、AI業界のプロフェッショナル向けの包括的情報源として、
+        直近{lookback}時間の重要ニュースを厳選配信。ダッシュボードでは業界全体像の俯瞰分析も提供。
+    </p>
 
     <section class="kpi-grid">
       <div class="kpi-card">
@@ -877,10 +884,10 @@ def main():
     )
 
     try:
-        Path("index.html").write_text(html_out, encoding="utf-8")
-        print(f"[SUCCESS] Wrote index.html ({len(html_out)} bytes)")
+        Path("news_detail.html").write_text(html_out, encoding="utf-8")
+        print(f"[SUCCESS] Wrote news_detail.html ({len(html_out)} bytes)")
     except Exception as e:
-        print(f"[ERROR] Failed to write index.html: {e}")
+        print(f"[ERROR] Failed to write news_detail.html: {e}")
         raise
     
     try:

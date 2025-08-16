@@ -21,9 +21,19 @@ Business:
 - name: Bloomberg Technology
   url: https://www.bloomberg.com/feeds/technology.rss
   general: true
-- name: 'Google News: AI企業・投資 (日本語)'
-  url: https://news.google.com/rss/search?q=AI&hl=ja&gl=JP
+# - name: 'Google News: AI企業・投資 (日本語)'
+#   url: https://news.google.com/rss/search?q=AI&hl=ja&gl=JP
+#   general: true
+#   disabled: 403エラーのため無効化
+
+# 代替ソース（403エラーなし）
+- name: 'AI News Japan'
+  url: https://www.itmedia.co.jp/news/subtop/aitech/
   general: true
+- name: 'Nikkei AI News'
+  url: https://www.nikkei.com/theme/DGXZQOCC140VF0U1A011C2000000.rss
+  general: true
+
 - name: Hacker News
   url: https://hnrss.org/frontpage
   general: true
@@ -54,15 +64,18 @@ Business:
 - name: TechCrunch Japan
   url: https://techcrunch.com/category/artificial-intelligence/feed/
   general: true
-- name: 'Google News: 日本AI企業ニュース'
-  url: https://news.google.com/rss/search?q=AI+%E6%97%A5%E6%9C%AC&hl=ja&gl=JP
-  general: true
-- name: 'Google News: 日本AI投資・資金調達'
-  url: https://news.google.com/rss/search?q=AI+%E6%8A%95%E8%B3%87&hl=ja&gl=JP
-  general: true
-- name: 'Google News: 生成AI・ChatGPT 日本'
-  url: https://news.google.com/rss/search?q=ChatGPT&hl=ja&gl=JP
-  general: true
+# - name: 'Google News: 日本AI企業ニュース'
+#   url: https://news.google.com/rss/search?q=AI+%E6%97%A5%E6%9C%AC&hl=ja&gl=JP
+#   general: true
+#   disabled: 403エラーのため無効化
+# - name: 'Google News: 日本AI投資・資金調達'
+#   url: https://news.google.com/rss/search?q=AI+%E6%8A%95%E8%B3%87&hl=ja&gl=JP
+#   general: true
+#   disabled: 403エラーのため無効化
+# - name: 'Google News: 生成AI・ChatGPT 日本'
+#   url: https://news.google.com/rss/search?q=ChatGPT&hl=ja&gl=JP
+#   general: true
+#   disabled: 403エラーのため無効化
 Tools:
 - name: Hugging Face Blog
   url: https://huggingface.co/blog/feed.xml
@@ -82,9 +95,10 @@ Tools:
 - name: The Verge
   url: https://www.theverge.com/rss/index.xml
   general: true
-- name: 'Google News: AIツール・フレームワーク'
-  url: https://news.google.com/rss/search?q=AI+tools&hl=en&gl=US
-  general: true
+# - name: 'Google News: AIツール・フレームワーク'
+#   url: https://news.google.com/rss/search?q=AI+tools&hl=en&gl=US
+#   general: true
+#   disabled: 403エラーのため無効化
 - name: Reddit MachineLearning
   url: https://www.reddit.com/r/MachineLearning/.rss
   general: true
@@ -117,9 +131,10 @@ Posts:
 - name: AI Research News
   url: https://www.airesearch.news/feed
   general: true
-- name: 'Google News: AI論文・研究'
-  url: https://news.google.com/rss/search?q=AI+research&hl=en&gl=US
-  general: true
+# - name: 'Google News: AI論文・研究'
+#   url: https://news.google.com/rss/search?q=AI+research&hl=en&gl=US
+#   general: true
+#   disabled: 403エラーのため無効化
 - name: Reddit Science
   url: https://www.reddit.com/r/science/.rss?limit=100
   general: true

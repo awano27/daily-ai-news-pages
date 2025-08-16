@@ -274,7 +274,7 @@ def analyze_ai_landscape():
             'influencer_posts': influencer_posts[:3],
             'tech_discussions': tech_discussions[:5]
         }
-        total_items += len(x_posts)
+        # X投稿は総ニュース数には含めない（別途SNS投稿としてカウント）
     except Exception as e:
         print(f"⚠️ X投稿の分析でエラー: {e}")
         dashboard_data['x_posts'] = {'total_count': 0, 'influencer_posts': [], 'tech_discussions': []}
@@ -894,14 +894,14 @@ def generate_comprehensive_dashboard_html(data):
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
                                 <a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #667eea; text-decoration: none;">
-                                    {post.get('author', 'Anonymous')}
+                                    {post.get('username', 'Anonymous')}
                                 </a>
                             </div>
                             <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                {post.get('content', '')[:120]}{'...' if len(post.get('content', '')) > 120 else ''}
+                                {post.get('summary', '')[:120]}{'...' if len(post.get('summary', '')) > 120 else ''}
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                {post.get('created_at', '')}
+                                {post.get('time', '')}
                             </div>
                         </div>
                         ''' for post in data.get('x_posts', {}).get('influencer_posts', [])[:5]])}
@@ -914,14 +914,14 @@ def generate_comprehensive_dashboard_html(data):
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
                                 <a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    {post.get('author', 'Anonymous')}
+                                    {post.get('username', 'Anonymous')}
                                 </a>
                             </div>
                             <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                {post.get('content', '')[:120]}{'...' if len(post.get('content', '')) > 120 else ''}
+                                {post.get('summary', '')[:120]}{'...' if len(post.get('summary', '')) > 120 else ''}
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                {post.get('created_at', '')}
+                                {post.get('time', '')}
                             </div>
                         </div>
                         ''' for post in data.get('x_posts', {}).get('tech_discussions', [])[:5]])}

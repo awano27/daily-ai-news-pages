@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-16T21:28:05.269636+09:00",
+  "timestamp": "2025-08-16T22:13:39.067936+09:00",
   "date": "2025-08-16",
-  "jst_time": "21:28 JST",
+  "jst_time": "22:13 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -286,14 +286,14 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 365,
+    "total_items": 12,
     "total_sources": 6,
     "active_companies": 4,
     "top_company": [
       "Meta",
       3
     ],
-    "last_updated": "2025-08-16 21:28 JST"
+    "last_updated": "2025-08-16 22:13 JST"
   },
   "x_posts": {
     "total_count": 353,
@@ -332,7 +332,7 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 365件のニュース、4社が活動",
+    "headline": "今日のAI業界: 12件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 0件の新製品リリース",

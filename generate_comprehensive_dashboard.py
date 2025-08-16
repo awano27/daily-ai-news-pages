@@ -968,7 +968,7 @@ def generate_comprehensive_dashboard_html(data):
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">👑 インフルエンサー投稿</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#2d3748'">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
+                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
                                 <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>
@@ -978,7 +978,7 @@ def generate_comprehensive_dashboard_html(data):
                             <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">🗨️ 技術ディスカッション</h4>
                             {''.join(f'''
                             <div class="topic-item">
-                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#1da1f2'" onmouseout="this.style.color='#2d3748'">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
+                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
                                 <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
                                 <div class="topic-meta">{post['time']}</div>
                             </div>

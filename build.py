@@ -127,6 +127,34 @@ def advanced_feed_fetch(url, name):
             continue
     
     print(f"[ERROR] All advanced fetch attempts failed for {name}")
+    
+    # 最後の手段: Gemini Web Fetcherを使用
+    try:
+        from gemini_web_fetcher import GeminiWebFetcher
+        fetcher = GeminiWebFetcher()
+        if fetcher.analyzer.enabled:
+            print(f"[INFO] Trying Gemini Web Fetcher for {name}...")
+            news_items = fetcher.fetch_from_problematic_source(url, name)
+            if news_items:
+                # feedparserライクなオブジェクトを作成
+                fake_feed = type('FakeFeed', (), {})()
+                fake_feed.entries = []
+                
+                for item in news_items:
+                    entry = type('FakeEntry', (), {})()
+                    entry.title = item.get('title', '')
+                    entry.summary = item.get('summary', '')
+                    entry.link = item.get('url', '#')
+                    entry.published_parsed = item.get('_dt', datetime.now()).timetuple()
+                    fake_feed.entries.append(entry)
+                
+                print(f"[SUCCESS] Gemini fetched {len(news_items)} items for {name}")
+                return fake_feed
+    except ImportError:
+        print(f"[WARN] Gemini Web Fetcher not available")
+    except Exception as e:
+        print(f"[WARN] Gemini Web Fetcher failed: {e}")
+    
     return None
 
 # ---------- translation ----------

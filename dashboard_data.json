@@ -1,55 +1,33 @@
 {
-  "timestamp": "2025-08-16T14:52:45.529822+09:00",
+  "timestamp": "2025-08-16T20:47:11.283051+09:00",
   "date": "2025-08-16",
-  "jst_time": "14:52 JST",
+  "jst_time": "20:47 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 38,
+      "count": 8,
       "top_sources": {
-        "Google News: AI企業・投資 (日本語)": 7,
-        "Reddit AI": 6,
-        "Google News: 生成AI・ChatGPT 日本": 6
+        "Reddit AI": 4,
+        "ASCII.jp AI・IoT": 3,
+        "TechCrunch Japan": 1
       },
       "top_companies": {
-        "OpenAI": 7,
-        "Amazon": 5,
-        "NVIDIA": 3,
-        "Google": 2,
-        "Apple": 1
+        "Meta": 2,
+        "OpenAI": 1,
+        "Anthropic": 1,
+        "NVIDIA": 1
       },
       "top_keywords": {
-        "GPT-5": 5,
-        "Claude": 3,
-        "大規模言語モデル": 3,
-        "投資": 1,
-        "政策": 1,
-        "Gemini": 1,
+        "GPT-5": 1,
+        "Claude": 1,
+        "大規模言語モデル": 1,
         "パートナーシップ": 1
       },
       "featured_topics": [
         {
-          "title": "🚨 Catch up with the AI industry, August 15, 2025",
-          "title_ja": "AI業界に追いつく、2025年8月15日",
-          "source": "Reddit AI",
-          "time": "18:28",
-          "summary": "OpenAI CEO weighs in on AI investment trends Grok loses government contract after chatbot's &amp;quot;MechaHitler&amp;qu...",
-          "importance": 15,
-          "url": "https://www.reddit.com/r/artificial/comments/1mr64ux/catch_up_with_the_ai_industry_august_15_2025/"
-        },
-        {
-          "title": "OpenAI API injects hidden instructions for GPT-5",
-          "title_ja": "Openai APIは、GPT-5の非表示命令を注入します",
-          "source": "Reddit AI",
-          "time": "15:24",
-          "summary": "&amp;#32; submitted by &amp;#32;  /u/Agitated_Space_672   [link] &amp;#32; [comments]",
-          "importance": 10,
-          "url": "https://www.reddit.com/r/artificial/comments/1mr10kf/openai_api_injects_hidden_instructions_for_gpt5/"
-        },
-        {
           "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-          "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
+          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
           "source": "TechCrunch Japan",
           "time": "22:20",
           "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
@@ -57,31 +35,49 @@
           "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
         },
         {
-          "title": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活 - au Webポータル",
-          "title_ja": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活 - au Webポータル",
-          "source": "Google News: 生成AI・ChatGPT 日本",
-          "time": "22:39",
-          "summary": "OpenAI、GPT-5を早速修正 冒頭の「良い質問ですね」が復活  au Webポータル",
+          "title": "Anthropic now lets Claude end abusive conversations, citing AI welfare: \"We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future.\"",
+          "title_ja": "人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。",
+          "source": "Reddit AI",
+          "time": "06:53",
+          "summary": "https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/MetaKnowing   [link] &...",
           "importance": 10,
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5oeW9oRWhhRGlZc2JpdEVFajBNWU90cGc2Rk1WYzdmU2FBZzB4Tk9QWWFQc0hBX2gyVlF2MW82STV0RGo0WkVVYm5BZjRaSGo4LW5ta1hZU0k4OUhPeXNPUnZ5eU5BWVdNOS01bzhURGlSS08wLWlJOGFfSQ?oc=5"
+          "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/"
         },
         {
-          "title": "This researcher turned OpenAI’s open weights model gpt-oss-20b into a non-reasoning ‘base’ model with less alignment, more freedom",
-          "title_ja": "この研究者は、OpenAIのオープンウェイトモデルGPT-OSS-20Bを、整合性が低く、自由が増えて、リラックスしていない「ベース」モデルに変えました",
-          "source": "VentureBeat AI",
-          "time": "19:19",
-          "summary": "Morris found it could also reproduce verbatim passages from copyrighted works, including three out of six book excerpts ...",
+          "title": "One-Minute Daily AI News 8/16/2025",
+          "title_ja": "1分間のAIニュース8/16/2025",
+          "source": "Reddit AI",
+          "time": "05:02",
+          "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
           "importance": 10,
-          "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
+          "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/"
         },
         {
-          "title": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ - Bloomberg.co.jp",
-          "title_ja": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ - Bloomberg.co.jp",
-          "source": "Google News: AI企業・投資 (日本語)",
-          "time": "03:10",
-          "summary": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ  Bloomberg.co.jp",
-          "importance": 10,
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1YVy1ZMEdKdUctcmlZSmw3RUFWWUJ2WFloNlN3eHZlc0NCY2s1R3dybGFvMGtrY3c5QjFhWjBTUnhNQzZkc25YdlA3VWZmaHpBR0tLYkh6OS1SMGlYc0RtUE5VTHNYV3ZiYk9mMzFTbFVjamRHWFE?oc=5"
+          "title": "Why is Getting Consistent Characters in AI Image Generators So Difficult? They have no sense of consistency. Any one else frustrated with that",
+          "title_ja": "AI画像ジェネレーターで一貫した文字を取得するのはなぜ難しいのですか？一貫性の感覚はありません。他の誰もがイライラしています",
+          "source": "Reddit AI",
+          "time": "21:25",
+          "summary": "I've been playing around with a number of different AI image generators, and while the results can be mind-blowing, ther...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/artificial/comments/1mraw2b/why_is_getting_consistent_characters_in_ai_image/"
+        },
+        {
+          "title": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
+          "title_ja": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
+          "source": "ASCII.jp AI・IoT",
+          "time": "03:00",
+          "summary": "富士通の直販サイト「富士通 WEB MART」では最新モデルを対象にセールを開催中。",
+          "importance": 0,
+          "url": "https://ascii.jp/elem/000/004/312/4312579/?rss"
+        },
+        {
+          "title": "Jevons Paradox",
+          "title_ja": "Jevons Paradox",
+          "source": "Reddit AI",
+          "time": "02:32",
+          "summary": "Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in essence it means as the ...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/"
         }
       ],
       "focus_area": "market"
@@ -89,53 +85,29 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 10,
+      "count": 4,
       "top_sources": {
-        "MarkTechPost": 3,
-        "Google News: AIツール・フレームワーク": 3,
-        "TechCrunch": 2
+        "MarkTechPost": 2,
+        "Reddit MachineLearning": 1,
+        "TechCrunch": 1
       },
       "top_companies": {
-        "OpenAI": 1,
-        "Anthropic": 1
+        "OpenAI": 1
       },
       "top_keywords": {
-        "Claude": 3,
         "大規模言語モデル": 2,
         "自動運転": 2,
-        "企業価値": 2,
-        "GPT-4": 1,
-        "GPT-5": 1,
-        "Transformer": 1,
-        "生成AI": 1
+        "GPT-5": 1
       },
       "featured_topics": [
         {
           "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-          "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
+          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
           "source": "TechCrunch",
           "time": "22:20",
           "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
           "importance": 10,
           "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-        },
-        {
-          "title": "Anthropic has new rules for a more dangerous AI landscape",
-          "title_ja": "人類には、より危険なAIランドスケープのための新しいルールがあります",
-          "source": "The Verge",
-          "time": "17:05",
-          "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
-          "importance": 10,
-          "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
-        },
-        {
-          "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
-          "title_ja": "Salesforce AIはMoirai 2.0をリリースします：Salesforceの最新の時系列ファンデーションモデルは、デコーダーのない変圧器アーキテクチャに基づいて構築されています",
-          "source": "MarkTechPost",
-          "time": "20:27",
-          "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
-          "importance": 5,
-          "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
         },
         {
           "title": "R-Zero: A Fully Autonomous AI Framework that Generates Its Own Training Data from Scratch",
@@ -160,7 +132,7 @@
           "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
           "source": "Reddit MachineLearning",
           "time": "02:07",
-          "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 🤖 AI...",
+          "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 The ...",
           "importance": 0,
           "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
         }
@@ -170,52 +142,11 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 4,
-      "top_sources": {
-        "Google News: AI論文・研究": 4
-      },
-      "top_companies": {
-        "NVIDIA": 1
-      },
+      "count": 0,
+      "top_sources": {},
+      "top_companies": {},
       "top_keywords": {},
-      "featured_topics": [
-        {
-          "title": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models - ExecutiveGov",
-          "title_ja": "NSF、NVIDIAバックAI2オープンソースAIモデルの開発 - エグゼクティブゴブ",
-          "source": "Google News: AI論文・研究",
-          "time": "20:00",
-          "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
-          "importance": 10,
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
-        },
-        {
-          "title": "IJCAI 2025 – Artificial Intelligence for a Better World - Since 1969 - EurekAlert!",
-          "title_ja": "IJCAI 2025  - より良い世界のための人工知能 -  1969年以来 - ユーレカラート！",
-          "source": "Google News: AI論文・研究",
-          "time": "17:26",
-          "summary": "IJCAI 2025 – Artificial Intelligence for a Better World - Since 1969  EurekAlert!",
-          "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB6Z2phZGRpVzVtakhaVmdzZUplVXRYTldfNUFZWjJIT3l0OFdfZnhzVFdyeFRuX1JWbi1Zb1lEMm1Rd2d4LWs3cVZJX09vaW1oczlzc1J0dGdmcHF4?oc=5"
-        },
-        {
-          "title": "Silicon Valley Needs Foreign AI Researchers. So Why Are They Rattled? - The Information",
-          "title_ja": "シリコンバレーには、外国のAI研究者が必要です。では、なぜ彼らはガタガタしているのでしょうか？ - 情報",
-          "source": "Google News: AI論文・研究",
-          "time": "16:04",
-          "summary": "Silicon Valley Needs Foreign AI Researchers. So Why Are They Rattled?  The Information",
-          "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQNVFoTG9ucGZWMnFMX2xTREtfbGd0QV9jTXF1ZjI0djVZRUVWUC1scm9idldCdHVWalZwYzMzQThQX2VVREVORnVwanZGYXZKNGtVbWtEV1poYzFHd1pRSjlKQm9Ia25jVkRPa2I3bWg3X1VlTDV0Y0ZJTUZSTldjRU4yU01BZFpSTVBtN1BNd0lUUDJOTGc?oc=5"
-        },
-        {
-          "title": "News - Marines Pilot Artificial Intelligence Fellowship at NPS - DVIDS",
-          "title_ja": "ニュース - 海兵隊のパイロットNPSでの人工知能フェローシップ-DVIDS",
-          "source": "Google News: AI論文・研究",
-          "time": "20:02",
-          "summary": "News - Marines Pilot Artificial Intelligence Fellowship at NPS  DVIDS",
-          "importance": 0,
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNb1VERlRTTVVUQzNJUkFLNXdBSXJXcE1qZjFEa1NmR3lSRkNMOUpGNUV0QUN5bWRDSzlyYmJ5MjlUYW96bV9NclE5RkdrZnE5ZEhSQ2RRSmEwSFo1WXZqVTBoUks4eEFBWDlBMTBLRUJ2eGdQcGxfRGNyVU9EbDA0ZktLTE9YR3VrLVh2M3h3RWlrTms?oc=5"
-        }
-      ],
+      "featured_topics": [],
       "focus_area": "research"
     }
   },
@@ -225,62 +156,43 @@
     "market_sentiment": "中立",
     "key_developments": [
       {
-        "title": "🚨 Catch up with the AI industry, August 15, 2025",
-        "title_ja": "AI業界に追いつく、2025年8月15日",
-        "source": "Reddit AI",
-        "time": "18:28",
-        "summary": "OpenAI CEO weighs in on AI investment trends Grok loses government contract after chatbot's &amp;quot;MechaHitler&amp;qu...",
-        "importance": 15,
-        "url": "https://www.reddit.com/r/artificial/comments/1mr64ux/catch_up_with_the_ai_industry_august_15_2025/"
-      },
-      {
-        "title": "OpenAI API injects hidden instructions for GPT-5",
-        "title_ja": "Openai APIは、GPT-5の非表示命令を注入します",
-        "source": "Reddit AI",
-        "time": "15:24",
-        "summary": "&amp;#32; submitted by &amp;#32;  /u/Agitated_Space_672   [link] &amp;#32; [comments]",
-        "importance": 10,
-        "url": "https://www.reddit.com/r/artificial/comments/1mr10kf/openai_api_injects_hidden_instructions_for_gpt5/"
-      },
-      {
         "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-        "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
+        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
         "source": "TechCrunch Japan",
         "time": "22:20",
         "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
         "importance": 10,
         "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
+      },
+      {
+        "title": "Anthropic now lets Claude end abusive conversations, citing AI welfare: \"We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future.\"",
+        "title_ja": "人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。",
+        "source": "Reddit AI",
+        "time": "06:53",
+        "summary": "https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/MetaKnowing   [link] &...",
+        "importance": 10,
+        "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/"
+      },
+      {
+        "title": "One-Minute Daily AI News 8/16/2025",
+        "title_ja": "1分間のAIニュース8/16/2025",
+        "source": "Reddit AI",
+        "time": "05:02",
+        "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
+        "importance": 10,
+        "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/"
       }
     ]
   },
   "tech_developments": {
-    "new_releases": [
-      {
-        "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
-        "title_ja": "Salesforce AIはMoirai 2.0をリリースします：Salesforceの最新の時系列ファンデーションモデルは、デコーダーのない変圧器アーキテクチャに基づいて構築されています",
-        "source": "MarkTechPost",
-        "time": "20:27",
-        "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
-      }
-    ],
+    "new_releases": [],
     "breakthrough_tech": [
-      {
-        "title": "Anthropic has new rules for a more dangerous AI landscape",
-        "title_ja": "人類には、より危険なAIランドスケープのための新しいルールがあります",
-        "source": "The Verge",
-        "time": "17:05",
-        "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
-        "importance": 10,
-        "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
-      },
       {
         "title": "[R] The House of Cards: New Research Shows the Entire Foundation of AI Reasoning is Unstable.",
         "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
         "source": "Reddit MachineLearning",
         "time": "02:07",
-        "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 🤖 AI...",
+        "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 The ...",
         "importance": 0,
         "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
       }
@@ -299,7 +211,7 @@
     "research_highlights": [
       {
         "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-        "title_ja": "サム・アルトマンは、ブレッドロールを超えて、GPT-5の後の生活を探ります",
+        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
         "source": "TechCrunch",
         "time": "22:20",
         "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
@@ -307,32 +219,31 @@
         "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
       },
       {
-        "title": "Anthropic has new rules for a more dangerous AI landscape",
-        "title_ja": "人類には、より危険なAIランドスケープのための新しいルールがあります",
-        "source": "The Verge",
-        "time": "17:05",
-        "summary": "Anthropic has updated the usage policy for its Claude AI chatbot in response to growing concerns about safety. In additi...",
-        "importance": 10,
-        "url": "https://www.theverge.com/news/760080/anthropic-updated-usage-policy-dangerous-ai-landscape"
+        "title": "R-Zero: A Fully Autonomous AI Framework that Generates Its Own Training Data from Scratch",
+        "title_ja": "R-Zero：独自のトレーニングデータをゼロから生成する完全に自律的なAIフレームワーク",
+        "source": "MarkTechPost",
+        "time": "04:19",
+        "summary": "Large Language Models (LLMs) have revolutionized fields from natural language understanding to reasoning and code genera...",
+        "importance": 0,
+        "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/"
       },
       {
-        "title": "Salesforce AI Releases Moirai 2.0: Salesforce’s Latest Time Series Foundation Model Built on a Decoder‑only Transformer Architecture",
-        "title_ja": "Salesforce AIはMoirai 2.0をリリースします：Salesforceの最新の時系列ファンデーションモデルは、デコーダーのない変圧器アーキテクチャに基づいて構築されています",
+        "title": "This AI Paper Introduces ReaGAN: A Graph Agentic Network That Empowers Nodes with Autonomous Planning and Global Semantic Retrieval",
+        "title_ja": "このAIペーパーでは、レーガンを紹介します：自律計画とグローバルなセマンティック検索でノードを強化するグラフエージェントネットワーク",
         "source": "MarkTechPost",
-        "time": "20:27",
-        "summary": "Salesforce AI Research has unveiled Moirai 2.0, the latest advancement in the world of time series foundation models. Bu...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/15/salesforce-ai-releases-moirai-2-0-salesforces-latest-time-series-foundation-model-built-on-a-decoder%e2%80%91only-transformer-architecture/"
+        "time": "04:06",
+        "summary": "How can we make every node in a graph its own intelligent agent—capable of personalized reasoning, adaptive retrieval, a...",
+        "importance": 0,
+        "url": "https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/"
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "OpenAI": 8,
-      "Amazon": 5,
-      "NVIDIA": 4,
-      "Google": 2,
-      "Apple": 1
+      "Meta": 2,
+      "OpenAI": 2,
+      "Anthropic": 1,
+      "NVIDIA": 1
     },
     "partnerships": [],
     "regulatory_updates": [],
@@ -340,45 +251,42 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "GPT-5": 6,
-      "Claude": 6,
-      "大規模言語モデル": 5,
+      "大規模言語モデル": 3,
+      "GPT-5": 2,
       "自動運転": 2,
-      "企業価値": 2,
-      "投資": 1
+      "Claude": 1,
+      "パートナーシップ": 1
     },
     "emerging_themes": [
       {
-        "theme": "GPT-5",
-        "mentions": 6
-      },
-      {
-        "theme": "Claude",
-        "mentions": 6
-      },
-      {
         "theme": "大規模言語モデル",
-        "mentions": 5
+        "mentions": 3
+      },
+      {
+        "theme": "GPT-5",
+        "mentions": 2
+      },
+      {
+        "theme": "自動運転",
+        "mentions": 2
       }
     ],
-    "geographic_focus": {
-      "シリコンバレー": 1
-    },
+    "geographic_focus": {},
     "future_outlook": "注意深い観察期"
   },
   "highlights": [],
   "stats": {
     "total_items": 361,
-    "total_sources": 7,
-    "active_companies": 6,
+    "total_sources": 6,
+    "active_companies": 4,
     "top_company": [
-      "OpenAI",
-      8
+      "Meta",
+      2
     ],
-    "last_updated": "2025-08-16 14:52 JST"
+    "last_updated": "2025-08-16 20:47 JST"
   },
   "x_posts": {
-    "total_count": 309,
+    "total_count": 349,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -414,12 +322,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 361件のニュース、6社が活動",
+    "headline": "今日のAI業界: 361件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
-      "🚀 技術開発: 1件の新製品リリース",
-      "🏢 企業動向: OpenAIが最も活発",
-      "💬 SNS: 309件の関連投稿"
+      "🚀 技術開発: 0件の新製品リリース",
+      "🏢 企業動向: Metaが最も活発",
+      "💬 SNS: 349件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

@@ -785,7 +785,7 @@ def generate_comprehensive_dashboard_html(data):
                     <div class="kpi-label">総ニュース数</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-number">{len(data['market_analysis']['active_companies'])}</div>
+                    <div class="kpi-number">{data.get('stats', {}).get('active_companies', 0)}</div>
                     <div class="kpi-label">活動企業数</div>
                 </div>
                 <div class="kpi">
@@ -793,7 +793,7 @@ def generate_comprehensive_dashboard_html(data):
                     <div class="kpi-label">情報ソース数</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-number">{data['stats']['x_posts_count']}</div>
+                    <div class="kpi-number">{data.get('x_posts', {}).get('total_count', 0)}</div>
                     <div class="kpi-label">SNS投稿数</div>
                 </div>
             </div>

@@ -30,6 +30,15 @@ def translate_title(title):
         return title
 from pathlib import Path
 
+# Gemini分析機能をインポート
+try:
+    from gemini_analyzer import GeminiAnalyzer
+    gemini_analyzer = GeminiAnalyzer()
+    print(f"🤖 Gemini分析機能: {'有効' if gemini_analyzer.enabled else '無効'}")
+except ImportError:
+    print("⚠️ Gemini分析機能が利用できません")
+    gemini_analyzer = None
+
 def analyze_ai_landscape():
     """今日のAI業界全体を分析してダッシュボードデータを生成"""
     
@@ -161,6 +170,17 @@ def analyze_ai_landscape():
         # 重要度でソート
         topics.sort(key=lambda x: x['importance'], reverse=True)
         
+        # Gemini分析による重要度強化
+        if gemini_analyzer and gemini_analyzer.enabled and topics:
+            print(f"🤖 {category_name}カテゴリをGeminiで分析中...")
+            try:
+                enhanced_topics = gemini_analyzer.analyze_news_importance(topics)
+                topics = enhanced_topics
+                print(f"✅ Gemini分析完了: {len(topics)}件")
+            except Exception as e:
+                print(f"⚠️ Gemini分析エラー: {e}")
+                pass  # フォールバックとして既存の処理を継続
+        
         dashboard_data['categories'][category_key] = {
             'name': cat_info['name'],
             'icon': cat_info['icon'],
@@ -212,6 +232,16 @@ def analyze_ai_landscape():
     
     # 市場洞察分析
     market_insights = analyze_market_trends(dashboard_data)
+    
+    # Gemini市場洞察強化
+    if gemini_analyzer and gemini_analyzer.enabled:
+        try:
+            gemini_insights = gemini_analyzer.generate_market_insights(dashboard_data)
+            market_insights.update(gemini_insights)
+            print("✅ Gemini市場洞察を統合")
+        except Exception as e:
+            print(f"⚠️ Gemini市場洞察エラー: {e}")
+    
     dashboard_data['market_insights'] = market_insights
     
     # 技術動向分析
@@ -245,6 +275,16 @@ def analyze_ai_landscape():
     
     # エグゼクティブサマリー生成
     executive_summary = generate_executive_summary(dashboard_data)
+    
+    # Geminiエグゼクティブサマリー強化
+    if gemini_analyzer and gemini_analyzer.enabled:
+        try:
+            enhanced_summary = gemini_analyzer.enhance_executive_summary(dashboard_data)
+            executive_summary.update(enhanced_summary)
+            print("✅ Geminiエグゼクティブサマリーを強化")
+        except Exception as e:
+            print(f"⚠️ Geminiサマリー強化エラー: {e}")
+    
     dashboard_data['executive_summary'] = executive_summary
     
     return dashboard_data

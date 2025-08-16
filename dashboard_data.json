@@ -1,31 +1,30 @@
 {
-  "timestamp": "2025-08-16T14:08:37.085222+09:00",
+  "timestamp": "2025-08-16T14:52:45.529822+09:00",
   "date": "2025-08-16",
-  "jst_time": "14:08 JST",
+  "jst_time": "14:52 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 39,
+      "count": 38,
       "top_sources": {
-        "Reddit AI": 7,
-        "Google News: 生成AI・ChatGPT 日本": 6,
-        "Google News: AI企業・投資 (日本語)": 6
+        "Google News: AI企業・投資 (日本語)": 7,
+        "Reddit AI": 6,
+        "Google News: 生成AI・ChatGPT 日本": 6
       },
       "top_companies": {
-        "OpenAI": 8,
+        "OpenAI": 7,
         "Amazon": 5,
         "NVIDIA": 3,
         "Google": 2,
         "Apple": 1
       },
       "top_keywords": {
-        "GPT-5": 4,
+        "GPT-5": 5,
         "Claude": 3,
         "大規模言語モデル": 3,
         "投資": 1,
         "政策": 1,
-        "自動運転": 1,
         "Gemini": 1,
         "パートナーシップ": 1
       },
@@ -76,13 +75,13 @@
           "url": "https://venturebeat.com/ai/this-researcher-turned-openais-open-weights-model-gpt-oss-20b-into-a-non-reasoning-base-model-with-less-alignment-more-freedom/"
         },
         {
-          "title": "Autonomous Presence Systems for OpenAI/Grok/etc",
-          "title_ja": "Openai/Grok/などの自律的な存在システム",
-          "source": "Reddit AI",
-          "time": "14:47",
-          "summary": "I was curious if this was something on any of their tables. Ive been trying to find any reference to timelines or even t...",
+          "title": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ - Bloomberg.co.jp",
+          "title_ja": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ - Bloomberg.co.jp",
+          "source": "Google News: AI企業・投資 (日本語)",
+          "time": "03:10",
+          "summary": "OpenAI、従業員保有の株式60億ドル相当をソフトバンクＧなどに売却へ  Bloomberg.co.jp",
           "importance": 10,
-          "url": "https://www.reddit.com/r/artificial/comments/1mqzyjs/autonomous_presence_systems_for_openaigroketc/"
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1YVy1ZMEdKdUctcmlZSmw3RUFWWUJ2WFloNlN3eHZlc0NCY2s1R3dybGFvMGtrY3c5QjFhWjBTUnhNQzZkc25YdlA3VWZmaHpBR0tLYkh6OS1SMGlYc0RtUE5VTHNYV3ZiYk9mMzFTbFVjamRHWFE?oc=5"
         }
       ],
       "focus_area": "market"
@@ -90,18 +89,18 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 12,
+      "count": 10,
       "top_sources": {
-        "Google News: AIツール・フレームワーク": 4,
         "MarkTechPost": 3,
-        "Reddit MachineLearning": 2
+        "Google News: AIツール・フレームワーク": 3,
+        "TechCrunch": 2
       },
       "top_companies": {
         "OpenAI": 1,
         "Anthropic": 1
       },
       "top_keywords": {
-        "Claude": 4,
+        "Claude": 3,
         "大規模言語モデル": 2,
         "自動運転": 2,
         "企業価値": 2,
@@ -171,9 +170,9 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 5,
+      "count": 4,
       "top_sources": {
-        "Google News: AI論文・研究": 5
+        "Google News: AI論文・研究": 4
       },
       "top_companies": {
         "NVIDIA": 1
@@ -188,15 +187,6 @@
           "summary": "NSF, NVIDIA Back Ai2 in Development of Open-Source AI Models  ExecutiveGov",
           "importance": 10,
           "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZFprVjVNbUFEa25tZXJfbzlyd1hiSEEyRmR1dlFIQUdCRzI0MTJSR3l6elFyUXBlTVdhQkhQY2ZSdDZmbXR0YlFMdmZjMHpTNFVZczZTb1lVWVJkWDJCdlhHeHZMdnlmT3Z3dEJjem1SaV95aWdfLWxyUjdydGNqQVhyeGpjem5fd1NLcC0xSQ?oc=5"
-        },
-        {
-          "title": "U of T Launches Health Data Hub for AI Research - Mirage News",
-          "title_ja": "u of tは、AI研究のための健康データハブを立ち上げます - ミラージュニュース",
-          "source": "Google News: AI論文・研究",
-          "time": "14:22",
-          "summary": "U of T Launches Health Data Hub for AI Research  Mirage News",
-          "importance": 5,
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYl9fcGVhYU41ZnI1azBFemJDNi1kNjhrNXJ0WlJuV0Y5ME1qVUVpMlpmd0ZuSV9URXdvNm1nM1VRbl8yNUoxQy1xX2sxV3RxOG5LWU1qMzBaY3U1M1FQUjVPTnJtWHh1WktJU0JwMEhUMnNVbXY4bkF2VHNvQnlkTkJuaVRyMGZkT3NZ?oc=5"
         },
         {
           "title": "IJCAI 2025 – Artificial Intelligence for a Better World - Since 1969 - EurekAlert!",
@@ -338,7 +328,7 @@
   },
   "industry_moves": {
     "most_active_companies": {
-      "OpenAI": 9,
+      "OpenAI": 8,
       "Amazon": 5,
       "NVIDIA": 4,
       "Google": 2,
@@ -350,21 +340,21 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "Claude": 7,
-      "GPT-5": 5,
+      "GPT-5": 6,
+      "Claude": 6,
       "大規模言語モデル": 5,
-      "自動運転": 3,
+      "自動運転": 2,
       "企業価値": 2,
       "投資": 1
     },
     "emerging_themes": [
       {
-        "theme": "Claude",
-        "mentions": 7
+        "theme": "GPT-5",
+        "mentions": 6
       },
       {
-        "theme": "GPT-5",
-        "mentions": 5
+        "theme": "Claude",
+        "mentions": 6
       },
       {
         "theme": "大規模言語モデル",
@@ -378,17 +368,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 349,
+    "total_items": 361,
     "total_sources": 7,
     "active_companies": 6,
     "top_company": [
       "OpenAI",
-      9
+      8
     ],
-    "last_updated": "2025-08-16 14:08 JST"
+    "last_updated": "2025-08-16 14:52 JST"
   },
   "x_posts": {
-    "total_count": 293,
+    "total_count": 309,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -424,12 +414,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 349件のニュース、6社が活動",
+    "headline": "今日のAI業界: 361件のニュース、6社が活動",
     "key_points": [
       "📈 市場動向: 中立なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
       "🏢 企業動向: OpenAIが最も活発",
-      "💬 SNS: 293件の関連投稿"
+      "💬 SNS: 309件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

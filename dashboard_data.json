@@ -1,65 +1,45 @@
 {
-  "timestamp": "2025-08-16T22:13:39.067936+09:00",
-  "date": "2025-08-16",
-  "jst_time": "22:13 JST",
+  "timestamp": "2025-08-17T00:17:44.628847+09:00",
+  "date": "2025-08-17",
+  "jst_time": "00:17 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 7,
+      "count": 4,
       "top_sources": {
         "Reddit AI": 3,
-        "ASCII.jp AI・IoT": 3,
-        "TechCrunch Japan": 1
+        "ASCII.jp AI・IoT": 1
       },
       "top_companies": {
         "Meta": 2,
-        "OpenAI": 1,
         "Anthropic": 1,
         "NVIDIA": 1
       },
       "top_keywords": {
-        "GPT-5": 1,
         "Claude": 1,
         "大規模言語モデル": 1,
         "パートナーシップ": 1
       },
       "featured_topics": [
         {
-          "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
-          "source": "TechCrunch Japan",
-          "time": "22:20",
-          "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
-          "importance": 10,
-          "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-        },
-        {
           "title": "Anthropic now lets Claude end abusive conversations, citing AI welfare: \"We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future.\"",
           "title_ja": "人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。",
           "source": "Reddit AI",
           "time": "06:53",
           "summary": "https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/MetaKnowing   [link] &...",
-          "importance": 10,
-          "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/"
-        },
-        {
-          "title": "One-Minute Daily AI News 8/16/2025",
-          "title_ja": "1分間のAIニュース8/16/2025",
-          "source": "Reddit AI",
-          "time": "05:02",
-          "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
-          "importance": 10,
-          "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/"
-        },
-        {
-          "title": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
-          "title_ja": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
-          "source": "ASCII.jp AI・IoT",
-          "time": "03:00",
-          "summary": "富士通の直販サイト「富士通 WEB MART」では最新モデルを対象にセールを開催中。",
-          "importance": 0,
-          "url": "https://ascii.jp/elem/000/004/312/4312579/?rss"
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/",
+          "gemini_selected": true,
+          "gemini_score": 80,
+          "gemini_reason": "主要AI企業であるAnthropicが「AIの福祉（AI welfare）」という概念を提唱し、それに基づいてClaudeの機能（虐待的会話の終了）を実装したことは、AI倫理の議論を深め、今後のAI開発の方向性や社会との関係性に大きな影響を与える可能性があるため。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "AI welfare",
+            "倫理",
+            "Anthropic"
+          ],
+          "final_importance": 80
         },
         {
           "title": "Jevons Paradox",
@@ -67,17 +47,56 @@
           "source": "Reddit AI",
           "time": "02:32",
           "summary": "Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in essence it means as the ...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/"
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/",
+          "gemini_selected": true,
+          "gemini_score": 75,
+          "gemini_reason": "AIの計算コストと利用拡大がもたらす資源消費と持続可能性という、業界の長期的な課題と社会への影響を提起する重要な議論であるため。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "Jevons Paradox",
+            "AIコスト",
+            "持続可能性"
+          ],
+          "final_importance": 75
         },
         {
-          "title": "富士通ノートPC「LIFEBOOK PH50/J3」の“キャンセル品”がいまなら17万円台！",
-          "title_ja": "富士通ノートPC「LIFEBOOK PH50/J3」の“キャンセル品”がいまなら17万円台！",
+          "title": "One-Minute Daily AI News 8/16/2025",
+          "title_ja": "1分間のAIニュース8/16/2025",
+          "source": "Reddit AI",
+          "time": "05:02",
+          "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/",
+          "gemini_selected": true,
+          "gemini_score": 45,
+          "gemini_reason": "AIとドローンを組み合わせた地方インフラの効率化事例であり、AIの社会実装の進展を示すものの、技術的なブレークスルーや市場・業界全体への大きな影響はないため、重要度は中程度に留まります。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "AI",
+            "ドローン",
+            "インフラ監視"
+          ],
+          "final_importance": 45
+        },
+        {
+          "title": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
+          "title_ja": "富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！",
           "source": "ASCII.jp AI・IoT",
-          "time": "01:00",
+          "time": "03:00",
           "summary": "富士通の直販サイト「富士通 WEB MART」では最新モデルを対象にセールを開催中。",
-          "importance": 0,
-          "url": "https://ascii.jp/elem/000/004/312/4312565/?rss"
+          "importance": 8,
+          "url": "https://ascii.jp/elem/000/004/312/4312579/?rss",
+          "gemini_selected": true,
+          "gemini_score": 15,
+          "gemini_reason": "富士通のCore Ultra 7搭載PCのセール情報であり、AI関連技術の進展や市場・業界に大きな影響を与えるものではないため、重要度は低いと評価します。",
+          "gemini_category": "business",
+          "gemini_keywords": [
+            "富士通",
+            "Core Ultra 7",
+            "セール"
+          ],
+          "final_importance": 15
         }
       ],
       "focus_area": "market"
@@ -85,48 +104,37 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 5,
+      "count": 4,
       "top_sources": {
-        "MarkTechPost": 2,
-        "Reddit MachineLearning": 1,
-        "AI Research": 1
+        "Reddit MachineLearning": 2,
+        "MarkTechPost": 2
       },
-      "top_companies": {
-        "Meta": 1,
-        "OpenAI": 1
-      },
+      "top_companies": {},
       "top_keywords": {
         "大規模言語モデル": 2,
         "自動運転": 2,
-        "GPT-5": 1
+        "コンピュータビジョン": 1,
+        "Transformer": 1
       },
       "featured_topics": [
-        {
-          "title": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine learning and bioinformatics analysis",
-          "title_ja": "機械学習とバイオインフォマティクス分析を統合することにより、歯周炎における脂質代謝関連遺伝子と免疫微小環境の役割の調査",
-          "source": "AI Research",
-          "time": "00:00",
-          "summary": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine...",
-          "importance": 10,
-          "url": "https://www.nature.com/articles/s41598-025-15330-z"
-        },
-        {
-          "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-          "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
-          "source": "TechCrunch",
-          "time": "22:20",
-          "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
-          "importance": 10,
-          "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-        },
         {
           "title": "R-Zero: A Fully Autonomous AI Framework that Generates Its Own Training Data from Scratch",
           "title_ja": "R-Zero：独自のトレーニングデータをゼロから生成する完全に自律的なAIフレームワーク",
           "source": "MarkTechPost",
           "time": "04:19",
           "summary": "Large Language Models (LLMs) have revolutionized fields from natural language understanding to reasoning and code genera...",
-          "importance": 0,
-          "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/"
+          "importance": 8,
+          "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/",
+          "gemini_selected": true,
+          "gemini_score": 90,
+          "gemini_reason": "自身の学習データをゼロから自律的に生成するAIフレームワークは、現在のAI開発におけるデータ収集・アノテーションの課題を根本的に解決し、AIの自己進化とAGI実現に向けた重要な技術的ブレークスルーとなる可能性を秘めているため、その革新性と潜在的影響は極めて高い。",
+          "gemini_category": "breakthrough",
+          "gemini_keywords": [
+            "自律AI",
+            "データ生成",
+            "LLM進化"
+          ],
+          "final_importance": 90
         },
         {
           "title": "This AI Paper Introduces ReaGAN: A Graph Agentic Network That Empowers Nodes with Autonomous Planning and Global Semantic Retrieval",
@@ -134,17 +142,56 @@
           "source": "MarkTechPost",
           "time": "04:06",
           "summary": "How can we make every node in a graph its own intelligent agent—capable of personalized reasoning, adaptive retrieval, a...",
-          "importance": 0,
-          "url": "https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/"
+          "importance": 8,
+          "url": "https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/",
+          "gemini_selected": true,
+          "gemini_score": 75,
+          "gemini_reason": "新しいグラフエージェントネットワーク「ReaGAN」は、各ノードに自律的な計画とグローバルな意味的検索能力を与える革新的なAI研究であり、将来の分散型AIシステムや知識グラフの進化に大きな可能性を秘めているため。",
+          "gemini_category": "technical",
+          "gemini_keywords": [
+            "ReaGAN",
+            "グラフエージェントネットワーク",
+            "自律的計画"
+          ],
+          "final_importance": 75
         },
         {
-          "title": "[R] The House of Cards: New Research Shows the Entire Foundation of AI Reasoning is Unstable.",
-          "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
+          "title": "[D] model architecture or data?",
+          "title_ja": "[D]モデルアーキテクチャまたはデータ？",
           "source": "Reddit MachineLearning",
-          "time": "02:07",
-          "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 The ...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
+          "time": "14:20",
+          "summary": "I’ve just read that the new model architecture called Hierarchical Reasoning Model (HRM) gains it’s performance benefits...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrwm3w/d_model_architecture_or_data/",
+          "gemini_selected": true,
+          "gemini_score": 55,
+          "gemini_reason": "新しいモデルアーキテクチャ「Hierarchical Reasoning Model (HRM)」の登場は、AIの性能向上に寄与する可能性を秘めており、技術的な進歩を示すものとして一定の重要性があります。しかし、Redditの投稿であり、現時点では市場や社会への直接的な影響は限定的です。",
+          "gemini_category": "technical",
+          "gemini_keywords": [
+            "Hierarchical Reasoning Model",
+            "モデルアーキテクチャ",
+            "性能向上"
+          ],
+          "final_importance": 55
+        },
+        {
+          "title": "[D] - # Senior AI/Computer Vision Engineer (4+ YoE) seeking realistic advice for landing jobs with visa support in Europe",
+          "title_ja": "[d]  - ＃ヨーロッパでのビザサポートを伴う上陸の仕事に対する現実的なアドバイスを求めるシニアAI/コンピュータービジョンエンジニア（4+ YOE）",
+          "source": "Reddit MachineLearning",
+          "time": "14:59",
+          "summary": "Background: - 4+ years as AI/Computer Vision Engineer in Mumbai, India - Led patent-pending tech that powered millions o...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrxo2t/d_senior_aicomputer_vision_engineer_4_yoe_seeking/",
+          "gemini_selected": true,
+          "gemini_score": 15,
+          "gemini_reason": "個人のキャリア相談であり、AI業界全体の技術革新、市場動向、主要企業の動きといった観点からは重要度が低い。しかし、AI人材の国際的な流動性や、特定の地域（インドからヨーロッパ）への求職における課題（ビザサポート）を間接的に示唆しており、グローバルなAI人材市場の現状を理解する上での一端を示す。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "AIエンジニア",
+            "国際移動",
+            "求職"
+          ],
+          "final_importance": 15
         }
       ],
       "focus_area": "tech"
@@ -152,11 +199,142 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 0,
-      "top_sources": {},
-      "top_companies": {},
-      "top_keywords": {},
-      "featured_topics": [],
+      "count": 8,
+      "top_sources": {
+        "Reddit DeepLearning": 3,
+        "Reddit ArtificialIntelligence": 3,
+        "Reddit MachineLearning Papers": 2
+      },
+      "top_companies": {
+        "Meta": 3,
+        "Google": 1,
+        "Anthropic": 1,
+        "NVIDIA": 1
+      },
+      "top_keywords": {
+        "大規模言語モデル": 2,
+        "GPT-5": 1,
+        "Claude": 1,
+        "Transformer": 1,
+        "パートナーシップ": 1,
+        "コンピュータビジョン": 1
+      },
+      "featured_topics": [
+        {
+          "title": "Caesar Data's New AI Scores 55.87% on HLE, Crushing Grok 4 (with tools) 44.4% and GPT-5 (with tools) 42%",
+          "title_ja": "Caesar Dataの新しいAIは、HLEで55.87％を獲得し、Grok 4（ツール付き）44.4％、GPT-5（ツール付き）42％を粉砕します",
+          "source": "Reddit DeepLearning",
+          "time": "02:43",
+          "summary": "Out of nowhere comes a model that even in Alpha phase crushes top competitors in perhaps the most challenging AI benchma...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mrihdx/caesar_datas_new_ai_scores_5587_on_hle_crushing/",
+          "gemini_selected": true,
+          "gemini_score": 88,
+          "gemini_reason": "AIの最も困難なベンチマークとされるHLEで、既存のトップモデル（Grok 4, GPT-5）を大幅に上回る性能をアルファ段階で達成したことは、技術的なブレイクスルーの可能性を示唆し、AI業界の競争環境に大きな影響を与える速報性の高いニュースであるため。",
+          "gemini_category": "breakthrough",
+          "gemini_keywords": [
+            "Caesar Data",
+            "HLEベンチマーク",
+            "AI性能向上"
+          ],
+          "final_importance": 88
+        },
+        {
+          "title": "Anthropic now lets Claude end abusive conversations, citing AI welfare: \"We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future.\"",
+          "title_ja": "人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。",
+          "source": "Reddit ArtificialIntelligence",
+          "time": "06:53",
+          "summary": "https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/MetaKnowing   [link] &...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/",
+          "gemini_selected": true,
+          "gemini_score": 78,
+          "gemini_reason": "Anthropicが「AI welfare」を理由にClaudeに会話終了機能を追加したことは、AIの倫理的地位や責任あるAI開発に関する業界および社会的な議論を深める重要な一歩であるため。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "AI welfare",
+            "倫理",
+            "Anthropic"
+          ],
+          "final_importance": 78
+        },
+        {
+          "title": "[D] model architecture or data?",
+          "title_ja": "[D]モデルアーキテクチャまたはデータ？",
+          "source": "Reddit MachineLearning Papers",
+          "time": "14:20",
+          "summary": "I’ve just read that the new model architecture called Hierarchical Reasoning Model (HRM) gains it’s performance benefits...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mrwm3w/d_model_architecture_or_data/",
+          "gemini_selected": true,
+          "gemini_score": 75,
+          "gemini_reason": "新しいモデルアーキテクチャ「Hierarchical Reasoning Model (HRM)」が性能向上に寄与するという情報は、AI技術の進化に直接関連し、研究開発コミュニティにとって重要な進展を示すため。",
+          "gemini_category": "technical",
+          "gemini_keywords": [
+            "Hierarchical Reasoning Model",
+            "モデルアーキテクチャ",
+            "性能向上"
+          ],
+          "final_importance": 75
+        },
+        {
+          "title": "Jevons Paradox",
+          "title_ja": "Jevons Paradox",
+          "source": "Reddit ArtificialIntelligence",
+          "time": "02:32",
+          "summary": "Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in essence it means as the ...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/",
+          "gemini_selected": true,
+          "gemini_score": 55,
+          "gemini_reason": "Redditの投稿であり速報性や具体的な影響は低いものの、AIのコストと利用拡大がもたらすジェボンズのパラドックスは、AIの持続可能性、環境負荷、長期的なインフラ戦略に関わる重要な概念的議論であるため。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "AIコスト",
+            "ジェボンズのパラドックス",
+            "持続可能性"
+          ],
+          "final_importance": 55
+        },
+        {
+          "title": "One-Minute Daily AI News 8/16/2025",
+          "title_ja": "1分間のAIニュース8/16/2025",
+          "source": "Reddit ArtificialIntelligence",
+          "time": "05:02",
+          "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/",
+          "gemini_selected": true,
+          "gemini_score": 35,
+          "gemini_reason": "AIとドローンによる廃水インフラ監視は、既存技術の具体的な応用事例として社会的な利益に貢献するものの、技術的革新性や市場・業界全体への影響は限定的であるため。",
+          "gemini_category": "social",
+          "gemini_keywords": [
+            "ドローン",
+            "廃水インフラ",
+            "AI応用"
+          ],
+          "final_importance": 35
+        },
+        {
+          "title": "Just Learned About Batch Normalization",
+          "title_ja": "バッチ正規化について学んだばかりです",
+          "source": "Reddit DeepLearning",
+          "time": "11:47",
+          "summary": "So I finally got around to understanding Batch Normalization in deep learning, and wow… it makes so much sense now. It n...",
+          "importance": 8,
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mrsygn/just_learned_about_batch_normalization/",
+          "gemini_selected": true,
+          "gemini_score": 5,
+          "gemini_reason": "Batch Normalizationは既に確立されたディープラーニング技術であり、このニュースは個人の学習体験に関するもので、AI業界全体の技術的革新、市場、業界動向、社会に与える影響が極めて低いため。",
+          "gemini_category": "technical",
+          "gemini_keywords": [
+            "Batch Normalization",
+            "Deep Learning",
+            "Learning"
+          ],
+          "final_importance": 8
+        }
+      ],
       "focus_area": "research"
     }
   },
@@ -166,22 +344,42 @@
     "market_sentiment": "中立",
     "key_developments": [
       {
-        "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
-        "source": "TechCrunch Japan",
-        "time": "22:20",
-        "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
-        "importance": 10,
-        "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-      },
-      {
         "title": "Anthropic now lets Claude end abusive conversations, citing AI welfare: \"We remain highly uncertain about the potential moral status of Claude and other LLMs, now or in the future.\"",
         "title_ja": "人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。",
         "source": "Reddit AI",
         "time": "06:53",
         "summary": "https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/MetaKnowing   [link] &...",
-        "importance": 10,
-        "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/"
+        "importance": 8,
+        "url": "https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/",
+        "gemini_selected": true,
+        "gemini_score": 80,
+        "gemini_reason": "主要AI企業であるAnthropicが「AIの福祉（AI welfare）」という概念を提唱し、それに基づいてClaudeの機能（虐待的会話の終了）を実装したことは、AI倫理の議論を深め、今後のAI開発の方向性や社会との関係性に大きな影響を与える可能性があるため。",
+        "gemini_category": "social",
+        "gemini_keywords": [
+          "AI welfare",
+          "倫理",
+          "Anthropic"
+        ],
+        "final_importance": 80
+      },
+      {
+        "title": "Jevons Paradox",
+        "title_ja": "Jevons Paradox",
+        "source": "Reddit AI",
+        "time": "02:32",
+        "summary": "Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in essence it means as the ...",
+        "importance": 8,
+        "url": "https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/",
+        "gemini_selected": true,
+        "gemini_score": 75,
+        "gemini_reason": "AIの計算コストと利用拡大がもたらす資源消費と持続可能性という、業界の長期的な課題と社会への影響を提起する重要な議論であるため。",
+        "gemini_category": "social",
+        "gemini_keywords": [
+          "Jevons Paradox",
+          "AIコスト",
+          "持続可能性"
+        ],
+        "final_importance": 75
       },
       {
         "title": "One-Minute Daily AI News 8/16/2025",
@@ -189,24 +387,39 @@
         "source": "Reddit AI",
         "time": "05:02",
         "summary": "Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Australia murder case court...",
-        "importance": 10,
-        "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/"
+        "importance": 8,
+        "url": "https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/",
+        "gemini_selected": true,
+        "gemini_score": 45,
+        "gemini_reason": "AIとドローンを組み合わせた地方インフラの効率化事例であり、AIの社会実装の進展を示すものの、技術的なブレークスルーや市場・業界全体への大きな影響はないため、重要度は中程度に留まります。",
+        "gemini_category": "social",
+        "gemini_keywords": [
+          "AI",
+          "ドローン",
+          "インフラ監視"
+        ],
+        "final_importance": 45
       }
-    ]
+    ],
+    "key_trends": [
+      "生成AI",
+      "企業AI導入",
+      "オープンソース"
+    ],
+    "investment_focus": [
+      "AI インフラ",
+      "エッジAI"
+    ],
+    "major_players": [
+      "OpenAI",
+      "Google",
+      "Microsoft"
+    ],
+    "outlook": "継続的な成長が期待される"
   },
   "tech_developments": {
     "new_releases": [],
-    "breakthrough_tech": [
-      {
-        "title": "[R] The House of Cards: New Research Shows the Entire Foundation of AI Reasoning is Unstable.",
-        "title_ja": "[R] Cards of Cards：新しい研究では、AI推論の基盤全体が不安定であることが示されています。",
-        "source": "Reddit MachineLearning",
-        "time": "02:07",
-        "summary": "Overview Framework Bias Categories Experiment Results 1 Experiment Results 2 Paper:https://arxiv.org/abs/2507.13758 The ...",
-        "importance": 0,
-        "url": "https://www.reddit.com/r/MachineLearning/comments/1mrhp31/r_the_house_of_cards_new_research_shows_the/"
-      }
-    ],
+    "breakthrough_tech": [],
     "developer_tools": [
       {
         "title": "R-Zero: A Fully Autonomous AI Framework that Generates Its Own Training Data from Scratch",
@@ -214,46 +427,86 @@
         "source": "MarkTechPost",
         "time": "04:19",
         "summary": "Large Language Models (LLMs) have revolutionized fields from natural language understanding to reasoning and code genera...",
-        "importance": 0,
-        "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/"
+        "importance": 8,
+        "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/",
+        "gemini_selected": true,
+        "gemini_score": 90,
+        "gemini_reason": "自身の学習データをゼロから自律的に生成するAIフレームワークは、現在のAI開発におけるデータ収集・アノテーションの課題を根本的に解決し、AIの自己進化とAGI実現に向けた重要な技術的ブレークスルーとなる可能性を秘めているため、その革新性と潜在的影響は極めて高い。",
+        "gemini_category": "breakthrough",
+        "gemini_keywords": [
+          "自律AI",
+          "データ生成",
+          "LLM進化"
+        ],
+        "final_importance": 90
       }
     ],
     "research_highlights": [
-      {
-        "title": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine learning and bioinformatics analysis",
-        "title_ja": "機械学習とバイオインフォマティクス分析を統合することにより、歯周炎における脂質代謝関連遺伝子と免疫微小環境の役割の調査",
-        "source": "AI Research",
-        "time": "00:00",
-        "summary": "Exploring the role of lipid metabolism related genes and immune microenvironment in periodontitis by integrating machine...",
-        "importance": 10,
-        "url": "https://www.nature.com/articles/s41598-025-15330-z"
-      },
-      {
-        "title": "Sam Altman, over bread rolls, explores life after GPT-5",
-        "title_ja": "サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります",
-        "source": "TechCrunch",
-        "time": "22:20",
-        "summary": "At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled details on the company's ambitions beyond Cha...",
-        "importance": 10,
-        "url": "https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/"
-      },
       {
         "title": "R-Zero: A Fully Autonomous AI Framework that Generates Its Own Training Data from Scratch",
         "title_ja": "R-Zero：独自のトレーニングデータをゼロから生成する完全に自律的なAIフレームワーク",
         "source": "MarkTechPost",
         "time": "04:19",
         "summary": "Large Language Models (LLMs) have revolutionized fields from natural language understanding to reasoning and code genera...",
-        "importance": 0,
-        "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/"
+        "importance": 8,
+        "url": "https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/",
+        "gemini_selected": true,
+        "gemini_score": 90,
+        "gemini_reason": "自身の学習データをゼロから自律的に生成するAIフレームワークは、現在のAI開発におけるデータ収集・アノテーションの課題を根本的に解決し、AIの自己進化とAGI実現に向けた重要な技術的ブレークスルーとなる可能性を秘めているため、その革新性と潜在的影響は極めて高い。",
+        "gemini_category": "breakthrough",
+        "gemini_keywords": [
+          "自律AI",
+          "データ生成",
+          "LLM進化"
+        ],
+        "final_importance": 90
+      },
+      {
+        "title": "This AI Paper Introduces ReaGAN: A Graph Agentic Network That Empowers Nodes with Autonomous Planning and Global Semantic Retrieval",
+        "title_ja": "このAIペーパーでは、レーガンを紹介します：自律計画とグローバルなセマンティック検索でノードを強化するグラフエージェントネットワーク",
+        "source": "MarkTechPost",
+        "time": "04:06",
+        "summary": "How can we make every node in a graph its own intelligent agent—capable of personalized reasoning, adaptive retrieval, a...",
+        "importance": 8,
+        "url": "https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/",
+        "gemini_selected": true,
+        "gemini_score": 75,
+        "gemini_reason": "新しいグラフエージェントネットワーク「ReaGAN」は、各ノードに自律的な計画とグローバルな意味的検索能力を与える革新的なAI研究であり、将来の分散型AIシステムや知識グラフの進化に大きな可能性を秘めているため。",
+        "gemini_category": "technical",
+        "gemini_keywords": [
+          "ReaGAN",
+          "グラフエージェントネットワーク",
+          "自律的計画"
+        ],
+        "final_importance": 75
+      },
+      {
+        "title": "[D] model architecture or data?",
+        "title_ja": "[D]モデルアーキテクチャまたはデータ？",
+        "source": "Reddit MachineLearning",
+        "time": "14:20",
+        "summary": "I’ve just read that the new model architecture called Hierarchical Reasoning Model (HRM) gains it’s performance benefits...",
+        "importance": 8,
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mrwm3w/d_model_architecture_or_data/",
+        "gemini_selected": true,
+        "gemini_score": 55,
+        "gemini_reason": "新しいモデルアーキテクチャ「Hierarchical Reasoning Model (HRM)」の登場は、AIの性能向上に寄与する可能性を秘めており、技術的な進歩を示すものとして一定の重要性があります。しかし、Redditの投稿であり、現時点では市場や社会への直接的な影響は限定的です。",
+        "gemini_category": "technical",
+        "gemini_keywords": [
+          "Hierarchical Reasoning Model",
+          "モデルアーキテクチャ",
+          "性能向上"
+        ],
+        "final_importance": 55
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "Meta": 3,
-      "OpenAI": 2,
-      "Anthropic": 1,
-      "NVIDIA": 1
+      "Meta": 5,
+      "Anthropic": 2,
+      "NVIDIA": 2,
+      "Google": 1
     },
     "partnerships": [],
     "regulatory_updates": [],
@@ -261,84 +514,122 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "大規模言語モデル": 3,
-      "GPT-5": 2,
+      "大規模言語モデル": 5,
+      "Claude": 2,
+      "パートナーシップ": 2,
       "自動運転": 2,
-      "Claude": 1,
-      "パートナーシップ": 1
+      "コンピュータビジョン": 2,
+      "Transformer": 2
     },
     "emerging_themes": [
       {
         "theme": "大規模言語モデル",
-        "mentions": 3
+        "mentions": 5
       },
       {
-        "theme": "GPT-5",
+        "theme": "Claude",
         "mentions": 2
       },
       {
-        "theme": "自動運転",
+        "theme": "パートナーシップ",
         "mentions": 2
       }
     ],
-    "geographic_focus": {},
+    "geographic_focus": {
+      "ヨーロッパ": 1
+    },
     "future_outlook": "注意深い観察期"
   },
   "highlights": [],
   "stats": {
-    "total_items": 12,
-    "total_sources": 6,
+    "total_items": 16,
+    "total_sources": 7,
     "active_companies": 4,
     "top_company": [
       "Meta",
-      3
+      5
     ],
-    "last_updated": "2025-08-16 22:13 JST"
+    "last_updated": "2025-08-17 00:17 JST"
   },
   "x_posts": {
-    "total_count": 353,
-    "influencer_posts": [],
+    "total_count": 356,
+    "influencer_posts": [
+      {
+        "username": "@cline",
+        "summary": "v3.24 is out\n\nClaude Sonnet 4 now supports 1M cont...",
+        "time": "00:08",
+        "url": "https://twitter.com/cline/status/1955783447454343665",
+        "source": "X/Twitter",
+        "quality_score": 9,
+        "reason": "Claude Sonnet 4の1Mコンテキスト対応を示唆。AIモデルの重要進展。"
+      },
+      {
+        "username": "@itm_aiplus",
+        "summary": "Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能\nhttps...",
+        "time": "00:25",
+        "url": "https://twitter.com/itm_aiplus/status/1955787719982113064",
+        "source": "X/Twitter",
+        "quality_score": 8,
+        "reason": "Google Geminiの機能強化に関する重要情報。専門メディアの公式投稿。"
+      }
+    ],
     "tech_discussions": [
       {
-        "username": "",
-        "summary": "AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に......",
-        "time": "00:00",
-        "url": "https://twitter.com/Tsubame33785667/status/1955781620893671583"
+        "username": "@itm_aiplus",
+        "summary": "AIは「大きい」より「小さい」方がいい──AIエージェントの開発手法、米NVIDIAが主張　LLMを...",
+        "time": "03:05",
+        "url": "https://twitter.com/itm_aiplus/status/1955827990912491640",
+        "source": "X/Twitter",
+        "quality_score": 9,
+        "reason": "NVIDIAのAI開発戦略に関する重要情報で、今後のAIエージェントの方向性を示唆。"
       },
       {
-        "username": "",
-        "summary": "すごい！！\n\n「AIで遊ぼうコミュニティ」メンバー大活躍✨\n@taiyo_ai_gakuse も登壇......",
-        "time": "00:14",
-        "url": "https://twitter.com/kojika_edu/status/1955785136626393305"
-      },
-      {
-        "username": "",
-        "summary": "Merge Labsの誕生は、AIをめぐる競争が「推論精度」や「大規模モデル」の範囲を超え、いよいよ......",
-        "time": "02:13",
-        "url": "https://twitter.com/Tsubame33785667/status/1955815069767623170"
-      },
-      {
-        "username": "",
-        "summary": "今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。\n\n実験でGPT-5と医......",
+        "username": "@K_Ishi_AI",
+        "summary": "今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。\n\n実験でGPT-5と医...",
         "time": "02:16",
-        "url": "https://twitter.com/K_Ishi_AI/status/1955815778139427220"
+        "url": "https://twitter.com/K_Ishi_AI/status/1955815778139427220",
+        "source": "X/Twitter",
+        "quality_score": 8,
+        "reason": "GPT-5の医療分野での人間超えを示唆。AI技術進化の重要情報だが、詳細ソースは不明。"
       },
       {
-        "username": "",
-        "summary": "Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能\nhttps......",
-        "time": "00:25",
-        "url": "https://twitter.com/itm_aiplus/status/1955787719982113064"
+        "username": "@Tsubame33785667",
+        "summary": "AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に...",
+        "time": "00:00",
+        "url": "https://twitter.com/Tsubame33785667/status/1955781620893671583",
+        "source": "X/Twitter",
+        "quality_score": 7,
+        "reason": "AI業界の競争構造変化に関する洞察で情報価値が高い。"
+      },
+      {
+        "username": "@commte",
+        "summary": "🚀 個人開発ピックアップ #WnB\nPersonaMate\n新規事業開発者・起業家向けのAI仮説検証...",
+        "time": "02:58",
+        "url": "https://twitter.com/commte/status/1955826382518489536",
+        "source": "X/Twitter",
+        "quality_score": 7,
+        "reason": "AIを活用した新規サービス紹介で、業界動向把握に有用。"
+      },
+      {
+        "username": "@kei31",
+        "summary": "こっそりお知らせします。OpenAIのCodex CLIの使い方が学べるUdemyコースをリリースし...",
+        "time": "03:18",
+        "url": "https://twitter.com/kei31/status/1955831314730639736",
+        "source": "X/Twitter",
+        "quality_score": 7,
+        "reason": "OpenAI技術の学習機会提供。具体的な情報で価値あり。"
       }
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 12件のニュース、4社が活動",
+    "headline": "今日のAI業界: 16件のニュース分析",
     "key_points": [
-      "📈 市場動向: 中立なセンチメント",
-      "🚀 技術開発: 0件の新製品リリース",
-      "🏢 企業動向: Metaが最も活発",
-      "💬 SNS: 353件の関連投稿"
+      "1. AI業界のニュースは16件と活発ながらも、活動企業は4社に限定され、主要プレイヤー（OpenAI, Google, Microsoft）への注目が集中しています。",
+      "2. 市場センチメントは中立を維持しており、大きな変動やサプライズはなく、安定した状況が続いています。",
+      "3. OpenAI、Google、Microsoftといった主要企業が今日のニュースの中心であり、彼らの動向が引き続き業界のトレンドを牽引しています。"
     ],
-    "outlook": "注意深い観察期"
+    "outlook": "継続的な成長が期待される",
+    "important_topic": "生成AIの進化と主要プレイヤー間の競争",
+    "tomorrow_focus": "主要企業によるAI技術の商用化とエコシステム構築の進展"
   }
 }

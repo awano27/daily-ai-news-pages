@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI業界全体像ダッシュボード - 2025-08-16</title>
+    <title>AI業界全体像ダッシュボード - 2025-08-17</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -80,7 +80,7 @@
         }
         .section-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
         .card {
@@ -126,12 +126,16 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        .tag {
-            background-color: #3b82f6;
-            color: white;
+        .tag, .keyword {
+            display: inline-block;
+            margin-right: 6px;
+            margin-bottom: 6px;
             padding: 3px 8px;
             border-radius: 9999px;
+            background-color: #3b82f6;
+            color: #fff;
             font-size: 0.75rem;
+            font-weight: 500;
         }
         .btn {
             display: inline-block;
@@ -151,13 +155,50 @@
         
         /* トレンドセクション */
         .trends-section { 
-            background: #fef7e0; 
-            border: 1px solid #f6d55c; 
-            border-radius: 12px; 
+            background: #f3f4f6; 
+            border-left: 4px solid #3b82f6; 
+            border-radius: 8px; 
             padding: 20px; 
             margin-bottom: 25px; 
         }
-        .trends-section h3 { color: #92400e; margin-bottom: 15px; }
+        .trends-section h3 { color: #1f2937; margin-bottom: 15px; }
+        
+        /* 活発企業グラフ */
+        .active-companies {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .company-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .company-label {
+            min-width: 80px;
+            font-size: 0.8rem;
+            color: #374151;
+            font-weight: 500;
+        }
+        .company-graph {
+            flex: 1;
+            height: 16px;
+            background-color: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .company-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+            min-width: 25%;
+            border-radius: 8px;
+        }
+        .company-count {
+            font-size: 0.75rem;
+            color: #6b7280;
+            min-width: 20px;
+        }
         
         /* インサイトセクション */
         .insights-grid { 
@@ -174,6 +215,40 @@
         }
         .insight-title { color: #1e40af; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; }
         .insight-content { color: #1e3a8a; font-size: 0.85rem; line-height: 1.4; }
+        
+        /* カテゴリカード */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .category-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .category-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .category-count {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        .category-card .section-content {
+            padding: 20px;
+            display: block;
+        }
         
         .footer { 
             text-align: center; 
@@ -197,17 +272,17 @@
     <div class="container">
         <header class="header">
             <h1>AI業界全体像ダッシュボード</h1>
-            <p class="subtitle">今日のAI業界: 12件のニュース、4社が活動</p>
-            <p class="update-time">2025-08-16 | 最終更新: 22:13 JST</p>
+            <p class="subtitle">今日のAI業界: 16件のニュース分析</p>
+            <p class="update-time">2025-08-17 | 最終更新: 00:17 JST</p>
         </header>
         
         <!-- エグゼクティブサマリー -->
         <section class="summary">
             <h2>エグゼクティブサマリー</h2>
-            <p>今日のAI業界: 12件のニュース、4社が活動</p>
+            <p>今日のAI業界: 16件のニュース分析</p>
             <div class="kpi-grid">
                 <div class="kpi">
-                    <div class="kpi-number">12</div>
+                    <div class="kpi-number">16</div>
                     <div class="kpi-label">総ニュース数</div>
                 </div>
                 <div class="kpi">
@@ -215,11 +290,11 @@
                     <div class="kpi-label">活動企業数</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-number">6</div>
+                    <div class="kpi-number">7</div>
                     <div class="kpi-label">情報ソース数</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-number">353</div>
+                    <div class="kpi-number">356</div>
                     <div class="kpi-label">SNS投稿数</div>
                 </div>
             </div>
@@ -239,7 +314,7 @@
                     <div class="insight-title">⚡ 技術開発</div>
                     <div class="insight-content">
                         新製品リリース: 0件<br>
-                        技術ブレークスルー: 1件<br>
+                        技術ブレークスルー: 0件<br>
                         開発者ツール: 1件
                     </div>
                 </div>
@@ -257,7 +332,7 @@
             <div class="trends-section">
                 <h3>🔥 グローバルトレンド</h3>
                 <div class="keywords">
-                    <span class="keyword">大規模言語モデル (3)</span><span class="keyword">GPT-5 (2)</span><span class="keyword">自動運転 (2)</span><span class="keyword">Claude (1)</span><span class="keyword">パートナーシップ (1)</span>
+                    <span class="keyword">大規模言語モデル (5)</span><span class="keyword">Claude (2)</span><span class="keyword">パートナーシップ (2)</span><span class="keyword">自動運転 (2)</span><span class="keyword">コンピュータビジョン (2)</span><span class="keyword">Transformer (2)</span>
                 </div>
             </div>
             
@@ -266,124 +341,248 @@
                 <div class="category-card">
                     <div class="category-header">
                         <div class="category-title">💼 ビジネス・投資</div>
-                        <div class="category-count">7件のニュース</div>
+                        <div class="category-count">4件のニュース</div>
                     </div>
                     <div class="section-content">
-                        <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります</a>
-                            </div>
-                            <div class="topic-meta">TechCrunch Japan • 22:20</div>
-                            <div class="topic-summary">At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled detai...</div>
-                        </div>
+                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
                         
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。</a>
                             </div>
-                            <div class="topic-meta">Reddit AI • 06:53</div>
-                            <div class="topic-summary">https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted...</div>
+                            <div class="topic-meta">
+                                Reddit AI • 06:53
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/Me...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Jevons Paradox</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit AI • 02:32
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in esse...</div>
                         </div>
                         
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="https://www.reddit.com/r/artificial/comments/1mrlcs5/oneminute_daily_ai_news_8162025/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">1分間のAIニュース8/16/2025</a>
                             </div>
-                            <div class="topic-meta">Reddit AI • 05:02</div>
-                            <div class="topic-summary">Michigan county is uses drones and AI to keep wastewater infrastructure running ...</div>
+                            <div class="topic-meta">
+                                Reddit AI • 05:02
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Michigan county is uses drones and AI to keep wastewater infrastructure running smoothly.[1] Austral...</div>
                         </div>
                         
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="https://ascii.jp/elem/000/004/312/4312579/?rss" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">富士通のCore Ultra 7搭載モデル「FMV UA-K1」が、直販価格26万6800円！</a>
                             </div>
-                            <div class="topic-meta">ASCII.jp AI・IoT • 03:00</div>
+                            <div class="topic-meta">
+                                ASCII.jp AI・IoT • 03:00
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
                             <div class="topic-summary">富士通の直販サイト「富士通 WEB MART」では最新モデルを対象にセールを開催中。</div>
                         </div>
                         
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="keywords">
-                            <span class="keyword">Meta (2)</span><span class="keyword">OpenAI (1)</span><span class="keyword">Anthropic (1)</span><span class="keyword">NVIDIA (1)</span>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
+                        <div class="active-companies">
+                            
+                            <div class="company-bar">
+                                <div class="company-label">Meta</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 50%;"></div>
+                                </div>
+                                <div class="company-count">2</div>
+                            </div>
+                            
+                            <div class="company-bar">
+                                <div class="company-label">Anthropic</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="company-count">1</div>
+                            </div>
+                            
+                            <div class="company-bar">
+                                <div class="company-label">NVIDIA</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="company-count">1</div>
+                            </div>
+                            
                         </div>
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
                         <div class="keywords">
-                            <span class="keyword">GPT-5 (1)</span><span class="keyword">Claude (1)</span><span class="keyword">大規模言語モデル (1)</span><span class="keyword">パートナーシップ (1)</span>
+                            <span class="keyword">Claude (1)</span><span class="keyword">大規模言語モデル (1)</span><span class="keyword">パートナーシップ (1)</span>
                         </div>
                     </div>
                 </div>
                 <div class="category-card">
                     <div class="category-header">
                         <div class="category-title">⚡ テクノロジー・ツール</div>
-                        <div class="category-count">5件のニュース</div>
+                        <div class="category-count">4件のニュース</div>
                     </div>
                     <div class="section-content">
-                        <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://www.nature.com/articles/s41598-025-15330-z" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">機械学習とバイオインフォマティクス分析を統合することにより、歯周炎における脂質代謝関連遺伝子と免疫微小環境の役割の調査</a>
-                            </div>
-                            <div class="topic-meta">AI Research • 00:00</div>
-                            <div class="topic-summary">Exploring the role of lipid metabolism related genes and immune microenvironment...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://techcrunch.com/2025/08/15/sam-altman-over-bread-rolls-explores-life-after-gpt-5/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">サム・アルトマンは、パン・ロールを超えて、GPT-5の後の生活を探ります</a>
-                            </div>
-                            <div class="topic-meta">TechCrunch • 22:20</div>
-                            <div class="topic-summary">At a dinner with reporters in San Francisco, OpenAI CEO Sam Altman spilled detai...</div>
-                        </div>
+                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
                         
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="https://www.marktechpost.com/2025/08/15/r-zero-a-fully-autonomous-ai-framework-that-generates-its-own-training-data-from-scratch/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">R-Zero：独自のトレーニングデータをゼロから生成する完全に自律的なAIフレームワーク</a>
                             </div>
-                            <div class="topic-meta">MarkTechPost • 04:19</div>
-                            <div class="topic-summary">Large Language Models (LLMs) have revolutionized fields from natural language un...</div>
+                            <div class="topic-meta">
+                                MarkTechPost • 04:19
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Large Language Models (LLMs) have revolutionized fields from natural language understanding to reaso...</div>
                         </div>
                         
                         <div class="topic-item">
                             <div class="topic-title">
                                 <a href="https://www.marktechpost.com/2025/08/15/this-ai-paper-introduces-reagan-a-graph-agentic-network-that-empowers-nodes-with-autonomous-planning-and-global-semantic-retrieval/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">このAIペーパーでは、レーガンを紹介します：自律計画とグローバルなセマンティック検索でノードを強化するグラフエージェントネットワー...</a>
                             </div>
-                            <div class="topic-meta">MarkTechPost • 04:06</div>
-                            <div class="topic-summary">How can we make every node in a graph its own intelligent agent—capable of perso...</div>
+                            <div class="topic-meta">
+                                MarkTechPost • 04:06
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">How can we make every node in a graph its own intelligent agent—capable of personalized reasoning, a...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/MachineLearning/comments/1mrwm3w/d_model_architecture_or_data/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">[D]モデルアーキテクチャまたはデータ？</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit MachineLearning • 14:20
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">I’ve just read that the new model architecture called Hierarchical Reasoning Model (HRM) gains it’s ...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/MachineLearning/comments/1mrxo2t/d_senior_aicomputer_vision_engineer_4_yoe_seeking/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">[d]  - ＃ヨーロッパでのビザサポートを伴う上陸の仕事に対する現実的なアドバイスを求めるシニアAI/コンピュータービジョンエン...</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit MachineLearning • 14:59
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Background: - 4+ years as AI/Computer Vision Engineer in Mumbai, India - Led patent-pending tech tha...</div>
                         </div>
                         
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="keywords">
-                            <span class="keyword">Meta (1)</span><span class="keyword">OpenAI (1)</span>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
+                        <div class="active-companies">
+                            <div style="color: #9ca3af; font-size: 0.8rem;">本日は該当企業がありません</div>
                         </div>
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
                         <div class="keywords">
-                            <span class="keyword">大規模言語モデル (2)</span><span class="keyword">自動運転 (2)</span><span class="keyword">GPT-5 (1)</span>
+                            <span class="keyword">大規模言語モデル (2)</span><span class="keyword">自動運転 (2)</span><span class="keyword">コンピュータビジョン (1)</span><span class="keyword">Transformer (1)</span>
                         </div>
                     </div>
                 </div>
                 <div class="category-card">
                     <div class="category-header">
                         <div class="category-title">🧪 SNS・論文</div>
-                        <div class="category-count">0件のニュース</div>
+                        <div class="category-count">8件のニュース</div>
                     </div>
                     <div class="section-content">
-                        <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
+                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/deeplearning/comments/1mrihdx/caesar_datas_new_ai_scores_5587_on_hle_crushing/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Caesar Dataの新しいAIは、HLEで55.87％を獲得し、Grok 4（ツール付き）44.4％、GPT-5（ツール付き）...</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit DeepLearning • 02:43
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Out of nowhere comes a model that even in Alpha phase crushes top competitors in perhaps the most ch...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/artificial/comments/1mrnhmg/anthropic_now_lets_claude_end_abusive/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">人類は、AI福祉を引用して、Claudeが虐待的な会話を終わらせることができます。</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit ArtificialIntelligence • 06:53
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">https://www.anthropic.com/research/end-subset-conversations  &amp;#32; submitted by &amp;#32;  /u/Me...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/MachineLearning/comments/1mrwm3w/d_model_architecture_or_data/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">[D]モデルアーキテクチャまたはデータ？</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit MachineLearning Papers • 14:20
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">I’ve just read that the new model architecture called Hierarchical Reasoning Model (HRM) gains it’s ...</div>
+                        </div>
+                        
+                        <div class="topic-item">
+                            <div class="topic-title">
+                                <a href="https://www.reddit.com/r/artificial/comments/1mri8jf/jevons_paradox/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Jevons Paradox</a>
+                            </div>
+                            <div class="topic-meta">
+                                Reddit ArtificialIntelligence • 02:32
+                                 • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>
+                            </div>
+                            <div class="topic-summary">Hey all, Curious on your perspective of AI costs and Jevon Paradox. For those who don’t know in esse...</div>
+                        </div>
                         
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="keywords">
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
+                        <div class="active-companies">
+                            
+                            <div class="company-bar">
+                                <div class="company-label">Meta</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 75%;"></div>
+                                </div>
+                                <div class="company-count">3</div>
+                            </div>
+                            
+                            <div class="company-bar">
+                                <div class="company-label">Google</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="company-count">1</div>
+                            </div>
+                            
+                            <div class="company-bar">
+                                <div class="company-label">Anthropic</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="company-count">1</div>
+                            </div>
+                            
+                            <div class="company-bar">
+                                <div class="company-label">NVIDIA</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: 25%;"></div>
+                                </div>
+                                <div class="company-count">1</div>
+                            </div>
                             
                         </div>
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
                         <div class="keywords">
-                            
+                            <span class="keyword">大規模言語モデル (2)</span><span class="keyword">GPT-5 (1)</span><span class="keyword">Claude (1)</span><span class="keyword">Transformer (1)</span><span class="keyword">パートナーシップ (1)</span>
                         </div>
                     </div>
                 </div>
@@ -392,93 +591,122 @@
             <!-- X/Twitter投稿セクション -->
             <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <h2 style="color: #2d3748; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #667eea; padding-left: 12px;">
-                    🐦 X/Twitter投稿 (353件)
+                    🐦 X/Twitter投稿 (356件)
                 </h2>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
                     <!-- インフルエンサー投稿 -->
                     <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿</h4>
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿（最大3件表示）</h4>
+                        
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="https://twitter.com/cline/status/1955783447454343665" target="_blank" rel="noopener" style="color: #667eea; text-decoration: none;">
+                                    @cline
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                v3.24 is out
+
+Claude Sonnet 4 now supports 1M cont...
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                X/Twitter • 00:08
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="https://twitter.com/itm_aiplus/status/1955787719982113064" target="_blank" rel="noopener" style="color: #667eea; text-decoration: none;">
+                                    @itm_aiplus
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能
+https...
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                X/Twitter • 00:25
+                            </div>
+                        </div>
                         
                     </div>
                     
                     <!-- 技術系ディスカッション -->
                     <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション</h4>
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション（最大5件表示）</h4>
                         
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
-                                <a href="https://twitter.com/Tsubame33785667/status/1955781620893671583" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    
+                                <a href="https://twitter.com/itm_aiplus/status/1955827990912491640" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
+                                    @itm_aiplus
                                 </a>
                             </div>
                             <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に......
+                                AIは「大きい」より「小さい」方がいい──AIエージェントの開発手法、米NVIDIAが主張　LLMを...
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                00:00
-                            </div>
-                        </div>
-                        
-                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
-                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
-                                <a href="https://twitter.com/kojika_edu/status/1955785136626393305" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    
-                                </a>
-                            </div>
-                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                すごい！！
-
-「AIで遊ぼうコミュニティ」メンバー大活躍✨
-@taiyo_ai_gakuse も登壇......
-                            </div>
-                            <div style="color: #718096; font-size: 0.75rem;">
-                                00:14
-                            </div>
-                        </div>
-                        
-                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
-                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
-                                <a href="https://twitter.com/Tsubame33785667/status/1955815069767623170" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    
-                                </a>
-                            </div>
-                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                Merge Labsの誕生は、AIをめぐる競争が「推論精度」や「大規模モデル」の範囲を超え、いよいよ......
-                            </div>
-                            <div style="color: #718096; font-size: 0.75rem;">
-                                02:13
+                                X/Twitter • 03:05
                             </div>
                         </div>
                         
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
                                 <a href="https://twitter.com/K_Ishi_AI/status/1955815778139427220" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    
+                                    @K_Ishi_AI
                                 </a>
                             </div>
                             <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
                                 今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。
 
-実験でGPT-5と医......
+実験でGPT-5と医...
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                02:16
+                                X/Twitter • 02:16
                             </div>
                         </div>
                         
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
-                                <a href="https://twitter.com/itm_aiplus/status/1955787719982113064" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
-                                    
+                                <a href="https://twitter.com/Tsubame33785667/status/1955781620893671583" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
+                                    @Tsubame33785667
                                 </a>
                             </div>
                             <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
-                                Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能
-https......
+                                AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に...
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                00:25
+                                X/Twitter • 00:00
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="https://twitter.com/commte/status/1955826382518489536" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
+                                    @commte
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                🚀 個人開発ピックアップ #WnB
+PersonaMate
+新規事業開発者・起業家向けのAI仮説検証...
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                X/Twitter • 02:58
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
+                            <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
+                                <a href="https://twitter.com/kei31/status/1955831314730639736" target="_blank" rel="noopener" style="color: #10b981; text-decoration: none;">
+                                    @kei31
+                                </a>
+                            </div>
+                            <div style="color: #4a5568; font-size: 0.85rem; line-height: 1.4; margin-bottom: 6px;">
+                                こっそりお知らせします。OpenAIのCodex CLIの使い方が学べるUdemyコースをリリースし...
+                            </div>
+                            <div style="color: #718096; font-size: 0.75rem;">
+                                X/Twitter • 03:18
                             </div>
                         </div>
                         
@@ -570,65 +798,10 @@ https......
                     </p>
                 </div>
             </div>
-            
-            <!-- SNS動向セクション -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-title">💬 SNS・コミュニティ動向</div>
-                </div>
-                <div class="section-content">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div>
-                            <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">👑 インフルエンサー投稿</h4>
-                            
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">🗨️ 技術ディスカッション</h4>
-                            
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="https://twitter.com/Tsubame33785667/status/1955781620893671583" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">@AI_user</a></div>
-                                <div class="topic-summary">AIフロンティアモデルを巡る競争は、もはや数十社の群雄割拠ではなく、数社の超資本集団による最終局面に......</div>
-                                <div class="topic-meta">00:00</div>
-                            </div>
-                            
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="https://twitter.com/kojika_edu/status/1955785136626393305" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">@AI_user</a></div>
-                                <div class="topic-summary">すごい！！
-
-「AIで遊ぼうコミュニティ」メンバー大活躍✨
-@taiyo_ai_gakuse も登壇......</div>
-                                <div class="topic-meta">00:14</div>
-                            </div>
-                            
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="https://twitter.com/Tsubame33785667/status/1955815069767623170" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">@AI_user</a></div>
-                                <div class="topic-summary">Merge Labsの誕生は、AIをめぐる競争が「推論精度」や「大規模モデル」の範囲を超え、いよいよ......</div>
-                                <div class="topic-meta">02:13</div>
-                            </div>
-                            
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="https://twitter.com/K_Ishi_AI/status/1955815778139427220" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">@AI_user</a></div>
-                                <div class="topic-summary">今度はGPT-5が医療分野のベンチマークで、人間を上回るスコアを叩き出した。
-
-実験でGPT-5と医......</div>
-                                <div class="topic-meta">02:16</div>
-                            </div>
-                            
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="https://twitter.com/itm_aiplus/status/1955787719982113064" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">@AI_user</a></div>
-                                <div class="topic-summary">Googleの「Gemini」、好みを記憶する機能をデフォルトに　「一時チャット」も可能
-https......</div>
-                                <div class="topic-meta">00:25</div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         
         <div class="footer">
-            <p>🤖 AI業界全体像ダッシュボード | 6の情報源から生成 | 
+            <p>🤖 AI業界全体像ダッシュボード | 7の情報源から生成 | 
             Claude Code により作成</p>
         </div>
     </div>

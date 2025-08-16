@@ -9,6 +9,31 @@ import json
 from datetime import datetime, timezone, timedelta
 from collections import Counter, defaultdict
 
+# .envファイル読み込み
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+    print("✅ .envファイル読み込み完了")
+except ImportError:
+    print("⚠️ python-dotenvがインストールされていません - 手動で.envファイルを読み込みます")
+    # 手動で.envファイルを読み込み
+    try:
+        env_path = os.path.join(os.path.dirname(__file__), '.env')
+        if os.path.exists(env_path):
+            with open(env_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, value = line.split('=', 1)
+                        os.environ[key.strip()] = value.strip()
+            print("✅ 手動で.envファイル読み込み完了")
+        else:
+            print("⚠️ .envファイルが見つかりません")
+    except Exception as e:
+        print(f"⚠️ 手動.envファイル読み込みエラー: {e}")
+except Exception as e:
+    print(f"⚠️ .envファイル読み込みエラー: {e}")
+
 # 翻訳機能の初期化
 translator = None
 try:
@@ -112,6 +137,24 @@ def analyze_ai_landscape():
         feeds = build.get_category(feeds_conf, category_name)
         items = build.gather_items(feeds, category_name)
         
+        # Gemini APIで有益な情報を選別（全カテゴリ）
+        # 環境変数でGemini選別をスキップ可能
+        skip_gemini = os.getenv('SKIP_GEMINI_SELECTION', '').lower() == 'true'
+        
+        if not skip_gemini and gemini_analyzer and gemini_analyzer.enabled:
+            print(f"🤖 {category_name}カテゴリをGemini APIで選別中...")
+            try:
+                items = select_valuable_news_with_gemini(items, category_name, gemini_analyzer)
+                print(f"✅ {category_name}: 選別後 {len(items)}件")
+            except Exception as e:
+                print(f"⚠️ {category_name}: Gemini選別でエラー: {e}")
+                print(f"📋 {category_name}: フォールバック - 元のアイテムを使用")
+        else:
+            if skip_gemini:
+                print(f"⚡ {category_name}: Gemini選別をスキップ")
+            else:
+                print(f"⚠️ {category_name}: Gemini API無効 - 基本選別を使用")
+        
         # Gemini Web Fetcherで403エラーのソースを補完
         if gemini_fetcher and gemini_fetcher.analyzer.enabled:
             print(f"🤖 {category_name}カテゴリの403エラーソースをGemini APIで補完中...")
@@ -206,14 +249,20 @@ def analyze_ai_landscape():
             if title_ja != item['title']:
                 print(f"[TRANSLATE] '{item['title'][:40]}...' -> '{title_ja[:40]}...'")
             
+            # Geminiの重要ポイントがあれば優先的に使用
+            summary = item.get('key_points', '')
+            if not summary:
+                summary = item['_summary'][:120] + '...' if len(item['_summary']) > 120 else item['_summary']
+            
             topics.append({
                 'title': item['title'],
                 'title_ja': title_ja,  # 翻訳された日本語タイトル
                 'source': item['_source'],
                 'time': item['_dt'].strftime('%H:%M'),
-                'summary': item['_summary'][:120] + '...' if len(item['_summary']) > 120 else item['_summary'],
-                'importance': importance,
-                'url': item.get('link', item.get('url', '#'))
+                'summary': summary,
+                'importance': item.get('gemini_score', importance),  # Geminiスコアがあれば使用
+                'url': item.get('link', item.get('url', '#')),
+                'gemini_selected': 'gemini_score' in item  # Gemini選別フラグ
             })
         
         # 重要度でソート
@@ -243,36 +292,26 @@ def analyze_ai_landscape():
         
         total_items += len(items)
     
-    # X投稿分析
+    # X投稿分析（Gemini API使用）
     try:
         x_posts = build.gather_x_posts(build.X_POSTS_CSV)
+        print(f"📊 X投稿取得: 合計 {len(x_posts)} 件")
         
-        # X投稿の詳細分析
-        influencer_posts = []
-        tech_discussions = []
+        # デバッグ: 最初の3件の投稿データを表示
+        if x_posts:
+            print("📝 取得したX投稿サンプル（最初の3件）:")
+            for i, post in enumerate(x_posts[:3], 1):
+                print(f"  {i}. タイトル: {post.get('title', 'N/A')}")
+                print(f"     URL: {post.get('link', 'N/A')[:50]}...")
+                print(f"     要約: {post.get('_summary', 'N/A')[:50]}...")
         
-        for post in x_posts[:10]:
-            username = ""
-            if "xポスト" in post['title']:
-                username = post['title'].replace("xポスト", "").strip()
-            
-            post_data = {
-                'username': username,
-                'summary': post['_summary'][:100] + '...',
-                'time': post['_dt'].strftime('%H:%M'),
-                'url': post.get('link', '#')  # X投稿のURLを追加
-            }
-            
-            # インフルエンサー判定
-            if any(user in username.lower() for user in ['@openai', '@anthropic', '@sama', '@ylecun']):
-                influencer_posts.append(post_data)
-            else:
-                tech_discussions.append(post_data)
+        # Gemini APIを使った投稿選別
+        selected_posts = analyze_x_posts_with_gemini(x_posts[:20], gemini_analyzer)
         
         dashboard_data['x_posts'] = {
             'total_count': len(x_posts),
-            'influencer_posts': influencer_posts[:3],
-            'tech_discussions': tech_discussions[:5]
+            'influencer_posts': selected_posts['influencer_posts'][:3],
+            'tech_discussions': selected_posts['tech_discussions'][:5]
         }
         # X投稿は総ニュース数には含めない（別途SNS投稿としてカウント）
     except Exception as e:
@@ -537,6 +576,282 @@ def analyze_geographic_trends(data):
     
     return dict(geographic_mentions.most_common(3))
 
+def select_valuable_news_with_gemini(items, category_name, gemini_analyzer):
+    """Gemini APIを使って有益なニュースを選別"""
+    if not items:
+        return items
+    
+    selected_items = []
+    
+    # カテゴリ別の選別基準
+    category_criteria = {
+        'Business': {
+            'name': 'ビジネス・投資',
+            'criteria': 'AIを活用した新規ビジネス、大型投資、M&A、新会社設立、資金調達、重要な企業発表、市場に大きな影響を与える戦略発表',
+            'max_items': 10
+        },
+        'Tools': {
+            'name': 'テクノロジー・ツール',
+            'criteria': 'ビジネスマンやエンジニアが日常業務で実際に使える具体的なツール、新機能リリース、実用的な技術、ワークフローを改善するサービス、開発効率化ツール',
+            'max_items': 8
+        },
+        'Posts': {
+            'name': 'SNS・論文',
+            'criteria': '重要なAI研究論文、学術発表、研究機関からの発表、影響力のあるAI研究者やエンジニアのSNS投稿、技術的なブレークスルー、新しい研究動向',
+            'max_items': 8
+        }
+    }
+    
+    criteria = category_criteria.get(category_name, {})
+    
+    print(f"📊 {criteria.get('name', category_name)}: {len(items)}件から有益な情報を選別中...")
+    
+    for i, item in enumerate(items[:10]):  # 最新10件から選別（処理量を削減）
+        try:
+            print(f"  📋 {i+1}/10: {item.get('title', '')[:40]}... を評価中")
+            
+            # より簡潔なプロンプトで確実に動作させる
+            evaluation_prompt = f"""
+タイトル: {item.get('title', '')[:80]}
+ソース: {item.get('_source', 'Unknown')}
+
+{criteria.get('name', category_name)}カテゴリに適した記事か評価してください。
+
+JSON形式で回答:
+{{
+  "valuable": true,
+  "importance_score": 8,
+  "reason": "理由"
+}}
+"""
+            
+            # Gemini APIリクエスト（既にタイムアウト機能内蔵）
+            analysis_result = gemini_analyzer._make_request(evaluation_prompt)
+            
+            if not analysis_result:
+                print(f"  ⚠️ 評価失敗: {item.get('title', '')[:30]}... - Gemini APIレスポンスなし")
+                continue
+            
+            # JSON解析
+            import json
+            import re
+            json_match = re.search(r'\{.*\}', analysis_result, re.DOTALL)
+            if json_match:
+                evaluation = json.loads(json_match.group())
+                
+                # 簡素化された条件：重要度6以上で選別
+                if (evaluation.get('valuable', False) and 
+                    evaluation.get('importance_score', 0) >= 6):
+                    
+                    # 評価情報を追加
+                    item['gemini_score'] = evaluation.get('importance_score', 0)
+                    item['gemini_reason'] = evaluation.get('reason', '')
+                    item['key_points'] = evaluation.get('key_points', '')
+                    selected_items.append(item)
+                    
+                    print(f"  ✅ 選別: {item['title'][:40]}... (スコア:{evaluation.get('importance_score')}/10)")
+                    
+                    # 最大件数に達したら終了
+                    if len(selected_items) >= criteria.get('max_items', 10):
+                        break
+                        
+        except Exception as e:
+            print(f"  ⚠️ 評価エラー: {item.get('title', '')[:30]}... - {e}")
+            continue
+        
+        # APIレート制限対策
+        import time
+        time.sleep(0.1)
+    
+    # 選別されなかった場合は元のリストから上位を返す
+    if not selected_items:
+        print(f"  ⚠️ Gemini選別で適切な記事が見つからなかったため、最新記事を使用")
+        return items[:criteria.get('max_items', 10)]
+    
+    # 重要度スコアでソート
+    selected_items.sort(key=lambda x: x.get('gemini_score', 0), reverse=True)
+    
+    print(f"✅ {criteria.get('name', category_name)}: {len(selected_items)}件を選別完了")
+    return selected_items
+
+def analyze_x_posts_with_gemini(x_posts, gemini_analyzer):
+    """Gemini APIを使ってX投稿を分析・選別"""
+    influencer_posts = []
+    tech_discussions = []
+    
+    if not gemini_analyzer or not gemini_analyzer.enabled:
+        print("⚠️ Gemini API無効のため、基本的な選別を使用")
+        return fallback_x_post_analysis(x_posts)
+    
+    try:
+        for post in x_posts:
+            username = ""
+            # タイトルからユーザー名を抽出（大文字小文字を区別せず）
+            if "ポスト" in post.get('title', ''):
+                # "Xポスト @username" または "xポスト @username" の形式
+                username = post['title'].replace("Xポスト", "").replace("xポスト", "").strip()
+            
+            # URLからユーザー名を補完取得
+            if not username and post.get('link'):
+                import re
+                match = re.search(r'(?:twitter|x)\.com/([^/]+)/', post.get('link', ''))
+                if match:
+                    username = f"@{match.group(1)}"
+            
+            # AI関連キーワードでの事前フィルタリング
+            content = post.get('_summary', '').lower()
+            ai_keywords = ['ai', 'artificial intelligence', 'machine learning', 'ml', 'deep learning', 'gpt', 'llm', 'chatgpt', 'claude', 'gemini', 'openai', 'anthropic', 'transformer', 'neural', 'model', 'algorithm']
+            
+            if not any(keyword in content for keyword in ai_keywords):
+                continue  # AI関連でない投稿はスキップ
+            
+            # Gemini APIで投稿を分析
+            analysis_prompt = f"""
+以下のX投稿を分析して、AI業界ダッシュボードに掲載する価値があるかを判定してください：
+
+【投稿者】: {username}
+【内容】: {post.get('_summary', '')[:300]}
+【時刻】: {post['_dt'].strftime('%H:%M')}
+
+判定基準:
+1. AI業界に関連する内容か（技術、企業動向、製品発表、研究成果など）
+2. 情報価値が高いか（具体的な情報、洞察、発表など）
+3. 投稿者の影響力（企業公式、研究者、業界専門家など）
+
+以下のJSON形式で回答してください：
+{{
+  "relevant": true/false,
+  "category": "influencer" or "tech_discussion",
+  "quality_score": 1-10,
+  "reason": "選別理由（50文字以内）"
+}}
+"""
+            
+            try:
+                analysis_result = gemini_analyzer._make_request(analysis_prompt)
+                
+                # JSON解析を試行
+                import json
+                import re
+                json_match = re.search(r'\{.*\}', analysis_result, re.DOTALL)
+                if json_match:
+                    analysis_data = json.loads(json_match.group())
+                    
+                    # 品質スコア6以上で関連性があるもののみ選別
+                    if analysis_data.get('relevant', False) and analysis_data.get('quality_score', 0) >= 6:
+                        post_data = {
+                            'username': username or '@Anonymous',
+                            'summary': post['_summary'][:120] + ('...' if len(post['_summary']) > 120 else ''),
+                            'time': post['_dt'].strftime('%H:%M'),
+                            'url': post.get('link', '#'),
+                            'source': 'X/Twitter',
+                            'quality_score': analysis_data.get('quality_score', 0),
+                            'reason': analysis_data.get('reason', '')
+                        }
+                        
+                        # カテゴリ別に分類
+                        if analysis_data.get('category') == 'influencer':
+                            influencer_posts.append(post_data)
+                        elif analysis_data.get('category') == 'tech_discussion':
+                            tech_discussions.append(post_data)
+                        
+                        print(f"✅ 選別: {username} - 品質:{analysis_data.get('quality_score')}/10")
+                else:
+                    print(f"⚠️ JSON解析失敗: {username}")
+                            
+            except Exception as e:
+                print(f"⚠️ Gemini分析エラー（{username}）: {e}")
+                continue
+            
+            # APIレート制限対策で短い待機
+            import time
+            time.sleep(0.1)
+    
+    except Exception as e:
+        print(f"⚠️ X投稿選別でエラー: {e}")
+        return fallback_x_post_analysis(x_posts)
+    
+    # 品質スコア順にソート
+    influencer_posts.sort(key=lambda x: x.get('quality_score', 0), reverse=True)
+    tech_discussions.sort(key=lambda x: x.get('quality_score', 0), reverse=True)
+    
+    print(f"✅ Gemini選別完了: インフルエンサー {len(influencer_posts)}件, 技術系 {len(tech_discussions)}件")
+    
+    # デバッグ: 選別された投稿の詳細
+    if influencer_posts:
+        print("📢 選別されたインフルエンサー投稿:")
+        for i, post in enumerate(influencer_posts[:3], 1):
+            print(f"  {i}. {post['username']} (品質:{post['quality_score']}/10)")
+    else:
+        print("⚠️ インフルエンサー投稿が選別されませんでした")
+    
+    if tech_discussions:
+        print("💬 選別された技術ディスカッション:")
+        for i, post in enumerate(tech_discussions[:3], 1):
+            print(f"  {i}. {post['username']} (品質:{post['quality_score']}/10)")
+    else:
+        print("⚠️ 技術ディスカッションが選別されませんでした")
+    
+    return {
+        'influencer_posts': influencer_posts,
+        'tech_discussions': tech_discussions
+    }
+
+def fallback_x_post_analysis(x_posts):
+    """Gemini API無効時のフォールバック選別"""
+    influencer_posts = []
+    tech_discussions = []
+    
+    print(f"📊 フォールバック分析: {len(x_posts[:10])}件のX投稿を処理")
+    
+    for post in x_posts[:10]:
+        username = ""
+        # タイトルからユーザー名を抽出（大文字小文字を区別せず）
+        if "ポスト" in post.get('title', ''):
+            # "Xポスト @username" または "xポスト @username" の形式
+            username = post['title'].replace("Xポスト", "").replace("xポスト", "").strip()
+        
+        # URLからユーザー名を補完取得
+        if not username and post.get('link'):
+            import re
+            match = re.search(r'(?:twitter|x)\.com/([^/]+)/', post.get('link', ''))
+            if match:
+                username = f"@{match.group(1)}"
+        
+        post_data = {
+            'username': username or '@Anonymous',
+            'summary': post['_summary'][:120] + ('...' if len(post['_summary']) > 120 else ''),
+            'time': post['_dt'].strftime('%H:%M'),
+            'url': post.get('link', '#'),
+            'source': 'X/Twitter',
+            'quality_score': 5
+        }
+        
+        # 基本的なインフルエンサー判定（より幅広い判定）
+        influencer_keywords = ['openai', 'anthropic', 'sama', 'ylecun', 'karpathy', 'jeffdean', 
+                               'microsoft', 'google', 'meta', 'nvidia', 'deepmind', 'tesla',
+                               'elonmusk', 'sundarpichai', 'satyanadella']
+        
+        # ユーザー名の判定（@を除いて比較）
+        username_check = username.lower().replace('@', '')
+        
+        if any(keyword in username_check for keyword in influencer_keywords):
+            influencer_posts.append(post_data)
+            print(f"📢 インフルエンサー判定: {username}")
+        elif len(influencer_posts) < 3:  # インフルエンサー投稿が3件未満の場合、品質の高い投稿を追加
+            influencer_posts.append(post_data)
+            print(f"📢 注目投稿として選出: {username}")
+        else:
+            tech_discussions.append(post_data)
+            print(f"💬 技術ディスカッション判定: {username}")
+    
+    print(f"✅ フォールバック選別完了: インフルエンサー {len(influencer_posts)}件, 技術系 {len(tech_discussions)}件")
+    
+    return {
+        'influencer_posts': influencer_posts,
+        'tech_discussions': tech_discussions
+    }
+
 def generate_outlook(data):
     """今後の見通し生成"""
     total_items = data.get('stats', {}).get('total_items', 0)
@@ -654,7 +969,7 @@ def generate_comprehensive_dashboard_html(data):
         }}
         .section-content {{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }}
         .card {{
@@ -700,12 +1015,16 @@ def generate_comprehensive_dashboard_html(data):
             flex-wrap: wrap;
             gap: 8px;
         }}
-        .tag {{
-            background-color: #3b82f6;
-            color: white;
+        .tag, .keyword {{
+            display: inline-block;
+            margin-right: 6px;
+            margin-bottom: 6px;
             padding: 3px 8px;
             border-radius: 9999px;
+            background-color: #3b82f6;
+            color: #fff;
             font-size: 0.75rem;
+            font-weight: 500;
         }}
         .btn {{
             display: inline-block;
@@ -725,13 +1044,50 @@ def generate_comprehensive_dashboard_html(data):
         
         /* トレンドセクション */
         .trends-section {{ 
-            background: #fef7e0; 
-            border: 1px solid #f6d55c; 
-            border-radius: 12px; 
+            background: #f3f4f6; 
+            border-left: 4px solid #3b82f6; 
+            border-radius: 8px; 
             padding: 20px; 
             margin-bottom: 25px; 
         }}
-        .trends-section h3 {{ color: #92400e; margin-bottom: 15px; }}
+        .trends-section h3 {{ color: #1f2937; margin-bottom: 15px; }}
+        
+        /* 活発企業グラフ */
+        .active-companies {{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }}
+        .company-bar {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+        .company-label {{
+            min-width: 80px;
+            font-size: 0.8rem;
+            color: #374151;
+            font-weight: 500;
+        }}
+        .company-graph {{
+            flex: 1;
+            height: 16px;
+            background-color: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }}
+        .company-fill {{
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+            min-width: 25%;
+            border-radius: 8px;
+        }}
+        .company-count {{
+            font-size: 0.75rem;
+            color: #6b7280;
+            min-width: 20px;
+        }}
         
         /* インサイトセクション */
         .insights-grid {{ 
@@ -748,6 +1104,40 @@ def generate_comprehensive_dashboard_html(data):
         }}
         .insight-title {{ color: #1e40af; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; }}
         .insight-content {{ color: #1e3a8a; font-size: 0.85rem; line-height: 1.4; }}
+        
+        /* カテゴリカード */
+        .categories-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }}
+        .category-card {{
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }}
+        .category-header {{
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }}
+        .category-title {{
+            font-size: 1.1rem;
+            font-weight: 600;
+        }}
+        .category-count {{
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }}
+        .category-card .section-content {{
+            padding: 20px;
+            display: block;
+        }}
         
         .footer {{ 
             text-align: center; 
@@ -848,7 +1238,7 @@ def generate_comprehensive_dashboard_html(data):
                         <div class="category-count">{cat_data['count']}件のニュース</div>
                     </div>
                     <div class="section-content">
-                        <h4 style="margin-bottom: 12px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
+                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
                         {''.join([f'''
                         <div class="topic-item">
                             <div class="topic-title">
@@ -858,21 +1248,31 @@ def generate_comprehensive_dashboard_html(data):
                                     topic.get('title_ja', topic['title'])[:65] + ('...' if len(topic.get('title_ja', topic['title'])) > 65 else '') + 
                                 '</span>')}
                             </div>
-                            <div class="topic-meta">{topic['source']} • {topic['time']}</div>
-                            <div class="topic-summary">{topic['summary'][:80]}{'...' if len(topic['summary']) > 80 else ''}</div>
+                            <div class="topic-meta">
+                                {topic['source']} • {topic['time']}
+                                {' • <span style="background: #10b981; color: white; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem;">✨ AI選別</span>' if topic.get('gemini_selected') else ''}
+                            </div>
+                            <div class="topic-summary">{topic['summary'][:100]}{'...' if len(topic['summary']) > 100 else ''}</div>
                         </div>
-                        ''' for topic in cat_data['featured_topics'][:4]])}
+                        ''' for topic in cat_data['featured_topics'][:4]]) if cat_data['featured_topics'] else '<div style="color: #9ca3af; font-size: 0.85rem; padding: 10px 0;">本日は該当ニュースがありません</div>'}
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="keywords">
-                            {''.join(f'<span class="keyword">{company} ({count})</span>' 
-                                    for company, count in list(cat_data['top_companies'].items())[:4])}
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
+                        <div class="active-companies">
+                            {''.join([f'''
+                            <div class="company-bar">
+                                <div class="company-label">{company}</div>
+                                <div class="company-graph">
+                                    <div class="company-fill" style="width: {min(100, max(25, count * 25))}%;"></div>
+                                </div>
+                                <div class="company-count">{count}</div>
+                            </div>
+                            ''' for company, count in list(cat_data['top_companies'].items())[:4]]) if cat_data['top_companies'] else '<div style="color: #9ca3af; font-size: 0.8rem;">本日は該当企業がありません</div>'}
                         </div>
                         
-                        <h4 style="margin: 15px 0 10px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
+                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
                         <div class="keywords">
                             {''.join(f'<span class="keyword">{keyword} ({count})</span>' 
-                                    for keyword, count in list(cat_data['top_keywords'].items())[:5])}
+                                    for keyword, count in list(cat_data['top_keywords'].items())[:5]) if cat_data['top_keywords'] else '<span style="color: #9ca3af; font-size: 0.8rem;">本日は該当キーワードがありません</span>'}
                         </div>
                     </div>
                 </div>"""
@@ -889,7 +1289,7 @@ def generate_comprehensive_dashboard_html(data):
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
                     <!-- インフルエンサー投稿 -->
                     <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿</h4>
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿（最大3件表示）</h4>
                         {''.join([f'''
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #667eea;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
@@ -901,15 +1301,15 @@ def generate_comprehensive_dashboard_html(data):
                                 {post.get('summary', '')[:120]}{'...' if len(post.get('summary', '')) > 120 else ''}
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                {post.get('time', '')}
+                                {post.get('source', 'X/Twitter')} • {post.get('time', '')}
                             </div>
                         </div>
-                        ''' for post in data.get('x_posts', {}).get('influencer_posts', [])[:5]])}
+                        ''' for post in data.get('x_posts', {}).get('influencer_posts', [])[:3]]) if data.get('x_posts', {}).get('influencer_posts') else '<div style="color: #9ca3af; font-size: 0.85rem; padding: 20px; text-align: center;">注目の投稿が見つかりませんでした</div>'}
                     </div>
                     
                     <!-- 技術系ディスカッション -->
                     <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション</h4>
+                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション（最大5件表示）</h4>
                         {''.join([f'''
                         <div style="background: white; border-radius: 8px; padding: 12px; margin-bottom: 10px; border-left: 3px solid #10b981;">
                             <div style="font-weight: 600; color: #2d3748; font-size: 0.9rem; margin-bottom: 6px;">
@@ -921,10 +1321,10 @@ def generate_comprehensive_dashboard_html(data):
                                 {post.get('summary', '')[:120]}{'...' if len(post.get('summary', '')) > 120 else ''}
                             </div>
                             <div style="color: #718096; font-size: 0.75rem;">
-                                {post.get('time', '')}
+                                {post.get('source', 'X/Twitter')} • {post.get('time', '')}
                             </div>
                         </div>
-                        ''' for post in data.get('x_posts', {}).get('tech_discussions', [])[:5]])}
+                        ''' for post in data.get('x_posts', {}).get('tech_discussions', [])[:5]]) if data.get('x_posts', {}).get('tech_discussions') else '<div style="color: #9ca3af; font-size: 0.85rem; padding: 20px; text-align: center;">技術ディスカッションが見つかりませんでした</div>'}
                     </div>
                 </div>
             </div>
@@ -1011,37 +1411,6 @@ def generate_comprehensive_dashboard_html(data):
                     <p style="color: #64748b; font-size: 0.8rem; text-align: center;">
                         💡 これらの外部サービスは毎日自動更新され、AI業界の最新動向を多角的に把握できます
                     </p>
-                </div>
-            </div>
-            
-            <!-- SNS動向セクション -->
-            <div class="section-card">
-                <div class="section-header">
-                    <div class="section-title">💬 SNS・コミュニティ動向</div>
-                </div>
-                <div class="section-content">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div>
-                            <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">👑 インフルエンサー投稿</h4>
-                            {''.join(f'''
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
-                                <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
-                                <div class="topic-meta">{post['time']}</div>
-                            </div>
-                            ''' for post in data['x_posts']['influencer_posts'][:4])}
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">🗨️ 技術ディスカッション</h4>
-                            {''.join(f'''
-                            <div class="topic-item">
-                                <div class="topic-title"><a href="{post.get('url', '#')}" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#1da1f2&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">{post.get('username', '@AI_user') if post.get('username') else '@AI_user'}</a></div>
-                                <div class="topic-summary">{post['summary'][:120]}{'...' if len(post['summary']) > 120 else ''}</div>
-                                <div class="topic-meta">{post['time']}</div>
-                            </div>
-                            ''' for post in data['x_posts']['tech_discussions'][:5])}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

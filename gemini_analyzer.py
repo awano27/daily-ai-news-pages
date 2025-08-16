@@ -18,14 +18,20 @@ class GeminiAnalyzer:
             api_key: Gemini API キー (環境変数 GEMINI_API_KEY からも取得可能)
         """
         self.api_key = api_key or os.getenv('GEMINI_API_KEY')
+        
+        # 最新のGemini 2.5モデルを使用 (2025年8月時点の最新安定版)
+        # gemini-2.5-flash: 最新の安定版（推奨）
+        # gemini-2.5-flash-lite: 低レイテンシ/高スループット版
+        # gemini-2.5-pro: 高度な推論用
+        self.model = "gemini-2.5-flash"  # 最新の安定版モデル
+        self.base_url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent"
+        
         if not self.api_key:
             print("⚠️ Gemini API key not found. Set GEMINI_API_KEY environment variable.")
             self.enabled = False
         else:
             self.enabled = True
-            print("✅ Gemini API initialized successfully")
-        
-        self.base_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
+            print(f"✅ Gemini API initialized successfully with model: {self.model}")
     
     def _make_request(self, prompt: str, max_retries: int = 3) -> Optional[str]:
         """Gemini APIへのリクエストを実行"""
@@ -48,8 +54,7 @@ class GeminiAnalyzer:
                         "temperature": 0.3,
                         "topK": 40,
                         "topP": 0.95,
-                        "maxOutputTokens": 1024,
-                        "stopSequences": []
+                        "maxOutputTokens": 2048
                     }
                 }
                 
@@ -59,10 +64,23 @@ class GeminiAnalyzer:
                 if response.status_code == 200:
                     result = response.json()
                     if 'candidates' in result and len(result['candidates']) > 0:
-                        content = result['candidates'][0]['content']['parts'][0]['text']
-                        return content.strip()
+                        candidate = result['candidates'][0]
+                        
+                        # 標準的なGemini 1.5レスポンス形式
+                        if 'content' in candidate and 'parts' in candidate['content']:
+                            parts = candidate['content']['parts']
+                            if len(parts) > 0 and 'text' in parts[0]:
+                                return parts[0]['text'].strip()
+                        
+                        # エラーケースの詳細ログ
+                        finish_reason = candidate.get('finishReason', 'UNKNOWN')
+                        print(f"[WARN] Gemini response issue - finishReason: {finish_reason}")
+                        if finish_reason == 'MAX_TOKENS':
+                            print(f"[WARN] Response truncated due to token limit")
+                        return None
                 else:
-                    print(f"[WARN] Gemini API request failed: {response.status_code}")
+                    error_text = response.text if hasattr(response, 'text') else 'Unknown error'
+                    print(f"[WARN] Gemini API failed: {response.status_code} - {error_text[:200]}")
                     if attempt < max_retries - 1:
                         time.sleep(2 ** attempt)  # Exponential backoff
                         

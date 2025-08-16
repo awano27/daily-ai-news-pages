@@ -120,27 +120,22 @@ Tools:
   url: https://www.nature.com/subjects/machine-learning.rss
   general: true
 Posts:
-- name: arXiv cs.AI
-  url: https://export.arxiv.org/rss/cs.AI
-- name: arXiv cs.LG (Machine Learning)
-  url: https://export.arxiv.org/rss/cs.LG
-- name: BAIR Blog
-  url: https://bair.berkeley.edu/blog/feed.xml
-- name: Distill
-  url: https://distill.pub/rss.xml
-- name: AI Research News
-  url: https://www.airesearch.news/feed
+# 確実に動作する研究・論文フィード
+- name: Reddit MachineLearning Papers
+  url: https://www.reddit.com/r/MachineLearning/.rss?limit=50
   general: true
-# - name: 'Google News: AI論文・研究'
-#   url: https://news.google.com/rss/search?q=AI+research&hl=en&gl=US
-#   general: true
-#   disabled: 403エラーのため無効化
-- name: Reddit Science
-  url: https://www.reddit.com/r/science/.rss?limit=100
+- name: Reddit DeepLearning
+  url: https://www.reddit.com/r/deeplearning/.rss?limit=50  
   general: true
-- name: OpenReview
-  url: https://openreview.net/rss/recent.xml
+- name: Reddit ArtificialIntelligence
+  url: https://www.reddit.com/r/artificial/.rss?limit=50
   general: true
-- name: arXiv AI Daily
-  url: https://rss.arxiv.org/rss/cs.AI/recent
+- name: Towards Data Science
+  url: https://towardsdatascience.com/feed
+  general: true
+- name: AI News
+  url: https://artificialintelligence-news.com/feed/
+  general: true
+- name: VentureBeat AI
+  url: https://venturebeat.com/category/ai/feed/
   general: true

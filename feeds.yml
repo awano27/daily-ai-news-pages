@@ -64,6 +64,108 @@ Business:
 - name: TechCrunch Japan
   url: https://techcrunch.com/category/artificial-intelligence/feed/
   general: true
+
+# ビジネス戦略・経営系（経営層向け価値提供）
+- name: Harvard Business Review AI
+  url: https://hbr.org/topic/artificial-intelligence.rss
+  general: true
+  business_category: strategy
+- name: MIT Sloan Management
+  url: https://mitsloan.mit.edu/ideas-made-to-matter/rss.xml
+  general: true
+  business_category: strategy
+- name: Stanford Business AI
+  url: https://www.gsb.stanford.edu/insights/rss.xml
+  general: true
+  business_category: strategy
+
+# 投資・M&A・資金調達（財務・投資担当向け）
+- name: Crunchbase AI News
+  url: https://news.crunchbase.com/tag/artificial-intelligence/feed/
+  general: true
+  business_category: investment
+- name: CB Insights AI
+  url: https://www.cbinsights.com/research/rss
+  general: true
+  business_category: investment
+
+# 日本企業・産業政策（日本のビジネスマン向け）
+- name: 日本経済新聞 AI特集
+  url: https://www.nikkei.com/theme/DGXZQOCC140VF0U1A011C2000000.rss
+  general: true
+  business_category: japan_business
+- name: 東洋経済オンライン AI
+  url: https://toyokeizai.net/list/genre/ai
+  general: true
+  business_category: japan_business
+
+# 規制・ガバナンス・コンプライアンス（法務・リスク管理向け）
+- name: AI Ethics News
+  url: https://www.brookings.edu/topic/artificial-intelligence/feed/
+  general: true
+  business_category: governance
+
+# 🔥 即実用的ビジネス情報源（今すぐ使える情報重視）
+- name: Product Hunt AI
+  url: https://www.producthunt.com/topics/artificial-intelligence/rss
+  general: true
+  business_category: tools_immediate
+- name: AI News Weekly
+  url: https://buttondown.email/ainews/rss
+  general: true
+  business_category: strategy
+- name: The Batch by DeepLearning.AI
+  url: https://www.deeplearning.ai/thebatch/rss/
+  general: true
+  business_category: strategy
+- name: AI Business Strategy
+  url: https://www.mckinsey.com/capabilities/quantumblack/our-insights/rss
+  general: true
+  business_category: strategy
+
+# 🚀 新AIツール・プロダクト情報（リリース直後情報）
+# - name: AI Tool Directory
+#   url: https://www.futuretools.io/rss
+#   general: true
+#   business_category: tools_immediate
+#   disabled: RSS形式エラーのため一時無効化
+# - name: There's An AI For That
+#   url: https://theresanaiforthat.com/rss/
+#   general: true
+#   business_category: tools_immediate
+#   disabled: 403エラーのため一時無効化
+- name: AI Tools Hub
+  url: https://aitoolshub.io/rss
+  general: true
+  business_category: tools_immediate
+
+# 💰 投資・スタートアップ特化（最新投資情報）
+- name: AI Startup Funding
+  url: https://www.ycombinator.com/blog/rss
+  general: true
+  business_category: investment
+- name: AI Investment News
+  url: https://news.crunchbase.com/tag/artificial-intelligence/feed/
+  general: true
+  business_category: investment
+- name: Bessemer AI Portfolio
+  url: https://www.bvp.com/insights/rss
+  general: true
+  business_category: investment
+
+# 🎯 実装事例・ケーススタディ（導入参考）
+- name: AI Implementation Cases
+  url: https://blog.google/technology/ai/rss/
+  general: true
+  business_category: implementation
+- name: Enterprise AI Success
+  url: https://www.ibm.com/blogs/watson/feed/
+  general: true
+  business_category: implementation
+- name: AI ROI Examples
+  url: https://blog.salesforce.com/tag/artificial-intelligence/feed/
+  general: true
+  business_category: implementation
 # - name: 'Google News: 日本AI企業ニュース'
 #   url: https://news.google.com/rss/search?q=AI+%E6%97%A5%E6%9C%AC&hl=ja&gl=JP
 #   general: true
@@ -119,6 +221,44 @@ Tools:
 - name: AI Research
   url: https://www.nature.com/subjects/machine-learning.rss
   general: true
+
+# 🛠️ ビジネス即戦力ツール情報（今すぐ業務で使える）
+- name: AI Tools for Business
+  url: https://blog.zapier.com/category/ai-automation/feed/
+  general: true
+  business_category: tools_immediate
+- name: No-Code AI Solutions
+  url: https://bubble.io/blog/tag/ai/rss/
+  general: true
+  business_category: tools_immediate
+- name: Microsoft AI for Business
+  url: https://blogs.microsoft.com/ai/feed/
+  general: true
+  business_category: implementation
+- name: Salesforce AI Updates
+  url: https://blog.salesforce.com/tag/artificial-intelligence/feed/
+  general: true
+  business_category: implementation
+
+# 📱 新AIアプリ・SaaS情報（B2B重視）
+- name: AI SaaS Launches
+  url: https://www.betalist.com/rss/ai
+  general: true
+  business_category: tools_immediate
+- name: Enterprise AI Tools
+  url: https://techcrunch.com/category/enterprise/feed/
+  general: true
+  business_category: tools_immediate
+
+# 💡 実装ガイド・チュートリアル（すぐ試せる）
+- name: OpenAI Cookbook
+  url: https://cookbook.openai.com/feed.xml
+  general: true
+  business_category: implementation
+- name: Anthropic Developer Updates
+  url: https://docs.anthropic.com/en/blog/rss.xml
+  general: true
+  business_category: implementation
 Posts:
 # 確実に動作する研究・論文フィード
 - name: Reddit MachineLearning Papers

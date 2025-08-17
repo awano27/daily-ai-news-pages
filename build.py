@@ -529,6 +529,39 @@ def get_category(conf, category_name):
             return value
     return []
 
+def categorize_business_news(item, feeds_info):
+    """ビジネスニュースをサブカテゴリに分類"""
+    business_category = feeds_info.get('business_category', 'general')
+    title = item.get('title', '').lower()
+    summary = item.get('_summary', '').lower()
+    
+    # キーワードベースの分類
+    if business_category == 'strategy':
+        return 'strategy'  # 戦略・経営
+    elif business_category == 'investment':
+        return 'investment'  # 投資・M&A
+    elif business_category == 'japan_business':
+        return 'japan_business'  # 日本企業
+    elif business_category == 'governance':
+        return 'governance'  # 規制・ガバナンス
+    else:
+        # キーワードで自動分類
+        investment_keywords = ['funding', 'investment', 'ipo', 'venture', 'capital', 'm&a', 'acquisition', '投資', '資金調達', 'IPO']
+        strategy_keywords = ['strategy', 'executive', 'ceo', 'leadership', 'transformation', '戦略', '経営', 'CEO']
+        governance_keywords = ['regulation', 'policy', 'compliance', 'ethics', 'governance', '規制', '政策', 'ガバナンス']
+        
+        for keyword in investment_keywords:
+            if keyword in title or keyword in summary:
+                return 'investment'
+        for keyword in strategy_keywords:
+            if keyword in title or keyword in summary:
+                return 'strategy'
+        for keyword in governance_keywords:
+            if keyword in title or keyword in summary:
+                return 'governance'
+                
+        return 'general'
+
 def within_window(published_parsed):
     if not published_parsed: 
         return True, NOW  # keep if unknown, use current time
@@ -886,6 +919,12 @@ def gather_items(feeds, category_name):
         except Exception as e:
             print(f"[ERROR] feed parse error: {name}: {e}")
             continue
+        
+        # フィード取得が失敗した場合はスキップ
+        if not d or not hasattr(d, 'entries'):
+            print(f"[WARN] No valid feed data for {name}, skipping...")
+            continue
+            
         entry_count = 0
         filtered_count = 0
         for e in d.entries:

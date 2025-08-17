@@ -331,6 +331,177 @@ AI業界のエグゼクティブ向けに、今日の業界動向の要約を作
         
         return dashboard_data.get('executive_summary', {})
 
+    def analyze_business_impact(self, news_items: List[Dict]) -> List[Dict]:
+        """
+        ビジネスインパクトをGemini Flash Thinkingで段階的分析
+        """
+        if not self.enabled:
+            print("⚠️ Gemini API not available, skipping business impact analysis")
+            return news_items
+        
+        print("🧠 Gemini Flash Thinking でビジネスインパクトを段階的分析中...")
+        
+        enhanced_items = []
+        
+        for item in news_items[:10]:  # 上位10件を分析
+            try:
+                prompt = f"""
+あなたは経営戦略コンサルタントです。以下のAIニュースを段階的に分析してください：
+
+【ニュース情報】
+タイトル: {item.get('title', '')}
+要約: {item.get('_summary', '')}
+ソース: {item.get('_source', '')}
+
+【段階的分析】
+1. 技術革新度評価（1-10）
+   - この技術の新規性はどの程度か？
+   - 既存技術からの進歩度は？
+
+2. 市場インパクト分析（1-10）
+   - どの業界・市場に影響するか？
+   - 市場規模・影響範囲は？
+
+3. 投資・事業機会（1-10）
+   - 新たなビジネスチャンスは？
+   - 投資機会やリスクは？
+
+4. 企業戦略への影響（1-10）
+   - 既存企業への影響は？
+   - 戦略転換の必要性は？
+
+5. 実装難易度・タイムライン（1-10、10が最も困難）
+   - 技術的実装の難しさは？
+   - 市場導入までの期間は？
+
+【出力形式】
+技術革新度: [1-10の数値]
+市場インパクト: [1-10の数値]
+投資機会: [1-10の数値]
+戦略影響: [1-10の数値]
+実装難易度: [1-10の数値]
+総合スコア: [1-100の数値]
+ビジネス要旨: [経営層向け1-2文の要約]
+推奨アクション: [具体的な次のステップ]
+"""
+                
+                response = self._make_request(prompt)
+                if response:
+                    # ビジネス分析結果をパース
+                    business_analysis = self._parse_business_analysis(response)
+                    
+                    enhanced_item = item.copy()
+                    enhanced_item.update({
+                        'business_analysis': business_analysis,
+                        'executive_priority': business_analysis.get('総合スコア', 0)
+                    })
+                    enhanced_items.append(enhanced_item)
+                    
+                    print(f"  🎯 {item.get('title', '')[:50]}... -> 総合: {business_analysis.get('総合スコア', 0)}")
+                    
+                    time.sleep(0.7)  # API制限対策
+                else:
+                    enhanced_items.append(item)
+                    
+            except Exception as e:
+                print(f"[WARN] Business analysis failed: {e}")
+                enhanced_items.append(item)
+        
+        # 残りのアイテムはそのまま追加
+        enhanced_items.extend(news_items[10:])
+        
+        return enhanced_items
+    
+    def _parse_business_analysis(self, response: str) -> Dict:
+        """ビジネス分析レスポンスをパース"""
+        analysis = {}
+        lines = response.split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            if ':' in line:
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip()
+                
+                # 数値データの抽出
+                if key in ['技術革新度', '市場インパクト', '投資機会', '戦略影響', '実装難易度', '総合スコア']:
+                    try:
+                        # 数値部分を抽出
+                        import re
+                        numbers = re.findall(r'\d+', value)
+                        if numbers:
+                            analysis[key] = int(numbers[0])
+                    except:
+                        analysis[key] = 0
+                else:
+                    analysis[key] = value
+        
+        return analysis
+    
+    def generate_executive_briefing(self, business_items: List[Dict], tools_items: List[Dict], posts_items: List[Dict]) -> str:
+        """
+        経営層向け1分ブリーフィング生成
+        """
+        if not self.enabled:
+            return "Gemini API利用不可のため、ブリーフィングを生成できません。"
+        
+        print("📋 経営層向けブリーフィングを生成中...")
+        
+        # 上位3件ずつ抽出
+        top_business = business_items[:3]
+        top_tools = tools_items[:3]
+        top_posts = posts_items[:3]
+        
+        # 全アイテムの概要を作成
+        business_summary = "\n".join([f"• {item.get('title', '')}" for item in top_business])
+        tools_summary = "\n".join([f"• {item.get('title', '')}" for item in top_tools])
+        posts_summary = "\n".join([f"• {item.get('title', '')}" for item in top_posts])
+        
+        prompt = f"""
+あなたは経営戦略アドバイザーです。今日のAI業界動向を1分で読める経営層向けブリーフィングを作成してください。
+
+【今日の主要ニュース】
+■ ビジネス動向:
+{business_summary}
+
+■ 技術・ツール:
+{tools_summary}
+
+■ 研究・コミュニティ:
+{posts_summary}
+
+【出力形式】
+# 📊 今日のAIエグゼクティブブリーフィング
+
+## 🎯 最重要3ポイント
+1. [最も重要な動向1つ目 - ビジネスインパクトを明記]
+2. [2つ目の重要動向 - 競合他社への影響]
+3. [3つ目の注目点 - 新技術・規制動向]
+
+## 💼 経営への示唆
+- [戦略的意思決定に関わる重要な示唆]
+- [投資・提携の機会]
+- [リスク要因]
+
+## ⚡ 今週のアクションアイテム
+- [ ] [具体的な次のステップ1]
+- [ ] [具体的な次のステップ2]
+- [ ] [具体的な次のステップ3]
+
+## 📈 市場動向サマリー
+[今日の動向から見える業界全体の方向性を2-3文で]
+
+---
+*生成時刻: {datetime.now().strftime('%Y-%m-%d %H:%M JST')}*
+"""
+        
+        try:
+            response = self._make_request(prompt)
+            return response if response else "ブリーフィング生成に失敗しました。"
+        except Exception as e:
+            return f"ブリーフィング生成エラー: {e}"
+
 # 使用例とテスト
 if __name__ == "__main__":
     analyzer = GeminiAnalyzer()

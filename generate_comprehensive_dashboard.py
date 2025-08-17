@@ -379,6 +379,63 @@ def analyze_ai_landscape():
     
     return dashboard_data
 
+def generate_executive_briefing_with_gemini(dashboard_data):
+    """
+    Gemini Flash Thinkingでエグゼクティブブリーフィング生成
+    """
+    if not gemini_analyzer or not gemini_analyzer.enabled:
+        return "Gemini API利用不可のため、ブリーフィングを生成できません。"
+    
+    print("📋 Gemini Flash Thinkingでエグゼクティブブリーフィング生成中...")
+    
+    # 各カテゴリから上位項目を抽出
+    business_items = dashboard_data['categories'].get('business', {}).get('featured_topics', [])[:3]
+    tools_items = dashboard_data['categories'].get('tools', {}).get('featured_topics', [])[:3]  
+    posts_items = dashboard_data['categories'].get('posts', {}).get('featured_topics', [])[:3]
+    
+    try:
+        briefing = gemini_analyzer.generate_executive_briefing(business_items, tools_items, posts_items)
+        return briefing
+    except Exception as e:
+        return f"ブリーフィング生成エラー: {e}"
+
+def generate_enhanced_dashboard():
+    """
+    強化されたダッシュボードとエグゼクティブブリーフィングを生成
+    """
+    print("🚀 Enhanced AI News Dashboard Generation Starting...")
+    
+    # 基本ダッシュボードデータ生成
+    dashboard_data = analyze_ai_landscape()
+    
+    # エグゼクティブブリーフィング生成
+    executive_briefing = generate_executive_briefing_with_gemini(dashboard_data)
+    dashboard_data['executive_briefing'] = executive_briefing
+    
+    # ビジネスインパクト分析（上位記事のみ）
+    if gemini_analyzer and gemini_analyzer.enabled:
+        print("🎯 ビジネスインパクト分析実行中...")
+        try:
+            # 各カテゴリの上位記事を収集
+            all_top_items = []
+            for category in ['business', 'tools', 'posts']:
+                items = dashboard_data['categories'].get(category, {}).get('featured_topics', [])
+                all_top_items.extend(items[:3])  # 各カテゴリ上位3件
+            
+            # Geminiでビジネスインパクト分析
+            enhanced_items = gemini_analyzer.analyze_business_impact(all_top_items)
+            dashboard_data['business_impact_analysis'] = {
+                'analyzed_items': len(enhanced_items),
+                'high_impact_items': [item for item in enhanced_items if item.get('executive_priority', 0) > 70]
+            }
+            print(f"✅ ビジネスインパクト分析完了: {len(enhanced_items)}件分析")
+            
+        except Exception as e:
+            print(f"⚠️ ビジネスインパクト分析エラー: {e}")
+            dashboard_data['business_impact_analysis'] = {'analyzed_items': 0, 'high_impact_items': []}
+    
+    return dashboard_data
+
 def analyze_market_trends(data):
     """市場トレンド分析"""
     business_data = data['categories'].get('business', {})
@@ -579,55 +636,97 @@ def analyze_geographic_trends(data):
     return dict(geographic_mentions.most_common(3))
 
 def select_valuable_news_with_gemini(items, category_name, gemini_analyzer):
-    """Gemini APIを使って有益なニュースを選別"""
+    """Gemini APIを使って実用性重視でニュースを選別"""
     if not items:
         return items
     
     selected_items = []
     
-    # カテゴリ別の選別基準
+    # 実用性重視のカテゴリ別選別基準（大幅改善）
     category_criteria = {
         'Business': {
             'name': 'ビジネス・投資',
-            'criteria': 'AIを活用した新規ビジネス、大型投資、M&A、新会社設立、資金調達、重要な企業発表、市場に大きな影響を与える戦略発表',
-            'max_items': 10
+            'criteria': '''
+            ビジネスマンが今すぐ知るべき情報を優先：
+            1. 今日から使えるAIツール・サービスのリリース
+            2. 具体的なROI事例・導入コスト情報
+            3. 大型資金調達・IPO・M&A（金額・評価額明記）
+            4. 規制変更・ガイドライン更新（コンプライアンス影響）
+            5. 競合他社の戦略転換・新事業発表
+            6. 日本企業のAI活用成功事例
+            ''',
+            'max_items': 8
         },
         'Tools': {
             'name': 'テクノロジー・ツール',
-            'criteria': 'ビジネスマンやエンジニアが日常業務で実際に使える具体的なツール、新機能リリース、実用的な技術、ワークフローを改善するサービス、開発効率化ツール',
+            'criteria': '''
+            即実用性を最重視：
+            1. 無料で今日から試せるAIツール
+            2. ワークフロー効率化が実証されたソリューション
+            3. 非エンジニアでも使える業務自動化ツール
+            4. API統合・ノーコード実装ガイド
+            5. コスト削減効果が明確な企業向けAIサービス
+            6. Microsoft 365、Google Workspace等既存ツールのAI機能追加
+            ''',
             'max_items': 8
         },
         'Posts': {
             'name': 'SNS・論文',
-            'criteria': '重要なAI研究論文、学術発表、研究機関からの発表、影響力のあるAI研究者やエンジニアのSNS投稿、技術的なブレークスルー、新しい研究動向',
-            'max_items': 8
+            'criteria': '''
+            実務直結の学術・専門情報を優先：
+            1. 企業のAI責任者・CTOによる実装知見の共有
+            2. ビジネス適用可能な研究論文（実装難易度低）
+            3. 著名AIリーダーによる業界予測・戦略提言
+            4. 新技術の商用化タイムライン・市場性分析
+            5. 失敗事例から学ぶリスク回避策
+            6. 日本のAI人材・組織運営のベストプラクティス
+            ''',
+            'max_items': 6
         }
     }
     
     criteria = category_criteria.get(category_name, {})
     
-    print(f"📊 {criteria.get('name', category_name)}: {len(items)}件から有益な情報を選別中...")
+    print(f"🔍 {criteria.get('name', category_name)}: {len(items)}件から実用性重視で選別中...")
     
-    for i, item in enumerate(items[:10]):  # 最新10件から選別（処理量を削減）
+    for i, item in enumerate(items[:15]):  # 15件まで拡大して質の高い記事を確保
         try:
-            print(f"  📋 {i+1}/10: {item.get('title', '')[:40]}... を評価中")
+            print(f"  📋 {i+1}/15: {item.get('title', '')[:40]}... を評価中")
             
-            # より簡潔なプロンプトで確実に動作させる
+            # 実用性を重視した詳細プロンプト
             evaluation_prompt = f"""
-タイトル: {item.get('title', '')[:80]}
+あなたは経験豊富な経営コンサルタントです。以下のニュースをビジネスマンの実用性観点で評価してください。
+
+【記事情報】
+タイトル: {item.get('title', '')[:100]}
 ソース: {item.get('_source', 'Unknown')}
+要約: {item.get('_summary', '')[:200]}
 
-{criteria.get('name', category_name)}カテゴリに適した記事か評価してください。
+【評価基準】
+{criteria.get('criteria', '')}
 
-JSON形式で回答:
+【評価項目】
+1. 即実用性（今すぐ行動に移せるか）: 1-10
+2. ビジネスインパクト（売上・コスト・効率に直結するか）: 1-10  
+3. 情報の具体性（数値・事例・手順が明確か）: 1-10
+4. 緊急性（競合他社より先に知る必要があるか）: 1-10
+5. 実現可能性（中小企業でも適用可能か）: 1-10
+
+以下のJSON形式で回答:
 {{
-  "valuable": true,
-  "importance_score": 8,
-  "reason": "理由"
+  "valuable": true/false,
+  "practicality_score": 8,
+  "business_impact": 7,
+  "specificity": 6,
+  "urgency": 9,
+  "feasibility": 8,
+  "total_score": 38,
+  "reason": "選別理由を簡潔に50文字以内で",
+  "actionable_insight": "ビジネスマンが取るべき具体的アクション"
 }}
 """
             
-            # Gemini APIリクエスト（既にタイムアウト機能内蔵）
+            # Gemini APIリクエスト
             analysis_result = gemini_analyzer._make_request(evaluation_prompt)
             
             if not analysis_result:
@@ -641,21 +740,30 @@ JSON形式で回答:
             if json_match:
                 evaluation = json.loads(json_match.group())
                 
-                # 簡素化された条件：重要度6以上で選別
+                # 実用性重視の選別条件：総合スコア25以上（50点満点中）
+                total_score = evaluation.get('total_score', 0)
+                practicality = evaluation.get('practicality_score', 0)
+                
                 if (evaluation.get('valuable', False) and 
-                    evaluation.get('importance_score', 0) >= 6):
+                    total_score >= 25 and 
+                    practicality >= 6):  # 実用性6点以上必須
                     
                     # 評価情報を追加
-                    item['gemini_score'] = evaluation.get('importance_score', 0)
+                    item['gemini_score'] = total_score
+                    item['practicality_score'] = practicality
+                    item['business_impact'] = evaluation.get('business_impact', 0)
                     item['gemini_reason'] = evaluation.get('reason', '')
-                    item['key_points'] = evaluation.get('key_points', '')
+                    item['actionable_insight'] = evaluation.get('actionable_insight', '')
+                    item['key_points'] = evaluation.get('actionable_insight', '')
                     selected_items.append(item)
                     
-                    print(f"  ✅ 選別: {item['title'][:40]}... (スコア:{evaluation.get('importance_score')}/10)")
+                    print(f"  ✅ 選別: {item['title'][:40]}... (総合:{total_score}/50, 実用性:{practicality}/10)")
                     
                     # 最大件数に達したら終了
-                    if len(selected_items) >= criteria.get('max_items', 10):
+                    if len(selected_items) >= criteria.get('max_items', 8):
                         break
+                else:
+                    print(f"  ❌ 除外: {item['title'][:40]}... (総合:{total_score}/50, 実用性:{practicality}/10)")
                         
         except Exception as e:
             print(f"  ⚠️ 評価エラー: {item.get('title', '')[:30]}... - {e}")
@@ -663,17 +771,24 @@ JSON形式で回答:
         
         # APIレート制限対策
         import time
-        time.sleep(0.1)
+        time.sleep(0.3)  # より慎重に
     
-    # 選別されなかった場合は元のリストから上位を返す
+    # 選別されなかった場合は元のリストから上位を返す（品質保証）
     if not selected_items:
         print(f"  ⚠️ Gemini選別で適切な記事が見つからなかったため、最新記事を使用")
-        return items[:criteria.get('max_items', 10)]
+        return items[:criteria.get('max_items', 8)]
     
-    # 重要度スコアでソート
-    selected_items.sort(key=lambda x: x.get('gemini_score', 0), reverse=True)
+    # 総合スコア（実用性重視）でソート
+    selected_items.sort(key=lambda x: (x.get('practicality_score', 0), x.get('gemini_score', 0)), reverse=True)
     
-    print(f"✅ {criteria.get('name', category_name)}: {len(selected_items)}件を選別完了")
+    print(f"✅ {criteria.get('name', category_name)}: {len(selected_items)}件を実用性重視で選別完了")
+    
+    # 選別結果のサマリー表示
+    if selected_items:
+        print(f"📊 選別結果サマリー:")
+        for i, item in enumerate(selected_items[:3], 1):
+            print(f"  {i}. {item['title'][:50]}... (実用性:{item.get('practicality_score', 0)}/10)")
+    
     return selected_items
 
 def analyze_x_posts_with_gemini(x_posts, gemini_analyzer):

@@ -290,7 +290,9 @@ def analyze_ai_landscape():
             'focus_area': cat_info['focus']
         }
         
-        total_items += len(items)
+        # 実際に表示される記事数のみカウント（featured_topicsの実際の数）
+        displayed_topics = topics[:6]  # 最大6件表示
+        total_items += len(displayed_topics)
     
     # X投稿分析（Gemini API使用）
     try:
@@ -1242,7 +1244,7 @@ def generate_comprehensive_dashboard_html(data):
                 <div class="category-card">
                     <div class="category-header">
                         <div class="category-title">{cat_data['icon']} {cat_data['name']}</div>
-                        <div class="category-count">{cat_data['count']}件のニュース</div>
+                        <div class="category-count">{len(cat_data.get('featured_topics', []))}件のニュース</div>
                     </div>
                     <div class="section-content">
                         <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>

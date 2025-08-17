@@ -39,7 +39,8 @@
       "Bash(\"deploy_403_final_fix.bat\")",
       "Bash(.simple_deploy.bat)",
       "Bash(git pull:*)",
-      "Bash(set TRANSLATE_TO_JA=0)"
+      "Bash(set TRANSLATE_TO_JA=0)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

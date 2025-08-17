@@ -43,6 +43,9 @@
       "WebFetch(domain:github.com)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\c\\Users\\yoshitaka"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-19T07:53:35.214222+09:00",
+  "timestamp": "2025-08-19T08:02:10.687904+09:00",
   "date": "2025-08-19",
-  "jst_time": "07:53 JST",
+  "jst_time": "08:02 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -386,10 +386,10 @@
       "Google",
       5
     ],
-    "last_updated": "2025-08-19 07:53 JST"
+    "last_updated": "2025-08-19 08:02 JST"
   },
   "x_posts": {
-    "total_count": 78,
+    "total_count": 74,
     "influencer_posts": [
       {
         "username": "@go_dev5",
@@ -408,10 +408,10 @@
         "quality_score": 5
       },
       {
-        "username": "@browser_use",
-        "summary": "Join us in building web 4.0 https://t.co/nheYNEX6Pn | AI/技術関連の投稿",
-        "time": "22:32",
-        "url": "https://twitter.com/browser_use/status/1957209060564193611",
+        "username": "@KirkDBorne",
+        "summary": "AI Value Creators — Beyond the Generative AI User Mindset: https://t.co/FxklCkLJeS from @OReillyMedia https://t.co/Vtl2Ec3Qo6",
+        "time": "19:32",
+        "url": "https://twitter.com/KirkDBorne/status/1957163539648618937",
         "source": "X/Twitter",
         "quality_score": 5
       }
@@ -426,26 +426,34 @@
         "quality_score": 5
       },
       {
-        "username": "@AquaRobot0202",
-        "summary": "夜眠れないもんだから、実はわかってなかった大事な技術、Flash Attentionの勉強を始めたけど、\nこの記事とってもとってもわかりやすい\n\n日本語で読めるのありがたいなあ\n\nhttps://t.co/IFe67TovgA https://t.co/42YZrTOFNc | AI/技術関連の投稿",
-        "time": "15:55",
-        "url": "https://twitter.com/AquaRobot0202/status/1957109068797018545",
-        "source": "X/Twitter",
-        "quality_score": 5
-      },
-      {
-        "username": "@__sakito__",
-        "summary": "W3Cやっていき〜！🎉🎉🎉\nひとまず11月にあるTPACに参加してきます！\n\nなぜサイボウズは W3C のメンバーに加入したのか？その真意を聞いてみた\nhttps://t.co/RX1NqTHavj | AI/技術関連の投稿",
-        "time": "01:45",
-        "url": "https://twitter.com/__sakito__/status/1957257549327237471",
-        "source": "X/Twitter",
-        "quality_score": 5
-      },
-      {
         "username": "@yohei_kikuta",
         "summary": "私の著書「原論文から解き明かす生成AI」が技術評論社より本日発売です。\n\nTransformer・GPT・拡散モデル・（推論時含む）スケーリング則など、生成AIの土台を原論文を読み解くことで理解しようという、類書が少ないタイプの本になっています。\n\n是非読んでみてください！\n\nhttps://t.co/LITQ7PpoK1",
         "time": "00:39",
         "url": "https://twitter.com/yohei_kikuta/status/1957240953292668994",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@tom_doerr",
+        "summary": "Curated resources and guides for Claude Code agents https://t.co/Pbv5ZPPQ7D",
+        "time": "02:03",
+        "url": "https://twitter.com/tom_doerr/status/1957261927471567013",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@Maruo_0314",
+        "summary": "ChatGPTの回答の精度を100倍良くする質問50選\n\nAIに質問をしても\n\n思った回答をしてくれない\nもっと精度の高い文章を作って欲しい\n120点の文章を作って欲しい\n\nこういった悩みを解決します。\nAIにこういった質問を投げかけると精度が良くなる？というものを50個まとめました https://t.co/RdxQ3yRr1F https://t.co/H6ahabpydN",
+        "time": "10:37",
+        "url": "https://twitter.com/Maruo_0314/status/1957029017074401426",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@KirkDBorne",
+        "summary": "🌟UPDATED Third Edition‼️\n\n\"Bayesian Analysis with #Python — Practical Guide to Probabilistic Modeling\": https://t.co/4VH4nHKcor v/ @PacktDataML \n—————\n#DataScience #DataScientist #AI #MachineLearning #ML #Probability #Statistics #Inference #StatisticalLearning https://t.co/R76IQfUCwj",
+        "time": "19:13",
+        "url": "https://twitter.com/KirkDBorne/status/1957158823543894476",
         "source": "X/Twitter",
         "quality_score": 5
       }
@@ -457,7 +465,7 @@
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 0件の新製品リリース",
       "🏢 企業動向: Googleが最も活発",
-      "💬 SNS: 78件の関連投稿"
+      "💬 SNS: 74件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

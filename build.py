@@ -265,6 +265,9 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                 
                 # 有効なテキストがあれば処理（条件を大幅に緩和）
                 if text and len(text.strip()) > 5:  # 5文字以上あれば処理
+                    # デバッグ出力: 投稿データの詳細を表示
+                    print(f"[DEBUG] Processing post: user={username}, text_len={len(text)}, text='{text[:50]}...'")
+                    
                     # 日付をパース（複数フォーマットに対応）
                     dt = None
                     # 複数の日付フォーマットを試す
@@ -296,6 +299,9 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                         'text': text,
                         'datetime': dt
                     })
+                    print(f"[DEBUG] Added post: url={tweet_url}, user={username}, text_len={len(text)}")
+                else:
+                    print(f"[DEBUG] Skipping invalid post: user={username}, text_len={len(text) if text else 0}")
     except Exception as e:
         print(f"[WARN] CSV parsing error: {e}")
         pass
@@ -351,6 +357,10 @@ def gather_x_posts(csv_path: str) -> list[dict]:
         x_data = _extract_x_data_from_csv(raw)
         print(f"[INFO] Extracted {len(x_data)} X posts from CSV.")
         
+        # 重複除去のためのセット
+        seen_urls = set()
+        seen_username_text = set()
+        
         for data in x_data:
             url = data['url']
             username = data['username'] or _author_from_url(url)
@@ -358,6 +368,22 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             # フルテキストも保持（プレビューとは別に）
             full_text = data['text']
             text_preview = data['text'][:150] + '...' if len(data['text']) > 150 else data['text']
+            
+            # 重複チェック
+            # 1. 同じURLの投稿は除外
+            if url in seen_urls:
+                print(f"[DEBUG] Skipping duplicate URL: {url}")
+                continue
+            
+            # 2. 同じユーザーの同じテキスト内容は除外
+            username_text_key = f"{username}:{full_text[:50]}"
+            if username_text_key in seen_username_text:
+                print(f"[DEBUG] Skipping duplicate content from {username}")
+                continue
+            
+            # 重複チェックを通過した投稿のみ追加
+            seen_urls.add(url)
+            seen_username_text.add(username_text_key)
             
             # X投稿は時間フィルター無効化（すべての投稿を含める）
             # if (NOW - post_date) <= timedelta(days=7):  # 時間フィルター無効化

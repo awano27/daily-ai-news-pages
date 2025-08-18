@@ -1,20 +1,19 @@
 {
-  "timestamp": "2025-08-18T22:09:38.285312+09:00",
+  "timestamp": "2025-08-18T23:41:51.950736+09:00",
   "date": "2025-08-18",
-  "jst_time": "22:09 JST",
+  "jst_time": "23:41 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 7,
+      "count": 6,
       "top_sources": {
         "MIT Technology Review AI": 2,
         "ASCII.jp AI・IoT": 2,
-        "Reddit AI": 1
+        "Hacker News": 1
       },
       "top_companies": {},
       "top_keywords": {
-        "GPT-4": 1,
         "大規模言語モデル": 1
       },
       "featured_topics": [
@@ -36,16 +35,6 @@
           "summary": "In 1943, while the world’s brightest physicists split atoms for the Manhattan Project, the American psychologist B.F. Sk...",
           "importance": 5,
           "url": "https://www.technologyreview.com/2025/08/18/1121370/ai-pigeons-reinforcement-learning/",
-          "gemini_selected": false
-        },
-        {
-          "title": "GPT feels colder. What if it’s not tone — but rhythm that’s gone?",
-          "title_ja": "GPTは冷たく感じます。トーンではない場合はどうなりますか？",
-          "source": "Reddit AI",
-          "time": "22:29",
-          "summary": "250818 | Rhythm Tuning Experiment After August 8, GPT-4o returned. Same architecture. Same tone. But it felt… desynchron...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/",
           "gemini_selected": false
         },
         {
@@ -77,6 +66,16 @@
           "importance": 0,
           "url": "https://ascii.jp/elem/000/004/313/4313168/?rss",
           "gemini_selected": false
+        },
+        {
+          "title": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
+          "title_ja": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
+          "source": "ITmedia AI・機械学習",
+          "time": "01:00",
+          "summary": "「クラウドなら従来のIT課題は解決できる」と期待してクラウドシフトしたものの、後でコスト増や運用負荷の落とし穴にはまる場合がある。こうした「クラウド移行の“誤算”」から脱却し、コストと運用を最適化するための“第3の選択肢”とは何か。",
+          "importance": 0,
+          "url": "https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html",
+          "gemini_selected": false
         }
       ],
       "focus_area": "market"
@@ -84,22 +83,34 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 5,
+      "count": 7,
       "top_sources": {
         "MarkTechPost": 3,
-        "Reddit MachineLearning": 2
+        "Reddit MachineLearning": 2,
+        "The Verge": 1
       },
       "top_companies": {
-        "Anthropic": 1
+        "Anthropic": 2
       },
       "top_keywords": {
         "大規模言語モデル": 2,
+        "Claude": 1,
         "GPT-4": 1,
         "企業価値": 1,
         "政策": 1,
         "マルチモーダル": 1
       },
       "featured_topics": [
+        {
+          "title": "Claude AI will end &#8216;persistently harmful or abusive user interactions&#8217;",
+          "title_ja": "Claude AIは終了します＆＃8216;持続的に有害または虐待的なユーザーインタラクション＆＃8217;",
+          "source": "The Verge",
+          "time": "14:13",
+          "summary": "Anthropic’s Claude AI chatbot can now end conversations deemed “persistently harmful or abusive,” as spotted earlier by ...",
+          "importance": 10,
+          "url": "https://www.theverge.com/news/760561/anthropic-claude-ai-chatbot-end-harmful-conversations",
+          "gemini_selected": false
+        },
         {
           "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
           "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
@@ -121,6 +132,26 @@
           "gemini_selected": false
         },
         {
+          "title": "[P] JAX Implementation of Hindsight Experience Replay (HER)",
+          "title_ja": "[P]後知恵体験リプレイのJAX実装（彼女）",
+          "source": "Reddit MachineLearning",
+          "time": "13:37",
+          "summary": "Hi! I recently discovered the Hindsight Experience Replay (HER) paper and noticed that the official implementation is ba...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtmadk/p_jax_implementation_of_hindsight_experience/",
+          "gemini_selected": false
+        },
+        {
+          "title": "7 NumPy Tricks You Didn’t Know You Needed",
+          "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
+          "source": "Machine Learning Mastery",
+          "time": "12:00",
+          "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
+          "importance": 0,
+          "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
+          "gemini_selected": false
+        },
+        {
           "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
           "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
           "source": "Reddit MachineLearning",
@@ -128,26 +159,6 @@
           "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
           "importance": 0,
           "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
-          "gemini_selected": false
-        },
-        {
-          "title": "What is AI Inference? A Technical Deep Dive and Top 9 AI Inference Providers (2025 Edition)",
-          "title_ja": "AI推論とは何ですか？テクニカルディープダイビングとトップ9 AI推論プロバイダー（2025エディション）",
-          "source": "MarkTechPost",
-          "time": "05:55",
-          "summary": "Artificial Intelligence (AI) has evolved rapidly—especially in how models are deployed and operated in real-world system...",
-          "importance": 0,
-          "url": "https://www.marktechpost.com/2025/08/17/what-is-ai-inference-a-technical-deep-dive-and-top-9-ai-inference-providers-2025-edition/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[D] - Multi Class Address Classification",
-          "title_ja": "[D]  - マルチクラスアドレス分類",
-          "source": "Reddit MachineLearning",
-          "time": "22:41",
-          "summary": "Hello people, I have a dataset with Adress and label 800K rows. I am trying to train a model for address label predictio...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/",
           "gemini_selected": false
         }
       ],
@@ -158,16 +169,15 @@
       "icon": "🧪",
       "count": 6,
       "top_sources": {
-        "Reddit DeepLearning": 3,
-        "Reddit MachineLearning Papers": 2,
-        "Reddit ArtificialIntelligence": 1
+        "Reddit DeepLearning": 4,
+        "Reddit MachineLearning Papers": 2
       },
       "top_companies": {
         "Google": 1,
         "DeepMind": 1
       },
       "top_keywords": {
-        "GPT-4": 2,
+        "GPT-4": 1,
         "企業価値": 1,
         "政策": 1,
         "ニューラルネット": 1
@@ -194,16 +204,6 @@
           "gemini_selected": false
         },
         {
-          "title": "GPT feels colder. What if it’s not tone — but rhythm that’s gone?",
-          "title_ja": "GPTは冷たく感じます。トーンではない場合はどうなりますか？",
-          "source": "Reddit ArtificialIntelligence",
-          "time": "22:29",
-          "summary": "250818 | Rhythm Tuning Experiment After August 8, GPT-4o returned. Same architecture. Same tone. But it felt… desynchron...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/",
-          "gemini_selected": false
-        },
-        {
           "title": "[R] Topological Feature Compression for Molecular Graph Neural Networks",
           "title_ja": "[R]分子グラフニューラルネットワークのトポロジーフィーチャ圧縮",
           "source": "Reddit DeepLearning",
@@ -224,13 +224,23 @@
           "gemini_selected": false
         },
         {
-          "title": "[D] - Multi Class Address Classification",
-          "title_ja": "[D]  - マルチクラスアドレス分類",
-          "source": "Reddit MachineLearning Papers",
-          "time": "22:41",
-          "summary": "Hello people, I have a dataset with Adress and label 800K rows. I am trying to train a model for address label predictio...",
+          "title": "Extremely low result on my deep learning model for masters dissertation - what can I do?",
+          "title_ja": "マスターズの論文のための私の深い学習モデルの非常に低い結果 - 私は何ができますか？",
+          "source": "Reddit DeepLearning",
+          "time": "14:14",
+          "summary": "I'm working on a mask rcnn for breast microcalcification instance segmentation with mask rcnn using detecron2. It took m...",
           "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/",
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mtn964/extremely_low_result_on_my_deep_learning_model/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[P] JAX Implementation of Hindsight Experience Replay (HER)",
+          "title_ja": "[P]後知恵体験リプレイのJAX実装（彼女）",
+          "source": "Reddit MachineLearning Papers",
+          "time": "13:37",
+          "summary": "Hi! I recently discovered the Hindsight Experience Replay (HER) paper and noticed that the official implementation is ba...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtmadk/p_jax_implementation_of_hindsight_experience/",
           "gemini_selected": false
         }
       ],
@@ -263,13 +273,13 @@
         "gemini_selected": false
       },
       {
-        "title": "GPT feels colder. What if it’s not tone — but rhythm that’s gone?",
-        "title_ja": "GPTは冷たく感じます。トーンではない場合はどうなりますか？",
-        "source": "Reddit AI",
-        "time": "22:29",
-        "summary": "250818 | Rhythm Tuning Experiment After August 8, GPT-4o returned. Same architecture. Same tone. But it felt… desynchron...",
+        "title": "LLMs and coding agents are a security nightmare",
+        "title_ja": "LLMSとコーディングエージェントはセキュリティの悪夢です",
+        "source": "Hacker News",
+        "time": "11:04",
+        "summary": "Article URL: https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare\nComments URL: https://news.ycombina...",
         "importance": 0,
-        "url": "https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/",
+        "url": "https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare",
         "gemini_selected": false
       }
     ]
@@ -302,6 +312,16 @@
     ],
     "research_highlights": [
       {
+        "title": "Claude AI will end &#8216;persistently harmful or abusive user interactions&#8217;",
+        "title_ja": "Claude AIは終了します＆＃8216;持続的に有害または虐待的なユーザーインタラクション＆＃8217;",
+        "source": "The Verge",
+        "time": "14:13",
+        "summary": "Anthropic’s Claude AI chatbot can now end conversations deemed “persistently harmful or abusive,” as spotted earlier by ...",
+        "importance": 10,
+        "url": "https://www.theverge.com/news/760561/anthropic-claude-ai-chatbot-end-harmful-conversations",
+        "gemini_selected": false
+      },
+      {
         "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
         "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
         "source": "MarkTechPost",
@@ -320,22 +340,12 @@
         "importance": 5,
         "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
         "gemini_selected": false
-      },
-      {
-        "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
-        "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
-        "source": "Reddit MachineLearning",
-        "time": "06:42",
-        "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
-        "importance": 0,
-        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
-        "gemini_selected": false
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "Anthropic": 1,
+      "Anthropic": 2,
       "Google": 1,
       "DeepMind": 1
     },
@@ -356,21 +366,21 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "GPT-4": 4,
       "大規模言語モデル": 3,
+      "GPT-4": 2,
       "企業価値": 2,
       "政策": 2,
-      "マルチモーダル": 1,
-      "ニューラルネット": 1
+      "Claude": 1,
+      "マルチモーダル": 1
     },
     "emerging_themes": [
       {
-        "theme": "GPT-4",
-        "mentions": 4
-      },
-      {
         "theme": "大規模言語モデル",
         "mentions": 3
+      },
+      {
+        "theme": "GPT-4",
+        "mentions": 2
       },
       {
         "theme": "企業価値",
@@ -382,17 +392,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 17,
+    "total_items": 18,
     "total_sources": 8,
     "active_companies": 3,
     "top_company": [
       "Anthropic",
-      1
+      2
     ],
-    "last_updated": "2025-08-18 22:09 JST"
+    "last_updated": "2025-08-18 23:41 JST"
   },
   "x_posts": {
-    "total_count": 123,
+    "total_count": 124,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -438,12 +448,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 17件のニュース、3社が活動",
+    "headline": "今日のAI業界: 18件のニュース、3社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
       "🏢 企業動向: Anthropicが最も活発",
-      "💬 SNS: 123件の関連投稿"
+      "💬 SNS: 124件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

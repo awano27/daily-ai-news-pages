@@ -318,7 +318,23 @@ def analyze_ai_landscape():
         # X投稿は総ニュース数には含めない（別途SNS投稿としてカウント）
     except Exception as e:
         print(f"⚠️ X投稿の分析でエラー: {e}")
-        dashboard_data['x_posts'] = {'total_count': 0, 'influencer_posts': [], 'tech_discussions': []}
+        # エラー時もフォールバック処理を実行
+        try:
+            x_posts = build.gather_x_posts(build.X_POSTS_CSV)
+            if x_posts:
+                print(f"🔄 フォールバック処理でX投稿を処理: {len(x_posts)}件")
+                fallback_result = fallback_x_post_analysis(x_posts)
+                dashboard_data['x_posts'] = {
+                    'total_count': len(x_posts),
+                    'influencer_posts': fallback_result['influencer_posts'][:5],
+                    'tech_discussions': fallback_result['tech_discussions'][:5]
+                }
+                print(f"✅ フォールバック完了: 注目投稿{len(fallback_result['influencer_posts'])}件、技術{len(fallback_result['tech_discussions'])}件")
+            else:
+                dashboard_data['x_posts'] = {'total_count': 0, 'influencer_posts': [], 'tech_discussions': []}
+        except Exception as e2:
+            print(f"❌ フォールバック処理もエラー: {e2}")
+            dashboard_data['x_posts'] = {'total_count': 0, 'influencer_posts': [], 'tech_discussions': []}
     
     # 市場洞察分析
     market_insights = analyze_market_trends(dashboard_data)
@@ -962,12 +978,18 @@ def fallback_x_post_analysis(x_posts):
         if is_influencer:
             influencer_posts.append(post_data)
             print(f"📢 インフルエンサー判定: {username}")
-        elif len(influencer_posts) < 5 and post_data.get('quality_score', 0) >= 6:  # 品質6以上の投稿を注目投稿として選出
+        elif len(influencer_posts) < 5 and post_data.get('quality_score', 0) >= 4:  # 品質4以上の投稿を注目投稿として選出（緩和）
             influencer_posts.append(post_data)
             print(f"📢 注目投稿として選出: {username} (品質:{post_data.get('quality_score')}/10)")
         else:
             tech_discussions.append(post_data)
             print(f"💬 技術ディスカッション判定: {username}")
+        
+        # 注目投稿が不足の場合、技術ディスカッションからも移動
+        if len(influencer_posts) < 3 and len(tech_discussions) > 0:
+            moved_post = tech_discussions.pop(0)
+            influencer_posts.append(moved_post)
+            print(f"📢 技術系から注目投稿に移動: {moved_post.get('username')}")
     
     print(f"✅ フォールバック選別完了: インフルエンサー {len(influencer_posts)}件, 技術系 {len(tech_discussions)}件")
     

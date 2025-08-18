@@ -1023,23 +1023,66 @@ def main():
         print(f"[ERROR] Failed to gather Posts items: {e}")
         posts = []
     
+    # Remove global duplicates across all categories first
+    print(f"[INFO] Removing duplicates across all categories...")
+    all_items = business + tools + posts
+    print(f"[INFO] Before deduplication: {len(all_items)} total items")
+    
+    seen_links = set()
+    seen_titles = set()
+    unique_business = []
+    unique_tools = []
+    unique_posts = []
+    
+    # Process each category and remove duplicates
+    for item in business:
+        link = item.get('link', '')
+        title = item.get('title', '').lower().strip()
+        if link not in seen_links and title not in seen_titles:
+            unique_business.append(item)
+            seen_links.add(link)
+            seen_titles.add(title)
+    
+    for item in tools:
+        link = item.get('link', '')
+        title = item.get('title', '').lower().strip()
+        if link not in seen_links and title not in seen_titles:
+            unique_tools.append(item)
+            seen_links.add(link)
+            seen_titles.add(title)
+    
+    for item in posts:
+        link = item.get('link', '')
+        title = item.get('title', '').lower().strip()
+        if link not in seen_links and title not in seen_titles:
+            unique_posts.append(item)
+            seen_links.add(link)
+            seen_titles.add(title)
+    
+    # Update with deduplicated items
+    business = unique_business
+    tools = unique_tools  
+    posts = unique_posts
+    
+    print(f"[INFO] After deduplication: Business={len(business)}, Tools={len(tools)}, Posts={len(posts)}")
+    
     # Inject X posts
     if X_POSTS_CSV:
         try:
             x_posts = gather_x_posts(X_POSTS_CSV)
             if x_posts:
                 print(f"[INFO] Adding {len(x_posts)} X posts")
-                posts.extend(x_posts)
+                # Only add X posts that aren't already in posts
+                for x_post in x_posts:
+                    x_link = x_post.get('link', '')
+                    x_title = x_post.get('title', '').lower().strip()
+                    if x_link not in seen_links and x_title not in seen_titles:
+                        posts.append(x_post)
+                        seen_links.add(x_link)
+                        seen_titles.add(x_title)
             else:
                 print(f"[INFO] No X posts to add")
-            # Remove duplicates and sort again
-            seen_links = set()
-            unique_posts = []
-            for post in posts:
-                if post.get('link') and post['link'] not in seen_links:
-                    unique_posts.append(post)
-                    seen_links.add(post['link'])
-            posts = sorted(unique_posts, key=lambda x: x.get('_dt', NOW), reverse=True)
+            posts = sorted(posts, key=lambda x: x.get('_dt', NOW), reverse=True)
         except Exception as e:
             print(f"[WARN] Failed to process X posts: {e}")
 

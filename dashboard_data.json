@@ -1,21 +1,21 @@
 {
-  "timestamp": "2025-08-18T21:39:30.995068+09:00",
+  "timestamp": "2025-08-18T21:57:53.812688+09:00",
   "date": "2025-08-18",
-  "jst_time": "21:39 JST",
+  "jst_time": "21:57 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 8,
+      "count": 7,
       "top_sources": {
         "MIT Technology Review AI": 2,
-        "Hacker News": 2,
-        "ASCII.jp AI・IoT": 2
+        "ASCII.jp AI・IoT": 2,
+        "Reddit AI": 1
       },
       "top_companies": {},
       "top_keywords": {
-        "大規模言語モデル": 2,
-        "GPT-4": 1
+        "GPT-4": 1,
+        "大規模言語モデル": 1
       },
       "featured_topics": [
         {
@@ -367,8 +367,8 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "大規模言語モデル": 4,
       "GPT-4": 4,
+      "大規模言語モデル": 3,
       "企業価値": 2,
       "政策": 2,
       "マルチモーダル": 1,
@@ -376,12 +376,12 @@
     },
     "emerging_themes": [
       {
-        "theme": "大規模言語モデル",
+        "theme": "GPT-4",
         "mentions": 4
       },
       {
-        "theme": "GPT-4",
-        "mentions": 4
+        "theme": "大規模言語モデル",
+        "mentions": 3
       },
       {
         "theme": "企業価値",
@@ -400,7 +400,7 @@
       "Anthropic",
       1
     ],
-    "last_updated": "2025-08-18 21:39 JST"
+    "last_updated": "2025-08-18 21:57 JST"
   },
   "x_posts": {
     "total_count": 123,

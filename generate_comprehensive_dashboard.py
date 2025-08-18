@@ -953,13 +953,25 @@ def fallback_x_post_analysis(x_posts):
         
         # フルテキストを優先的に取得、なければ_summaryを使用
         actual_text = post.get('_full_text', '') or post.get('_summary', '')
-        # テキストが空の場合のフォールバック
-        if not actual_text or actual_text == "X投稿データ":
-            actual_text = f"X投稿（@{username.replace('@', '')}）- AI関連の投稿"
+        # デバッグ用: 取得したテキストを確認
+        print(f"[DEBUG] Post {post.get('title', '')}: _full_text='{post.get('_full_text', 'None')}', _summary='{post.get('_summary', 'None')}'")
+        
+        # テキストが空または無効な場合のフォールバック（条件を厳しく）
+        if not actual_text or actual_text.strip() == "" or actual_text == "X投稿データ":
+            # 最後の手段：元の投稿から有効な情報を抽出
+            title = post.get('title', '')
+            if 'Xポスト' in title:
+                actual_text = f"AI関連のX投稿 - 詳細は元の投稿をご確認ください"
+            else:
+                actual_text = f"X投稿（@{username.replace('@', '')}）- AI関連の投稿"
+        
+        # テキストの最大長を制限（長すぎる場合は要約）
+        if len(actual_text) > 200:
+            actual_text = actual_text[:200] + "..."
         
         post_data = {
             'username': username or '@Anonymous',
-            'summary': actual_text[:200] + ('...' if len(actual_text) > 200 else ''),
+            'summary': actual_text,
             'time': post.get('_dt', datetime.now()).strftime('%H:%M') if post.get('_dt') else '00:10',
             'url': post.get('link', '#'),
             'source': 'X/Twitter',

@@ -290,12 +290,12 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                         dt = datetime.now(JST)
                     
                     # 常に投稿を追加
-                        data.append({
-                            'url': tweet_url,
-                            'username': username,
-                            'text': text,
-                            'datetime': dt
-                        })
+                    data.append({
+                        'url': tweet_url,
+                        'username': username,
+                        'text': text,
+                        'datetime': dt
+                    })
     except Exception as e:
         print(f"[WARN] CSV parsing error: {e}")
         pass

@@ -1,22 +1,75 @@
 {
-  "timestamp": "2025-08-19T00:10:17.397880+09:00",
+  "timestamp": "2025-08-19T06:27:48.496648+09:00",
   "date": "2025-08-19",
-  "jst_time": "00:10 JST",
+  "jst_time": "06:27 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 6,
+      "count": 19,
       "top_sources": {
-        "MIT Technology Review AI": 2,
-        "ASCII.jp AI・IoT": 2,
-        "Hacker News": 1
+        "Reddit AI": 4,
+        "Nvidia Developer Blog": 3,
+        "Hacker News": 3
       },
-      "top_companies": {},
+      "top_companies": {
+        "NVIDIA": 2,
+        "Anthropic": 1,
+        "Google": 1,
+        "Meta": 1,
+        "Apple": 1
+      },
       "top_keywords": {
-        "大規模言語モデル": 1
+        "大規模言語モデル": 4,
+        "生成AI": 3,
+        "政策": 1,
+        "Claude": 1,
+        "資金調達": 1,
+        "Gemini": 1,
+        "ニューラルネット": 1,
+        "強化学習": 1
       },
       "featured_topics": [
+        {
+          "title": "Announcing the Latest NVIDIA Gaming AI and Neural Rendering Technologies",
+          "title_ja": "最新のNvidiaゲームAIおよびニューラルレンダリングテクノロジーの発表",
+          "source": "Nvidia Developer Blog",
+          "time": "19:30",
+          "summary": "Today at Gamescom 2025, NVIDIA unveiled updates to NVIDIA RTX neural rendering and NVIDIA ACE generative AI technologies...",
+          "importance": 10,
+          "url": "https://developer.nvidia.com/blog/announcing-the-latest-nvidia-gaming-ai-and-neural-rendering-technologies/",
+          "gemini_selected": false
+        },
+        {
+          "title": "🚨 Catch up with the AI industry, August 18, 2025",
+          "title_ja": "AI業界に追いつく、2025年8月18日",
+          "source": "Reddit AI",
+          "time": "17:59",
+          "summary": "Patients trust AI medical advice, even when it’s wrong Meta’s internal AI guidelines permit harmful content Google and N...",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/artificial/comments/1mttftg/catch_up_with_the_ai_industry_august_18_2025/",
+          "gemini_selected": false
+        },
+        {
+          "title": "Create a travel planning agentic workflow with Amazon Nova",
+          "title_ja": "Amazon Novaで旅行計画エージェントワークフローを作成します",
+          "source": "AWS AI Blog",
+          "time": "20:30",
+          "summary": "In this post, we explore how to build a travel planning solution using AI agents. The agent uses Amazon Nova, which offe...",
+          "importance": 10,
+          "url": "https://aws.amazon.com/blogs/machine-learning/create-a-travel-planning-agentic-workflow-with-amazon-nova/",
+          "gemini_selected": false
+        },
+        {
+          "title": "Identify Speakers in Meetings, Calls, and Voice Apps in Real-Time with NVIDIA Streaming Sortformer",
+          "title_ja": "nvidiaストリーミングソートフォーマーを使用して、ミーティング、コール、音声アプリでスピーカーをリアルタイムで識別します",
+          "source": "Nvidia Developer Blog",
+          "time": "16:00",
+          "summary": "In every meeting, call, crowded room, or voice-enabled app, technology has a core question: who is speaking, and when? F...",
+          "importance": 10,
+          "url": "https://developer.nvidia.com/blog/identify-speakers-in-meetings-calls-and-voice-apps-in-real-time-with-nvidia-streaming-sortformer/",
+          "gemini_selected": false
+        },
         {
           "title": "The Download: pigeons’ role in developing AI, and Native artists’ tech interpretations",
           "title_ja": "ダウンロード：AIの開発におけるハトの役割、およびネイティブアーティストの技術解釈",
@@ -36,46 +89,6 @@
           "importance": 5,
           "url": "https://www.technologyreview.com/2025/08/18/1121370/ai-pigeons-reinforcement-learning/",
           "gemini_selected": false
-        },
-        {
-          "title": "LLMs and coding agents are a security nightmare",
-          "title_ja": "LLMSとコーディングエージェントはセキュリティの悪夢です",
-          "source": "Hacker News",
-          "time": "11:04",
-          "summary": "Article URL: https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare\nComments URL: https://news.ycombina...",
-          "importance": 0,
-          "url": "https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare",
-          "gemini_selected": false
-        },
-        {
-          "title": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
-          "title_ja": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
-          "source": "ASCII.jp AI・IoT",
-          "time": "08:30",
-          "summary": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
-          "importance": 0,
-          "url": "https://ascii.jp/elem/000/004/313/4313183/?rss",
-          "gemini_selected": false
-        },
-        {
-          "title": "ポータブル電源「ポポフmini」シリーズ登場　ABW最適・800g・3台同時給電【9月発売】",
-          "title_ja": "ポータブル電源「ポポフmini」シリーズ登場　ABW最適・800g・3台同時給電【9月発売】",
-          "source": "ASCII.jp AI・IoT",
-          "time": "08:15",
-          "summary": "シーテック株式会社が、個人利用に最適化された新しいポータブル電源「ポポフmini」シリーズを2025年9月に発売開始予定。",
-          "importance": 0,
-          "url": "https://ascii.jp/elem/000/004/313/4313168/?rss",
-          "gemini_selected": false
-        },
-        {
-          "title": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
-          "title_ja": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
-          "source": "ITmedia AI・機械学習",
-          "time": "01:00",
-          "summary": "「クラウドなら従来のIT課題は解決できる」と期待してクラウドシフトしたものの、後でコスト増や運用負荷の落とし穴にはまる場合がある。こうした「クラウド移行の“誤算”」から脱却し、コストと運用を最適化するための“第3の選択肢”とは何か。",
-          "importance": 0,
-          "url": "https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html",
-          "gemini_selected": false
         }
       ],
       "focus_area": "market"
@@ -83,24 +96,22 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 11,
+      "count": 9,
       "top_sources": {
         "Reddit MachineLearning": 4,
-        "MarkTechPost": 3,
-        "Machine Learning Mastery": 2
+        "Machine Learning Mastery": 2,
+        "Towards Data Science": 1
       },
       "top_companies": {
-        "Google": 2,
-        "Anthropic": 2,
-        "Meta": 1
+        "Meta": 1,
+        "Google": 1,
+        "Anthropic": 1
       },
       "top_keywords": {
-        "大規模言語モデル": 2,
-        "Claude": 1,
+        "大規模言語モデル": 3,
         "GPT-4": 1,
         "企業価値": 1,
-        "政策": 1,
-        "マルチモーダル": 1
+        "政策": 1
       },
       "featured_topics": [
         {
@@ -114,33 +125,13 @@
           "gemini_selected": false
         },
         {
-          "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
-          "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+          "title": "Is Perplexity AI’s $34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+          "title_ja": "Perplexity AIの345億ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
           "source": "AI News",
           "time": "14:49",
           "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
           "importance": 10,
           "url": "https://www.artificialintelligence-news.com/news/perplexity-ai-chrome-bid-analysis/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[D] Google Collab or Kaggle Notebook?",
-          "title_ja": "[D] Google CollabまたはKaggle Notebook？",
-          "source": "Reddit MachineLearning",
-          "time": "14:45",
-          "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
-          "importance": 10,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
-          "gemini_selected": false
-        },
-        {
-          "title": "Claude AI will end &#8216;persistently harmful or abusive user interactions&#8217;",
-          "title_ja": "Claude AIは終了します＆＃8216;持続的に有害または虐待的なユーザーインタラクション＆＃8217;",
-          "source": "The Verge",
-          "time": "14:13",
-          "summary": "Anthropic’s Claude AI chatbot can now end conversations deemed “persistently harmful or abusive,” as spotted earlier by ...",
-          "importance": 10,
-          "url": "https://www.theverge.com/news/760561/anthropic-claude-ai-chatbot-end-harmful-conversations",
           "gemini_selected": false
         },
         {
@@ -154,13 +145,33 @@
           "gemini_selected": false
         },
         {
-          "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
-          "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
-          "source": "MarkTechPost",
-          "time": "06:15",
-          "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
-          "importance": 5,
-          "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
+          "title": "[D] Context engineering as a skill",
+          "title_ja": "[D]スキルとしてのコンテキストエンジニアリング",
+          "source": "Reddit MachineLearning",
+          "time": "19:27",
+          "summary": "I came across this concept a few weeks ago, and I really think it’s well descriptive for the work AI engineers do on a d...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtvw96/d_context_engineering_as_a_skill/",
+          "gemini_selected": false
+        },
+        {
+          "title": "How to Create Powerful LLM Applications with Context Engineering",
+          "title_ja": "コンテキストエンジニアリングを備えた強力なLLMアプリケーションを作成する方法",
+          "source": "Towards Data Science",
+          "time": "18:13",
+          "summary": "Improve your LLM by optimizing its context\nThe post How to Create Powerful LLM Applications with Context Engineering app...",
+          "importance": 0,
+          "url": "https://towardsdatascience.com/how-to-create-powerful-llm-applications-with-context-engineering/",
+          "gemini_selected": false
+        },
+        {
+          "title": "How to Diagnose Why Your Classification Model Fails",
+          "title_ja": "分類モデルが失敗する理由を診断する方法",
+          "source": "Machine Learning Mastery",
+          "time": "13:59",
+          "summary": "In classification models , failure occurs when the model assigns the wrong class to a new data observation; that is, whe...",
+          "importance": 0,
+          "url": "https://machinelearningmastery.com/how-to-diagnose-why-your-classification-model-fails/",
           "gemini_selected": false
         }
       ],
@@ -169,22 +180,27 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 9,
+      "count": 18,
       "top_sources": {
-        "Reddit DeepLearning": 4,
-        "Reddit MachineLearning Papers": 4,
-        "AI News": 1
+        "Reddit DeepLearning": 5,
+        "Reddit ArtificialIntelligence": 5,
+        "Reddit MachineLearning Papers": 4
       },
       "top_companies": {
         "Google": 3,
+        "Meta": 2,
         "DeepMind": 1,
-        "Meta": 1
+        "Anthropic": 1,
+        "Apple": 1
       },
       "top_keywords": {
+        "大規模言語モデル": 5,
+        "政策": 2,
+        "Gemini": 2,
         "GPT-4": 1,
         "企業価値": 1,
-        "政策": 1,
-        "ニューラルネット": 1
+        "強化学習": 1,
+        "生成AI": 1
       },
       "featured_topics": [
         {
@@ -198,8 +214,8 @@
           "gemini_selected": false
         },
         {
-          "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
-          "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+          "title": "Is Perplexity AI’s $34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+          "title_ja": "Perplexity AIの345億ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
           "source": "AI News",
           "time": "14:49",
           "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
@@ -208,13 +224,13 @@
           "gemini_selected": false
         },
         {
-          "title": "[D] Google Collab or Kaggle Notebook?",
-          "title_ja": "[D] Google CollabまたはKaggle Notebook？",
-          "source": "Reddit MachineLearning Papers",
-          "time": "14:45",
-          "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
+          "title": "🚨 Catch up with the AI industry, August 18, 2025",
+          "title_ja": "AI業界に追いつく、2025年8月18日",
+          "source": "Reddit ArtificialIntelligence",
+          "time": "17:59",
+          "summary": "Patients trust AI medical advice, even when it’s wrong Meta’s internal AI guidelines permit harmful content Google and N...",
           "importance": 10,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
+          "url": "https://www.reddit.com/r/artificial/comments/1mttftg/catch_up_with_the_ai_industry_august_18_2025/",
           "gemini_selected": false
         },
         {
@@ -238,13 +254,13 @@
           "gemini_selected": false
         },
         {
-          "title": "[R] Topological Feature Compression for Molecular Graph Neural Networks",
-          "title_ja": "[R]分子グラフニューラルネットワークのトポロジーフィーチャ圧縮",
+          "title": "How to decide the optimal number of epochs",
+          "title_ja": "最適な数の時代を決定する方法",
           "source": "Reddit DeepLearning",
-          "time": "11:29",
-          "summary": "Contributions:  This paper introduces a novel Graph Neural Network (GNN) architecture called PACTNET that integrates com...",
+          "time": "20:43",
+          "summary": "Hi everyone, I’m still new to machine learning and I’m trying to understand how to choose the right number of training e...",
           "importance": 0,
-          "url": "https://www.reddit.com/r/deeplearning/comments/1mtjdxt/r_topological_feature_compression_for_molecular/",
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mtxxqs/how_to_decide_the_optimal_number_of_epochs/",
           "gemini_selected": false
         }
       ],
@@ -257,50 +273,39 @@
     "market_sentiment": "楽観的",
     "key_developments": [
       {
-        "title": "The Download: pigeons’ role in developing AI, and Native artists’ tech interpretations",
-        "title_ja": "ダウンロード：AIの開発におけるハトの役割、およびネイティブアーティストの技術解釈",
-        "source": "MIT Technology Review AI",
-        "time": "12:10",
-        "summary": "This is today&amp;#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&amp;#8217;s...",
-        "importance": 5,
-        "url": "https://www.technologyreview.com/2025/08/18/1122004/the-download-pigeons-role-in-developing-ai-and-native-artists-tech-interpretations/",
+        "title": "Announcing the Latest NVIDIA Gaming AI and Neural Rendering Technologies",
+        "title_ja": "最新のNvidiaゲームAIおよびニューラルレンダリングテクノロジーの発表",
+        "source": "Nvidia Developer Blog",
+        "time": "19:30",
+        "summary": "Today at Gamescom 2025, NVIDIA unveiled updates to NVIDIA RTX neural rendering and NVIDIA ACE generative AI technologies...",
+        "importance": 10,
+        "url": "https://developer.nvidia.com/blog/announcing-the-latest-nvidia-gaming-ai-and-neural-rendering-technologies/",
         "gemini_selected": false
       },
       {
-        "title": "Why we should thank pigeons for our AI breakthroughs",
-        "title_ja": "AIのブレークスルーについてハトに感謝する必要がある理由",
-        "source": "MIT Technology Review AI",
-        "time": "10:00",
-        "summary": "In 1943, while the world’s brightest physicists split atoms for the Manhattan Project, the American psychologist B.F. Sk...",
-        "importance": 5,
-        "url": "https://www.technologyreview.com/2025/08/18/1121370/ai-pigeons-reinforcement-learning/",
+        "title": "🚨 Catch up with the AI industry, August 18, 2025",
+        "title_ja": "AI業界に追いつく、2025年8月18日",
+        "source": "Reddit AI",
+        "time": "17:59",
+        "summary": "Patients trust AI medical advice, even when it’s wrong Meta’s internal AI guidelines permit harmful content Google and N...",
+        "importance": 10,
+        "url": "https://www.reddit.com/r/artificial/comments/1mttftg/catch_up_with_the_ai_industry_august_18_2025/",
         "gemini_selected": false
       },
       {
-        "title": "LLMs and coding agents are a security nightmare",
-        "title_ja": "LLMSとコーディングエージェントはセキュリティの悪夢です",
-        "source": "Hacker News",
-        "time": "11:04",
-        "summary": "Article URL: https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare\nComments URL: https://news.ycombina...",
-        "importance": 0,
-        "url": "https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare",
+        "title": "Create a travel planning agentic workflow with Amazon Nova",
+        "title_ja": "Amazon Novaで旅行計画エージェントワークフローを作成します",
+        "source": "AWS AI Blog",
+        "time": "20:30",
+        "summary": "In this post, we explore how to build a travel planning solution using AI agents. The agent uses Amazon Nova, which offe...",
+        "importance": 10,
+        "url": "https://aws.amazon.com/blogs/machine-learning/create-a-travel-planning-agentic-workflow-with-amazon-nova/",
         "gemini_selected": false
       }
     ]
   },
   "tech_developments": {
-    "new_releases": [
-      {
-        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
-        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
-        "source": "MarkTechPost",
-        "time": "06:15",
-        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
-        "gemini_selected": false
-      }
-    ],
+    "new_releases": [],
     "breakthrough_tech": [],
     "developer_tools": [],
     "research_highlights": [
@@ -315,8 +320,8 @@
         "gemini_selected": false
       },
       {
-        "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
-        "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+        "title": "Is Perplexity AI’s $34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+        "title_ja": "Perplexity AIの345億ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
         "source": "AI News",
         "time": "14:49",
         "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
@@ -325,13 +330,13 @@
         "gemini_selected": false
       },
       {
-        "title": "[D] Google Collab or Kaggle Notebook?",
-        "title_ja": "[D] Google CollabまたはKaggle Notebook？",
-        "source": "Reddit MachineLearning",
-        "time": "14:45",
-        "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
+        "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
+        "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
+        "source": "MarkTechPost",
+        "time": "06:57",
+        "summary": "The explosive growth of artificial intelligence, particularly large language models (LLMs), has revolutionized how busin...",
         "importance": 10,
-        "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
+        "url": "https://www.marktechpost.com/2025/08/17/is-model-context-protocol-mcp-the-missing-standard-in-ai-infrastructure/",
         "gemini_selected": false
       }
     ]
@@ -339,46 +344,36 @@
   "industry_moves": {
     "most_active_companies": {
       "Google": 5,
-      "Anthropic": 2,
-      "Meta": 2,
-      "DeepMind": 1
+      "Meta": 4,
+      "Anthropic": 3,
+      "NVIDIA": 2,
+      "Apple": 2
     },
-    "partnerships": [
-      {
-        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
-        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
-        "source": "MarkTechPost",
-        "time": "06:15",
-        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
-        "gemini_selected": false
-      }
-    ],
+    "partnerships": [],
     "regulatory_updates": [],
     "talent_moves": []
   },
   "global_trends": {
     "hot_technologies": {
-      "大規模言語モデル": 3,
-      "GPT-4": 2,
-      "企業価値": 2,
-      "政策": 2,
-      "Claude": 1,
-      "マルチモーダル": 1
+      "大規模言語モデル": 12,
+      "生成AI": 4,
+      "政策": 4,
+      "Gemini": 3,
+      "強化学習": 2,
+      "GPT-4": 2
     },
     "emerging_themes": [
       {
         "theme": "大規模言語モデル",
-        "mentions": 3
+        "mentions": 12
       },
       {
-        "theme": "GPT-4",
-        "mentions": 2
+        "theme": "生成AI",
+        "mentions": 4
       },
       {
-        "theme": "企業価値",
-        "mentions": 2
+        "theme": "政策",
+        "mentions": 4
       }
     ],
     "geographic_focus": {},
@@ -388,36 +383,36 @@
   "stats": {
     "total_items": 18,
     "total_sources": 9,
-    "active_companies": 4,
+    "active_companies": 6,
     "top_company": [
       "Google",
       5
     ],
-    "last_updated": "2025-08-19 00:10 JST"
+    "last_updated": "2025-08-19 06:27 JST"
   },
   "x_posts": {
-    "total_count": 209,
+    "total_count": 217,
     "influencer_posts": [
       {
         "username": "@Majin_AppSheet",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@Majin_AppSheet）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://x.com/Majin_AppSheet/status/1956930830326284344/photo/1",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@Majin_AppSheet",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@Majin_AppSheet）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/Majin_AppSheet/status/1956930830326284344",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@alfredplpl",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@alfredplpl）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/alfredplpl/status/1957065303650640337",
         "source": "X/Twitter",
         "quality_score": 5
@@ -426,40 +421,40 @@
     "tech_discussions": [
       {
         "username": "@maru56",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@maru56）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://x.com/maru56/status/1956882934910374149/photo/1",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@maru56",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@maru56）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/maru56/status/1956882934910374149",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@__syumai",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@__syumai）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/__syumai/status/1957030353685668348",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@yahoonewstopics",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@yahoonewstopics）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/yahoonewstopics/status/1956851967378231666",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@sutoroveli",
-        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:10",
+        "summary": "X投稿（@sutoroveli）- AI関連の投稿",
+        "time": "06:27",
         "url": "https://twitter.com/sutoroveli/status/1956974829070168455",
         "source": "X/Twitter",
         "quality_score": 5
@@ -467,12 +462,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 18件のニュース、4社が活動",
+    "headline": "今日のAI業界: 18件のニュース、6社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
-      "🚀 技術開発: 1件の新製品リリース",
+      "🚀 技術開発: 0件の新製品リリース",
       "🏢 企業動向: Googleが最も活発",
-      "💬 SNS: 209件の関連投稿"
+      "💬 SNS: 217件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

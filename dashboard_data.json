@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-19T00:01:36.804895+09:00",
+  "timestamp": "2025-08-19T00:10:17.397880+09:00",
   "date": "2025-08-19",
-  "jst_time": "00:01 JST",
+  "jst_time": "00:10 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -83,11 +83,11 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 10,
+      "count": 11,
       "top_sources": {
         "Reddit MachineLearning": 4,
         "MarkTechPost": 3,
-        "AI News": 1
+        "Machine Learning Mastery": 2
       },
       "top_companies": {
         "Google": 2,
@@ -387,22 +387,21 @@
   "highlights": [],
   "stats": {
     "total_items": 18,
-    "total_sources": 8,
+    "total_sources": 9,
     "active_companies": 4,
     "top_company": [
       "Google",
       5
     ],
-    "last_updated": "2025-08-19 00:01 JST"
+    "last_updated": "2025-08-19 00:10 JST"
   },
   "x_posts": {
     "total_count": 209,
-    "influencer_posts": [],
-    "tech_discussions": [
+    "influencer_posts": [
       {
         "username": "@Majin_AppSheet",
         "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:01",
+        "time": "00:10",
         "url": "https://x.com/Majin_AppSheet/status/1956930830326284344/photo/1",
         "source": "X/Twitter",
         "quality_score": 5
@@ -410,7 +409,7 @@
       {
         "username": "@Majin_AppSheet",
         "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:01",
+        "time": "00:10",
         "url": "https://twitter.com/Majin_AppSheet/status/1956930830326284344",
         "source": "X/Twitter",
         "quality_score": 5
@@ -418,24 +417,50 @@
       {
         "username": "@alfredplpl",
         "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:01",
+        "time": "00:10",
         "url": "https://twitter.com/alfredplpl/status/1957065303650640337",
         "source": "X/Twitter",
         "quality_score": 5
-      },
+      }
+    ],
+    "tech_discussions": [
       {
-        "username": "@shota7180",
+        "username": "@maru56",
         "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:01",
-        "url": "https://x.com/shota7180/status/1957042245548577043/photo/1",
+        "time": "00:10",
+        "url": "https://x.com/maru56/status/1956882934910374149/photo/1",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
-        "username": "@shota7180",
+        "username": "@maru56",
         "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
-        "time": "00:01",
-        "url": "https://twitter.com/shota7180/status/1957042245548577043",
+        "time": "00:10",
+        "url": "https://twitter.com/maru56/status/1956882934910374149",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@__syumai",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:10",
+        "url": "https://twitter.com/__syumai/status/1957030353685668348",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@yahoonewstopics",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:10",
+        "url": "https://twitter.com/yahoonewstopics/status/1956851967378231666",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@sutoroveli",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:10",
+        "url": "https://twitter.com/sutoroveli/status/1956974829070168455",
         "source": "X/Twitter",
         "quality_score": 5
       }

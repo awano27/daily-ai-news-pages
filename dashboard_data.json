@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-18T23:41:51.950736+09:00",
-  "date": "2025-08-18",
-  "jst_time": "23:41 JST",
+  "timestamp": "2025-08-19T00:01:36.804895+09:00",
+  "date": "2025-08-19",
+  "jst_time": "00:01 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -83,14 +83,16 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 7,
+      "count": 10,
       "top_sources": {
+        "Reddit MachineLearning": 4,
         "MarkTechPost": 3,
-        "Reddit MachineLearning": 2,
-        "The Verge": 1
+        "AI News": 1
       },
       "top_companies": {
-        "Anthropic": 2
+        "Google": 2,
+        "Anthropic": 2,
+        "Meta": 1
       },
       "top_keywords": {
         "大規模言語モデル": 2,
@@ -101,6 +103,36 @@
         "マルチモーダル": 1
       },
       "featured_topics": [
+        {
+          "title": "[D] ACL Rolling Review (ARR) 2025 May (EMNLP 2025) Stats",
+          "title_ja": "[D] ACLローリングレビュー（arr）2025 5月（EMNLP 2025）統計",
+          "source": "Reddit MachineLearning",
+          "time": "14:58",
+          "summary": "The stats for ARR May 2025 are out: https://stats.aclrollingreview.org/iterations/2025/may/ It looks like about 25% of s...",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtoewm/d_acl_rolling_review_arr_2025_may_emnlp_2025_stats/",
+          "gemini_selected": false
+        },
+        {
+          "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+          "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+          "source": "AI News",
+          "time": "14:49",
+          "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
+          "importance": 10,
+          "url": "https://www.artificialintelligence-news.com/news/perplexity-ai-chrome-bid-analysis/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[D] Google Collab or Kaggle Notebook?",
+          "title_ja": "[D] Google CollabまたはKaggle Notebook？",
+          "source": "Reddit MachineLearning",
+          "time": "14:45",
+          "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
+          "gemini_selected": false
+        },
         {
           "title": "Claude AI will end &#8216;persistently harmful or abusive user interactions&#8217;",
           "title_ja": "Claude AIは終了します＆＃8216;持続的に有害または虐待的なユーザーインタラクション＆＃8217;",
@@ -130,36 +162,6 @@
           "importance": 5,
           "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
           "gemini_selected": false
-        },
-        {
-          "title": "[P] JAX Implementation of Hindsight Experience Replay (HER)",
-          "title_ja": "[P]後知恵体験リプレイのJAX実装（彼女）",
-          "source": "Reddit MachineLearning",
-          "time": "13:37",
-          "summary": "Hi! I recently discovered the Hindsight Experience Replay (HER) paper and noticed that the official implementation is ba...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtmadk/p_jax_implementation_of_hindsight_experience/",
-          "gemini_selected": false
-        },
-        {
-          "title": "7 NumPy Tricks You Didn’t Know You Needed",
-          "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
-          "source": "Machine Learning Mastery",
-          "time": "12:00",
-          "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
-          "importance": 0,
-          "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
-          "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
-          "source": "Reddit MachineLearning",
-          "time": "06:42",
-          "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
-          "gemini_selected": false
         }
       ],
       "focus_area": "tech"
@@ -167,14 +169,16 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 6,
+      "count": 9,
       "top_sources": {
         "Reddit DeepLearning": 4,
-        "Reddit MachineLearning Papers": 2
+        "Reddit MachineLearning Papers": 4,
+        "AI News": 1
       },
       "top_companies": {
-        "Google": 1,
-        "DeepMind": 1
+        "Google": 3,
+        "DeepMind": 1,
+        "Meta": 1
       },
       "top_keywords": {
         "GPT-4": 1,
@@ -191,6 +195,36 @@
           "summary": "DeepMind has released AlphaEarth Foundations (AEF), a new model trained on billions of multi-modal Earth observation sam...",
           "importance": 15,
           "url": "https://www.reddit.com/r/deeplearning/comments/1mtg7mz/alphaearth_foundations_a_universal_embedding_for/",
+          "gemini_selected": false
+        },
+        {
+          "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+          "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+          "source": "AI News",
+          "time": "14:49",
+          "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
+          "importance": 10,
+          "url": "https://www.artificialintelligence-news.com/news/perplexity-ai-chrome-bid-analysis/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[D] Google Collab or Kaggle Notebook?",
+          "title_ja": "[D] Google CollabまたはKaggle Notebook？",
+          "source": "Reddit MachineLearning Papers",
+          "time": "14:45",
+          "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[D] ACL Rolling Review (ARR) 2025 May (EMNLP 2025) Stats",
+          "title_ja": "[D] ACLローリングレビュー（arr）2025 5月（EMNLP 2025）統計",
+          "source": "Reddit MachineLearning Papers",
+          "time": "14:58",
+          "summary": "The stats for ARR May 2025 are out: https://stats.aclrollingreview.org/iterations/2025/may/ It looks like about 25% of s...",
+          "importance": 10,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtoewm/d_acl_rolling_review_arr_2025_may_emnlp_2025_stats/",
           "gemini_selected": false
         },
         {
@@ -211,36 +245,6 @@
           "summary": "Contributions:  This paper introduces a novel Graph Neural Network (GNN) architecture called PACTNET that integrates com...",
           "importance": 0,
           "url": "https://www.reddit.com/r/deeplearning/comments/1mtjdxt/r_topological_feature_compression_for_molecular/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[R] Families of Optimal Transport Kernels for Cell Complexes",
-          "title_ja": "[R]細胞複合体の最適な輸送カーネルのファミリー",
-          "source": "Reddit DeepLearning",
-          "time": "11:35",
-          "summary": "Abstract: Recent advances have discussed cell complexes as ideal learning representations. However, there is a lack of a...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/deeplearning/comments/1mtjhqh/r_families_of_optimal_transport_kernels_for_cell/",
-          "gemini_selected": false
-        },
-        {
-          "title": "Extremely low result on my deep learning model for masters dissertation - what can I do?",
-          "title_ja": "マスターズの論文のための私の深い学習モデルの非常に低い結果 - 私は何ができますか？",
-          "source": "Reddit DeepLearning",
-          "time": "14:14",
-          "summary": "I'm working on a mask rcnn for breast microcalcification instance segmentation with mask rcnn using detecron2. It took m...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/deeplearning/comments/1mtn964/extremely_low_result_on_my_deep_learning_model/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[P] JAX Implementation of Hindsight Experience Replay (HER)",
-          "title_ja": "[P]後知恵体験リプレイのJAX実装（彼女）",
-          "source": "Reddit MachineLearning Papers",
-          "time": "13:37",
-          "summary": "Hi! I recently discovered the Hindsight Experience Replay (HER) paper and noticed that the official implementation is ba...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtmadk/p_jax_implementation_of_hindsight_experience/",
           "gemini_selected": false
         }
       ],
@@ -298,55 +302,45 @@
       }
     ],
     "breakthrough_tech": [],
-    "developer_tools": [
-      {
-        "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
-        "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
-        "source": "Reddit MachineLearning",
-        "time": "06:42",
-        "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
-        "importance": 0,
-        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
-        "gemini_selected": false
-      }
-    ],
+    "developer_tools": [],
     "research_highlights": [
       {
-        "title": "Claude AI will end &#8216;persistently harmful or abusive user interactions&#8217;",
-        "title_ja": "Claude AIは終了します＆＃8216;持続的に有害または虐待的なユーザーインタラクション＆＃8217;",
-        "source": "The Verge",
-        "time": "14:13",
-        "summary": "Anthropic’s Claude AI chatbot can now end conversations deemed “persistently harmful or abusive,” as spotted earlier by ...",
+        "title": "[D] ACL Rolling Review (ARR) 2025 May (EMNLP 2025) Stats",
+        "title_ja": "[D] ACLローリングレビュー（arr）2025 5月（EMNLP 2025）統計",
+        "source": "Reddit MachineLearning",
+        "time": "14:58",
+        "summary": "The stats for ARR May 2025 are out: https://stats.aclrollingreview.org/iterations/2025/may/ It looks like about 25% of s...",
         "importance": 10,
-        "url": "https://www.theverge.com/news/760561/anthropic-claude-ai-chatbot-end-harmful-conversations",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtoewm/d_acl_rolling_review_arr_2025_may_emnlp_2025_stats/",
         "gemini_selected": false
       },
       {
-        "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
-        "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
-        "source": "MarkTechPost",
-        "time": "06:57",
-        "summary": "The explosive growth of artificial intelligence, particularly large language models (LLMs), has revolutionized how busin...",
+        "title": "Is Perplexity AI’s US$34.5b Chrome bid a strategic master stroke or elaborate PR stunt?",
+        "title_ja": "Perplexity AIの345億米ドルのChrome入札は、戦略的なマスターストロークまたは精巧なPRスタントですか？",
+        "source": "AI News",
+        "time": "14:49",
+        "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
         "importance": 10,
-        "url": "https://www.marktechpost.com/2025/08/17/is-model-context-protocol-mcp-the-missing-standard-in-ai-infrastructure/",
+        "url": "https://www.artificialintelligence-news.com/news/perplexity-ai-chrome-bid-analysis/",
         "gemini_selected": false
       },
       {
-        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
-        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
-        "source": "MarkTechPost",
-        "time": "06:15",
-        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
+        "title": "[D] Google Collab or Kaggle Notebook?",
+        "title_ja": "[D] Google CollabまたはKaggle Notebook？",
+        "source": "Reddit MachineLearning",
+        "time": "14:45",
+        "summary": "I'm currently learning Machine Learning and I wanna try out some Kaggle datasets to practice Data Analysis and Feature E...",
+        "importance": 10,
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mto2hz/d_google_collab_or_kaggle_notebook/",
         "gemini_selected": false
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
+      "Google": 5,
       "Anthropic": 2,
-      "Google": 1,
+      "Meta": 2,
       "DeepMind": 1
     },
     "partnerships": [
@@ -394,66 +388,66 @@
   "stats": {
     "total_items": 18,
     "total_sources": 8,
-    "active_companies": 3,
+    "active_companies": 4,
     "top_company": [
-      "Anthropic",
-      2
+      "Google",
+      5
     ],
-    "last_updated": "2025-08-18 23:41 JST"
+    "last_updated": "2025-08-19 00:01 JST"
   },
   "x_posts": {
-    "total_count": 124,
+    "total_count": 209,
     "influencer_posts": [],
     "tech_discussions": [
       {
         "username": "@Majin_AppSheet",
-        "summary": "noteでスキ1000の瞬間をスクショできた✨ https://t.co/etU8XNZt4e",
-        "time": "04:07",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:01",
+        "url": "https://x.com/Majin_AppSheet/status/1956930830326284344/photo/1",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@Majin_AppSheet",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:01",
         "url": "https://twitter.com/Majin_AppSheet/status/1956930830326284344",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@alfredplpl",
-        "summary": "お、サイバーエージェントが日本語報酬モデル出してる\n\nhttps://t.co/AHNdCd2O0M",
-        "time": "13:01",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:01",
         "url": "https://twitter.com/alfredplpl/status/1957065303650640337",
         "source": "X/Twitter",
         "quality_score": 5
       },
       {
         "username": "@shota7180",
-        "summary": "AIの進化、速すぎてもう無理…\n\n今週の最新AIニュースを1枚の図解にまとめました！\n\n1分でトレン...",
-        "time": "11:30",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:01",
+        "url": "https://x.com/shota7180/status/1957042245548577043/photo/1",
+        "source": "X/Twitter",
+        "quality_score": 5
+      },
+      {
+        "username": "@shota7180",
+        "summary": "手動で「いいね」したポストから自動抽出（要約なし）",
+        "time": "00:01",
         "url": "https://twitter.com/shota7180/status/1957042245548577043",
-        "source": "X/Twitter",
-        "quality_score": 5
-      },
-      {
-        "username": "@maru56",
-        "summary": "メルカリがai nativeカンパニーって言ってあり、DeNA もAIって言ってるけど、\n\nだいたい...",
-        "time": "00:57",
-        "url": "https://twitter.com/maru56/status/1956882934910374149",
-        "source": "X/Twitter",
-        "quality_score": 5
-      },
-      {
-        "username": "@__syumai",
-        "summary": "“生成AIの生成物を必要に応じて「捨てる」ことができる” のが大事なのわかる\n\n生成AIの成果物に責...",
-        "time": "10:42",
-        "url": "https://twitter.com/__syumai/status/1957030353685668348",
         "source": "X/Twitter",
         "quality_score": 5
       }
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 18件のニュース、3社が活動",
+    "headline": "今日のAI業界: 18件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
-      "🏢 企業動向: Anthropicが最も活発",
-      "💬 SNS: 124件の関連投稿"
+      "🏢 企業動向: Googleが最も活発",
+      "💬 SNS: 209件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

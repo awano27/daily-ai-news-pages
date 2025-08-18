@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-18T20:23:55.420132+09:00",
+  "timestamp": "2025-08-18T20:33:36.996589+09:00",
   "date": "2025-08-18",
-  "jst_time": "20:23 JST",
+  "jst_time": "20:33 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -172,10 +172,10 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 4,
+      "count": 5,
       "top_sources": {
+        "Reddit DeepLearning": 2,
         "Reddit MachineLearning Papers": 2,
-        "Reddit DeepLearning": 1,
         "Reddit ArtificialIntelligence": 1
       },
       "top_companies": {
@@ -185,7 +185,8 @@
       "top_keywords": {
         "GPT-4": 2,
         "企業価値": 1,
-        "政策": 1
+        "政策": 1,
+        "ニューラルネット": 1
       },
       "featured_topics": [
         {
@@ -216,6 +217,16 @@
           "summary": "250818 | Rhythm Tuning Experiment After August 8, GPT-4o returned. Same architecture. Same tone. But it felt… desynchron...",
           "importance": 0,
           "url": "https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[R] Topological Feature Compression for Molecular Graph Neural Networks",
+          "title_ja": "[R]分子グラフニューラルネットワークのトポロジーフィーチャ圧縮",
+          "source": "Reddit DeepLearning",
+          "time": "11:29",
+          "summary": "Contributions:  This paper introduces a novel Graph Neural Network (GNN) architecture called PACTNET that integrates com...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mtjdxt/r_topological_feature_compression_for_molecular/",
           "gemini_selected": false
         },
         {
@@ -378,14 +389,14 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 16,
+    "total_items": 17,
     "total_sources": 9,
     "active_companies": 4,
     "top_company": [
       "OpenAI",
       2
     ],
-    "last_updated": "2025-08-18 20:23 JST"
+    "last_updated": "2025-08-18 20:33 JST"
   },
   "x_posts": {
     "total_count": 119,
@@ -434,7 +445,7 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 16件のニュース、4社が活動",
+    "headline": "今日のAI業界: 17件のニュース、4社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",

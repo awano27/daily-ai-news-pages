@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-19T07:11:10.069474+09:00",
+  "timestamp": "2025-08-19T07:19:45.233748+09:00",
   "date": "2025-08-19",
-  "jst_time": "07:11 JST",
+  "jst_time": "07:19 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -96,9 +96,9 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 7,
+      "count": 8,
       "top_sources": {
-        "Reddit MachineLearning": 3,
+        "Reddit MachineLearning": 4,
         "Machine Learning Mastery": 2,
         "Towards Data Science": 1
       },
@@ -107,7 +107,7 @@
         "Google": 1
       },
       "top_keywords": {
-        "大規模言語モデル": 2
+        "大規模言語モデル": 3
       },
       "featured_topics": [
         {
@@ -128,6 +128,16 @@
           "summary": "The artificial intelligence company Perplexity&amp;#8217;s audacious offer to acquire Chrome has sent shockwaves through...",
           "importance": 10,
           "url": "https://www.artificialintelligence-news.com/news/perplexity-ai-chrome-bid-analysis/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[R]Too much of a good thing: how chasing scale is stifling AI innovation",
+          "title_ja": "[R]あまりにも良いこと：スケールを追いかけることがAIイノベーションを息苦しくしている方法",
+          "source": "Reddit MachineLearning",
+          "time": "22:12",
+          "summary": "Dear r/MachineLearning friends, Hello everyone! I hope you are all doing well out there. I've been observing a pattern i...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mu0az6/rtoo_much_of_a_good_thing_how_chasing_scale_is/",
           "gemini_selected": false
         },
         {
@@ -159,16 +169,6 @@
           "importance": 0,
           "url": "https://machinelearningmastery.com/how-to-diagnose-why-your-classification-model-fails/",
           "gemini_selected": false
-        },
-        {
-          "title": "[P] JAX Implementation of Hindsight Experience Replay (HER)",
-          "title_ja": "[P]後知恵体験リプレイのJAX実装（彼女）",
-          "source": "Reddit MachineLearning",
-          "time": "13:37",
-          "summary": "Hi! I recently discovered the Hindsight Experience Replay (HER) paper and noticed that the official implementation is ba...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtmadk/p_jax_implementation_of_hindsight_experience/",
-          "gemini_selected": false
         }
       ],
       "focus_area": "tech"
@@ -176,11 +176,11 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 20,
+      "count": 21,
       "top_sources": {
         "Reddit DeepLearning": 8,
         "Reddit ArtificialIntelligence": 5,
-        "Reddit MachineLearning Papers": 3
+        "Reddit MachineLearning Papers": 4
       },
       "top_companies": {
         "Google": 3,
@@ -190,7 +190,7 @@
         "Apple": 1
       },
       "top_keywords": {
-        "大規模言語モデル": 7,
+        "大規模言語モデル": 8,
         "Gemini": 2,
         "政策": 2,
         "Transformer": 1,
@@ -241,6 +241,16 @@
           "gemini_selected": false
         },
         {
+          "title": "[R]Too much of a good thing: how chasing scale is stifling AI innovation",
+          "title_ja": "[R]あまりにも良いこと：スケールを追いかけることがAIイノベーションを息苦しくしている方法",
+          "source": "Reddit MachineLearning Papers",
+          "time": "22:12",
+          "summary": "Dear r/MachineLearning friends, Hello everyone! I hope you are all doing well out there. I've been observing a pattern i...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mu0az6/rtoo_much_of_a_good_thing_how_chasing_scale_is/",
+          "gemini_selected": false
+        },
+        {
           "title": "How to decide the optimal number of epochs",
           "title_ja": "最適な数の時代を決定する方法",
           "source": "Reddit DeepLearning",
@@ -248,16 +258,6 @@
           "summary": "Hi everyone, I’m still new to machine learning and I’m trying to understand how to choose the right number of training e...",
           "importance": 0,
           "url": "https://www.reddit.com/r/deeplearning/comments/1mtxxqs/how_to_decide_the_optimal_number_of_epochs/",
-          "gemini_selected": false
-        },
-        {
-          "title": "Extremely low result on my deep learning model for masters dissertation - what can I do?",
-          "title_ja": "マスターズの論文のための私の深い学習モデルの非常に低い結果 - 私は何ができますか？",
-          "source": "Reddit DeepLearning",
-          "time": "14:14",
-          "summary": "I'm working on a mask rcnn for breast microcalcification instance segmentation with mask rcnn using detecron2. It took m...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/deeplearning/comments/1mtn964/extremely_low_result_on_my_deep_learning_model/",
           "gemini_selected": false
         }
       ],
@@ -327,13 +327,13 @@
         "gemini_selected": false
       },
       {
-        "title": "[D] Context engineering as a skill",
-        "title_ja": "[D]スキルとしてのコンテキストエンジニアリング",
+        "title": "[R]Too much of a good thing: how chasing scale is stifling AI innovation",
+        "title_ja": "[R]あまりにも良いこと：スケールを追いかけることがAIイノベーションを息苦しくしている方法",
         "source": "Reddit MachineLearning",
-        "time": "19:27",
-        "summary": "I came across this concept a few weeks ago, and I really think it’s well descriptive for the work AI engineers do on a d...",
+        "time": "22:12",
+        "summary": "Dear r/MachineLearning friends, Hello everyone! I hope you are all doing well out there. I've been observing a pattern i...",
         "importance": 0,
-        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtvw96/d_context_engineering_as_a_skill/",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mu0az6/rtoo_much_of_a_good_thing_how_chasing_scale_is/",
         "gemini_selected": false
       }
     ]
@@ -352,7 +352,7 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "大規模言語モデル": 13,
+      "大規模言語モデル": 15,
       "生成AI": 4,
       "政策": 3,
       "Gemini": 3,
@@ -362,7 +362,7 @@
     "emerging_themes": [
       {
         "theme": "大規模言語モデル",
-        "mentions": 13
+        "mentions": 15
       },
       {
         "theme": "生成AI",
@@ -385,14 +385,14 @@
       "Google",
       5
     ],
-    "last_updated": "2025-08-19 07:11 JST"
+    "last_updated": "2025-08-19 07:19 JST"
   },
   "x_posts": {
     "total_count": 134,
     "influencer_posts": [
       {
         "username": "@alfredplpl",
-        "summary": "お、サイバーエージェントが日本語報酬モデル出してる\n\nhttps://t.co/AHNdCd2O0M",
+        "summary": "お、サイバーエージェントが日本語報酬モデル出してる\n\nhttps://t.co/AHNdCd2O0M | AI/技術関連の投稿",
         "time": "13:01",
         "url": "https://twitter.com/alfredplpl/status/1957065303650640337",
         "source": "X/Twitter",
@@ -442,7 +442,7 @@
       },
       {
         "username": "@rasbt",
-        "summary": "Couldn't resist. \nHere's a pure PyTorch from-scratch re-implementation of Gemma 3 270M in a Jupyter Notebook (uses about 1.49 GB RAM): https://t.co/M2f8EB0KBE https://t.co/9vF9U29pWh https://t.co/S8ps...",
+        "summary": "Couldn't resist. \nHere's a pure PyTorch from-scratch re-implementation of Gemma 3 270M in a Jupyter Notebook (uses about 1.49 GB RAM): https://t.co/M2f8EB0KBE https://t.co/9vF9U29pWh https://t.co/S8psrne2rJ | AI/技術関連の投稿",
         "time": "13:35",
         "url": "https://twitter.com/rasbt/status/1957073842393792751",
         "source": "X/Twitter",

@@ -1,34 +1,31 @@
 {
-  "timestamp": "2025-08-18T20:33:36.996589+09:00",
+  "timestamp": "2025-08-18T21:39:30.995068+09:00",
   "date": "2025-08-18",
-  "jst_time": "20:33 JST",
+  "jst_time": "21:39 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
       "count": 8,
       "top_sources": {
+        "MIT Technology Review AI": 2,
         "Hacker News": 2,
-        "ASCII.jp AI・IoT": 2,
-        "TechCrunch Japan": 1
+        "ASCII.jp AI・IoT": 2
       },
-      "top_companies": {
-        "OpenAI": 1
-      },
+      "top_companies": {},
       "top_keywords": {
         "大規模言語モデル": 2,
-        "GPT-5": 1,
         "GPT-4": 1
       },
       "featured_topics": [
         {
-          "title": "GPT-5 is supposed to be nicer now",
-          "title_ja": "GPT-5は今より良いと思われます",
-          "source": "TechCrunch Japan",
-          "time": "21:08",
-          "summary": "OpenAI announced late Friday that it’s updating its latest model to be “warmer and friendlier.”",
-          "importance": 10,
-          "url": "https://techcrunch.com/2025/08/17/gpt-5-is-supposed-to-be-nicer-now/",
+          "title": "The Download: pigeons’ role in developing AI, and Native artists’ tech interpretations",
+          "title_ja": "ダウンロード：AIの開発におけるハトの役割、およびネイティブアーティストの技術解釈",
+          "source": "MIT Technology Review AI",
+          "time": "12:10",
+          "summary": "This is today&amp;#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&amp;#8217;s...",
+          "importance": 5,
+          "url": "https://www.technologyreview.com/2025/08/18/1122004/the-download-pigeons-role-in-developing-ai-and-native-artists-tech-interpretations/",
           "gemini_selected": false
         },
         {
@@ -52,8 +49,8 @@
           "gemini_selected": false
         },
         {
-          "title": "LLMs and Coding Agents = Security Nightmare",
-          "title_ja": "LLMSおよびコーディングエージェント=セキュリティナイトメア",
+          "title": "LLMs and coding agents are a security nightmare",
+          "title_ja": "LLMSとコーディングエージェントはセキュリティの悪夢です",
           "source": "Hacker News",
           "time": "11:04",
           "summary": "Article URL: https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare\nComments URL: https://news.ycombina...",
@@ -91,19 +88,17 @@
       "top_sources": {
         "MarkTechPost": 3,
         "Reddit MachineLearning": 2,
-        "TechCrunch": 1
+        "Machine Learning Mastery": 1
       },
       "top_companies": {
-        "Anthropic": 1,
-        "OpenAI": 1
+        "Anthropic": 1
       },
       "top_keywords": {
         "大規模言語モデル": 2,
         "GPT-4": 1,
         "企業価値": 1,
         "政策": 1,
-        "マルチモーダル": 1,
-        "GPT-5": 1
+        "マルチモーダル": 1
       },
       "featured_topics": [
         {
@@ -117,16 +112,6 @@
           "gemini_selected": false
         },
         {
-          "title": "GPT-5 is supposed to be nicer now",
-          "title_ja": "GPT-5は今より良いと思われます",
-          "source": "TechCrunch",
-          "time": "21:08",
-          "summary": "OpenAI announced late Friday that it’s updating its latest model to be “warmer and friendlier.”",
-          "importance": 10,
-          "url": "https://techcrunch.com/2025/08/17/gpt-5-is-supposed-to-be-nicer-now/",
-          "gemini_selected": false
-        },
-        {
           "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
           "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
           "source": "MarkTechPost",
@@ -134,6 +119,16 @@
           "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
           "importance": 5,
           "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
+          "gemini_selected": false
+        },
+        {
+          "title": "7 NumPy Tricks You Didn’t Know You Needed",
+          "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
+          "source": "Machine Learning Mastery",
+          "time": "12:00",
+          "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
+          "importance": 0,
+          "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
           "gemini_selected": false
         },
         {
@@ -172,9 +167,9 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 5,
+      "count": 6,
       "top_sources": {
-        "Reddit DeepLearning": 2,
+        "Reddit DeepLearning": 3,
         "Reddit MachineLearning Papers": 2,
         "Reddit ArtificialIntelligence": 1
       },
@@ -230,6 +225,16 @@
           "gemini_selected": false
         },
         {
+          "title": "[R] Families of Optimal Transport Kernels for Cell Complexes",
+          "title_ja": "[R]細胞複合体の最適な輸送カーネルのファミリー",
+          "source": "Reddit DeepLearning",
+          "time": "11:35",
+          "summary": "Abstract: Recent advances have discussed cell complexes as ideal learning representations. However, there is a lack of a...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mtjhqh/r_families_of_optimal_transport_kernels_for_cell/",
+          "gemini_selected": false
+        },
+        {
           "title": "[D] - Multi Class Address Classification",
           "title_ja": "[D]  - マルチクラスアドレス分類",
           "source": "Reddit MachineLearning Papers",
@@ -249,13 +254,13 @@
     "market_sentiment": "楽観的",
     "key_developments": [
       {
-        "title": "GPT-5 is supposed to be nicer now",
-        "title_ja": "GPT-5は今より良いと思われます",
-        "source": "TechCrunch Japan",
-        "time": "21:08",
-        "summary": "OpenAI announced late Friday that it’s updating its latest model to be “warmer and friendlier.”",
-        "importance": 10,
-        "url": "https://techcrunch.com/2025/08/17/gpt-5-is-supposed-to-be-nicer-now/",
+        "title": "The Download: pigeons’ role in developing AI, and Native artists’ tech interpretations",
+        "title_ja": "ダウンロード：AIの開発におけるハトの役割、およびネイティブアーティストの技術解釈",
+        "source": "MIT Technology Review AI",
+        "time": "12:10",
+        "summary": "This is today&amp;#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&amp;#8217;s...",
+        "importance": 5,
+        "url": "https://www.technologyreview.com/2025/08/18/1122004/the-download-pigeons-role-in-developing-ai-and-native-artists-tech-interpretations/",
         "gemini_selected": false
       },
       {
@@ -318,16 +323,6 @@
         "gemini_selected": false
       },
       {
-        "title": "GPT-5 is supposed to be nicer now",
-        "title_ja": "GPT-5は今より良いと思われます",
-        "source": "TechCrunch",
-        "time": "21:08",
-        "summary": "OpenAI announced late Friday that it’s updating its latest model to be “warmer and friendlier.”",
-        "importance": 10,
-        "url": "https://techcrunch.com/2025/08/17/gpt-5-is-supposed-to-be-nicer-now/",
-        "gemini_selected": false
-      },
-      {
         "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
         "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
         "source": "MarkTechPost",
@@ -336,12 +331,21 @@
         "importance": 5,
         "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
         "gemini_selected": false
+      },
+      {
+        "title": "7 NumPy Tricks You Didn’t Know You Needed",
+        "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
+        "source": "Machine Learning Mastery",
+        "time": "12:00",
+        "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
+        "importance": 0,
+        "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
+        "gemini_selected": false
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "OpenAI": 2,
       "Anthropic": 1,
       "Google": 1,
       "DeepMind": 1
@@ -365,10 +369,10 @@
     "hot_technologies": {
       "大規模言語モデル": 4,
       "GPT-4": 4,
-      "GPT-5": 2,
       "企業価値": 2,
       "政策": 2,
-      "マルチモーダル": 1
+      "マルチモーダル": 1,
+      "ニューラルネット": 1
     },
     "emerging_themes": [
       {
@@ -380,7 +384,7 @@
         "mentions": 4
       },
       {
-        "theme": "GPT-5",
+        "theme": "企業価値",
         "mentions": 2
       }
     ],
@@ -389,17 +393,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 17,
+    "total_items": 18,
     "total_sources": 9,
-    "active_companies": 4,
+    "active_companies": 3,
     "top_company": [
-      "OpenAI",
-      2
+      "Anthropic",
+      1
     ],
-    "last_updated": "2025-08-18 20:33 JST"
+    "last_updated": "2025-08-18 21:39 JST"
   },
   "x_posts": {
-    "total_count": 119,
+    "total_count": 123,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -445,12 +449,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 17件のニュース、4社が活動",
+    "headline": "今日のAI業界: 18件のニュース、3社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
-      "🏢 企業動向: OpenAIが最も活発",
-      "💬 SNS: 119件の関連投稿"
+      "🏢 企業動向: Anthropicが最も活発",
+      "💬 SNS: 123件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

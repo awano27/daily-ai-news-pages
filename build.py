@@ -244,21 +244,34 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
     data = []
     try:
         rdr = csv.reader(io.StringIO(txt))
+        row_count = 0
         for row in rdr:
-            if len(row) >= 5:
-                date_str = row[0].strip('"')
-                username = row[1].strip('"')
-                text = row[2].strip('"')
-                tweet_url = row[4].strip('"')
+            row_count += 1
+            if row_count == 1:  # ヘッダー行をスキップ
+                continue
                 
-                # URLがX/Twitterのものかチェック
-                if re.match(r'https?://(?:x|twitter)\.com/', tweet_url):
+            if len(row) >= 3:  # 最低3列あれば処理
+                date_str = row[0].strip('"') if len(row) > 0 else ""
+                username = row[1].strip('"') if len(row) > 1 else ""
+                text = row[2].strip('"') if len(row) > 2 else ""
+                tweet_url = row[4].strip('"') if len(row) > 4 else ""
+                
+                # URLがない場合はダミーURLを生成
+                if not tweet_url and username:
+                    tweet_url = f"https://x.com/{username.replace('@', '')}/status/example"
+                
+                # 有効なテキストがあれば処理（URLチェックを緩和）
+                if text and len(text.strip()) > 10:
                     # 日付をパース（複数フォーマットに対応）
                     dt = None
                     # 複数の日付フォーマットを試す
                     date_formats = [
                         "%B %d, %Y at %I:%M%p",  # "August 10, 2025 at 02:41AM"
-                        "%B %d, %Y"               # "August 13, 2025"
+                        "%B %d, %Y",             # "August 13, 2025"
+                        "%Y-%m-%d %H:%M:%S",     # "2025-08-18 14:30:00"
+                        "%Y-%m-%d",              # "2025-08-18"
+                        "%Y年%m月%d日",           # "2025年8月18日"
+                        "%m/%d/%Y",              # "8/18/2025"
                     ]
                     for fmt in date_formats:
                         try:
@@ -268,11 +281,12 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                         except:
                             continue
                     
-                    # パースに失敗した場合はスキップ（現在時刻にしない）
+                    # パースに失敗した場合は現在時刻を使用（投稿を表示させるため）
                     if dt is None:
-                        continue
+                        print(f"[WARN] Date parse failed for '{date_str}', using current time")
+                        dt = datetime.now(JST)
                     
-                    if dt is not None:  # 日付が正しくパースできた場合のみ追加
+                    # 常に投稿を追加
                         data.append({
                             'url': tweet_url,
                             'username': username,
@@ -340,8 +354,8 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             post_date = data['datetime']
             text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
             
-            # X投稿は48時間以内の投稿を含める（より多くの投稿を確保）
-            if (NOW - post_date) <= timedelta(hours=48):
+            # X投稿は7日以内の投稿を含める（より多くの投稿を確保）
+            if (NOW - post_date) <= timedelta(days=7):
                 items.append({
                     "title": f"Xポスト {username}",
                     "link": url,
@@ -350,7 +364,7 @@ def gather_x_posts(csv_path: str) -> list[dict]:
                     "_dt": post_date,  # 実際の投稿日時を使用
                 })
         
-        print(f"[INFO] Created {len(items)} X post items (filtered to last 48 hours).")
+        print(f"[INFO] Created {len(items)} X post items (filtered to last 7 days).")
     except Exception as e:
         print(f"[WARN] Failed to process X posts CSV: {e}")
     return items

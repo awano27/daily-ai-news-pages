@@ -251,17 +251,20 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                 continue
                 
             if len(row) >= 3:  # 最低3列あれば処理
-                date_str = row[0].strip('"') if len(row) > 0 else ""
-                username = row[1].strip('"') if len(row) > 1 else ""
-                text = row[2].strip('"') if len(row) > 2 else ""
-                tweet_url = row[4].strip('"') if len(row) > 4 else ""
+                date_str = row[0].strip('"').strip() if len(row) > 0 else ""
+                username = row[1].strip('"').strip() if len(row) > 1 else ""
+                text = row[2].strip('"').strip() if len(row) > 2 else ""
+                tweet_url = row[4].strip('"').strip() if len(row) > 4 else ""
                 
                 # URLがない場合はダミーURLを生成
                 if not tweet_url and username:
-                    tweet_url = f"https://x.com/{username.replace('@', '')}/status/example"
+                    username_clean = username.replace('@', '').replace('"', '')
+                    tweet_url = f"https://x.com/{username_clean}/status/example"
+                elif not tweet_url:
+                    tweet_url = "https://x.com/unknown/status/example"
                 
-                # 有効なテキストがあれば処理（URLチェックを緩和）
-                if text and len(text.strip()) > 10:
+                # 有効なテキストがあれば処理（条件を大幅に緩和）
+                if text and len(text.strip()) > 5:  # 5文字以上あれば処理
                     # 日付をパース（複数フォーマットに対応）
                     dt = None
                     # 複数の日付フォーマットを試す
@@ -352,19 +355,23 @@ def gather_x_posts(csv_path: str) -> list[dict]:
             url = data['url']
             username = data['username'] or _author_from_url(url)
             post_date = data['datetime']
-            text_preview = data['text'][:50] + '...' if len(data['text']) > 50 else data['text']
+            # フルテキストも保持（プレビューとは別に）
+            full_text = data['text']
+            text_preview = data['text'][:150] + '...' if len(data['text']) > 150 else data['text']
             
-            # X投稿は7日以内の投稿を含める（より多くの投稿を確保）
-            if (NOW - post_date) <= timedelta(days=7):
+            # X投稿は時間フィルター無効化（すべての投稿を含める）
+            # if (NOW - post_date) <= timedelta(days=7):  # 時間フィルター無効化
+            if True:  # すべての投稿を処理
                 items.append({
                     "title": f"Xポスト {username}",
                     "link": url,
-                    "_summary": text_preview or "手動で「いいね」したポストから自動抽出（要約なし）",
+                    "_summary": text_preview or "X投稿データ",
+                    "_full_text": full_text,  # フルテキストを追加
                     "_source": "X / SNS", 
                     "_dt": post_date,  # 実際の投稿日時を使用
                 })
         
-        print(f"[INFO] Created {len(items)} X post items (filtered to last 7 days).")
+        print(f"[INFO] Created {len(items)} X post items (time filter disabled).")
     except Exception as e:
         print(f"[WARN] Failed to process X posts CSV: {e}")
     return items

@@ -951,10 +951,16 @@ def fallback_x_post_analysis(x_posts):
             if match:
                 username = f"@{match.group(1)}"
         
+        # フルテキストを優先的に取得、なければ_summaryを使用
+        actual_text = post.get('_full_text', '') or post.get('_summary', '')
+        # テキストが空の場合のフォールバック
+        if not actual_text or actual_text == "X投稿データ":
+            actual_text = f"X投稿（@{username.replace('@', '')}）- AI関連の投稿"
+        
         post_data = {
             'username': username or '@Anonymous',
-            'summary': post['_summary'][:120] + ('...' if len(post['_summary']) > 120 else ''),
-            'time': post['_dt'].strftime('%H:%M'),
+            'summary': actual_text[:200] + ('...' if len(actual_text) > 200 else ''),
+            'time': post.get('_dt', datetime.now()).strftime('%H:%M') if post.get('_dt') else '00:10',
             'url': post.get('link', '#'),
             'source': 'X/Twitter',
             'quality_score': 5

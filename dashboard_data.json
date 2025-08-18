@@ -1,25 +1,24 @@
 {
-  "timestamp": "2025-08-18T14:59:16.816661+09:00",
+  "timestamp": "2025-08-18T20:23:55.420132+09:00",
   "date": "2025-08-18",
-  "jst_time": "14:59 JST",
+  "jst_time": "20:23 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
       "icon": "💼",
-      "count": 6,
+      "count": 8,
       "top_sources": {
-        "Hacker News": 3,
-        "TechCrunch Japan": 1,
-        "Reddit AI": 1
+        "Hacker News": 2,
+        "ASCII.jp AI・IoT": 2,
+        "TechCrunch Japan": 1
       },
       "top_companies": {
         "OpenAI": 1
       },
       "top_keywords": {
-        "Claude": 2,
+        "大規模言語モデル": 2,
         "GPT-5": 1,
-        "GPT-4": 1,
-        "大規模言語モデル": 1
+        "GPT-4": 1
       },
       "featured_topics": [
         {
@@ -33,6 +32,16 @@
           "gemini_selected": false
         },
         {
+          "title": "Why we should thank pigeons for our AI breakthroughs",
+          "title_ja": "AIのブレークスルーについてハトに感謝する必要がある理由",
+          "source": "MIT Technology Review AI",
+          "time": "10:00",
+          "summary": "In 1943, while the world’s brightest physicists split atoms for the Manhattan Project, the American psychologist B.F. Sk...",
+          "importance": 5,
+          "url": "https://www.technologyreview.com/2025/08/18/1121370/ai-pigeons-reinforcement-learning/",
+          "gemini_selected": false
+        },
+        {
           "title": "GPT feels colder. What if it’s not tone — but rhythm that’s gone?",
           "title_ja": "GPTは冷たく感じます。トーンではない場合はどうなりますか？",
           "source": "Reddit AI",
@@ -43,43 +52,33 @@
           "gemini_selected": false
         },
         {
-          "title": "Show HN: ASCII Tree Editor",
-          "title_ja": "HNを表示：ASCIIツリーエディター",
+          "title": "LLMs and Coding Agents = Security Nightmare",
+          "title_ja": "LLMSおよびコーディングエージェント=セキュリティナイトメア",
           "source": "Hacker News",
-          "time": "02:52",
-          "summary": "Show HN: ASCII Tree EditorI've created a web-based editor for ASCII file directory trees called asciitreeman. It's desig...",
+          "time": "11:04",
+          "summary": "Article URL: https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare\nComments URL: https://news.ycombina...",
           "importance": 0,
-          "url": "https://asciitree.reorx.com/",
+          "url": "https://garymarcus.substack.com/p/llms-coding-agents-security-nightmare",
           "gemini_selected": false
         },
         {
-          "title": "Claudia – Desktop companion for Claude code",
-          "title_ja": "Claudia  -  Claude Codeのデスクトップコンパニオン",
-          "source": "Hacker News",
-          "time": "17:26",
-          "summary": "Article URL: https://claudiacode.com/\nComments URL: https://news.ycombinator.com/item?id=44933255\nPoints: 366\n# Comments...",
+          "title": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
+          "title_ja": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
+          "source": "ASCII.jp AI・IoT",
+          "time": "08:30",
+          "summary": "投信の最新情報に関する記事4本を「みんかぶ（投資信託）」に掲載しました 2025年8月",
           "importance": 0,
-          "url": "https://claudiacode.com/",
+          "url": "https://ascii.jp/elem/000/004/313/4313183/?rss",
           "gemini_selected": false
         },
         {
-          "title": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
-          "title_ja": "PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？",
-          "source": "ITmedia AI・機械学習",
-          "time": "01:00",
-          "summary": "「クラウドなら従来のIT課題は解決できる」と期待してクラウドシフトしたものの、後でコスト増や運用負荷の落とし穴にはまる場合がある。こうした「クラウド移行の“誤算”」から脱却し、コストと運用を最適化するための“第3の選択肢”とは何か。",
+          "title": "ポータブル電源「ポポフmini」シリーズ登場　ABW最適・800g・3台同時給電【9月発売】",
+          "title_ja": "ポータブル電源「ポポフmini」シリーズ登場　ABW最適・800g・3台同時給電【9月発売】",
+          "source": "ASCII.jp AI・IoT",
+          "time": "08:15",
+          "summary": "シーテック株式会社が、個人利用に最適化された新しいポータブル電源「ポポフmini」シリーズを2025年9月に発売開始予定。",
           "importance": 0,
-          "url": "https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html",
-          "gemini_selected": false
-        },
-        {
-          "title": "Llama-Scan: Convert PDFs to Text W Local LLMs",
-          "title_ja": "Llama-Scan：PDFをローカルLLMSにテキストに変換します",
-          "source": "Hacker News",
-          "time": "21:40",
-          "summary": "Article URL: https://github.com/ngafar/llama-scan\nComments URL: https://news.ycombinator.com/item?id=44935169\nPoints: 10...",
-          "importance": 0,
-          "url": "https://github.com/ngafar/llama-scan",
+          "url": "https://ascii.jp/elem/000/004/313/4313168/?rss",
           "gemini_selected": false
         }
       ],
@@ -88,21 +87,35 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 7,
+      "count": 6,
       "top_sources": {
         "MarkTechPost": 3,
-        "Reddit MachineLearning": 3,
+        "Reddit MachineLearning": 2,
         "TechCrunch": 1
       },
       "top_companies": {
-        "OpenAI": 2
+        "Anthropic": 1,
+        "OpenAI": 1
       },
       "top_keywords": {
-        "コンピュータビジョン": 2,
         "大規模言語モデル": 2,
+        "GPT-4": 1,
+        "企業価値": 1,
+        "政策": 1,
+        "マルチモーダル": 1,
         "GPT-5": 1
       },
       "featured_topics": [
+        {
+          "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
+          "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
+          "source": "MarkTechPost",
+          "time": "06:57",
+          "summary": "The explosive growth of artificial intelligence, particularly large language models (LLMs), has revolutionized how busin...",
+          "importance": 10,
+          "url": "https://www.marktechpost.com/2025/08/17/is-model-context-protocol-mcp-the-missing-standard-in-ai-infrastructure/",
+          "gemini_selected": false
+        },
         {
           "title": "GPT-5 is supposed to be nicer now",
           "title_ja": "GPT-5は今より良いと思われます",
@@ -114,23 +127,23 @@
           "gemini_selected": false
         },
         {
-          "title": "How to Test an OpenAI Model Against Single-Turn Adversarial Attacks Using deepteam",
-          "title_ja": "DeepTeamを使用して、単一ターン敵対攻撃に対してOpenaiモデルをテストする方法",
+          "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
+          "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
           "source": "MarkTechPost",
-          "time": "19:41",
-          "summary": "In this tutorial, we’ll explore how to test an OpenAI model against single-turn adversarial attacks using deepteam. deep...",
-          "importance": 10,
-          "url": "https://www.marktechpost.com/2025/08/17/how-to-test-an-openai-model-against-single-turn-adversarial-attacks-using-deepteam/",
+          "time": "06:15",
+          "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
+          "importance": 5,
+          "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
           "gemini_selected": false
         },
         {
-          "title": "Hugging Face Unveils AI Sheets: A Free, Open-Source No-Code Toolkit for LLM-Powered Datasets",
-          "title_ja": "抱きしめる顔はAIシートを発表します：LLM駆動のデータセット用の無料のオープンソースなしコードツールキット",
-          "source": "MarkTechPost",
-          "time": "20:06",
-          "summary": "Hugging Face has just released AI Sheets, a free, open-source, and local-first no-code tool designed to radically simpli...",
-          "importance": 5,
-          "url": "https://www.marktechpost.com/2025/08/17/hugging-face-unveils-ai-sheets-a-free-open-source-no-code-toolkit-for-llm-powered-datasets/",
+          "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
+          "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
+          "source": "Reddit MachineLearning",
+          "time": "06:42",
+          "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
+          "importance": 0,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
           "gemini_selected": false
         },
         {
@@ -144,23 +157,13 @@
           "gemini_selected": false
         },
         {
-          "title": "[D] How did you guys get started with Computer Vision ?",
-          "title_ja": "[D]どうやってコンピュータービジョンを始めましたか？",
+          "title": "[D] - Multi Class Address Classification",
+          "title_ja": "[D]  - マルチクラスアドレス分類",
           "source": "Reddit MachineLearning",
-          "time": "05:09",
-          "summary": "Hey Guys, I recently came across Computer vision projects and found it interesting, Curious how did you guys get started...",
+          "time": "22:41",
+          "summary": "Hello people, I have a dataset with Adress and label 800K rows. I am trying to train a model for address label predictio...",
           "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[P]Working on Computer Vision Projects",
-          "title_ja": "[P]コンピュータービジョンプロジェクトに取り組む",
-          "source": "Reddit MachineLearning",
-          "time": "05:04",
-          "summary": "Hey Guys, I recently came across Computer vision projects and found it interesting, Curious how did you guys get started...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/",
           "gemini_selected": false
         }
       ],
@@ -169,27 +172,40 @@
     "posts": {
       "name": "SNS・論文",
       "icon": "🧪",
-      "count": 5,
+      "count": 4,
       "top_sources": {
-        "Reddit MachineLearning Papers": 3,
+        "Reddit MachineLearning Papers": 2,
         "Reddit DeepLearning": 1,
         "Reddit ArtificialIntelligence": 1
       },
-      "top_companies": {},
+      "top_companies": {
+        "Google": 1,
+        "DeepMind": 1
+      },
       "top_keywords": {
-        "コンピュータビジョン": 2,
-        "GPT-5": 1,
-        "GPT-4": 1
+        "GPT-4": 2,
+        "企業価値": 1,
+        "政策": 1
       },
       "featured_topics": [
         {
-          "title": "ChatGPT-5 Brutally Exposes the Banal Pseudo-Intellectualism of David Brooks's Luddite Attack on AI in Education",
-          "title_ja": "Chatgpt-5は、教育におけるAIに対するDavid BrooksのLuddite攻撃の平凡な擬似30の宗教主義を残酷に暴露します",
+          "title": "AlphaEarth Foundations: a universal embedding for Earth observation data",
+          "title_ja": "Alphaearth Foundations：地球観測データのための普遍的な埋め込み",
           "source": "Reddit DeepLearning",
-          "time": "15:53",
-          "summary": "Humanity has a long-standing problem that manifests most seriously within academia. Some people become very good at memo...",
+          "time": "08:25",
+          "summary": "DeepMind has released AlphaEarth Foundations (AEF), a new model trained on billions of multi-modal Earth observation sam...",
+          "importance": 15,
+          "url": "https://www.reddit.com/r/deeplearning/comments/1mtg7mz/alphaearth_foundations_a_universal_embedding_for/",
+          "gemini_selected": false
+        },
+        {
+          "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
+          "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
+          "source": "Reddit MachineLearning Papers",
+          "time": "06:42",
+          "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
           "importance": 0,
-          "url": "https://www.reddit.com/r/deeplearning/comments/1msuie7/chatgpt5_brutally_exposes_the_banal/",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
           "gemini_selected": false
         },
         {
@@ -211,26 +227,6 @@
           "importance": 0,
           "url": "https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/",
           "gemini_selected": false
-        },
-        {
-          "title": "[D] How did you guys get started with Computer Vision ?",
-          "title_ja": "[D]どうやってコンピュータービジョンを始めましたか？",
-          "source": "Reddit MachineLearning Papers",
-          "time": "05:09",
-          "summary": "Hey Guys, I recently came across Computer vision projects and found it interesting, Curious how did you guys get started...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/",
-          "gemini_selected": false
-        },
-        {
-          "title": "[P]Working on Computer Vision Projects",
-          "title_ja": "[P]コンピュータービジョンプロジェクトに取り組む",
-          "source": "Reddit MachineLearning Papers",
-          "time": "05:04",
-          "summary": "Hey Guys, I recently came across Computer vision projects and found it interesting, Curious how did you guys get started...",
-          "importance": 0,
-          "url": "https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/",
-          "gemini_selected": false
         }
       ],
       "focus_area": "research"
@@ -239,7 +235,7 @@
   "market_insights": {
     "funding_activities": [],
     "valuation_changes": [],
-    "market_sentiment": "中立",
+    "market_sentiment": "楽観的",
     "key_developments": [
       {
         "title": "GPT-5 is supposed to be nicer now",
@@ -252,6 +248,16 @@
         "gemini_selected": false
       },
       {
+        "title": "Why we should thank pigeons for our AI breakthroughs",
+        "title_ja": "AIのブレークスルーについてハトに感謝する必要がある理由",
+        "source": "MIT Technology Review AI",
+        "time": "10:00",
+        "summary": "In 1943, while the world’s brightest physicists split atoms for the Manhattan Project, the American psychologist B.F. Sk...",
+        "importance": 5,
+        "url": "https://www.technologyreview.com/2025/08/18/1121370/ai-pigeons-reinforcement-learning/",
+        "gemini_selected": false
+      },
+      {
         "title": "GPT feels colder. What if it’s not tone — but rhythm that’s gone?",
         "title_ja": "GPTは冷たく感じます。トーンではない場合はどうなりますか？",
         "source": "Reddit AI",
@@ -260,46 +266,46 @@
         "importance": 0,
         "url": "https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/",
         "gemini_selected": false
-      },
-      {
-        "title": "Show HN: ASCII Tree Editor",
-        "title_ja": "HNを表示：ASCIIツリーエディター",
-        "source": "Hacker News",
-        "time": "02:52",
-        "summary": "Show HN: ASCII Tree EditorI've created a web-based editor for ASCII file directory trees called asciitreeman. It's desig...",
-        "importance": 0,
-        "url": "https://asciitree.reorx.com/",
-        "gemini_selected": false
       }
     ]
   },
   "tech_developments": {
     "new_releases": [
       {
-        "title": "Hugging Face Unveils AI Sheets: A Free, Open-Source No-Code Toolkit for LLM-Powered Datasets",
-        "title_ja": "抱きしめる顔はAIシートを発表します：LLM駆動のデータセット用の無料のオープンソースなしコードツールキット",
+        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
+        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
         "source": "MarkTechPost",
-        "time": "20:06",
-        "summary": "Hugging Face has just released AI Sheets, a free, open-source, and local-first no-code tool designed to radically simpli...",
+        "time": "06:15",
+        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
         "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/hugging-face-unveils-ai-sheets-a-free-open-source-no-code-toolkit-for-llm-powered-datasets/",
+        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
         "gemini_selected": false
       }
     ],
     "breakthrough_tech": [],
     "developer_tools": [
       {
-        "title": "Hugging Face Unveils AI Sheets: A Free, Open-Source No-Code Toolkit for LLM-Powered Datasets",
-        "title_ja": "抱きしめる顔はAIシートを発表します：LLM駆動のデータセット用の無料のオープンソースなしコードツールキット",
-        "source": "MarkTechPost",
-        "time": "20:06",
-        "summary": "Hugging Face has just released AI Sheets, a free, open-source, and local-first no-code tool designed to radically simpli...",
-        "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/hugging-face-unveils-ai-sheets-a-free-open-source-no-code-toolkit-for-llm-powered-datasets/",
+        "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
+        "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
+        "source": "Reddit MachineLearning",
+        "time": "06:42",
+        "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
+        "importance": 0,
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
         "gemini_selected": false
       }
     ],
     "research_highlights": [
+      {
+        "title": "Is Model Context Protocol MCP the Missing Standard in AI Infrastructure?",
+        "title_ja": "モデルコンテキストプロトコルMCPは、AIインフラストラクチャの欠落標準ですか？",
+        "source": "MarkTechPost",
+        "time": "06:57",
+        "summary": "The explosive growth of artificial intelligence, particularly large language models (LLMs), has revolutionized how busin...",
+        "importance": 10,
+        "url": "https://www.marktechpost.com/2025/08/17/is-model-context-protocol-mcp-the-missing-standard-in-ai-infrastructure/",
+        "gemini_selected": false
+      },
       {
         "title": "GPT-5 is supposed to be nicer now",
         "title_ja": "GPT-5は今より良いと思われます",
@@ -311,40 +317,33 @@
         "gemini_selected": false
       },
       {
-        "title": "How to Test an OpenAI Model Against Single-Turn Adversarial Attacks Using deepteam",
-        "title_ja": "DeepTeamを使用して、単一ターン敵対攻撃に対してOpenaiモデルをテストする方法",
+        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
+        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
         "source": "MarkTechPost",
-        "time": "19:41",
-        "summary": "In this tutorial, we’ll explore how to test an OpenAI model against single-turn adversarial attacks using deepteam. deep...",
-        "importance": 10,
-        "url": "https://www.marktechpost.com/2025/08/17/how-to-test-an-openai-model-against-single-turn-adversarial-attacks-using-deepteam/",
-        "gemini_selected": false
-      },
-      {
-        "title": "Hugging Face Unveils AI Sheets: A Free, Open-Source No-Code Toolkit for LLM-Powered Datasets",
-        "title_ja": "抱きしめる顔はAIシートを発表します：LLM駆動のデータセット用の無料のオープンソースなしコードツールキット",
-        "source": "MarkTechPost",
-        "time": "20:06",
-        "summary": "Hugging Face has just released AI Sheets, a free, open-source, and local-first no-code tool designed to radically simpli...",
+        "time": "06:15",
+        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
         "importance": 5,
-        "url": "https://www.marktechpost.com/2025/08/17/hugging-face-unveils-ai-sheets-a-free-open-source-no-code-toolkit-for-llm-powered-datasets/",
+        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
         "gemini_selected": false
       }
     ]
   },
   "industry_moves": {
     "most_active_companies": {
-      "OpenAI": 3
+      "OpenAI": 2,
+      "Anthropic": 1,
+      "Google": 1,
+      "DeepMind": 1
     },
     "partnerships": [
       {
-        "title": "How to Test an OpenAI Model Against Single-Turn Adversarial Attacks Using deepteam",
-        "title_ja": "DeepTeamを使用して、単一ターン敵対攻撃に対してOpenaiモデルをテストする方法",
+        "title": "Alibaba AI Team Just Released Ovis 2.5 Multimodal LLMs: A Major Leap in Open-Source AI with Enhanced Visual Perception and Reasoning Capabilities",
+        "title_ja": "Alibaba AIチームはOvis 2.5マルチモーダルLLMSをリリースしました：視覚的知覚と推論機能が強化されたオープンソースAIのメジャーリープ",
         "source": "MarkTechPost",
-        "time": "19:41",
-        "summary": "In this tutorial, we’ll explore how to test an OpenAI model against single-turn adversarial attacks using deepteam. deep...",
-        "importance": 10,
-        "url": "https://www.marktechpost.com/2025/08/17/how-to-test-an-openai-model-against-single-turn-adversarial-attacks-using-deepteam/",
+        "time": "06:15",
+        "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
+        "importance": 5,
+        "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
         "gemini_selected": false
       }
     ],
@@ -353,24 +352,25 @@
   },
   "global_trends": {
     "hot_technologies": {
-      "コンピュータビジョン": 4,
-      "GPT-5": 3,
-      "大規模言語モデル": 3,
-      "Claude": 2,
-      "GPT-4": 2
+      "大規模言語モデル": 4,
+      "GPT-4": 4,
+      "GPT-5": 2,
+      "企業価値": 2,
+      "政策": 2,
+      "マルチモーダル": 1
     },
     "emerging_themes": [
       {
-        "theme": "コンピュータビジョン",
+        "theme": "大規模言語モデル",
+        "mentions": 4
+      },
+      {
+        "theme": "GPT-4",
         "mentions": 4
       },
       {
         "theme": "GPT-5",
-        "mentions": 3
-      },
-      {
-        "theme": "大規模言語モデル",
-        "mentions": 3
+        "mentions": 2
       }
     ],
     "geographic_focus": {},
@@ -378,17 +378,17 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 17,
+    "total_items": 16,
     "total_sources": 9,
-    "active_companies": 1,
+    "active_companies": 4,
     "top_company": [
       "OpenAI",
-      3
+      2
     ],
-    "last_updated": "2025-08-18 14:59 JST"
+    "last_updated": "2025-08-18 20:23 JST"
   },
   "x_posts": {
-    "total_count": 89,
+    "total_count": 119,
     "influencer_posts": [],
     "tech_discussions": [
       {
@@ -434,12 +434,12 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 17件のニュース、1社が活動",
+    "headline": "今日のAI業界: 16件のニュース、4社が活動",
     "key_points": [
-      "📈 市場動向: 中立なセンチメント",
+      "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",
       "🏢 企業動向: OpenAIが最も活発",
-      "💬 SNS: 89件の関連投稿"
+      "💬 SNS: 119件の関連投稿"
     ],
     "outlook": "注意深い観察期"
   }

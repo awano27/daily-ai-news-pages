@@ -67,7 +67,7 @@ if GEMINI_API_KEY:
     # より制限の緩いモデルを使用
     gemini_model = genai.GenerativeModel('gemini-1.5-flash')
     translation_count = 0  # 翻訳回数カウンター
-    max_translations = 30  # 最大翻訳回数制限（より保守的に）
+    max_translations = 80  # 翻訳回数制限を拡大（重要な記事を確実に翻訳）
 else:
     gemini_model = None
     translation_count = 0
@@ -845,6 +845,37 @@ def create_dashboard(all_items, x_posts):
     
     return html_content
 
+def remove_duplicates(articles):
+    """重複記事を削除（URL、タイトルベース）"""
+    seen_urls = set()
+    seen_titles = set()
+    unique_articles = []
+    
+    for article in articles:
+        # URLベースの重複チェック
+        if article['link'] in seen_urls:
+            continue
+        
+        # タイトルベースの重複チェック（類似度も考慮）
+        title_key = article['title'].lower().strip()
+        if title_key in seen_titles:
+            continue
+        
+        # 短縮された類似タイトルのチェック
+        is_duplicate = False
+        for existing_title in seen_titles:
+            if (len(title_key) > 20 and len(existing_title) > 20 and 
+                (title_key in existing_title or existing_title in title_key)):
+                is_duplicate = True
+                break
+        
+        if not is_duplicate:
+            seen_urls.add(article['link'])
+            seen_titles.add(title_key)
+            unique_articles.append(article)
+    
+    return unique_articles
+
 def main():
     """メイン処理"""
     try:
@@ -866,6 +897,11 @@ def main():
                             category
                         )
                         all_items.extend(items)
+        
+        # 重複記事を削除
+        print(f"ログ: 重複削除前: {len(all_items)}件")
+        all_items = remove_duplicates(all_items)
+        print(f"ログ: 重複削除後: {len(all_items)}件")
         
         # X投稿取得
         x_posts = fetch_x_posts()

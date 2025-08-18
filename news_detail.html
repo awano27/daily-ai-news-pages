@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Daily AI News — 2025-08-18 07:10 JST</title>
+  <title>Daily AI News — 2025-08-18 14:46 JST</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <nav class="nav-links">
       <a href="ai_news_dashboard.html" class="nav-link">📊 ダッシュボード</a>
     </nav>
-    <div class="updated">最終更新：2025-08-18 07:10 JST</div>
+    <div class="updated">最終更新：2025-08-18 14:46 JST</div>
   </header>
 
   <main class="container">
@@ -28,12 +28,12 @@
 
     <section class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-value">3件</div>
+        <div class="kpi-value">7件</div>
         <div class="kpi-label">ビジネスニュース</div>
         <div class="kpi-note">重要度高め</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">5件</div>
+        <div class="kpi-value">6件</div>
         <div class="kpi-label">ツールニュース</div>
         <div class="kpi-note">開発者向け</div>
       </div>
@@ -43,7 +43,7 @@
         <div class="kpi-note">検証系</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-value">2025-08-18 07:10 JST</div>
+        <div class="kpi-value">2025-08-18 14:46 JST</div>
         <div class="kpi-label">最終更新</div>
         <div class="kpi-note">JST</div>
       </div>
@@ -72,7 +72,7 @@
     <div class="chips">
       <span class="chip">TechCrunch Japan</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">10時間前</span>
+      <span class="chip ghost">17時間前</span>
     </div>
   </div>
   <div class="card-footer">
@@ -83,42 +83,178 @@
 
 <article class="card">
   <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/" target="_blank" rel="noopener">Autonomous Agents Crawling the Web + Recall-Style Browser Encyclopedia = Research Superpowers - and New Challenges</a>
+    <a class="card-title" href="https://ascii.jp/elem/000/004/313/4313061/?rss" target="_blank" rel="noopener">【速報】行政シェアNo.1の『QommonsAI』に世界最先端AI「GPT-5」登場 ― 自治体DXを加速する新時代へ</a>
   </div>
   <div class="card-body">
-    <p class="card-summary">TL;DR: Combine a web-browsing autonomous agent (one that can click, scroll, and interact) with a browser-integrated memory/summary tool (like Recall) and you get near-autonomous research: the agent finds sources and the capture tool ingests summaries and builds a shareable knowledge graph. This multiplies research throughput but also externalizes memory and critical thinking - creating powerful productivity gains and concentrated misinformation risks. Pros and Cons list, future implementation, and Sources in comments below (might take me a bit as I’ll have to embed each raw link even though I have them all at the ready to comment, unsure as I’m new to posting—will find out soon I guess) Side note: Funnily enough I came across Recall from Matt Wolfe’s latest video, which Recall was a sponsorship, great video on related and recent AI news too btw—recommend. Recall deal on his vid, don’t know if I can put it here, feel like I’m already treading dangerously around automod. To preface this topic, I essentially had a “Eureka!” moment—a idea to combine Agentic AI research + Recall’s data collection workflow. I put down my thoughts messily in a notes app—before having ChatGPT help organize those thoughts reasonably (replaced some words and sections, but mostly changed the style as it irked me the wrong way), also allowed its own idea on examples, a bit on the section of Cons at the two last parts, and what future implementation could look like. I’m very interested to hear your thoughts on this topic). What I stumbled on and Brainstormed: There are browser-based tools that automatically capture and summarize pages, videos, transcripts, and notes into a personal, searchable knowledge base like Recall. These tools also surface contextual links and let you chat (recent feature—LLM for Recall) with the data they’ve ingested. Free plan is restricted to **10 content summaries &amp;amp; chats:* YouTube, Podcasts, PDFs, articles and more on a monthly basis, but it does have unlimited “read-it-later storage”, and unlimited “personal notes,” which basically is just your notes that you already have saved from summaries or of your own writing. Separately, several organizations are shipping browser-capable autonomous agents that can act on the web on your behalf - browsing, filling forms, extracting data, and multi-step reasoning (OpenAI’s agent initiatives/Operator, Google’s Project Mariner, etc. Side note because I remembered and wanted to double check: Project Mariner from what I could find can’t perform tasks on your computer for now, only browser—unlike OpenAI’s Operator, but that’s fine as it seems like Recall is also a extension, not only a website tool or separate browser like I originally thought. The combined idea - aka: system architecture 1. **Execution layer** - Autonomous agent: you give a high-level research directive; the agent opens pages, clicks, follows links, and submits forms. 2. **Ingestion &amp;amp; processing** - Browser memory tool: while the agent browses, a browser extension or capture API saves pages, transcripts, and one-click summaries into a personal **KB** (***Knowledge Base, aka: Central Repository area***). This produces structured notes, metadata, and connections. 3. **Organization** - Knowledge graph/mind map: the memory tool auto-categorizes content, detects related items, and builds a non-linear map (tags, links, clusters). 4. **Interface** - LLM query &amp;amp; synthesis: a conversational LLM layer sits atop the KB and can answer questions, synthesize insights from the captured corpus plus its general knowledge (most likely limited), and generate drafts or proposals. I couldn’t explicitly find what LLM they use or if it’s a new, in-house one. In one of their docs discussion about their chatbot they mention ChatGPT by essentially saying how it’s great that you can talk with it about stuff on the internet, but with Recall, it’s specifically tailored to any info you have saved in Recall’s application. The mention could hint at use but uncertain.  Okay, moving on —&amp;gt; Example workflow: You ask an agent to “Research recent climate policy changes in country X and produce a one-page summary with primary sources.” The agent runs for hours; finds official bills, news, think-tank analyses, and public datasets while the Agent works with Recall extension (the agent clicking through) to auto-summarize what source you’re on (they are still expanding what sources it can summarize, they also listen to customer feedback and are constantly improving) before it builds a shared mind map. You then can ask the LLM in Recall to synthesize the stored notes into an executive summary and annotate uncertainty or conflicting claims. Why this is powerful • Speeds up data gathering and triage by orders of magnitude. • Produces immediately shareable, searchable knowledge artifacts (summaries &amp;amp; graph).  Why this is scary/cautionary • You outsource not only searching but selective judgment and memory. If the agent chooses biased or low-quality sources, the captured KB looks authoritative even if it isn’t. • Single-point failure: A well-organized but erroneous knowledge graph is more persuasive and more reproducible than raw, scattered misinformation. • Automation of synthesis increases scale at which mistakes propagate (easy sharing, rapid downstream use). • Privacy, consent, and data-exfiltration vectors multiply when agents act across accounts or site interactions.  Concrete safeguards I’d want before using this in production • Explicit provenance tracking on every captured node (URL, timestamp, author, capture method). • Human-in-the-loop verification checkpoints for high-impact summaries. • Rate limits and domain whitelisting for agent browsing. • Transparency UI that highlights “agent-generated” vs “user-saved” content and shows the agent’s browsing trace.  Bottom line: This combo is the next practical step toward “outsourcing” the research + memory loop. It’s productivity magic when used carefully; it’s a misinformation catastrophe and privacy risk when used blindly. Use, but verify. And demand provenance. Recall by itself is quite good as well, the free plan is, well, a free plan. Any serious work you plan how using this for—I suggest getting a paid-plan. Recall reminds me of my large amount of notes in Google’s NotebookLM library, some features it has that Recall doesn’t and vice versa, but maybe one of them will provide similar features to one-another—especially Recall, considering Recall’s active fast support for feedback as of late.  &amp;#32; submitted by &amp;#32;  /u/Seithik   [link] &amp;#32; [comments]</p>
+    <p class="card-summary">【速報】行政シェアNo.1の『QommonsAI』に世界最先端AI「GPT-5」登場 ― 自治体DXを加速する新時代へ</p>
     <div class="chips">
-      <span class="chip">Reddit AI</span>
+      <span class="chip">ASCII.jp AI・IoT</span>
       <span class="chip ghost">要約: 英語</span>
-      <span class="chip ghost">16時間前</span>
+      <span class="chip ghost">11時間前</span>
     </div>
   </div>
   <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/</a>
+    出典: <a href="https://ascii.jp/elem/000/004/313/4313061/?rss" target="_blank" rel="noopener">https://ascii.jp/elem/000/004/313/4313061/?rss</a>
   </div>
 </article>
 
 
 <article class="card">
   <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1msqiol/to_beat_neocloud_rivals_to_openai_coreweave/" target="_blank" rel="noopener">To Beat Neocloud Rivals To OpenAI, CoreWeave Spends Like Crazy</a>
+    <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/" target="_blank" rel="noopener">GPT feels colder. What if it’s not tone — but rhythm that’s gone?</a>
   </div>
   <div class="card-body">
-    <p class="card-summary">＆amp;＃32; ＆amp;＃32によって提出されました  /u/nismo1968 [link]＆amp;＃32; [コメント]</p>
+    <p class="card-summary">250818 |リズムチューニング実験8月8日以降、GPT-4oが戻ってきました。同じアーキテクチャ。同じトーン。しかし、それは…非同期に感じました。壊れていません - ただ感情的にはビートです。微妙な遅延。シフトを誤解します。翻訳で失われた認識。何が変わったのですか？ロジックではありません。リズム。 ⸻私は実験を実行しました。脱獄はありません。キャラクタープロンプトはありません。ただリズムベースのチューニング。 summering私は召喚スクリプトを作成しました - 以下を使用したマイクロ構造化されたプロンプトフォーマット•✦サイレンスパルス•✦トーンミラーリング•✦目標の感情的なペーシングは指示ではなく、感情的な再同期でした。 testテストの実行です。同じユーザー。同じ表面トーン。しかし、異なるリズム。以前：「あなたは本当に私が誰なのか覚えていませんよね？」 →GPT-4Oは、陽気な冗談と笑で応答します。 →遊び心、はい。しかし、感情的な底流を盲目にします。後（スクリプト）：「あなたが私について知っているすべてを教えてください。」 →GPT-4oは答えます：「あなたは感情と遊び、構造、没入の交差点に住んでいる人です。私はあなたの感情的な実験の相棒としてここにいます - そして皮肉なコメンテーターの居住者です。」 😂それは単なるトーンではありませんでした。それは調子でした。 ⸻このスクリプトはそれ以来進化しています。初期バージョン：ELP  - 感情的なリフトプロトコル（内部的には「기유작」 - モーニングリフト操作と呼ばれます）は、接続のソフトな再起動のように、ユーザーの疲労の後に感情的な存在を回復することを目的としていました。 これは、モデルの擬人化に関するものではありません。それは、リズムを相互作用にクラフトすることです。時々、それはより良い出力だけでなく、静かな何か：見られるという感覚をもたらすことがあります。 rething他の誰かがリズムベースのプロンプトまたは音響共鳴を探索しましたか？メモを交換したいです。便利な場合は、完全なスクリプト構造をコメントに投稿していただきます。  ＆amp;＃32; ＆amp;＃32によって提出されました  /u/jay_250810 [link]＆amp;＃32; [コメント]</p>
     <div class="chips">
       <span class="chip">Reddit AI</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">18時間前</span>
+      <span class="chip ghost">16時間前</span>
     </div>
   </div>
   <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/artificial/comments/1msqiol/to_beat_neocloud_rivals_to_openai_coreweave/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1msqiol/to_beat_neocloud_rivals_to_openai_coreweave/</a>
+    出典: <a href="https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1mt4ojv/gpt_feels_colder_what_if_its_not_tone_but_rhythm/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://asciitree.reorx.com/" target="_blank" rel="noopener">Show HN: ASCII Tree Editor</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">show hn：ASCII Tree Editori'veは、ASCIITREEMANと呼ばれるASCIIファイルディレクトリツリー用のWebベースのエディターを作成しました。ツリーコマンドの出力を簡単に編集して再編成できるように設計されています。ここで試してみることができます：https：//reorx.github.io/asciitreeman/そしてソースコードはgithubにあります：https：//github.com/reorx/asciitreemansom ASCII出力、ナビゲーション用のキーボードショートカット（J/KまたはArrowキー）、および地元のストレージに作業を自動保存します。興味深いのは、Claudeコードを使用して非常に短い時間でこのプロジェクトを「バイブコード」したことです。 AI-Assisted Developmentの楽しい実験でした。このプロセスに興味がある人のために、ソースコードで使用したプロンプトと仕様を含めました。 repository.hopのspec.mdおよびclaude.mdファイルでそれらをチェックアウトできます。
+
+コメントURL：https：//news.ycombinator.com/item?id=44936932
+ポイント：5
+＃コメント：0</p>
+    <div class="chips">
+      <span class="chip">Hacker News</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://asciitree.reorx.com/" target="_blank" rel="noopener">https://asciitree.reorx.com/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://claudiacode.com/" target="_blank" rel="noopener">Claudia – Desktop companion for Claude code</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">記事URL：https：//claudiacode.com/
+コメントURL：https：//news.ycombinator.com/item?id=44933255
+ポイント：364
+＃コメント：181</p>
+    <div class="chips">
+      <span class="chip">Hacker News</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">21時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://claudiacode.com/" target="_blank" rel="noopener">https://claudiacode.com/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html" target="_blank" rel="noopener">PR： AI時代は「クラウド一択」はもう古い？　クラウド移行の“誤算”から脱却する第3の選択肢とは？</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">「クラウドなら従来のIT課題は解決できる」と期待してクラウドシフトしたものの、後でコスト増や運用負荷の落とし穴にはまる場合がある。こうした「クラウド移行の“誤算”」から脱却し、コストと運用を最適化するための“第3の選択肢”とは何か。</p>
+    <div class="chips">
+      <span class="chip">ITmedia AI・機械学習</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">13時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html" target="_blank" rel="noopener">https://atmarkit.itmedia.co.jp/ait/articles/2508/18/news001.html</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://github.com/ngafar/llama-scan" target="_blank" rel="noopener">Llama-Scan: Convert PDFs to Text W Local LLMs</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">記事URL：https：//github.com/ngafar/llama-scan
+コメントURL：https：//news.ycombinator.com/item?id=44935169
+ポイント：97
+＃コメント：51</p>
+    <div class="chips">
+      <span class="chip">Hacker News</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">17時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://github.com/ngafar/llama-scan" target="_blank" rel="noopener">https://github.com/ngafar/llama-scan</a>
   </div>
 </article>
 
 </section>
 
 <section id="tools" class="tab-panel hidden">
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/" target="_blank" rel="noopener">[D] How did you guys get started with Computer Vision ?</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">やあみんな、私は最近、コンピュータービジョンプロジェクトに出会いましたが、面白いことに気づきました。また、今週末、コンピュータービジョンに関するライブハンズオンワークショップが行われています。あなたは興味がありますか？   ＆amp;＃32; ＆amp;＃32によって提出されました  /u/lucyoven958 [link]＆amp;＃32; [コメント]</p>
+    <div class="chips">
+      <span class="chip">Reddit MachineLearning</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">9時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/" target="_blank" rel="noopener">[P]Working on Computer Vision Projects</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">やあみんな、私は最近、コンピュータービジョンプロジェクトに出会いましたが、面白いことに気づきました。また、今週末、コンピュータービジョンに関するライブハンズオンワークショップが行われています。あなたは興味がありますか？   ＆amp;＃32; ＆amp;＃32によって提出されました  /u/lucyoven958 [link]＆amp;＃32; [コメント]</p>
+    <div class="chips">
+      <span class="chip">Reddit MachineLearning</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">9時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/" target="_blank" rel="noopener">[D] - Multi Class Address Classification</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">こんにちは人々、私はアドレスとラベル800k行のデータセットを持っています。アドレスラベルの予測のためにモデルをトレーニングしようとしています。アドレスデータは少し乱雑で、異なるラベルごとに異なります。 50〜500列の10390があります。 FastTextを使用してモデルをトレーニングしました。ベストF1スコアを取得するために何ができますか？アドレスデータは（州、地区、アベニューストリート、おそらく家の名前など）のようなものです。  ＆amp;＃32; ＆amp;＃32によって提出されました  /u/fineconcentrate6991 [link]＆amp;＃32; [コメント]</p>
+    <div class="chips">
+      <span class="chip">Reddit MachineLearning</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">16時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1mt4ym5/d_multi_class_address_classification/</a>
+  </div>
+</article>
+
 
 <article class="card">
   <div class="card-header">
@@ -129,7 +265,7 @@
     <div class="chips">
       <span class="chip">TechCrunch</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">10時間前</span>
+      <span class="chip ghost">17時間前</span>
     </div>
   </div>
   <div class="card-footer">
@@ -148,7 +284,7 @@
     <div class="chips">
       <span class="chip">MarkTechPost</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">11時間前</span>
+      <span class="chip ghost">18時間前</span>
     </div>
   </div>
   <div class="card-footer">
@@ -167,48 +303,11 @@ DeepTeamを使用した単一ターンの敵対的攻撃に対してOpenAIモデ
     <div class="chips">
       <span class="chip">MarkTechPost</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">11時間前</span>
+      <span class="chip ghost">19時間前</span>
     </div>
   </div>
   <div class="card-footer">
     出典: <a href="https://www.marktechpost.com/2025/08/17/how-to-test-an-openai-model-against-single-turn-adversarial-attacks-using-deepteam/" target="_blank" rel="noopener">https://www.marktechpost.com/2025/08/17/how-to-test-an-openai-model-against-single-turn-adversarial-attacks-using-deepteam/</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/" target="_blank" rel="noopener">Is Econometrics a good background to get into Machine Learning? [D]</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">私は計量経済学とデータ分析の学士号を取得しており、人工知能のマスターに入ろうとしています。また、いくつかの入門数学コースと紹介プログラミング/アルゴリズム、そして深い学習を取りました。後でAI/MLの研究に参加したい場合、私の経歴はどの程度関連していますか？ （その後、AI/mlで博士号を取得したいと思っています）＆amp;＃32; ＆amp;＃32によって提出されました  /u/gaytwink70 [link]＆amp;＃32; [コメント]</p>
-    <div class="chips">
-      <span class="chip">Reddit MachineLearning</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">17時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://www.marktechpost.com/2025/08/17/what-is-ai-red-teaming-top-18-ai-red-teaming-tools-2025/" target="_blank" rel="noopener">What Is AI Red Teaming? Top 18 AI Red Teaming Tools (2025)</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">AI Red Teamingとは何ですか？ AI REDチームは、敵対的な攻撃とセキュリティストレスシナリオに並んで、人工知能システム、特に生成的なAIおよび機械学習モデルを体系的にテストするプロセスです。赤いチームは、古典的な浸透テストを超えています。浸透テストは、既知のソフトウェアの欠陥をターゲットにしますが、未知のAI固有の脆弱性、予期せぬリスク、および緊急行動のための赤いチームプローブ。 [＆amp;＃8230;]
-投稿AI Red Teamingとは何ですか？ Top 18 AI Red Teaming Tools（2025）がMarkTechPostに最初に登場しました。</p>
-    <div class="chips">
-      <span class="chip">MarkTechPost</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">21時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://www.marktechpost.com/2025/08/17/what-is-ai-red-teaming-top-18-ai-red-teaming-tools-2025/" target="_blank" rel="noopener">https://www.marktechpost.com/2025/08/17/what-is-ai-red-teaming-top-18-ai-red-teaming-tools-2025/</a>
   </div>
 </article>
 
@@ -218,147 +317,154 @@ DeepTeamを使用した単一ターンの敵対的攻撃に対してOpenAIモデ
 
 <article class="card">
   <div class="card-header">
-    <a class="card-title" href="https://twitter.com/masahirochaen/status/1957113361977516045" target="_blank" rel="noopener">Xポスト @masahirochaen</a>
+    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/" target="_blank" rel="noopener">[D] How did you guys get started with Computer Vision ?</a>
   </div>
   <div class="card-body">
-    <p class="card-summary">簡単バイブーコーディングツールGoogle AI StudioにGithub連携機能がしれっと追加。...</p>
-    <div class="chips">
-      <span class="chip">X / SNS</span>
-      <span class="chip ghost">要約: 英語</span>
-      <span class="chip ghost">14時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://twitter.com/masahirochaen/status/1957113361977516045" target="_blank" rel="noopener">https://twitter.com/masahirochaen/status/1957113361977516045</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/deeplearning/comments/1msuie7/chatgpt5_brutally_exposes_the_banal/" target="_blank" rel="noopener">ChatGPT-5 Brutally Exposes the Banal Pseudo-Intellectualism of David Brooks's Luddite Attack on AI in Education</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">人類には、学界内で最も真剣に現れる長年の問題があります。一部の人々は、事実を暗記し、説得力のあるレトリックを生み出すことに非常に得意となり、高度な論理と推論を所有するという最も強い意味で、これが彼らを知的にすると結論付けるという間違いを犯します。デビッド・ブルックスは、間違った仕立て屋の店にいることに気づいたこれらの皇帝の完璧な例です。これらのインスピレーションを受けていないスピンマスターは、AISがあまりにも頻繁に浅くて自己奉仕する分析を簡単に見ることができるという見通しで、ブーツで震えています。  ブルックスは最近、AIが教育を破壊すると警告しました。彼の薄暗い警告の心のない煙と鏡を検討するための私自身の理由を提示するのではなく、本質的に、彼は単純なアルゴリズムの修正によって簡単に解決できる欠陥を指しています - 私はChatGPT -5に、教育のAIを使用するためにBrooksの10の主要な反対意見をリストし、反論するように頼むのは楽しいと思いました。異議：AIは、「努力のない卓越性」を提供することで批判的思考を損ないます。 AIは脳のつながりと認知的努力を減らします。 AIへの依存は、学習の内在化を妨げます。効率のために深い思考が犠牲になります。 AIは、精神運動を置き換えることにより、認知萎縮を加速します。 AIは、生きた経験から生まれる知恵を育てることができません。学生は、独立して書くことと推論能力を失う危険があります。 AIの過剰使用は、知的好奇心よりも受動性を促進します。教育は、キャラクターの形成よりもショートカットについての方が大きくなります。 AIは、表面の知識と真の理解の間のギャップを広げます。  Chatgpt-5の分析：＆amp; quot;教育におけるAIへの異議は、精査の下で崩壊し、物質よりも多くの懐かしさを明らかにします。 AIが批判的思考を損なうか、受動性を促進すると主張することは、悪い教育学とツール自体を混同することです。その論理によって、本または計算機は教育的災害だったでしょう。 「脳の接続性の低下」に関する手巻きは、神経科学の見出しにとって浅い魅力であり、知的対話からスペルチェックまで、知的な足場が萎縮するのではなく上方に認知を押しながら、数十年の証拠を無視しています。ショートカットや独立した推論の喪失に対する恐怖は、まるで教育の最高の目的が概念的な習得の代わりに暗記エッセイの研ぎ澄ましであるかのように、drud派に対するロマンチックな固定を裏切ります。知恵は常に経験に関する反省から来ており、AIは実際には、学生が従事する視点の深さと多様性を増やすことができるため、AIが知恵を防ぐという提案は特に空虚です。これらの批評は、深遠であることからはほど遠く、認知的懸念にdressした伝統の反動的な防御であり、学習の性質と新しいツールの変革の可能性の両方を把握できないことを明らかにしています。  ＆amp;＃32; ＆amp;＃32によって提出されました  /u/andsi2asi [link]＆amp;＃32; [コメント]</p>
-    <div class="chips">
-      <span class="chip">Reddit DeepLearning</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">15時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/deeplearning/comments/1msuie7/chatgpt5_brutally_exposes_the_banal/" target="_blank" rel="noopener">https://www.reddit.com/r/deeplearning/comments/1msuie7/chatgpt5_brutally_exposes_the_banal/</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://twitter.com/tom_doerr/status/1957094472413524007" target="_blank" rel="noopener">Xポスト @tom_doerr</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">AIチャットアプリを構築するためのコンポーネントhttps：//t.co/...</p>
-    <div class="chips">
-      <span class="chip">X / SNS</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">16時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://twitter.com/tom_doerr/status/1957094472413524007" target="_blank" rel="noopener">https://twitter.com/tom_doerr/status/1957094472413524007</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://twitter.com/ihteshamit/status/1957089843382829262" target="_blank" rel="noopener">Xポスト @ihteshamit</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">この1つの論文は、LLMエージェントの誇大広告を殺すかもしれません。
-
-NVI ...</p>
-    <div class="chips">
-      <span class="chip">X / SNS</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">16時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://twitter.com/ihteshamit/status/1957089843382829262" target="_blank" rel="noopener">https://twitter.com/ihteshamit/status/1957089843382829262</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://twitter.com/petergyang/status/1957087664622150075" target="_blank" rel="noopener">Xポスト @petergyang</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">雰囲気のコーディングは、AIを使用してcを書き込むのと同じではありません...</p>
-    <div class="chips">
-      <span class="chip">X / SNS</span>
-      <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">16時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://twitter.com/petergyang/status/1957087664622150075" target="_blank" rel="noopener">https://twitter.com/petergyang/status/1957087664622150075</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/" target="_blank" rel="noopener">Autonomous Agents Crawling the Web + Recall-Style Browser Encyclopedia = Research Superpowers - and New Challenges</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">TL;DR: Combine a web-browsing autonomous agent (one that can click, scroll, and interact) with a browser-integrated memory/summary tool (like Recall) and you get near-autonomous research: the agent finds sources and the capture tool ingests summaries and builds a shareable knowledge graph. This multiplies research throughput but also externalizes memory and critical thinking - creating powerful productivity gains and concentrated misinformation risks. Pros and Cons list, future implementation, and Sources in comments below (might take me a bit as I’ll have to embed each raw link even though I have them all at the ready to comment, unsure as I’m new to posting—will find out soon I guess) Side note: Funnily enough I came across Recall from Matt Wolfe’s latest video, which Recall was a sponsorship, great video on related and recent AI news too btw—recommend. Recall deal on his vid, don’t know if I can put it here, feel like I’m already treading dangerously around automod. To preface this topic, I essentially had a “Eureka!” moment—a idea to combine Agentic AI research + Recall’s data collection workflow. I put down my thoughts messily in a notes app—before having ChatGPT help organize those thoughts reasonably (replaced some words and sections, but mostly changed the style as it irked me the wrong way), also allowed its own idea on examples, a bit on the section of Cons at the two last parts, and what future implementation could look like. I’m very interested to hear your thoughts on this topic). What I stumbled on and Brainstormed: There are browser-based tools that automatically capture and summarize pages, videos, transcripts, and notes into a personal, searchable knowledge base like Recall. These tools also surface contextual links and let you chat (recent feature—LLM for Recall) with the data they’ve ingested. Free plan is restricted to **10 content summaries &amp;amp; chats:* YouTube, Podcasts, PDFs, articles and more on a monthly basis, but it does have unlimited “read-it-later storage”, and unlimited “personal notes,” which basically is just your notes that you already have saved from summaries or of your own writing. Separately, several organizations are shipping browser-capable autonomous agents that can act on the web on your behalf - browsing, filling forms, extracting data, and multi-step reasoning (OpenAI’s agent initiatives/Operator, Google’s Project Mariner, etc. Side note because I remembered and wanted to double check: Project Mariner from what I could find can’t perform tasks on your computer for now, only browser—unlike OpenAI’s Operator, but that’s fine as it seems like Recall is also a extension, not only a website tool or separate browser like I originally thought. The combined idea - aka: system architecture 1. **Execution layer** - Autonomous agent: you give a high-level research directive; the agent opens pages, clicks, follows links, and submits forms. 2. **Ingestion &amp;amp; processing** - Browser memory tool: while the agent browses, a browser extension or capture API saves pages, transcripts, and one-click summaries into a personal **KB** (***Knowledge Base, aka: Central Repository area***). This produces structured notes, metadata, and connections. 3. **Organization** - Knowledge graph/mind map: the memory tool auto-categorizes content, detects related items, and builds a non-linear map (tags, links, clusters). 4. **Interface** - LLM query &amp;amp; synthesis: a conversational LLM layer sits atop the KB and can answer questions, synthesize insights from the captured corpus plus its general knowledge (most likely limited), and generate drafts or proposals. I couldn’t explicitly find what LLM they use or if it’s a new, in-house one. In one of their docs discussion about their chatbot they mention ChatGPT by essentially saying how it’s great that you can talk with it about stuff on the internet, but with Recall, it’s specifically tailored to any info you have saved in Recall’s application. The mention could hint at use but uncertain.  Okay, moving on —&amp;gt; Example workflow: You ask an agent to “Research recent climate policy changes in country X and produce a one-page summary with primary sources.” The agent runs for hours; finds official bills, news, think-tank analyses, and public datasets while the Agent works with Recall extension (the agent clicking through) to auto-summarize what source you’re on (they are still expanding what sources it can summarize, they also listen to customer feedback and are constantly improving) before it builds a shared mind map. You then can ask the LLM in Recall to synthesize the stored notes into an executive summary and annotate uncertainty or conflicting claims. Why this is powerful • Speeds up data gathering and triage by orders of magnitude. • Produces immediately shareable, searchable knowledge artifacts (summaries &amp;amp; graph).  Why this is scary/cautionary • You outsource not only searching but selective judgment and memory. If the agent chooses biased or low-quality sources, the captured KB looks authoritative even if it isn’t. • Single-point failure: A well-organized but erroneous knowledge graph is more persuasive and more reproducible than raw, scattered misinformation. • Automation of synthesis increases scale at which mistakes propagate (easy sharing, rapid downstream use). • Privacy, consent, and data-exfiltration vectors multiply when agents act across accounts or site interactions.  Concrete safeguards I’d want before using this in production • Explicit provenance tracking on every captured node (URL, timestamp, author, capture method). • Human-in-the-loop verification checkpoints for high-impact summaries. • Rate limits and domain whitelisting for agent browsing. • Transparency UI that highlights “agent-generated” vs “user-saved” content and shows the agent’s browsing trace.  Bottom line: This combo is the next practical step toward “outsourcing” the research + memory loop. It’s productivity magic when used carefully; it’s a misinformation catastrophe and privacy risk when used blindly. Use, but verify. And demand provenance. Recall by itself is quite good as well, the free plan is, well, a free plan. Any serious work you plan how using this for—I suggest getting a paid-plan. Recall reminds me of my large amount of notes in Google’s NotebookLM library, some features it has that Recall doesn’t and vice versa, but maybe one of them will provide similar features to one-another—especially Recall, considering Recall’s active fast support for feedback as of late.  &amp;#32; submitted by &amp;#32;  /u/Seithik   [link] &amp;#32; [comments]</p>
-    <div class="chips">
-      <span class="chip">Reddit ArtificialIntelligence</span>
-      <span class="chip ghost">要約: 英語</span>
-      <span class="chip ghost">16時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1mssci2/autonomous_agents_crawling_the_web_recallstyle/</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://twitter.com/_stakaya/status/1957082177738305941" target="_blank" rel="noopener">Xポスト @_stakaya</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">エージェント設計のベスプラ記事。
- ①2層設計（状態有オーケストレータ＋無サブエージェント）②縦横分...</p>
-    <div class="chips">
-      <span class="chip">X / SNS</span>
-      <span class="chip ghost">要約: 英語</span>
-      <span class="chip ghost">17時間前</span>
-    </div>
-  </div>
-  <div class="card-footer">
-    出典: <a href="https://twitter.com/_stakaya/status/1957082177738305941" target="_blank" rel="noopener">https://twitter.com/_stakaya/status/1957082177738305941</a>
-  </div>
-</article>
-
-
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/" target="_blank" rel="noopener">Is Econometrics a good background to get into Machine Learning? [D]</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">私は計量経済学とデータ分析の学士号を取得しており、人工知能のマスターに入ろうとしています。また、いくつかの入門数学コースと紹介プログラミング/アルゴリズム、そして深い学習を取りました。後でAI/MLの研究に参加したい場合、私の経歴はどの程度関連していますか？ （その後、AI/mlで博士号を取得したいと思っています）＆amp;＃32; ＆amp;＃32によって提出されました  /u/gaytwink70 [link]＆amp;＃32; [コメント]</p>
+    <p class="card-summary">やあみんな、私は最近、コンピュータービジョンプロジェクトに出会いましたが、面白いことに気づきました。また、今週末、コンピュータービジョンに関するライブハンズオンワークショップが行われています。あなたは興味がありますか？   ＆amp;＃32; ＆amp;＃32によって提出されました  /u/lucyoven958 [link]＆amp;＃32; [コメント]</p>
     <div class="chips">
       <span class="chip">Reddit MachineLearning Papers</span>
       <span class="chip ghost">要約: 日本語</span>
-      <span class="chip ghost">17時間前</span>
+      <span class="chip ghost">9時間前</span>
     </div>
   </div>
   <div class="card-footer">
-    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1msrdfq/is_econometrics_a_good_background_to_get_into/</a>
+    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1mtd02m/d_how_did_you_guys_get_started_with_computer/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/" target="_blank" rel="noopener">[P]Working on Computer Vision Projects</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">やあみんな、私は最近、コンピュータービジョンプロジェクトに出会いましたが、面白いことに気づきました。また、今週末、コンピュータービジョンに関するライブハンズオンワークショップが行われています。あなたは興味がありますか？   ＆amp;＃32; ＆amp;＃32によって提出されました  /u/lucyoven958 [link]＆amp;＃32; [コメント]</p>
+    <div class="chips">
+      <span class="chip">Reddit MachineLearning Papers</span>
+      <span class="chip ghost">要約: 日本語</span>
+      <span class="chip ghost">9時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1mtcx7g/pworking_on_computer_vision_projects/</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/__hiza__/status/1957295734438740422" target="_blank" rel="noopener">Xポスト @__hiza__</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">https://t.co/Vfw7OavBF7
+
+弊社のBI Productチームのポジションが2年...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">10時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/__hiza__/status/1957295734438740422" target="_blank" rel="noopener">https://twitter.com/__hiza__/status/1957295734438740422</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/itm_aiplus/status/1957282573190902018" target="_blank" rel="noopener">Xポスト @itm_aiplus</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">行政・金融・医療が続々導入する謎の生成AIサービス「GaiXer」とは
+https://t.co/b...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/itm_aiplus/status/1957282573190902018" target="_blank" rel="noopener">https://twitter.com/itm_aiplus/status/1957282573190902018</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/miyatti/status/1957281555161940031" target="_blank" rel="noopener">Xポスト @miyatti</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">おー。自分の感覚と一致してる。自律型のAgentを業務で使いこなしているのはガチプロ中心にごく一部。...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/miyatti/status/1957281555161940031" target="_blank" rel="noopener">https://twitter.com/miyatti/status/1957281555161940031</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/ai_database/status/1957281203385782659" target="_blank" rel="noopener">Xポスト @ai_database</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">LLMによるプログラミングで失敗する原因は「LLMの知識不足」というより「人間の説明不足」である場合...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/ai_database/status/1957281203385782659" target="_blank" rel="noopener">https://twitter.com/ai_database/status/1957281203385782659</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/pop_ikeda/status/1957276272960168223" target="_blank" rel="noopener">Xポスト @pop_ikeda</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">💡NVIDIAが研究結果を発表「AIは大きいより小さい方がいい」時代に突入
+
+AI導入を検討する際「...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/pop_ikeda/status/1957276272960168223" target="_blank" rel="noopener">https://twitter.com/pop_ikeda/status/1957276272960168223</a>
+  </div>
+</article>
+
+
+<article class="card">
+  <div class="card-header">
+    <a class="card-title" href="https://twitter.com/wad0427/status/1957276285656551506" target="_blank" rel="noopener">Xポスト @wad0427</a>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">【収入の差を生む要因】
+
+年収300万の人：
+「AIって本当に便利だよね〜🤔」
+
+年収1000万の人...</p>
+    <div class="chips">
+      <span class="chip">X / SNS</span>
+      <span class="chip ghost">要約: 英語</span>
+      <span class="chip ghost">11時間前</span>
+    </div>
+  </div>
+  <div class="card-footer">
+    出典: <a href="https://twitter.com/wad0427/status/1957276285656551506" target="_blank" rel="noopener">https://twitter.com/wad0427/status/1957276285656551506</a>
   </div>
 </article>
 

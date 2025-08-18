@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-08-18T21:57:53.812688+09:00",
+  "timestamp": "2025-08-18T22:09:38.285312+09:00",
   "date": "2025-08-18",
-  "jst_time": "21:57 JST",
+  "jst_time": "22:09 JST",
   "categories": {
     "business": {
       "name": "ビジネス・投資",
@@ -84,11 +84,10 @@
     "tools": {
       "name": "テクノロジー・ツール",
       "icon": "⚡",
-      "count": 6,
+      "count": 5,
       "top_sources": {
         "MarkTechPost": 3,
-        "Reddit MachineLearning": 2,
-        "Machine Learning Mastery": 1
+        "Reddit MachineLearning": 2
       },
       "top_companies": {
         "Anthropic": 1
@@ -119,16 +118,6 @@
           "summary": "Ovis2.5, the latest large multimodal language model (MLLM) from Alibaba’s AIDC-AI team, is making waves in the open-sour...",
           "importance": 5,
           "url": "https://www.marktechpost.com/2025/08/17/alibaba-ai-team-just-released-ovis-2-5-multimodal-llms-a-major-leap-in-open-source-ai-with-enhanced-visual-perception-and-reasoning-capabilities/",
-          "gemini_selected": false
-        },
-        {
-          "title": "7 NumPy Tricks You Didn’t Know You Needed",
-          "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
-          "source": "Machine Learning Mastery",
-          "time": "12:00",
-          "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
-          "importance": 0,
-          "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
           "gemini_selected": false
         },
         {
@@ -333,13 +322,13 @@
         "gemini_selected": false
       },
       {
-        "title": "7 NumPy Tricks You Didn’t Know You Needed",
-        "title_ja": "あなたが必要としていないことを知らなかった7つのnumpyトリック",
-        "source": "Machine Learning Mastery",
-        "time": "12:00",
-        "summary": "NumPy is one of the most popular Python libraries for working with numbers and data.",
+        "title": "[P] Looking for datasets/tools for testing document forgery detection in medical claims",
+        "title_ja": "[P]医療請求でドキュメント偽造の検出をテストするためのデータセット/ツールを探しています",
+        "source": "Reddit MachineLearning",
+        "time": "06:42",
+        "summary": "I’m a new joinee working on a project where I need to test a forgery detection agent for medical/insurance claim documen...",
         "importance": 0,
-        "url": "https://machinelearningmastery.com/7-numpy-tricks-you-didnt-know-you-needed/",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1mtekhm/p_looking_for_datasetstools_for_testing_document/",
         "gemini_selected": false
       }
     ]
@@ -393,14 +382,14 @@
   },
   "highlights": [],
   "stats": {
-    "total_items": 18,
-    "total_sources": 9,
+    "total_items": 17,
+    "total_sources": 8,
     "active_companies": 3,
     "top_company": [
       "Anthropic",
       1
     ],
-    "last_updated": "2025-08-18 21:57 JST"
+    "last_updated": "2025-08-18 22:09 JST"
   },
   "x_posts": {
     "total_count": 123,
@@ -449,7 +438,7 @@
     ]
   },
   "executive_summary": {
-    "headline": "今日のAI業界: 18件のニュース、3社が活動",
+    "headline": "今日のAI業界: 17件のニュース、3社が活動",
     "key_points": [
       "📈 市場動向: 楽観的なセンチメント",
       "🚀 技術開発: 1件の新製品リリース",

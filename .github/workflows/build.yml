@@ -27,12 +27,16 @@ jobs:
         run: |
           python -V
           pip install --upgrade pip
-          pip install feedparser pyyaml deep-translator==1.11.4
-      - name: Build HTML
-        timeout-minutes: 8
+          pip install feedparser pyyaml deep-translator==1.11.4 google-generativeai python-dotenv
+      - name: Build HTML and Daily Report
+        timeout-minutes: 10
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           timeout 420 python build.py || echo "Build timeout, using emergency build"
+          timeout 120 python generate_reference_format_dashboard.py || echo "Gemini dashboard timeout, using fallback"
           timeout 120 python generate_comprehensive_dashboard.py || echo "Dashboard timeout, skipping"
+          timeout 300 python generate_daily_business_report.py || echo "Daily report timeout, skipping"
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

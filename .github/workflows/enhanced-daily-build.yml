@@ -141,14 +141,7 @@ jobs:
           
           # Create descriptive commit message
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M JST')
-          git commit -m "🤖 Enhanced AI News Update - ${TIMESTAMP}
-
-🧠 Gemini URL Context: Enhanced X post analysis
-📝 300字要約制限: Implemented  
-❌ 重複除去: Advanced deduplication
-⭐ 重要度ランキング: Priority-based sorting
-
-Generated with Enhanced AI News System [skip ci]" || echo "No changes to commit"
+          git commit -m "🤖 Enhanced AI News Update - ${TIMESTAMP} [skip ci]" || echo "No changes to commit"
           
           git push
           echo "✅ Enhanced content deployed"

@@ -29,16 +29,17 @@ jobs:
           ls -la
           
           # 最小限のHTMLを生成
-          cat > test_build.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><title>Build Test</title></head>
-<body>
-<h1>Build Test Success</h1>
-<p>Generated at: $(date)</p>
-</body>
-</html>
-EOF
+          TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
+          cat > test_build.html << EOF
+          <!DOCTYPE html>
+          <html>
+          <head><title>Build Test</title></head>
+          <body>
+          <h1>Build Test Success</h1>
+          <p>Generated at: ${TIMESTAMP}</p>
+          </body>
+          </html>
+          EOF
           
           echo "✅ Test HTML created"
           

@@ -11,7 +11,7 @@ on:
       - 'dashboard.html'
       - '**.html'
   workflow_run:
-    workflows: ["Daily build (JA summaries fixed)"]
+    workflows: ["Enhanced Daily AI News Build (Gemini URL Context)", "Daily build (JA summaries fixed)"]
     types:
       - completed
 
@@ -38,9 +38,14 @@ jobs:
           
       - name: Copy built files to outputs
         run: |
-          # HTMLファイルをコピー
+          # Enhanced system で生成されるHTMLファイルをコピー
           cp -f index.html outputs/ 2>/dev/null || true
+          cp -f news_detail.html outputs/ 2>/dev/null || true
+          cp -f ai_news_dashboard.html outputs/ 2>/dev/null || true
           cp -f dashboard.html outputs/ 2>/dev/null || true
+          
+          # news_detail.html を index.html としてもコピー（メインページとして）
+          [ -f "news_detail.html" ] && cp news_detail.html outputs/index.html || true
           
           # 必要な静的ファイルをコピー（あれば）
           [ -d "assets" ] && cp -r assets outputs/ || true
@@ -65,7 +70,7 @@ jobs:
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: awano27/daily-ai-news-pages
-          publish_branch: gh-pages
+          publish_branch: main
           publish_dir: ./outputs
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'

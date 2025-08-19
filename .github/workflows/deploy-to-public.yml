@@ -70,7 +70,7 @@ jobs:
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: awano27/daily-ai-news-pages
-          publish_branch: main
+          publish_branch: gh-pages
           publish_dir: ./outputs
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'

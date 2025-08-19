@@ -25,6 +25,15 @@ import yaml
 import feedparser
 import requests
 import random
+# Enhanced X Processing Integration
+try:
+    from enhanced_x_processor import EnhancedXProcessor
+    ENHANCED_X_AVAILABLE = True
+    print("✅ Enhanced X Processor: Integrated")
+except ImportError:
+    ENHANCED_X_AVAILABLE = False
+    print("⚠️ Enhanced X Processor: Using fallback")
+
 import time
 from urllib.parse import urljoin
 
@@ -339,7 +348,37 @@ def _author_from_url(u: str) -> str:
     except Exception:
         return 'X'
 
+
+def enhanced_gather_x_posts_implementation(csv_path: str) -> list[dict]:
+    """Enhanced X Posts - 重複除去とGemini強化"""
+    if ENHANCED_X_AVAILABLE:
+        try:
+            processor = EnhancedXProcessor()
+            posts = processor.process_x_posts(csv_path, max_posts=25)
+            
+            if posts:
+                build_items = processor.convert_to_build_format(posts)
+                print(f"✅ Enhanced X処理: {len(build_items)}件 (重複除去・Gemini強化済み)")
+                
+                # 統計表示
+                enhanced_count = sum(1 for item in build_items if item.get('_enhanced', False))
+                high_priority = sum(1 for item in build_items if item.get('_priority', 0) >= 3)
+                
+                print(f"   🧠 Gemini強化済み: {enhanced_count}件")
+                print(f"   ⭐ 高重要度投稿: {high_priority}件")
+                
+                return build_items
+        except Exception as e:
+            print(f"⚠️ Enhanced処理エラー: {e} - フォールバックを使用")
+    
+    # フォールバック: 元の処理
+    return original_gather_x_posts(csv_path)
+
+
 def gather_x_posts(csv_path: str) -> list[dict]:
+    return enhanced_gather_x_posts_implementation(csv_path)
+
+def original_gather_x_posts(csv_path: str) -> list[dict]:
     # Check if it's a URL or local file
     is_url = csv_path.startswith('http')
     
@@ -892,10 +931,15 @@ def build_cards(items, translator):
                 except Exception as e:
                     print(f"[WARN] Translation failed for {link[:50]}: {e}")
 
+        # 要約の文字数制限（300文字以内）
+        final_summary = ja_summary if did_translate else raw_summary
+        if len(final_summary) > 300:
+            final_summary = final_summary[:300] + '...'
+
         cards.append(CARD_TMPL.format(
             link=html.escape(link, quote=True),
             title=html.escape(title, quote=False),
-            summary=(ja_summary if did_translate else raw_summary),
+            summary=final_summary,
             source_name=html.escape(src, quote=False),
             summary_lang=("要約: 日本語" if did_translate else "要約: 英語"),
             ago=ago_str(dt),

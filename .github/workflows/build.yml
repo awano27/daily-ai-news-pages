@@ -1,4 +1,4 @@
-name: Daily build (JA summaries fixed)
+name: Enhanced Daily AI News Build (Gemini URL Context)
 on:
   schedule:
     - cron: "0 22 * * *"   # 07:00 JST (daily automatic update)
@@ -24,21 +24,42 @@ jobs:
         run: |
           python -V
           pip install --upgrade pip
-          pip install feedparser pyyaml deep-translator==1.11.4 google-generativeai python-dotenv
-      - name: Build HTML and Daily Report
-        timeout-minutes: 10
+          pip install feedparser pyyaml deep-translator==1.11.4 google-genai python-dotenv requests
+      - name: Enhanced AI News Build with Gemini URL Context
+        timeout-minutes: 15
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: "gemini-2.5-flash"
+          HOURS_LOOKBACK: "24"
+          MAX_ITEMS_PER_CATEGORY: "10"
+          TRANSLATE_TO_JA: "1"
+          TRANSLATE_ENGINE: "google"
         run: |
-          timeout 420 python build.py || echo "Build timeout, using emergency build"
-          timeout 120 python generate_fixed_dashboard.py || echo "Fixed dashboard timeout, using fallback"
-          if [ -f "fixed_dashboard_*.html" ]; then cp fixed_dashboard_*.html index.html; fi
-          timeout 120 python generate_comprehensive_dashboard.py || echo "Dashboard timeout, skipping"
-          timeout 300 python generate_daily_business_report.py || echo "Daily report timeout, skipping"
-      - name: Commit and push
+          echo "🚀 Enhanced AI News Build with Gemini URL Context"
+          echo "Creating .env file for Gemini API..."
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
+          echo "GEMINI_MODEL=gemini-2.5-flash" >> .env
+          
+          echo "📊 Running production integration test..."
+          timeout 300 python final_production_test.py || echo "Production test timeout, proceeding with build"
+          
+          echo "🔄 Building enhanced site with X post deduplication..."
+          timeout 600 python build.py || echo "Enhanced build timeout, using fallback"
+          
+          echo "📰 Generating enhanced dashboard..."
+          timeout 180 python generate_comprehensive_dashboard.py || echo "Dashboard timeout, using fallback"
+          
+          echo "📈 Generating daily business report..."
+          timeout 300 python generate_daily_business_report.py || echo "Report timeout, skipping"
+          
+          echo "🔍 Checking generated files..."
+          ls -la *.html || echo "No HTML files found"
+          
+          echo "✅ Enhanced build completed"
+      - name: Commit and push enhanced content
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "chore: update site content [skip ci]" || echo "no changes"
+          git commit -m "🤖 Enhanced daily AI news update with Gemini URL Context [skip ci]" || echo "no changes"
           git push

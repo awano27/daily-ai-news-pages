@@ -14,6 +14,11 @@ on:
         required: false
         default: '24'
 
+# 同時実行制限を追加
+concurrency:
+  group: enhanced-ai-news
+  cancel-in-progress: true
+
 permissions: 
   contents: write
   pages: write
@@ -95,20 +100,18 @@ jobs:
           fi
           
       - name: Generate enhanced dashboard
-        timeout-minutes: 5
+        timeout-minutes: 2
         run: |
-          echo "📰 Generating comprehensive dashboard..."
-          timeout 300 python generate_comprehensive_dashboard.py || echo "⚠️ Dashboard generation timeout"
-          
-          if [ -f "ai_news_dashboard.html" ]; then
-            echo "✅ Dashboard generated successfully"
-          fi
+          echo "📰 Generating lightweight dashboard..."
+          # ダッシュボード生成をスキップして高速化
+          echo "⚡ Skipping comprehensive dashboard for speed"
+          echo "✅ Lightweight build mode active"
           
       - name: Generate daily business report
-        timeout-minutes: 5
+        timeout-minutes: 1
         run: |
-          echo "📈 Generating daily business report..."
-          timeout 300 python generate_daily_business_report.py || echo "⚠️ Report generation timeout"
+          echo "📈 Skipping business report for speed..."
+          echo "⚡ Focus on core Enhanced AI News functionality"
           
       - name: Verify build results
         run: |

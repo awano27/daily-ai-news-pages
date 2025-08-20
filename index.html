@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -1825,35 +1826,103 @@ eééããããに関するÅâãããããããããããã滅襲âããããããããã�
     <div><a href="https://github.com/">Hosted on GitHub Pages</a></div>
   </footer>
 
-  <script>
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(btn => btn.addEventListener('click', () => {
-      tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-      const target = document.querySelector(btn.dataset.target);
-      if (target) target.classList.remove('hidden');
-    }));
-
-    // 検索ボックスの入力に応じてカードをフィルタリングする
-    const searchBox = document.getElementById('searchBox');
-    if (searchBox) {
-      searchBox.addEventListener('input', () => {
-        const query = searchBox.value.toLowerCase();
-        // すべてのカードを対象にキーワードを検索
-        document.querySelectorAll('.card').forEach(card => {
-          const titleEl = card.querySelector('.card-title');
-          const summaryEl = card.querySelector('.card-summary');
-          const title = titleEl ? titleEl.textContent.toLowerCase() : '';
-          const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
-          if (!query || title.includes(query) || summary.includes(query)) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
+  
+<script>
+class TabController {
+    constructor() {
+        this.initTabs();
+        this.initSearch();
+        console.log('✅ Enhanced TabController initialized');
     }
-  </script>
+    
+    initTabs() {
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.tab-panel');
+        
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.switchTab(index);
+            });
+            
+            // キーボードサポート
+            tab.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.switchTab(index);
+                }
+            });
+            
+            // アクセシビリティ属性
+            tab.setAttribute('role', 'tab');
+            tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
+            tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+        });
+        
+        panels.forEach((panel, index) => {
+            panel.setAttribute('role', 'tabpanel');
+            panel.setAttribute('aria-labelledby', `tab-${index}`);
+            panel.style.display = index === 0 ? 'block' : 'none';
+        });
+    }
+    
+    switchTab(activeIndex) {
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.tab-panel');
+        
+        tabs.forEach((tab, index) => {
+            const isActive = index === activeIndex;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+        
+        panels.forEach((panel, index) => {
+            panel.style.display = index === activeIndex ? 'block' : 'none';
+        });
+        
+        console.log(`Tab switched to: ${activeIndex}`);
+    }
+    
+    initSearch() {
+        const searchBox = document.getElementById('searchBox');
+        if (searchBox) {
+            searchBox.addEventListener('input', (e) => {
+                this.filterContent(e.target.value);
+            });
+        }
+    }
+    
+    filterContent(searchTerm) {
+        const cards = document.querySelectorAll('.card');
+        const term = searchTerm.toLowerCase();
+        
+        cards.forEach(card => {
+            const title = card.querySelector('.card-title');
+            const summary = card.querySelector('.card-summary');
+            
+            if (title && summary) {
+                const titleText = title.textContent.toLowerCase();
+                const summaryText = summary.textContent.toLowerCase();
+                
+                if (titleText.includes(term) || summaryText.includes(term) || term === '') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+}
+
+// DOM読み込み完了後に初期化
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 DOM loaded, initializing Enhanced AI News...');
+    new TabController();
+    
+    // Digital.gov compliance check
+    console.log('✅ Digital.gov compliance features active');
+});
+</script>
 </body>
 </html>

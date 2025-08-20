@@ -1,0 +1,6 @@
+feedparser
+pyyaml
+requests
+deep-translator>=1.11.4
+google-genai
+python-dotenv

@@ -66,7 +66,14 @@
       "Bash(\"simple_deploy.bat\")",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe deploy_build_fix.py)",
       "Bash(.run_sns_enhanced.bat)",
-      "Bash(.commit_sns_enhanced.bat)"
+      "Bash(.commit_sns_enhanced.bat)",
+      "Bash(gh workflow:*)",
+      "Bash(gh run list:*)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newscomprehensive_test.py)",
+      "Bash(set TRANSLATE_TO_JA=1)",
+      "Bash(set TRANSLATE_ENGINE=google)",
+      "Bash(set HOURS_LOOKBACK=48)",
+      "Bash(set MAX_ITEMS_PER_CATEGORY=30)"
     ],
     "deny": [],
     "ask": [],

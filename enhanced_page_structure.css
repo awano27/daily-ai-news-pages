@@ -1,0 +1,187 @@
+/* Digital.gov準拠: 重要情報をページ上部に集約 */
+
+/* 情報階層ヘッダー - 最重要情報を最上部に */
+.info-hierarchy {
+  background: var(--gradient-subtle);
+  border: 2px solid var(--brand-light);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.info-hierarchy::before {
+  content: "📊";
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  font-size: 20px;
+}
+
+/* 重要情報グリッド */
+.priority-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.priority-item {
+  background: white;
+  border: 2px solid var(--brand-light);
+  border-radius: var(--spacing-sm);
+  padding: var(--spacing-md);
+  text-align: center;
+  position: relative;
+}
+
+.priority-item::before {
+  content: attr(data-icon);
+  display: block;
+  font-size: 24px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.priority-value {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: var(--brand);
+  margin-bottom: var(--spacing-xs);
+}
+
+.priority-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: var(--spacing-xs);
+}
+
+.priority-note {
+  font-size: var(--font-size-xs);
+  color: var(--muted);
+}
+
+/* 視覚順序と読み順の一致 */
+.content-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+/* セマンティックセクション */
+.semantic-section {
+  position: relative;
+}
+
+.semantic-section > h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--brand);
+  position: relative;
+}
+
+.semantic-section > h2::before {
+  content: attr(data-icon);
+  margin-right: var(--spacing-sm);
+  color: var(--brand);
+}
+
+/* 近接の法則適用 */
+.proximity-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.proximity-group + .proximity-group {
+  border-top: 1px solid var(--line);
+  padding-top: var(--spacing-xl);
+}
+
+/* 色以外での意味伝達 */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+}
+
+.status-indicator::before {
+  content: attr(data-symbol);
+  font-weight: 800;
+}
+
+.status-success {
+  background: rgba(21, 128, 61, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(21, 128, 61, 0.3);
+}
+
+.status-warning {
+  background: rgba(202, 138, 4, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(202, 138, 4, 0.3);
+}
+
+.status-info {
+  background: rgba(3, 105, 161, 0.1);
+  color: var(--info);
+  border: 1px solid rgba(3, 105, 161, 0.3);
+}
+
+/* アクセシブルなアイコンシステム */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.icon-text::before {
+  content: attr(data-icon);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* スクリーンリーダー専用テキスト */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* フォーカス管理 */
+*:focus {
+  outline: 3px solid var(--brand-light);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--focus-ring);
+}
+
+/* キーボードナビゲーション用の skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--brand);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  border-radius: var(--spacing-xs);
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

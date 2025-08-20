@@ -1,22 +1,55 @@
 :root{
-  /* カラー・コントラスト改善: WCAG AA準拠（4.5:1以上） */
-  --fg:#111827; --bg:#ffffff; --muted:#4b5563; --line:#e5e7eb;
-  --brand:#2563eb; --brand-weak:#f0f4ff; --chip:#f8fafc;
-  --brand-hover:#1d4ed8; --brand-light:#93c5fd;
-  --success:#059669; --warning:#d97706; --danger:#dc2626;
-  --gradient:linear-gradient(135deg, #2563eb 0%, #3730a3 100%);
+  /* Digital.gov準拠: WCAG AAA対応カラーシステム */
+  --fg:#0f172a; --bg:#ffffff; --muted:#475569; --line:#e2e8f0;
+  --brand:#1e40af; --brand-weak:#f1f5f9; --chip:#f8fafc;
+  --brand-hover:#1e3a8a; --brand-light:#bfdbfe; --brand-dark:#1e3a8a;
+  --success:#15803d; --warning:#ca8a04; --danger:#dc2626;
+  --info:#0369a1; --neutral:#64748b;
+  
+  /* 段階的背景色（彩度を下げた背景） */
+  --bg-subtle:#f8fafc; --bg-muted:#f1f5f9; --bg-emphasis:#e2e8f0;
+  
+  /* グラデーション（彩度調整済み） */
+  --gradient:linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  --gradient-subtle:linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  
+  /* シャドウ */
   --shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg:0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* レイアウト変数 */
   --border-radius: 12px;
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
+  --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; 
+  --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 48px;
+  
+  /* タイポグラフィ */
+  --font-size-xs: 12px; --font-size-sm: 14px; --font-size-base: 16px;
+  --font-size-lg: 18px; --font-size-xl: 20px; --font-size-2xl: 24px;
+  --font-size-3xl: 32px; --font-size-4xl: 36px;
+  
+  /* フォーカス表示 */
+  --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  --focus-ring-offset: 2px;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans JP',sans-serif}
-.container{max-width:1000px;margin:0 auto;padding:24px 16px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans JP',sans-serif;
+  font-size:var(--font-size-base);
+  line-height:1.6;
+  scroll-behavior:smooth;
+}
+.container{
+  max-width:1000px;
+  margin:0 auto;
+  padding:var(--spacing-lg) var(--spacing-md);
+  /* digital.gov: 重要情報を上部に集約するためのグリッド */
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-lg);
+}
 .site-header{
   background:var(--gradient);
   color:white;
@@ -34,44 +67,112 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
   display:flex;justify-content:space-between;align-items:center;
 }
 .brand{font-weight:700;font-size:20px}
-.updated{color:rgba(255,255,255,0.9);font-size:14px}
-/* ページタイトル・説明 - 階層明確化 */
-.page-title{
-  margin:var(--spacing-lg) 0 var(--spacing-sm) 0;
-  font-size:36px;
-  font-weight:800;
-  color:var(--fg);
-  text-align:center;
-  border-bottom:3px solid var(--brand);
-  padding-bottom:var(--spacing-md);
+.updated{
+  color:rgba(255,255,255,0.95);
+  font-size:var(--font-size-sm);
+  font-weight:500;
+  /* digital.gov: アイコンで情報を補完 */
 }
-.lead{
-  color:var(--muted);
-  margin:0 0 var(--spacing-xl) 0;
-  font-size:16px;
-  line-height:1.7;
-  text-align:center;
-  max-width:800px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-bottom:var(--spacing-xl);
-  background:var(--chip);
-  padding:var(--spacing-lg);
+.updated::before{
+  content:'🕒 ';
+  margin-right:var(--spacing-xs);
+}
+/* Digital.gov: 情報階層を上部に集約 */
+.priority-header{
+  background:var(--gradient-subtle);
+  border:2px solid var(--brand-light);
   border-radius:var(--border-radius);
-  border-left:4px solid var(--brand);
+  padding:var(--spacing-xl);
+  margin-bottom:var(--spacing-2xl);
+  text-align:center;
+  position:relative;
 }
 
-/* KPIエリア - 階層と視認性を改善 */
+.priority-header::before{
+  content:'📊 ';
+  font-size:var(--font-size-2xl);
+  position:absolute;
+  top:var(--spacing-sm);
+  left:var(--spacing-md);
+}
+
+.page-title{
+  margin:0 0 var(--spacing-sm) 0;
+  font-size:var(--font-size-4xl);
+  font-weight:800;
+  color:var(--fg);
+  line-height:1.2;
+}
+
+.lead{
+  color:var(--muted);
+  margin:var(--spacing-md) 0 var(--spacing-lg) 0;
+  font-size:var(--font-size-base);
+  line-height:1.6;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* 重要情報グリッド */
+.key-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+  gap:var(--spacing-sm);
+  margin-top:var(--spacing-lg);
+}
+
+.key-stat{
+  background:white;
+  border:1px solid var(--brand-light);
+  border-radius:var(--spacing-sm);
+  padding:var(--spacing-md);
+  text-align:center;
+}
+
+.key-stat-icon{
+  font-size:var(--font-size-lg);
+  margin-bottom:var(--spacing-xs);
+  display:block;
+}
+
+.key-stat-value{
+  font-size:var(--font-size-xl);
+  font-weight:700;
+  color:var(--brand);
+  margin-bottom:var(--spacing-xs);
+  display:block;
+}
+
+.key-stat-label{
+  font-size:var(--font-size-xs);
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* Digital.gov: KPIエリアを第二階層として明確化 */
 .kpi-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
   gap:var(--spacing-md);
-  margin:var(--spacing-xl) 0;
-  padding:var(--spacing-lg);
-  background:var(--brand-weak);
+  margin:var(--spacing-2xl) 0;
+  padding:var(--spacing-xl);
+  background:var(--bg-subtle);
   border-radius:var(--border-radius);
-  border: 2px solid var(--brand-light);
+  border:2px solid var(--line);
+  position:relative;
 }
+
+.kpi-grid::before{
+  content:'📈 データ概要';
+  position:absolute;
+  top:var(--spacing-sm);
+  left:var(--spacing-md);
+  font-size:var(--font-size-sm);
+  font-weight:700;
+  color:var(--brand);
+}
+
 .kpi-card{
   background:white;
   border:2px solid var(--brand-light);
@@ -80,41 +181,79 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
   box-shadow:var(--shadow);
   transition:all 0.2s ease;
   text-align:center;
+  position:relative;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
+
 .kpi-card:hover{
   transform:translateY(-2px);
   box-shadow:var(--shadow-lg);
   border-color:var(--brand);
 }
+
+.kpi-card:focus-within{
+  outline:3px solid var(--brand-light);
+  outline-offset:2px;
+}
+
 .kpi-value{
-  font-size:32px;
+  font-size:var(--font-size-3xl);
   font-weight:800;
   color:var(--brand);
   margin-bottom:var(--spacing-xs);
+  line-height:1;
 }
+
 .kpi-label{
   color:var(--fg);
-  font-weight:700;
+  font-weight:600;
   margin-bottom:var(--spacing-xs);
-  font-size:14px;
+  font-size:var(--font-size-sm);
+  line-height:1.2;
 }
 .kpi-note{
   color:var(--muted);
-  font-size:12px;
+  font-size:var(--font-size-xs);
   font-weight:500;
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:var(--spacing-xs);
 }
 
-/* タブナビ - コントラスト改善とアクセシビリティ強化 */
+.kpi-note::before{
+  content:attr(data-icon);
+  font-style:normal;
+}
+
+/* Digital.gov: タブナビゲーション - 完全アクセシブル */
 .tabs{
   display:flex;
   gap:var(--spacing-xs);
-  background:var(--brand-weak);
-  border:2px solid var(--brand-light);
+  background:var(--bg-subtle);
+  border:2px solid var(--line);
   border-radius:var(--border-radius);
   padding:var(--spacing-xs);
-  margin:var(--spacing-xl) 0 var(--spacing-lg) 0;
+  margin:var(--spacing-2xl) 0 var(--spacing-lg) 0;
   box-shadow:var(--shadow);
+  position:relative;
+  role:tablist;
 }
+
+.tabs::before{
+  content:'📑 カテゴリ選択';
+  position:absolute;
+  top:calc(-1 * var(--spacing-lg));
+  left:0;
+  font-size:var(--font-size-sm);
+  font-weight:700;
+  color:var(--brand);
+}
+
 .tab{
   appearance:none;
   background:transparent;
@@ -124,7 +263,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
   cursor:pointer;
   color:var(--fg);
   font-weight:600;
-  font-size:16px;
+  font-size:var(--font-size-base);
   transition:all 0.2s ease;
   flex:1;
   text-align:center;
@@ -132,22 +271,54 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
   display:flex;
   align-items:center;
   justify-content:center;
+  gap:var(--spacing-xs);
+  position:relative;
 }
-.tab.active{
+
+.tab[aria-selected="true"]{
   background:var(--brand);
   color:white;
-  border-color:var(--brand-hover);
+  border-color:var(--brand-dark);
   box-shadow:var(--shadow);
   font-weight:700;
 }
-.tab:hover:not(.active){
+
+.tab[aria-selected="true"]::after{
+  content:'✓';
+  position:absolute;
+  top:-8px;
+  right:-8px;
+  background:var(--success);
+  color:white;
+  border-radius:50%;
+  width:20px;
+  height:20px;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.tab:hover:not([aria-selected="true"]){
   background:white;
   color:var(--brand);
   border-color:var(--brand-light);
+  box-shadow:var(--shadow);
 }
+
 .tab:focus{
   outline:3px solid var(--brand-light);
   outline-offset:2px;
+  z-index:1;
+}
+
+/* キーボードナビゲーション表示 */
+.tab:focus::before{
+  content:'→';
+  position:absolute;
+  left:-12px;
+  color:var(--brand);
+  font-weight:800;
 }
 
 /* 検索ボックスエリア */
@@ -168,14 +339,29 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
 .tab-panel{padding:16px 0}
 .hidden{display:none}
 
+/* Digital.gov: 記事カード - 近接の法則と意味伝達強化 */
 .card{
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:20px;
-  margin:16px 0;
+  border:2px solid var(--line);
+  border-radius:var(--border-radius);
+  padding:var(--spacing-lg);
+  margin:var(--spacing-lg) 0;
   background:white;
   box-shadow:var(--shadow);
-  transition:transform 0.2s ease, box-shadow 0.2s ease;
+  transition:all 0.2s ease;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-sm);
+}
+
+.card::before{
+  content:attr(data-category-icon);
+  position:absolute;
+  top:var(--spacing-sm);
+  right:var(--spacing-sm);
+  font-size:var(--font-size-lg);
+  opacity:0.6;
+}
 }
 .card:hover{
   transform:translateY(-2px);
@@ -206,28 +392,45 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-
   font-size:15px;
   font-weight:500;
 }
+/* Digital.gov: フッター - 関連要素の近接配置 */
 .card-footer{
-  margin-top:var(--spacing-md);
-  padding-top:var(--spacing-sm);
-  border-top:1px solid var(--line);
+  margin-top:auto;
+  padding-top:var(--spacing-md);
+  border-top:2px solid var(--bg-emphasis);
   color:var(--muted);
-  font-size:13px;
+  font-size:var(--font-size-xs);
   font-weight:500;
   display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:var(--spacing-sm);
+  flex-direction:column;
+  gap:var(--spacing-xs);
 }
+
+.card-footer::before{
+  content:'🔗 情報源';
+  font-weight:700;
+  color:var(--brand);
+  font-size:var(--font-size-xs);
+}
+
 .card-footer a{
   color:var(--brand);
   text-decoration:none;
   font-weight:600;
   word-break:break-all;
+  padding:var(--spacing-xs);
+  border-radius:var(--spacing-xs);
+  transition:all 0.2s ease;
 }
+
 .card-footer a:hover{
   color:var(--brand-hover);
   text-decoration:underline;
+  background:var(--brand-weak);
+}
+
+.card-footer a:focus{
+  outline:2px solid var(--brand-light);
+  outline-offset:2px;
 }
 /* チップ - 色だけでなくアイコンで意味を伝達 */
 .chips{

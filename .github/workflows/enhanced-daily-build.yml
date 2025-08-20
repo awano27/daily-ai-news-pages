@@ -139,8 +139,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Only add HTML files and cache
-          git add *.html _cache/ || true
+          # Add HTML files, CSS, and cache for complete deployment
+          git add *.html style.css _cache/ || true
           
           # Create descriptive commit message
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M JST')

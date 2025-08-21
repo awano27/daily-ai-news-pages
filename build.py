@@ -335,6 +335,9 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                 text = row[2].strip('"').strip() if len(row) > 2 else ""
                 tweet_url = row[4].strip('"').strip() if len(row) > 4 else ""
                 
+                # HTMLエンティティをデコード
+                text = html.unescape(text)
+                
                 # URLがない場合はダミーURLを生成
                 if not tweet_url and username:
                     username_clean = username.replace('@', '').replace('"', '')

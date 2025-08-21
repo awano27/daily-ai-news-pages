@@ -195,6 +195,11 @@ class EnhancedXProcessor:
                 media_url = row[3].strip('"').strip() if len(row) > 3 else ''
                 post_url = row[4].strip('"').strip() if len(row) > 4 else ''
                 
+                # HTMLエンティティをデコード
+                import html
+                text = html.unescape(text)
+                username = html.unescape(username)
+                
                 print(f"[DEBUG] Row {total_rows}: date={date_str[:20]}..., user={username}, text_len={len(text)}")
                 
                 if not text or not username or len(text.strip()) < 5:

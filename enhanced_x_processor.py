@@ -152,9 +152,12 @@ class EnhancedXProcessor:
         print(f"🔄 Processing X posts from: {csv_url}")
         
         try:
-            # CSV データを取得
+            # CSV データを取得（エンコーディングを明示的に指定）
             response = requests.get(csv_url, timeout=30)
             response.raise_for_status()
+            
+            # エンコーディングを明示的にUTF-8に設定
+            response.encoding = 'utf-8'
             
             # CSV をパース  
             content = response.text
@@ -199,6 +202,19 @@ class EnhancedXProcessor:
                 import html
                 text = html.unescape(text)
                 username = html.unescape(username)
+                
+                # 追加の文字化け対策
+                # 全角文字の正規化
+                import unicodedata
+                text = unicodedata.normalize('NFKC', text)
+                username = unicodedata.normalize('NFKC', username)
+                
+                # 不正な文字や制御文字を除去
+                text = ''.join(char for char in text if char.isprintable() or char in '\n\r\t')
+                
+                # 連続する空白を正規化
+                import re
+                text = re.sub(r'\s+', ' ', text).strip()
                 
                 print(f"[DEBUG] Row {total_rows}: date={date_str[:20]}..., user={username}, text_len={len(text)}")
                 

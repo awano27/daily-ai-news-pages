@@ -303,8 +303,12 @@ class JaTranslator:
 # ---------- X (Twitter) post injection ----------
 def _read_csv_bytes(path_or_url: str) -> bytes:
     if re.match(r'^https?://', path_or_url, re.I):
-        with urlopen(path_or_url) as r:
-            return r.read()
+        # requestsを使用してエンコーディングを適切に処理
+        import requests
+        response = requests.get(path_or_url, timeout=30)
+        response.raise_for_status()
+        response.encoding = 'utf-8'  # UTF-8を明示的に設定
+        return response.content
     with open(path_or_url, 'rb') as f:
         return f.read()
 
@@ -337,6 +341,19 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                 
                 # HTMLエンティティをデコード
                 text = html.unescape(text)
+                username = html.unescape(username)
+                
+                # 追加の文字化け対策
+                # 全角文字の正規化
+                import unicodedata
+                text = unicodedata.normalize('NFKC', text)
+                username = unicodedata.normalize('NFKC', username)
+                
+                # 不正な文字や制御文字を除去
+                text = ''.join(char for char in text if char.isprintable() or char in '\n\r\t')
+                
+                # 連続する空白を正規化
+                text = re.sub(r'\s+', ' ', text).strip()
                 
                 # URLがない場合はダミーURLを生成
                 if not tweet_url and username:

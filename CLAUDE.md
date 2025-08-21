@@ -4,85 +4,134 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static site generator for a Japanese AI news aggregation website. It automatically fetches AI-related news from multiple RSS feeds, translates summaries to Japanese, and generates a static HTML site hosted on GitHub Pages.
+A static site generator for a Japanese AI news aggregation website that:
+- Fetches AI-related news from multiple RSS feeds (Business, Tools, Posts categories)
+- Translates summaries to Japanese using Google Translate or DeepL
+- Integrates X (Twitter) posts from Google Sheets
+- Uses Gemini API for enhanced content analysis and URL context
+- Generates static HTML hosted on GitHub Pages
 
 ## Key Commands
 
-### Local Development
+### Build and Deploy
 ```bash
-# Install dependencies
-pip install feedparser pyyaml deep-translator==1.11.4
+# Install all dependencies
+pip install -r requirements.txt
 
-# Set environment variables (Windows Command Prompt)
+# Windows environment setup
 set TRANSLATE_TO_JA=1
 set TRANSLATE_ENGINE=google
 set HOURS_LOOKBACK=24
 set MAX_ITEMS_PER_CATEGORY=8
-
-# Optional: Use DeepL instead of Google Translate
-set DEEPL_API_KEY=your_api_key_here
+set GEMINI_API_KEY=your_key_here
 
 # Build the site
 python build.py
 
-# Fix language indicators in generated HTML
-python fix_lang_chips.py
+# Generate comprehensive dashboard
+python generate_comprehensive_dashboard.py
+
+# Run comprehensive test
+python comprehensive_test.py
+
+# Deploy to GitHub Pages
+python deploy.py
 ```
 
-### Testing Changes
+### Testing
 ```bash
-# Generate the site locally
-python build.py
+# Run comprehensive system test
+python comprehensive_test.py
 
-# Open index.html in browser to preview
-# Check console for JavaScript errors
-# Verify all tabs work correctly
+# Test production build
+python final_production_test.py
+
+# Test dashboard generation
+python test_dashboard.py
+
+# Test Gemini integration
+python test_gemini.py
+```
+
+### Batch Scripts (Windows)
+```bash
+# Run full test and build
+run_test.bat
+
+# Deploy to GitHub
+simple_deploy.bat
+
+# Generate daily report
+run_daily_report.bat
+
+# Run dashboard with SNS integration
+run_sns_enhanced.bat
 ```
 
 ## Architecture
 
-### Core Components
+### Core Build Pipeline
 
-1. **build.py**: Main generator that:
-   - Fetches RSS feeds from sources defined in `feeds.yml`
-   - Filters content by time window (HOURS_LOOKBACK)
-   - Translates English summaries to Japanese
+1. **build.py**: Main generator
+   - Fetches RSS feeds from `feeds.yml`
+   - Filters by HOURS_LOOKBACK (default: 24 hours)
+   - Translates summaries via Google Translate/DeepL
+   - Integrates X posts from Google Sheets CSV
    - Generates tabbed HTML interface
    - Caches translations in `_cache/translations.json`
 
-2. **feeds.yml**: RSS feed configuration with three categories:
-   - Business: Tech company blogs and business news
-   - Tools: Developer-focused content and frameworks
-   - Posts: Academic papers and research blogs
-   - Sources marked with `general: true` are filtered for AI-related keywords
+2. **enhanced_x_processor.py**: X/Twitter integration
+   - Fetches posts from Google Sheets CSV URL
+   - Deduplicates posts by content similarity
+   - Formats posts with proper links and metadata
 
-3. **GitHub Actions** (.github/workflows/build.yml):
-   - Runs daily at 07:00 JST
-   - Automatically commits generated HTML with `[skip ci]` flag
-   - Uses Google Translate by default (configurable to DeepL)
+3. **gemini_url_context.py**: Gemini API integration
+   - Analyzes URLs for additional context
+   - Enhances summaries with AI-generated insights
+   - Requires GEMINI_API_KEY environment variable
+
+### Configuration Files
+
+- **feeds.yml**: RSS feed sources organized by category
+  - Business: Company blogs, tech news
+  - Tools: Developer tools, frameworks
+  - Posts: Academic papers, research
+  - Sources with `general: true` filtered for AI keywords
+
+- **requirements.txt**: Python dependencies including:
+  - feedparser, pyyaml
+  - deep-translator==1.11.4
+  - google-generativeai>=0.3.0
+  - beautifulsoup4, requests
+
+### GitHub Actions Workflow
+
+`.github/workflows/build.yml`:
+- Runs daily at 07:00 JST (22:00 UTC)
+- Sets environment variables for translation and content limits
+- Executes build pipeline with timeout protection
+- Auto-commits with `[skip ci]` to prevent loops
 
 ### Translation System
 
-- Primary: Google Translate (via deep-translator library)
-- Fallback: MyMemory Translation API
-- Optional: DeepL API (requires API key)
-- Caching: Translations stored in `_cache/translations.json` to avoid repeated API calls
+- **Primary**: Google Translate (deep-translator library)
+- **Alternative**: DeepL API (requires DEEPL_API_KEY)
+- **Fallback**: MyMemory Translation API
+- **Caching**: `_cache/translations.json` persists translations
 
-### Content Processing Flow
+### X Posts Integration
 
-1. RSS feeds fetched based on `feeds.yml` configuration
-2. General news sources filtered for AI-related keywords
-3. Content from last 24 hours selected
-4. English summaries translated to Japanese
-5. HTML generated with tabbed interface
-6. Post-processing with `fix_lang_chips.py` if needed
-7. Automatic commit and deployment to GitHub Pages
+Environment variable: `X_POSTS_CSV`
+- Default: Google Sheets export URL
+- Format: CSV with columns for content, links, timestamps
+- Deduplication: Similarity threshold to avoid duplicates
 
 ## Important Considerations
 
-- **Translation Cache**: Always preserve `_cache/translations.json` to avoid unnecessary API calls
-- **Commit Messages**: Use `[skip ci]` in automated commits to prevent workflow loops
-- **GitHub Pages**: `.nojekyll` file required to serve files starting with underscore
-- **Rate Limits**: Google Translate has rate limits; cache helps mitigate this
-- **Character Encoding**: Ensure UTF-8 encoding for Japanese text
-- **RSS Feed Reliability**: Some feeds may be unavailable; handle gracefully
+- **Translation Cache**: Preserve `_cache/translations.json` to minimize API calls
+- **Commit Messages**: Use `[skip ci]` flag to prevent workflow loops
+- **GitHub Pages**: `.nojekyll` file enables underscore-prefixed files
+- **Rate Limits**: Translation APIs have limits; caching mitigates this
+- **Encoding**: UTF-8 required for Japanese text
+- **Error Handling**: Timeouts set for all external API calls
+- **Google Sheets Access**: Public CSV export URL required for X posts

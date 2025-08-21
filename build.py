@@ -48,14 +48,47 @@ except ImportError:
     def is_403_url(url):
         return False
 
-# ---------- config ----------
-HOURS_LOOKBACK = int(os.getenv("HOURS_LOOKBACK", "24"))
-MAX_ITEMS_PER_CATEGORY = int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8"))
-TRANSLATE_TO_JA = os.getenv("TRANSLATE_TO_JA", "1") == "1"
-TRANSLATE_ENGINE = os.getenv("TRANSLATE_ENGINE", "google").lower()
-# Google Sheets CSV URL for live X posts data
-GOOGLE_SHEETS_URL = "https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0"
-X_POSTS_CSV = os.getenv("X_POSTS_CSV", GOOGLE_SHEETS_URL)
+# ---------- config (改善版) ----------
+def get_config():
+    """設定読み込み（改善版）"""
+    config = {
+        'hours_lookback': int(os.getenv("HOURS_LOOKBACK", "24")),
+        'max_items_per_category': int(os.getenv("MAX_ITEMS_PER_CATEGORY", "8")),
+        'translate_to_ja': os.getenv("TRANSLATE_TO_JA", "1") == "1",
+        'translate_engine': os.getenv("TRANSLATE_ENGINE", "google").lower(),
+        'x_posts_csv': os.getenv("X_POSTS_CSV", ""),
+        'gemini_api_key': os.getenv("GEMINI_API_KEY", ""),
+        'debug_mode': os.getenv("DEBUG_MODE", "0") == "1"
+    }
+
+    # X投稿CSVのデフォルト値
+    if not config['x_posts_csv']:
+        config['x_posts_csv'] = "https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0"
+
+    # 設定値の検証
+    if config['hours_lookback'] < 1 or config['hours_lookback'] > 168:  # 1時間～1週間
+        print(f"[WARN] Invalid HOURS_LOOKBACK: {config['hours_lookback']}, using default 24")
+        config['hours_lookback'] = 24
+
+    if config['max_items_per_category'] < 1 or config['max_items_per_category'] > 20:
+        print(f"[WARN] Invalid MAX_ITEMS_PER_CATEGORY: {config['max_items_per_category']}, using default 8")
+        config['max_items_per_category'] = 8
+
+    # デバッグモード表示
+    if config['debug_mode']:
+        print("[DEBUG] Debug mode enabled")
+
+    return config
+
+# 設定読み込み
+CONFIG = get_config()
+
+# グローバル変数設定
+HOURS_LOOKBACK = CONFIG['hours_lookback']
+MAX_ITEMS_PER_CATEGORY = CONFIG['max_items_per_category']
+TRANSLATE_TO_JA = CONFIG['translate_to_ja']
+TRANSLATE_ENGINE = CONFIG['translate_engine']
+X_POSTS_CSV = CONFIG['x_posts_csv']
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
@@ -65,19 +98,56 @@ CACHE_DIR.mkdir(exist_ok=True)
 CACHE_FILE = CACHE_DIR / "translations.json"
 
 def load_cache():
+    """キャッシュ読み込み（改善版）"""
     try:
         if CACHE_FILE.exists():
-            return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        pass
+            cache_data = json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+            cache_size = len(cache_data)
+            print(f"[INFO] Loaded cache with {cache_size} entries")
+            return cache_data
+        else:
+            print("[INFO] No cache file found, starting fresh")
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        print(f"[WARN] Cache file corrupted: {e}")
+    except Exception as e:
+        print(f"[ERROR] Failed to load cache: {e}")
     return {}
 
 def save_cache(cache):
+    """キャッシュ保存（改善版）"""
     try:
         CACHE_DIR.mkdir(exist_ok=True)
+
+        # キャッシュサイズチェック
+        cache_size = len(cache)
+        if cache_size > 10000:  # 10,000エントリ以上は警告
+            print(f"[WARN] Large cache detected ({cache_size} entries)")
+
+        # バックアップ作成
+        if CACHE_FILE.exists():
+            backup_file = CACHE_FILE.with_suffix('.json.backup')
+            CACHE_FILE.rename(backup_file)
+
+        # 新しいキャッシュを保存
         CACHE_FILE.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception:
-        pass
+
+        # 保存確認
+        saved_size = len(json.loads(CACHE_FILE.read_text(encoding="utf-8")))
+        if saved_size == cache_size:
+            print(f"[SUCCESS] Cache saved with {cache_size} entries")
+        else:
+            print(f"[WARN] Cache size mismatch: expected {cache_size}, got {saved_size}")
+
+        # 古いバックアップ削除
+        if backup_file.exists():
+            backup_file.unlink()
+
+    except Exception as e:
+        print(f"[ERROR] Failed to save cache: {e}")
+        # バックアップから復元
+        if 'backup_file' in locals() and backup_file.exists():
+            backup_file.rename(CACHE_FILE)
+            print("[INFO] Restored cache from backup")
 
 def advanced_feed_fetch(url, name):
     """高度なHTTPリクエストでフィード取得 - Google News 403エラー対策"""
@@ -612,44 +682,75 @@ def get_category(conf, category_name):
             return value
     return []
 
+# グローバルキーワードセット（処理効率化）
+INVESTMENT_KEYWORDS = frozenset([
+    'funding', 'investment', 'ipo', 'venture', 'capital', 'm&a', 'acquisition',
+    '投資', '資金調達', 'ipo', 'ベンチャー', '資本', '買収', '合併'
+])
+
+STRATEGY_KEYWORDS = frozenset([
+    'strategy', 'executive', 'ceo', 'leadership', 'transformation', 'partnership',
+    '戦略', '経営', 'ceo', 'リーダーシップ', '変革', '提携'
+])
+
+GOVERNANCE_KEYWORDS = frozenset([
+    'regulation', 'policy', 'compliance', 'ethics', 'governance', 'law',
+    '規制', '政策', 'コンプライアンス', '倫理', 'ガバナンス', '法律'
+])
+
 def categorize_business_news(item, feeds_info):
-    """ビジネスニュースをサブカテゴリに分類"""
-    business_category = feeds_info.get('business_category', 'general')
-    title = item.get('title', '').lower()
-    summary = item.get('_summary', '').lower()
-    
-    # キーワードベースの分類
-    if business_category == 'strategy':
-        return 'strategy'  # 戦略・経営
-    elif business_category == 'investment':
-        return 'investment'  # 投資・M&A
-    elif business_category == 'japan_business':
-        return 'japan_business'  # 日本企業
-    elif business_category == 'governance':
-        return 'governance'  # 規制・ガバナンス
-    else:
-        # キーワードで自動分類
-        investment_keywords = ['funding', 'investment', 'ipo', 'venture', 'capital', 'm&a', 'acquisition', '投資', '資金調達', 'IPO']
-        strategy_keywords = ['strategy', 'executive', 'ceo', 'leadership', 'transformation', '戦略', '経営', 'CEO']
-        governance_keywords = ['regulation', 'policy', 'compliance', 'ethics', 'governance', '規制', '政策', 'ガバナンス']
-        
-        for keyword in investment_keywords:
-            if keyword in title or keyword in summary:
-                return 'investment'
-        for keyword in strategy_keywords:
-            if keyword in title or keyword in summary:
-                return 'strategy'
-        for keyword in governance_keywords:
-            if keyword in title or keyword in summary:
-                return 'governance'
-                
+    """ビジネスニュースをサブカテゴリに分類（最適化版）"""
+    try:
+        business_category = feeds_info.get('business_category', 'general')
+        title = item.get('title', '').lower() if item.get('title') else ''
+        summary = item.get('_summary', '').lower() if item.get('_summary') else ''
+        content = f"{title} {summary}"
+
+        # 設定されたカテゴリを優先
+        if business_category in ['strategy', 'investment', 'japan_business', 'governance']:
+            return business_category
+
+        # キーワードベースの高速分類（set lookup）
+        if any(kw in content for kw in INVESTMENT_KEYWORDS):
+            return 'investment'
+        if any(kw in content for kw in STRATEGY_KEYWORDS):
+            return 'strategy'
+        if any(kw in content for kw in GOVERNANCE_KEYWORDS):
+            return 'governance'
+
+        return 'general'
+
+    except Exception as e:
+        print(f"[WARN] Error in categorize_business_news: {e}")
         return 'general'
 
 def within_window(published_parsed):
-    if not published_parsed: 
-        return True, NOW  # keep if unknown, use current time
-    dt = datetime.fromtimestamp(time.mktime(published_parsed), tz=timezone.utc).astimezone(JST)
-    return (NOW - dt) <= timedelta(hours=HOURS_LOOKBACK), dt
+    """時間ウィンドウチェック（改善版）"""
+    try:
+        if not published_parsed:
+            return True, NOW  # 公開日不明の場合、保持して現在時刻を使用
+
+        # タイムゾーン変換（エラーハンドリング強化）
+        dt = datetime.fromtimestamp(time.mktime(published_parsed), tz=timezone.utc).astimezone(JST)
+
+        # 未来の日付チェック
+        if dt > NOW:
+            print(f"[DEBUG] Future date detected: {dt}")
+            return False, dt
+
+        # 時間ウィンドウチェック
+        time_diff = NOW - dt
+        is_within = time_diff <= timedelta(hours=HOURS_LOOKBACK)
+
+        if not is_within:
+            hours_old = time_diff.total_seconds() / 3600
+            print(f"[DEBUG] Item too old ({hours_old:.1f}h): {dt}")
+
+        return is_within, dt
+
+    except (OSError, ValueError, OverflowError) as e:
+        print(f"[WARN] Time parsing error: {e}")
+        return True, NOW  # エラー時は保持
 
 def is_ai_relevant(title: str, summary: str) -> bool:
     """
@@ -1074,13 +1175,25 @@ def gather_items(feeds, category_name):
     return items
 
 def main():
-    print(f"[INFO] Starting build at {NOW.strftime('%Y-%m-%d %H:%M JST')}")
-    print(f"[INFO] HOURS_LOOKBACK={HOURS_LOOKBACK}, MAX_ITEMS_PER_CATEGORY={MAX_ITEMS_PER_CATEGORY}")
-    print(f"[INFO] TRANSLATE_TO_JA={TRANSLATE_TO_JA}, TRANSLATE_ENGINE={TRANSLATE_ENGINE}")
+    """メイン処理（改善版）"""
+    start_time = time.time()
+
+    print(f"\n{'='*60}")
+    print(f"🚀 Daily AI News Build Started")
+    print(f"📅 {NOW.strftime('%Y-%m-%d %H:%M:%S JST')}")
+    print(f"⚙️  Config: LOOKBACK={HOURS_LOOKBACK}h, MAX_ITEMS={MAX_ITEMS_PER_CATEGORY}")
+    print(f"🔤 Translate: {TRANSLATE_TO_JA} (engine: {TRANSLATE_ENGINE})")
+    print(f"{'='*60}\n")
     
     global TRANSLATION_CACHE
     TRANSLATION_CACHE = load_cache()
     print(f"[INFO] Loaded {len(TRANSLATION_CACHE)} cached translations")
+
+    # デバッグモードの場合、追加情報を表示
+    if CONFIG['debug_mode']:
+        print(f"[DEBUG] Feed sources: {len(parse_feeds())} categories")
+        print(f"[DEBUG] Translation engine: {CONFIG['translate_engine']}")
+        print(f"[DEBUG] Gemini API: {'enabled' if CONFIG['gemini_api_key'] else 'disabled'}")
 
     try:
         feeds_conf = parse_feeds()
@@ -1212,11 +1325,32 @@ def main():
         print(f"[ERROR] Failed to build Posts section: {e}")
         sections_html.append(SECTION_TMPL.format(sec_id="posts", extra_class="hidden", cards=EMPTY_TMPL))
 
-    print(f"[INFO] Final counts after limiting to {MAX_ITEMS_PER_CATEGORY} per category:")
-    print(f"  Business: {len(business[:MAX_ITEMS_PER_CATEGORY])} items")
-    print(f"  Tools: {len(tools[:MAX_ITEMS_PER_CATEGORY])} items")
-    print(f"  Posts: {len(posts[:MAX_ITEMS_PER_CATEGORY])} items")
-    print(f"[INFO] Total items to display: {len(business[:MAX_ITEMS_PER_CATEGORY]) + len(tools[:MAX_ITEMS_PER_CATEGORY]) + len(posts[:MAX_ITEMS_PER_CATEGORY])}")
+    # 統計情報表示（改善版）
+    final_business = len(business[:MAX_ITEMS_PER_CATEGORY])
+    final_tools = len(tools[:MAX_ITEMS_PER_CATEGORY])
+    final_posts = len(posts[:MAX_ITEMS_PER_CATEGORY])
+    total_final = final_business + final_tools + final_posts
+    total_original = len(business) + len(tools) + len(posts)
+
+    print(f"\n{'='*60}")
+    print(f"📊 Processing Summary")
+    print(f"{'='*60}")
+    print(f"📈 Original counts:")
+    print(f"   Business: {len(business):3d} → {final_business:3d} items")
+    print(f"   Tools:    {len(tools):3d} → {final_tools:3d} items")
+    print(f"   Posts:    {len(posts):3d} → {final_posts:3d} items")
+    print(f"   Total:    {total_original:3d} → {total_final:3d} items")
+    print(f"   Filtered: {total_original - total_final:3d} items")
+
+    # 処理時間計算
+    end_time = time.time()
+    processing_time = end_time - start_time
+    print(f"\n⏱️  Processing Time: {processing_time:.2f} seconds")
+
+    if total_final > 0:
+        avg_time_per_item = processing_time / total_final
+        print(f"   Average per item: {avg_time_per_item:.3f} seconds")
+    print(f"{'='*60}\n")
     html_out = PAGE_TMPL.format(
         updated_title=NOW.strftime("%Y-%m-%d %H:%M JST"),
         updated_full=NOW.strftime("%Y-%m-%d %H:%M JST"),

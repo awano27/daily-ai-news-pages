@@ -453,9 +453,6 @@ PAGE_TMPL = """<!doctype html>
 <body>
   <header class="site-header">
     <div class="brand">📰 Daily AI News</div>
-    <nav class="nav-links">
-      <a href="ai_news_dashboard.html" class="nav-link">📊 ダッシュボード</a>
-    </nav>
     <div class="updated">最終更新：{updated_full}</div>
   </header>
 

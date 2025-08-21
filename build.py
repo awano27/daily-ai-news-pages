@@ -737,43 +737,20 @@ SECTION_TMPL = """
 """
 
 CARD_TMPL = """
-<article class="card {priority_class}" data-importance="{importance_score}" data-source-trust="{source_trust}">
-  <div class="card-priority">
-    <div class="priority-badge {priority_class}">
-      <span class="priority-score">{importance_score}</span>
-      <span class="priority-label">{priority_label}</span>
-    </div>
-    <div class="trust-indicator" title="ソース信頼度: {source_trust}%">
-      <div class="trust-bar" style="width: {source_trust}%"></div>
-    </div>
-  </div>
-
+<article class="card">
   <div class="card-header">
-    <div class="card-meta">
-      <span class="source-badge {source_type_class}">{source_name}</span>
-      <span class="time-ago">{ago}</span>
-    </div>
     <a class="card-title" href="{link}" target="_blank" rel="noopener">{title}</a>
   </div>
-
   <div class="card-body">
     <p class="card-summary">{summary}</p>
-    <div class="card-indicators">
-      <span class="indicator {translation_class}" title="{translation_title}">
-        {summary_lang}
-      </span>
-      <span class="indicator {freshness_class}" title="鮮度: {freshness_score}/100">
-        🕐 {freshness_indicator}
-      </span>
+    <div class="chips">
+      <span class="chip">{source_name}</span>
+      <span class="chip ghost">要約: {summary_lang}</span>
+      <span class="chip ghost">{ago}</span>
     </div>
   </div>
-
   <div class="card-footer">
-    <div class="card-actions">
-      <a href="{link}" target="_blank" rel="noopener" class="action-link">詳細を読む</a>
-      <span class="reading-time">📖 約{min_read_time}分</span>
-    </div>
-    <a href="{link}" target="_blank" rel="noopener" class="source-link">出典元</a>
+    出典: <a href="{link}" target="_blank" rel="noopener">{link}</a>
   </div>
 </article>
 """
@@ -1259,21 +1236,10 @@ def build_cards(items, translator):
         cards.append(CARD_TMPL.format(
             link=html.escape(link, quote=True),
             title=html.escape(title, quote=False),
-            summary=final_summary,
+            summary=html.escape(final_summary, quote=False),
             source_name=html.escape(src, quote=False),
             summary_lang=("日本語" if did_translate else "英語"),
-            ago=ago_str(dt),
-            importance_score=importance_score,
-            priority_class=priority_class,
-            priority_label=priority_label,
-            source_trust=source_trust,
-            freshness_score=freshness_score,
-            freshness_indicator=freshness_indicator,
-            freshness_class=freshness_class,
-            translation_class=translation_class,
-            translation_title=translation_title,
-            min_read_time=min_read_time,
-            source_type_class=source_type_class
+            ago=ago_str(dt)
         ))
 
     return "\n".join(cards) if cards else EMPTY_TMPL

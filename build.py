@@ -566,9 +566,17 @@ PAGE_TMPL = """<!doctype html>
       <button class="tab" data-target="#posts" aria-selected="false">🧪 SNS/論文ポスト</button>
     </nav>
 
-    <!-- 検索ボックス: タイトルや要約に含まれるキーワードでフィルタリングします -->
+    <!-- 改善版検索・フィルタリングUI -->
     <div class="search-container">
-      <input id="searchBox" type="text" placeholder="キーワードで記事を検索..." aria-label="検索" />
+      <div class="search-header">
+        <input id="searchBox" type="text" placeholder="キーワードで記事を検索（タイトル・要約・ソース）..." aria-label="検索" />
+        <div class="search-info">
+          💡 重要度バッジ・信頼度バー・鮮度インジケーターで価値を判定
+        </div>
+      </div>
+      <div class="filter-controls" style="display: none;">
+        <!-- JavaScriptで動的に追加される -->
+      </div>
     </div>
 
     {sections}
@@ -583,6 +591,7 @@ PAGE_TMPL = """<!doctype html>
   </footer>
 
   <script>
+    // タブ切り替え機能
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(btn => btn.addEventListener('click', () => {{
       tabs.forEach(b => {{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); }});
@@ -592,25 +601,110 @@ PAGE_TMPL = """<!doctype html>
       if (target) target.classList.remove('hidden');
     }}));
 
-    // 検索ボックスの入力に応じてカードをフィルタリングする
+    // フィルタ・ソート機能
     const searchBox = document.getElementById('searchBox');
-    if (searchBox) {{
-      searchBox.addEventListener('input', () => {{
-        const query = searchBox.value.toLowerCase();
-        // すべてのカードを対象にキーワードを検索
-        document.querySelectorAll('.card').forEach(card => {{
-          const titleEl = card.querySelector('.card-title');
-          const summaryEl = card.querySelector('.card-summary');
-          const title = titleEl ? titleEl.textContent.toLowerCase() : '';
-          const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
-          if (!query || title.includes(query) || summary.includes(query)) {{
-            card.style.display = '';
-          }} else {{
-            card.style.display = 'none';
-          }}
-        }});
-      }});
+    const importanceFilter = document.getElementById('importanceFilter');
+    const sortSelect = document.getElementById('sortSelect');
+
+    function getVisibleCards() {{
+      const activeTab = document.querySelector('.tab.active');
+      if (!activeTab) return [];
+      const targetPanel = document.querySelector(activeTab.dataset.target);
+      return targetPanel ? Array.from(targetPanel.querySelectorAll('.card')) : [];
     }}
+
+    function filterAndSortCards() {{
+      const query = searchBox ? searchBox.value.toLowerCase() : '';
+      const importanceThreshold = importanceFilter ? parseInt(importanceFilter.value) : 0;
+      const sortBy = sortSelect ? sortSelect.value : 'importance';
+
+      const cards = getVisibleCards();
+
+      cards.forEach(card => {{
+        // テキスト検索
+        const titleEl = card.querySelector('.card-title');
+        const summaryEl = card.querySelector('.card-summary');
+        const sourceEl = card.querySelector('.source-badge');
+        const title = titleEl ? titleEl.textContent.toLowerCase() : '';
+        const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
+        const source = sourceEl ? sourceEl.textContent.toLowerCase() : '';
+
+        const textMatch = !query || title.includes(query) || summary.includes(query) || source.includes(query);
+
+        // 重要度フィルタ
+        const importance = parseInt(card.dataset.importance || '50');
+        const importanceMatch = importance >= importanceThreshold;
+
+        // 表示・非表示
+        if (textMatch && importanceMatch) {{
+          card.style.display = '';
+        }} else {{
+          card.style.display = 'none';
+        }}
+      }});
+
+      // ソート
+      if (sortBy !== 'none') {{
+        const container = cards[0]?.parentElement;
+        if (container) {{
+          const visibleCards = cards.filter(card => card.style.display !== 'none');
+          visibleCards.sort((a, b) => {{
+            switch (sortBy) {{
+              case 'importance':
+                return parseInt(b.dataset.importance || '0') - parseInt(a.dataset.importance || '0');
+              case 'freshness':
+                return parseInt(b.dataset.freshness || '0') - parseInt(a.dataset.freshness || '0');
+              case 'time':
+                const timeA = new Date(a.querySelector('.time-ago')?.dataset.timestamp || '2023-01-01');
+                const timeB = new Date(b.querySelector('.time-ago')?.dataset.timestamp || '2023-01-01');
+                return timeB - timeA;
+              default:
+                return 0;
+            }}
+          }});
+
+          visibleCards.forEach(card => container.appendChild(card));
+        }}
+      }}
+    }}
+
+    // イベントリスナー設定
+    if (searchBox) {{
+      searchBox.addEventListener('input', filterAndSortCards);
+    }}
+
+    // フィルタ・ソートUIを動的に追加
+    document.addEventListener('DOMContentLoaded', function() {{
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer) {{
+        searchContainer.innerHTML += `
+          <div class="filter-controls">
+            <select id="importanceFilter" title="重要度フィルター">
+              <option value="0">全重要度</option>
+              <option value="90">🔥 最高重要度のみ</option>
+              <option value="75">⭐ 高重要度以上</option>
+              <option value="50">📊 中重要度以上</option>
+            </select>
+            <select id="sortSelect" title="ソート順">
+              <option value="importance">重要度順</option>
+              <option value="freshness">鮮度順</option>
+              <option value="time">時間順</option>
+              <option value="none">ソートなし</option>
+            </select>
+          </div>
+        `;
+
+        // 新しいコントロールのイベントリスナー
+        const importanceFilter = document.getElementById('importanceFilter');
+        const sortSelect = document.getElementById('sortSelect');
+
+        if (importanceFilter) importanceFilter.addEventListener('change', filterAndSortCards);
+        if (sortSelect) sortSelect.addEventListener('change', filterAndSortCards);
+      }}
+
+      // 初期ソート実行
+      setTimeout(filterAndSortCards, 100);
+    }});
   </script>
 </body>
 </html>
@@ -623,20 +717,43 @@ SECTION_TMPL = """
 """
 
 CARD_TMPL = """
-<article class="card">
-  <div class="card-header">
-    <a class="card-title" href="{link}" target="_blank" rel="noopener">{title}</a>
-  </div>
-  <div class="card-body">
-    <p class="card-summary">{summary}</p>
-    <div class="chips">
-      <span class="chip">{source_name}</span>
-      <span class="chip ghost">{summary_lang}</span>
-      <span class="chip ghost">{ago}</span>
+<article class="card {priority_class}" data-importance="{importance_score}" data-source-trust="{source_trust}">
+  <div class="card-priority">
+    <div class="priority-badge {priority_class}">
+      <span class="priority-score">{importance_score}</span>
+      <span class="priority-label">{priority_label}</span>
+    </div>
+    <div class="trust-indicator" title="ソース信頼度: {source_trust}%">
+      <div class="trust-bar" style="width: {source_trust}%"></div>
     </div>
   </div>
+
+  <div class="card-header">
+    <div class="card-meta">
+      <span class="source-badge {source_type_class}">{source_name}</span>
+      <span class="time-ago">{ago}</span>
+    </div>
+    <a class="card-title" href="{link}" target="_blank" rel="noopener">{title}</a>
+  </div>
+
+  <div class="card-body">
+    <p class="card-summary">{summary}</p>
+    <div class="card-indicators">
+      <span class="indicator {translation_class}" title="{translation_title}">
+        {summary_lang}
+      </span>
+      <span class="indicator {freshness_class}" title="鮮度: {freshness_score}/100">
+        🕐 {freshness_indicator}
+      </span>
+    </div>
+  </div>
+
   <div class="card-footer">
-    出典: <a href="{link}" target="_blank" rel="noopener">{link}</a>
+    <div class="card-actions">
+      <a href="{link}" target="_blank" rel="noopener" class="action-link">詳細を読む</a>
+      <span class="reading-time">📖 約{min_read_time}分</span>
+    </div>
+    <a href="{link}" target="_blank" rel="noopener" class="source-link">出典元</a>
   </div>
 </article>
 """
@@ -1001,19 +1118,90 @@ def calculate_sns_importance_score(item):
     
     return max(score, 0)  # 負のスコアは0に
 
+def calculate_source_trust(source_name):
+    """ソースの信頼度を計算（0-100）"""
+    trust_scores = {
+        'OpenAI': 95, 'Anthropic': 95, 'Google': 90, 'Microsoft': 90,
+        'Meta': 85, 'Nvidia': 85, 'Apple': 80, 'Amazon': 80,
+        'DeepMind': 90, 'Hugging Face': 85, 'MIT Technology Review': 90,
+        'Nature': 95, 'Science': 95, 'Reuters': 90, 'Bloomberg': 90,
+        'TechCrunch': 80, 'The Verge': 75, 'VentureBeat': 80,
+        'X': 60, 'SNS': 60, 'Reddit': 70, 'arXiv': 90
+    }
+    return trust_scores.get(source_name, 50)
+
+def calculate_freshness_score(dt):
+    """鮮度スコアを計算（0-100）"""
+    if not dt:
+        return 50
+    hours_old = (NOW - dt).total_seconds() / 3600
+    if hours_old < 6:
+        return 100  # 6時間以内
+    elif hours_old < 12:
+        return 90   # 12時間以内
+    elif hours_old < 24:
+        return 80   # 24時間以内
+    elif hours_old < 48:
+        return 60   # 2日以内
+    elif hours_old < 168:  # 1週間
+        return max(20, 60 - (hours_old - 48) / 2)
+    else:
+        return max(10, 20 - (hours_old - 168) / 100)
+
+def get_freshness_indicator(score):
+    """鮮度スコアに基づく表示テキスト"""
+    if score >= 90: return "🔥 新着"
+    elif score >= 70: return "🕐 新鮮"
+    elif score >= 50: return "📄 普通"
+    else: return "🗂️ 古い"
+
+def estimate_reading_time(text):
+    """推定読書時間を計算（分）"""
+    if not text:
+        return 1
+    word_count = len(text.split())
+    return max(1, round(word_count / 200))  # 200 words per minute
+
 def build_cards(items, translator):
+    """改善版カード生成関数"""
     cards = []
     for it in items[:MAX_ITEMS_PER_CATEGORY]:
         title = it.get("title") or "(no title)"
         link = it.get("link") or "#"
-        src  = it.get("_source") or ""
-        dt   = it.get("_dt") or NOW
+        src = it.get("_source") or ""
+        dt = it.get("_dt") or NOW
         raw_summary = it.get("_summary") or ""
+        importance_score = it.get("_importance_score", 50)
+
+        # 重要度クラス決定
+        if importance_score >= 90:
+            priority_class = "high-priority"
+            priority_label = "最高"
+        elif importance_score >= 75:
+            priority_class = "medium-priority"
+            priority_label = "高"
+        elif importance_score >= 50:
+            priority_class = "normal-priority"
+            priority_label = "中"
+        else:
+            priority_class = "low-priority"
+            priority_label = "低"
+
+        # ソース信頼度計算
+        source_trust = calculate_source_trust(src)
+
+        # 鮮度計算
+        freshness_score = calculate_freshness_score(dt)
+        freshness_indicator = get_freshness_indicator(freshness_score)
+        freshness_class = "fresh" if freshness_score >= 70 else "stale"
+
+        # 翻訳処理
         ja_summary = raw_summary
         did_translate = False
+        translation_class = "original"
+        translation_title = "原文"
 
         if TRANSLATE_TO_JA and translator and raw_summary and not looks_japanese(raw_summary):
-            # cache key: stable on link+hash(summary)
             cache_key = f"{link}::{hash(raw_summary)}"
             cached = TRANSLATION_CACHE.get(cache_key)
             if cached:
@@ -1029,19 +1217,45 @@ def build_cards(items, translator):
                 except Exception as e:
                     print(f"[WARN] Translation failed for {link[:50]}: {e}")
 
-        # 要約の文字数制限（300文字以内）
+        # 翻訳状態設定
+        if did_translate:
+            translation_class = "translated"
+            translation_title = "Gemini AI 翻訳"
+        else:
+            translation_class = "original"
+            translation_title = "英語原文"
+
+        # 要約の文字数制限
         final_summary = ja_summary if did_translate else raw_summary
         if len(final_summary) > 300:
             final_summary = final_summary[:300] + '...'
+
+        # 読書時間推定
+        min_read_time = estimate_reading_time(final_summary)
+
+        # ソースタイプ判定
+        source_type_class = "official" if any(word in src.lower() for word in ['openai', 'anthropic', 'google', 'microsoft', 'meta']) else "news"
 
         cards.append(CARD_TMPL.format(
             link=html.escape(link, quote=True),
             title=html.escape(title, quote=False),
             summary=final_summary,
             source_name=html.escape(src, quote=False),
-            summary_lang=("要約: 日本語" if did_translate else "要約: 英語"),
+            summary_lang=("日本語" if did_translate else "英語"),
             ago=ago_str(dt),
+            importance_score=importance_score,
+            priority_class=priority_class,
+            priority_label=priority_label,
+            source_trust=source_trust,
+            freshness_score=freshness_score,
+            freshness_indicator=freshness_indicator,
+            freshness_class=freshness_class,
+            translation_class=translation_class,
+            translation_title=translation_title,
+            min_read_time=min_read_time,
+            source_type_class=source_type_class
         ))
+
     return "\n".join(cards) if cards else EMPTY_TMPL
 
 def gather_items(feeds, category_name):
@@ -1138,12 +1352,29 @@ def gather_items(feeds, category_name):
                 continue
                 
             entry_count += 1
+            # 重要度スコア計算
+            importance_score = 50  # デフォルト値
+            if category_name == "Business":
+                importance_score = calculate_importance_score({
+                    "title": title,
+                    "_summary": summary,
+                    "_source": name,
+                    "_dt": dt
+                })
+            elif category_name == "Posts":
+                importance_score = calculate_sns_importance_score({
+                    "title": title,
+                    "_summary": summary,
+                    "_dt": dt
+                })
+
             items.append({
                 "title": title,
                 "link": link_url,
                 "_summary": summary,
                 "_source": name,
                 "_dt": dt,
+                "_importance_score": importance_score
             })
         if entry_count > 0:
             if filtered_count > 0:

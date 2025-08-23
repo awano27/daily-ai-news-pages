@@ -113,7 +113,8 @@
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newstrigger_github_actions.py)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe build_simple_ranking.py)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_css_reference.py)",
-      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newsbuild.py)"
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newsbuild.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_submodule_issue.py)"
     ],
     "deny": [],
     "ask": [],

@@ -430,7 +430,7 @@ def generate_html(items):
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Daily AI News — {now}</title>
-  <link rel="stylesheet" href="style_enhanced_ranking.css"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <header class="site-header">
@@ -519,7 +519,86 @@ def generate_html(items):
     </div>
   </footer>
 
-  <script src="script_enhanced_ranking.js"></script>
+  <script>
+    // タブ切り替え機能
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const panels = document.querySelectorAll('.tab-panel');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // すべてのタブとパネルをリセット
+          tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(p => {
+            p.classList.remove('active');
+          });
+          
+          // クリックされたタブをアクティブに
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+          
+          // 対応するパネルをアクティブに
+          const targetId = this.getAttribute('data-target');
+          const targetPanel = document.querySelector(targetId);
+          if (targetPanel) {
+            targetPanel.classList.add('active');
+          }
+        });
+      });
+      
+      // フィルタ機能
+      const searchBox = document.getElementById('searchBox');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      if (searchBox) {
+        searchBox.addEventListener('input', function() {
+          filterCards();
+        });
+      }
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          filterCards();
+        });
+      });
+      
+      function filterCards() {
+        const query = searchBox ? searchBox.value.toLowerCase() : '';
+        const activeFilter = document.querySelector('.filter-btn.active');
+        const filterType = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+        const activePanel = document.querySelector('.tab-panel.active');
+        
+        if (activePanel) {
+          const cards = activePanel.querySelectorAll('.card');
+          cards.forEach(card => {
+            const title = card.querySelector('.card-title');
+            const summary = card.querySelector('.card-summary');
+            const titleText = title ? title.textContent.toLowerCase() : '';
+            const summaryText = summary ? summary.textContent.toLowerCase() : '';
+            
+            const matchesSearch = !query || titleText.includes(query) || summaryText.includes(query);
+            
+            let matchesFilter = true;
+            if (filterType !== 'all') {
+              const priority = card.getAttribute('data-priority') || '';
+              matchesFilter = priority === filterType;
+            }
+            
+            if (matchesSearch && matchesFilter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      }
+    });
+  </script>
 </body>
 </html>'''
     

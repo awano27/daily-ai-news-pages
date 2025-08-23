@@ -2,6 +2,12 @@
 """
 Simple Enhanced Daily AI News - 確実に動作するランキングシステム
 元の build.py をベースに、情報量を維持しつつランキング機能を追加
+
+HTML Structure Fix Applied: 2025-08-23
+- Enhanced card template with priority system
+- Proper HTML tag structure and closure
+- CSS generation included for styling
+- Force GitHub Actions to use this updated version
 """
 
 import os, re, sys, json, time, html, csv, io

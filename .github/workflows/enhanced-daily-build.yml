@@ -88,14 +88,13 @@ jobs:
           echo "  - Translation: Japanese enabled"
           echo ""
           
-          echo "🔄 Building main site with enhanced X processing..."
-          timeout 700 python build.py
+          echo "🔄 Building main site with engineer ranking system..."
+          timeout 700 python build_simple_ranking.py
           
-          if [ -f "news_detail.html" ]; then
-            echo "✅ Main site built successfully"
-            cp news_detail.html index.html 2>/dev/null || true
+          if [ -f "index.html" ]; then
+            echo "✅ Engineer ranking system built successfully"
           else
-            echo "❌ Main site build failed"
+            echo "❌ Engineer ranking build failed"
             exit 1
           fi
           

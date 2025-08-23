@@ -84,7 +84,11 @@
       "Bash(where git)",
       "Bash(uv tool install:*)",
       "Bash(echo $SHELL)",
-      "Bash(/mcp list)"
+      "Bash(/mcp list)",
+      "Bash(simple_deploy.bat)",
+      "Bash(C:Usersyoshitakadaily-ai-newsdeploy_js_fix.bat)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe deploy_js_fix.py)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": [],

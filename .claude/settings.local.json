@@ -91,7 +91,14 @@
       "Bash(grep:*)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe -m pip install playwright)",
       "mcp__requirement__create_requirement",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(set MAX_ITEMS_PER_CATEGORY=25)",
+      "Bash(start C:Usersyoshitakadaily-ai-newsdocsrequirements.html)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe trigger_github_actions.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe force_build_update.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe test_site_playwright.py)",
+      "Bash(commit_css_fix.bat)",
+      "Bash(commit_html_fix.bat)"
     ],
     "deny": [],
     "ask": [],

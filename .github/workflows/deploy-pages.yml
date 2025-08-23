@@ -47,6 +47,14 @@ jobs:
       run: |
         echo "🔨 Building AI News site with enhanced ranking..."
         python build_simple_ranking.py
+        
+        echo "📱 Checking for X posts in build output..."
+        if grep -q "X (Twitter)" index.html 2>/dev/null; then
+          x_count=$(grep -c "X (Twitter)" index.html)
+          echo "✅ Found $x_count X posts in generated HTML"
+        else
+          echo "⚠️ No X posts found in generated HTML"
+        fi
 
         echo "📊 Verifying build output..."
         if [ -f "index.html" ]; then
@@ -63,33 +71,26 @@ jobs:
           exit 1
         fi
 
-    - name: Prepare Pages artifact
-      run: |
-        echo "📦 Preparing Pages artifact (_site)"
-        rm -rf _site || true
-        mkdir -p _site
-        cp -v index.html _site/
-        cp -v style.css _site/ || true
-        # Disable Jekyll on Pages
-        touch _site/.nojekyll
-        ls -la _site
-
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: '_site'
-
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-
-    - name: Display results
       run: |
-        echo "🎉 Deployment completed!"
-        echo "🌐 Site URL: ${{ steps.deployment.outputs.page_url }}"
-        echo "📅 Expected: Current date with enhanced features"
-        echo "🖱️ Expected: Working tab functionality"
+        echo "🚀 Deploying to gh-pages branch..."
+        
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Create .nojekyll file to disable Jekyll
+        touch .nojekyll
+        
+        # Add generated files
+        git add index.html style.css .nojekyll
+        
+        # Commit changes
+        git commit -m "Deploy: AI News site update $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+        
+        # Force push to gh-pages branch
+        git push origin HEAD:gh-pages --force
+        
+        echo "✅ Deployment completed!"
+        echo "🌐 Site URL: https://awano27.github.io/daily-ai-news-pages/"
 

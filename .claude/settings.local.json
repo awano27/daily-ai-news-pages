@@ -114,7 +114,11 @@
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe build_simple_ranking.py)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_css_reference.py)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newsbuild.py)",
-      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_submodule_issue.py)"
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_submodule_issue.py)",
+      "Bash(CYGWIN=nodosfilewarning git add .)",
+      "Bash(CYGWIN=nodosfilewarning git commit -m \"feat: Complete tab functionality fix with working article display\")",
+      "Bash(CYGWIN=nodosfilewarning git push origin main)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe deploy_final.py)"
     ],
     "deny": [],
     "ask": [],

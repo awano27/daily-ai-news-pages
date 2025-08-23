@@ -98,12 +98,29 @@
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe force_build_update.py)",
       "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe test_site_playwright.py)",
       "Bash(commit_css_fix.bat)",
-      "Bash(commit_html_fix.bat)"
+      "Bash(commit_html_fix.bat)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe setup_pages_workflow.py)",
+      "Bash(TMPDIR=/tmp TMP=/tmp TEMP=/tmp git status)",
+      "Bash(unset TEMP)",
+      "Bash(unset TMP)",
+      "Bash(\"C:\\Users\\yoshitaka\\daily-ai-news\\commit_workflow.bat\")",
+      "Bash(export TEMP=/tmp)",
+      "Bash(export TMP=/tmp)",
+      "Bash(CYGWIN=nodosfilewarning git status)",
+      "mcp__t2i-kamui-imagen4-ultra__imagen4_ultra_submit",
+      "Bash(CYGWIN=nodosfilewarning python setup_pages_workflow.py)",
+      "Bash(CYGWIN=nodosfilewarning git add .github/ .nojekyll requirements.txt)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newstrigger_github_actions.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe build_simple_ranking.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe fix_css_reference.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe C:Usersyoshitakadaily-ai-newsbuild.py)"
     ],
     "deny": [],
     "ask": [],
     "additionalDirectories": [
-      "C:\\c\\Users\\yoshitaka"
+      "C:\\c\\Users\\yoshitaka",
+      "C:\\cygdrive\\c\\Users\\yoshitaka",
+      "C:\\d C:\\Users\\yoshitaka"
     ]
   }
 }

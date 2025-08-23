@@ -1,11 +1,7 @@
-name: Deploy AI News to GitHub Pages
+name: Deploy AI News to GitHub Pages (Optimized)
 
 on:
-  push:
-    branches: [ main ]
-  schedule:
-    # Run daily at 7:00 JST (22:00 UTC)
-    - cron: '0 22 * * *'
+  # 手動実行のみ（既存ワークフローと重複実行を避けるため）
   workflow_dispatch:
 
 permissions:
@@ -14,7 +10,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages-optimized"
   cancel-in-progress: false
 
 jobs:

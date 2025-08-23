@@ -1,0 +1,10 @@
+﻿{
+  "type": "stdio",
+  "command": "uv",
+  "args": [
+    "run", "--directory", "C:\\\\tools\\\\serena",
+    "serena", "start-mcp-server",
+    "--context", "ide-assistant",
+    "--project", "C:\\\\Users\\\\yoshitaka\\\\daily-ai-news"
+  ]
+}

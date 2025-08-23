@@ -829,7 +829,7 @@ def main():
         panel_class = 'tab-panel' if is_active else 'tab-panel hidden'
         
         html_template += f'''
-    <section class="{panel_class}" data-category="{category_name}">
+    <section class="{panel_class}" data-category="{category_name.lower()}">
       <div class="tab-content">
 '''
         

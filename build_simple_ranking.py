@@ -688,6 +688,356 @@ def format_time_ago(dt):
     else:
         return f"{hours // 24}日前"
 
+def generate_css():
+    """CSSファイルを生成"""
+    css_content = '''/* Digital.gov compliance deployed at 2025-08-20 23:07:20 JST */
+:root{
+  /* Digital.gov準拠: WCAG AAA対応カラーシステム */
+  --fg:#0f172a; --bg:#ffffff; --muted:#475569; --line:#e2e8f0;
+  --brand:#1e40af; --brand-weak:#f1f5f9; --chip:#f8fafc;
+  --brand-hover:#1e3a8a; --brand-light:#bfdbfe; --brand-dark:#1e3a8a;
+  --success:#15803d; --warning:#ca8a04; --danger:#dc2626;
+  --info:#0369a1; --neutral:#64748b;
+  
+  /* 段階的背景色（彩度を下げた背景） */
+  --bg-subtle:#f8fafc; --bg-muted:#f1f5f9; --bg-emphasis:#e2e8f0;
+  
+  /* グラデーション（彩度調整済み） */
+  --gradient:linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  --gradient-subtle:linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  
+  /* シャドウ */
+  --shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* レイアウト変数 */
+  --border-radius: 12px;
+  --spacing-xs: 4px; --spacing-sm: 8px; --spacing-md: 16px; 
+  --spacing-lg: 24px; --spacing-xl: 32px; --spacing-2xl: 48px;
+  
+  /* タイポグラフィ */
+  --font-size-xs: 12px; --font-size-sm: 14px; --font-size-base: 16px;
+  --font-size-lg: 18px; --font-size-xl: 20px; --font-size-2xl: 24px;
+  --font-size-3xl: 32px; --font-size-4xl: 36px;
+  
+  /* フォーカス表示 */
+  --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  --focus-ring-offset: 2px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Noto Sans JP',sans-serif;
+  font-size:var(--font-size-base);
+  line-height:1.6;
+  scroll-behavior:smooth;
+}
+.container{
+  max-width:1000px;
+  margin:0 auto;
+  padding:var(--spacing-lg) var(--spacing-md);
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-lg);
+}
+
+/* ヘッダー */
+.site-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:var(--spacing-md);
+  background:var(--bg-subtle);
+  border-bottom:1px solid var(--line);
+  margin-bottom:var(--spacing-lg);
+}
+.brand{
+  font-size:var(--font-size-xl);
+  font-weight:700;
+  color:var(--brand);
+}
+.updated{
+  color:var(--muted);
+  font-size:var(--font-size-sm);
+}
+
+/* タイトル */
+.page-title{
+  font-size:var(--font-size-3xl);
+  font-weight:700;
+  margin:0 0 var(--spacing-md) 0;
+  text-align:center;
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.lead{
+  font-size:var(--font-size-lg);
+  color:var(--muted);
+  text-align:center;
+  margin-bottom:var(--spacing-xl);
+  line-height:1.7;
+}
+
+/* KPI Grid */
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:var(--spacing-md);
+  margin-bottom:var(--spacing-xl);
+}
+.kpi-card{
+  background:var(--bg-subtle);
+  padding:var(--spacing-md);
+  border-radius:var(--border-radius);
+  text-align:center;
+  border:1px solid var(--line);
+}
+.kpi-value{
+  font-size:var(--font-size-2xl);
+  font-weight:700;
+  color:var(--brand);
+}
+.kpi-label{
+  font-size:var(--font-size-sm);
+  color:var(--muted);
+  margin-top:var(--spacing-xs);
+}
+.kpi-note{
+  font-size:var(--font-size-xs);
+  color:var(--neutral);
+  margin-top:var(--spacing-xs);
+}
+
+/* タブ */
+.tabs{
+  display:flex;
+  border-bottom:2px solid var(--line);
+  margin-bottom:var(--spacing-lg);
+  gap:var(--spacing-sm);
+}
+.tab{
+  background:none;
+  border:none;
+  padding:var(--spacing-md) var(--spacing-lg);
+  font-size:var(--font-size-base);
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:all 0.3s ease;
+  color:var(--muted);
+}
+.tab.active{
+  color:var(--brand);
+  border-bottom-color:var(--brand);
+  font-weight:600;
+}
+.tab:hover{
+  color:var(--brand-hover);
+  background:var(--bg-subtle);
+  border-radius:var(--border-radius) var(--border-radius) 0 0;
+}
+
+/* タブパネル */
+.tab-panel{
+  display:block;
+}
+.tab-panel.hidden{
+  display:none;
+}
+
+/* 検索・フィルター */
+.search-container{
+  margin-bottom:var(--spacing-lg);
+}
+.search-header{
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-sm);
+  margin-bottom:var(--spacing-md);
+}
+#searchBox{
+  padding:var(--spacing-md);
+  border:1px solid var(--line);
+  border-radius:var(--border-radius);
+  font-size:var(--font-size-base);
+  width:100%;
+}
+#searchBox:focus{
+  outline:none;
+  border-color:var(--brand);
+  box-shadow:var(--focus-ring);
+}
+.search-info{
+  font-size:var(--font-size-sm);
+  color:var(--muted);
+  text-align:center;
+}
+.filter-controls{
+  display:flex;
+  gap:var(--spacing-sm);
+  flex-wrap:wrap;
+}
+.filter-controls select{
+  padding:var(--spacing-sm) var(--spacing-md);
+  border:1px solid var(--line);
+  border-radius:var(--border-radius);
+  background:var(--bg);
+}
+
+/* カード */
+.card{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:var(--border-radius);
+  margin-bottom:var(--spacing-md);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:all 0.3s ease;
+}
+.card:hover{
+  box-shadow:var(--shadow-lg);
+  transform:translateY(-2px);
+}
+.card-header{
+  padding:var(--spacing-md);
+  background:var(--bg-subtle);
+  border-bottom:1px solid var(--line);
+}
+.card-title{
+  font-size:var(--font-size-lg);
+  font-weight:600;
+  color:var(--brand);
+  text-decoration:none;
+  display:block;
+  line-height:1.4;
+}
+.card-title:hover{
+  color:var(--brand-hover);
+  text-decoration:underline;
+}
+.card-body{
+  padding:var(--spacing-md);
+}
+.card-summary{
+  color:var(--fg);
+  line-height:1.6;
+  margin:0 0 var(--spacing-md) 0;
+}
+.card-footer{
+  padding:var(--spacing-md);
+  background:var(--bg-muted);
+  border-top:1px solid var(--line);
+  font-size:var(--font-size-sm);
+  color:var(--muted);
+}
+.card-footer a{
+  color:var(--brand);
+  text-decoration:none;
+}
+.card-footer a:hover{
+  text-decoration:underline;
+}
+
+/* チップ */
+.chips{
+  display:flex;
+  gap:var(--spacing-sm);
+  flex-wrap:wrap;
+}
+.chip{
+  background:var(--chip);
+  color:var(--brand);
+  padding:var(--spacing-xs) var(--spacing-sm);
+  border-radius:var(--border-radius);
+  font-size:var(--font-size-xs);
+  border:1px solid var(--line);
+}
+.chip.ghost{
+  background:transparent;
+  color:var(--muted);
+}
+
+/* フッター */
+.site-footer{
+  margin-top:var(--spacing-2xl);
+  padding:var(--spacing-lg);
+  background:var(--bg-subtle);
+  border-top:1px solid var(--line);
+  text-align:center;
+  font-size:var(--font-size-sm);
+  color:var(--muted);
+}
+.site-footer a{
+  color:var(--brand);
+  text-decoration:none;
+}
+.site-footer a:hover{
+  text-decoration:underline;
+}
+
+/* ノート */
+.note{
+  background:var(--bg-emphasis);
+  border:1px solid var(--line);
+  border-radius:var(--border-radius);
+  padding:var(--spacing-md);
+  margin-top:var(--spacing-xl);
+  font-size:var(--font-size-sm);
+  color:var(--muted);
+  text-align:center;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .container{
+    padding:var(--spacing-md) var(--spacing-sm);
+  }
+  .site-header{
+    flex-direction:column;
+    gap:var(--spacing-sm);
+    text-align:center;
+  }
+  .tabs{
+    flex-direction:column;
+  }
+  .tab{
+    border-bottom:none;
+    border-left:3px solid transparent;
+  }
+  .tab.active{
+    border-left-color:var(--brand);
+    background:var(--bg-subtle);
+  }
+  .kpi-grid{
+    grid-template-columns:1fr;
+  }
+  .filter-controls{
+    flex-direction:column;
+  }
+  .chips{
+    justify-content:center;
+  }
+}
+
+/* アクセシビリティ */
+.tab:focus{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+#searchBox:focus{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}
+.card-title:focus{
+  outline:none;
+  box-shadow:var(--focus-ring);
+}'''
+    
+    return css_content
+
 def main():
     """メイン処理"""
     print("🚀 Simple Enhanced Daily AI News")
@@ -706,6 +1056,12 @@ def main():
     # ファイル出力
     output_file = Path('index.html')
     output_file.write_text(html_content, encoding='utf-8')
+    
+    # CSS生成
+    css_content = generate_css()
+    css_file = Path('style.css')
+    css_file.write_text(css_content, encoding='utf-8')
+    print("✅ CSS file generated")
     
     print(f"✅ 生成完了: {output_file}")
     print("📊 ランキング完了")

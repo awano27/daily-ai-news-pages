@@ -20,9 +20,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - name: Checkout
@@ -35,14 +32,15 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt || pip install feedparser pyyaml deep-translator==1.11.4 beautifulsoup4 requests google-generativeai>=0.3.0
+        pip install -r requirements.txt || pip install feedparser pyyaml deep-translator==1.11.4 beautifulsoup4 requests google-generativeai>=0.3.0 python-dateutil>=2.8.0
 
     - name: Set environment variables
       run: |
         echo "TRANSLATE_TO_JA=1" >> $GITHUB_ENV
         echo "TRANSLATE_ENGINE=google" >> $GITHUB_ENV
-        echo "HOURS_LOOKBACK=24" >> $GITHUB_ENV
+        echo "HOURS_LOOKBACK=48" >> $GITHUB_ENV
         echo "MAX_ITEMS_PER_CATEGORY=25" >> $GITHUB_ENV
+        echo "X_POSTS_CSV=https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0" >> $GITHUB_ENV
 
     - name: Build AI News Site
       timeout-minutes: 10

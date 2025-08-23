@@ -247,19 +247,21 @@ def fetch_x_posts():
         print(f"📱 X投稿取得中: {X_POSTS_CSV}")
         
         response = requests.get(X_POSTS_CSV, timeout=30)
+        print(f"🌐 HTTP Response: {response.status_code}")
         if response.status_code != 200:
             print(f"❌ HTTP Status: {response.status_code}")
             return []
         
         content = response.text.strip()
         print(f"📄 受信データサイズ: {len(content)} 文字")
+        print(f"📄 データ先頭100文字: {content[:100]}")
         
         # CSVかテキストかを判定
         if content.startswith('"Timestamp"') or ',' in content[:200]:
-            # CSV形式として処理
+            print("📋 CSV形式として処理中...")
             return fetch_x_posts_from_csv(content)
         else:
-            # テキスト形式として処理
+            print("📄 テキスト形式として処理中...")
             return fetch_x_posts_from_text(content)
             
     except Exception as e:
@@ -836,7 +838,9 @@ def main():
         
         # X投稿も追加（postsカテゴリのみ）
         if category == 'posts':
+            print(f"🔍 DEBUG: postsカテゴリでX投稿取得開始...")
             x_items = fetch_x_posts()
+            print(f"🔍 DEBUG: X投稿取得完了 - {len(x_items)}件")
             category_items.extend(x_items)
         
         # エンジニア関連度でソート

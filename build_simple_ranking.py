@@ -467,7 +467,7 @@ def generate_html(items):
         <div class="kpi-note">自動更新</div>
       </div>
     </section>
-
+    
     <div class="filter-controls">
       <div class="filter-group">
         <label>優先度フィルター:</label>

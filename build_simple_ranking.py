@@ -901,6 +901,9 @@ class TabController {
     
     // フィルター機能
     this.setupFilters();
+    
+    // 初期表示：businessタブを明示的に表示
+    this.switchTab('business');
   }
   
   switchTab(tabName) {
@@ -919,7 +922,27 @@ class TabController {
     document.querySelector(`[data-category="${tabName}"]`).classList.remove('hidden');
     
     this.activeTab = tabName;
+    this.updateTabCounts(); // タブカウント更新
     this.applyFilters(); // フィルター再適用
+  }
+  
+  updateTabCounts() {
+    // 各タブの記事数をカウントして表示更新
+    const tabs = ['business', 'tools', 'posts'];
+    const tabLabels = {
+      'business': '📈 Business',
+      'tools': '🔧 Tools', 
+      'posts': '💬 Posts'
+    };
+    
+    tabs.forEach(tabName => {
+      const panel = document.querySelector(`[data-category="${tabName}"]`);
+      const count = panel ? panel.querySelectorAll('.enhanced-card').length : 0;
+      const button = document.querySelector(`[data-tab="${tabName}"]`);
+      if (button) {
+        button.textContent = `${tabLabels[tabName]} (${count})`;
+      }
+    });
   }
   
   setupFilters() {

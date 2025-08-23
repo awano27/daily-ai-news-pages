@@ -118,7 +118,8 @@
       "Bash(CYGWIN=nodosfilewarning git add .)",
       "Bash(CYGWIN=nodosfilewarning git commit -m \"feat: Complete tab functionality fix with working article display\")",
       "Bash(CYGWIN=nodosfilewarning git push origin main)",
-      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe deploy_final.py)"
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe deploy_final.py)",
+      "Bash(C:UsersyoshitakaAppDataLocalProgramsPythonPython311python.exe check_x_posts.py)"
     ],
     "deny": [],
     "ask": [],

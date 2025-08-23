@@ -248,6 +248,7 @@ def fetch_x_posts():
         
         response = requests.get(X_POSTS_CSV, timeout=30)
         if response.status_code != 200:
+            print(f"❌ HTTP Status: {response.status_code}")
             return []
         
         # CSVパース
@@ -256,24 +257,41 @@ def fetch_x_posts():
         
         posts = []
         for row in reader:
-            # 最近の投稿のみ
-            try:
-                post_date = datetime.fromisoformat(row.get('created_at', '').replace('Z', '+00:00'))
-                if not is_recent(post_date.strftime('%Y-%m-%d %H:%M:%S'), HOURS_LOOKBACK):
-                    continue
-            except:
+            # 投稿内容を取得
+            tweet_content = row.get('Tweet Content', '').strip()
+            username = row.get('Username', '').strip()
+            timestamp_str = row.get('Timestamp', '').strip()
+            
+            # 空のコンテンツはスキップ
+            if not tweet_content:
                 continue
             
+            # タイムスタンプ処理（形式: "August 21, 2025 at 11:19PM"）
+            try:
+                from dateutil import parser
+                post_date = parser.parse(timestamp_str)
+                if not is_recent(post_date.strftime('%Y-%m-%d %H:%M:%S'), HOURS_LOOKBACK):
+                    continue
+            except Exception as e:
+                print(f"⚠️ 日付解析エラー: {timestamp_str} - {e}")
+                continue
+            
+            # URL取得（Source Link 1を優先、なければSource Link 2）
+            post_url = row.get('Source Link 1', '').strip() or row.get('Source Link 2', '').strip()
+            
+            # タイトル作成
+            title = tweet_content[:100] + '...' if len(tweet_content) > 100 else tweet_content
+            
             post = {
-                'title': row.get('text', '')[:100] + '...' if len(row.get('text', '')) > 100 else row.get('text', ''),
-                'url': row.get('url', ''),
-                'summary': row.get('text', ''),
-                'published': row.get('created_at', ''),
+                'title': title,
+                'url': post_url,
+                'summary': f"@{username}: {tweet_content}",
+                'published': timestamp_str,
                 'source': 'X (Twitter)',
                 'engineer_score': SimpleEngineerRanking.calculate_score({
-                    'title': row.get('text', ''),
-                    'summary': row.get('text', ''),
-                    'url': row.get('url', '')
+                    'title': tweet_content,
+                    'summary': tweet_content,
+                    'url': post_url
                 })
             }
             posts.append(post)
@@ -283,6 +301,8 @@ def fetch_x_posts():
         
     except Exception as e:
         print(f"❌ X投稿取得エラー: {e}")
+        import traceback
+        traceback.print_exc()
         return []
 
 def format_time_ago(published_str):

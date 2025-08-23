@@ -138,14 +138,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Add HTML files, CSS, and cache for complete deployment
-          git add *.html style.css _cache/ || true
+          # Pull latest changes first to avoid conflicts
+          git pull origin main --rebase || echo "No remote changes to pull"
+          
+          # Add HTML files and CSS (skip cache due to .gitignore)
+          git add *.html style.css || true
           
           # Create descriptive commit message
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M JST')
           git commit -m "🤖 Enhanced AI News Update - ${TIMESTAMP} [skip ci]" || echo "No changes to commit"
           
-          git push
+          # Force push to avoid conflicts
+          git push origin main
           echo "✅ Enhanced content deployed"
           
       - name: Build summary

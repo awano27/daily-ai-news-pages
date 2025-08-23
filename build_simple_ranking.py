@@ -724,8 +724,9 @@ def main():
                 if item['summary']:
                     item['summary_ja'] = translate_text(item['summary'], 'ja', translation_cache)
         
-        all_categories[category] = category_items
+        all_categories[category.lower()] = category_items
         print(f"✅ {category}: {len(category_items)}件 (平均スコア: {sum(item['engineer_score'] for item in category_items) / len(category_items):.1f})")
+        print(f"   → all_categories['{category.lower()}'] に保存")
     
     # 翻訳キャッシュ保存
     if TRANSLATE_TO_JA:
@@ -826,9 +827,9 @@ def main():
     # 各カテゴリのコンテンツ生成（businessを最初に確実に表示）
     category_order = ['business', 'tools', 'posts']
     for category_name in category_order:
-        if category_name not in all_categories:
-            continue
-        items = all_categories[category_name]
+        # カテゴリが存在しない場合は空のリストとして扱う
+        items = all_categories.get(category_name, [])
+        print(f"DEBUG: {category_name} カテゴリ - {len(items)}件の記事")
         is_active = category_name == 'business'
         panel_class = 'tab-panel' if is_active else 'tab-panel hidden'
         

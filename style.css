@@ -337,7 +337,14 @@ body{
   font-size:16px;
 }
 
-.tab-panel{padding:16px 0}
+.tab-panel{
+  padding:16px 0;
+  display:none;
+}
+
+.tab-panel.active{
+  display:block;
+}
 .hidden{display:none}
 
 /* Digital.gov: 記事カード - 近接の法則と意味伝達強化 */

@@ -251,22 +251,37 @@ def fetch_x_posts():
             print(f"❌ HTTP Status: {response.status_code}")
             return []
         
-        # CSVパース
-        csv_content = response.text
+        content = response.text.strip()
+        print(f"📄 受信データサイズ: {len(content)} 文字")
+        
+        # CSVかテキストかを判定
+        if content.startswith('"Timestamp"') or ',' in content[:200]:
+            # CSV形式として処理
+            return fetch_x_posts_from_csv(content)
+        else:
+            # テキスト形式として処理
+            return fetch_x_posts_from_text(content)
+            
+    except Exception as e:
+        print(f"❌ X投稿取得エラー: {e}")
+        import traceback
+        traceback.print_exc()
+        return []
+
+def fetch_x_posts_from_csv(csv_content):
+    """CSV形式のXポストを処理"""
+    try:
         reader = csv.DictReader(io.StringIO(csv_content))
         
         posts = []
         for row in reader:
-            # 投稿内容を取得
             tweet_content = row.get('Tweet Content', '').strip()
             username = row.get('Username', '').strip()
             timestamp_str = row.get('Timestamp', '').strip()
             
-            # 空のコンテンツはスキップ
             if not tweet_content:
                 continue
             
-            # タイムスタンプ処理（形式: "August 21, 2025 at 11:19PM"）
             try:
                 from dateutil import parser
                 post_date = parser.parse(timestamp_str)
@@ -276,10 +291,7 @@ def fetch_x_posts():
                 print(f"⚠️ 日付解析エラー: {timestamp_str} - {e}")
                 continue
             
-            # URL取得（Source Link 1を優先、なければSource Link 2）
             post_url = row.get('Source Link 1', '').strip() or row.get('Source Link 2', '').strip()
-            
-            # タイトル作成
             title = tweet_content[:100] + '...' if len(tweet_content) > 100 else tweet_content
             
             post = {
@@ -296,11 +308,110 @@ def fetch_x_posts():
             }
             posts.append(post)
         
-        print(f"✅ X投稿: {len(posts)}件取得")
+        print(f"✅ CSV形式X投稿: {len(posts)}件取得")
         return posts[:MAX_ITEMS_PER_CATEGORY]
         
     except Exception as e:
-        print(f"❌ X投稿取得エラー: {e}")
+        print(f"❌ CSV処理エラー: {e}")
+        return []
+
+def fetch_x_posts_from_text(text_content):
+    """テキスト形式のXポストを処理"""
+    try:
+        import re
+        
+        # 日付パターンでポストを分割
+        posts = []
+        
+        # August XX, 2025 形式の日付を検索
+        date_pattern = r'(August \d{1,2}, 2025 at \d{1,2}:\d{2}[AP]M)'
+        username_pattern = r'@([a-zA-Z0-9_]+)'
+        url_pattern = r'https?://[^\s,"]+'
+        
+        # テキストを行で分割して処理
+        lines = text_content.split('\n')
+        current_post = {}
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            
+            # 日付を検出
+            date_match = re.search(date_pattern, line)
+            if date_match:
+                # 前のポストを保存
+                if current_post.get('content'):
+                    posts.append(current_post.copy())
+                
+                # 新しいポストを開始
+                current_post = {
+                    'timestamp': date_match.group(1),
+                    'content': '',
+                    'urls': [],
+                    'username': ''
+                }
+                continue
+            
+            # ユーザー名を検出
+            username_match = re.search(username_pattern, line)
+            if username_match and not current_post.get('username'):
+                current_post['username'] = username_match.group(1)
+            
+            # URLを検出
+            url_matches = re.findall(url_pattern, line)
+            for url in url_matches:
+                if url not in current_post['urls']:
+                    current_post['urls'].append(url)
+            
+            # コンテンツを蓄積
+            if not re.search(date_pattern, line):  # 日付行以外
+                if current_post.get('content'):
+                    current_post['content'] += ' ' + line
+                else:
+                    current_post['content'] = line
+        
+        # 最後のポストを追加
+        if current_post.get('content'):
+            posts.append(current_post)
+        
+        # ポストオブジェクトに変換
+        converted_posts = []
+        for post_data in posts[:MAX_ITEMS_PER_CATEGORY]:
+            if not post_data.get('content'):
+                continue
+            
+            # 日付チェック（最近48時間以内）
+            try:
+                from dateutil import parser
+                post_date = parser.parse(post_data['timestamp'])
+                if not is_recent(post_date.strftime('%Y-%m-%d %H:%M:%S'), HOURS_LOOKBACK):
+                    continue
+            except:
+                continue
+            
+            title = post_data['content'][:100] + '...' if len(post_data['content']) > 100 else post_data['content']
+            post_url = post_data['urls'][0] if post_data['urls'] else ''
+            
+            post = {
+                'title': title,
+                'url': post_url,
+                'summary': f"@{post_data.get('username', 'unknown')}: {post_data['content']}",
+                'published': post_data['timestamp'],
+                'source': 'X (Twitter)',
+                'engineer_score': SimpleEngineerRanking.calculate_score({
+                    'title': post_data['content'],
+                    'summary': post_data['content'],
+                    'url': post_url
+                })
+            }
+            converted_posts.append(post)
+        
+        print(f"✅ テキスト形式X投稿: {len(converted_posts)}件取得")
+        return converted_posts
+        
+    except Exception as e:
+        print(f"❌ テキスト処理エラー: {e}")
         import traceback
         traceback.print_exc()
         return []

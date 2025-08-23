@@ -823,8 +823,12 @@ def main():
     </nav>
 '''
     
-    # 各カテゴリのコンテンツ生成
-    for category_name, items in all_categories.items():
+    # 各カテゴリのコンテンツ生成（businessを最初に確実に表示）
+    category_order = ['business', 'tools', 'posts']
+    for category_name in category_order:
+        if category_name not in all_categories:
+            continue
+        items = all_categories[category_name]
         is_active = category_name == 'business'
         panel_class = 'tab-panel' if is_active else 'tab-panel hidden'
         

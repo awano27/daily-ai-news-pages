@@ -7,6 +7,7 @@ HTML Structure Fix Applied: 2025-08-23
 - Enhanced card template with priority system
 - Proper HTML tag structure and closure
 - CSS generation included for styling
+- Tab functionality JavaScript fixed (hidden class logic)
 - Force GitHub Actions to use this updated version
 """
 
@@ -505,8 +506,8 @@ def generate_html(items):
     
     # タブコンテンツ
     for i, (cat, cat_items) in enumerate(categories.items()):
-        active = 'active' if i == 0 else ''
-        html += f'''    <section id="{cat.lower()}" class="tab-panel {active}">
+        hidden = '' if i == 0 else 'hidden'
+        html += f'''    <section id="{cat.lower()}" class="tab-panel {hidden}">
 '''
         
         for item in cat_items:
@@ -539,7 +540,7 @@ def generate_html(items):
             t.setAttribute('aria-selected', 'false');
           });
           panels.forEach(p => {
-            p.classList.remove('active');
+            p.classList.add('hidden');
           });
           
           // クリックされたタブをアクティブに
@@ -550,7 +551,7 @@ def generate_html(items):
           const targetId = this.getAttribute('data-target');
           const targetPanel = document.querySelector(targetId);
           if (targetPanel) {
-            targetPanel.classList.add('active');
+            targetPanel.classList.remove('hidden');
           }
         });
       });
@@ -577,7 +578,7 @@ def generate_html(items):
         const query = searchBox ? searchBox.value.toLowerCase() : '';
         const activeFilter = document.querySelector('.filter-btn.active');
         const filterType = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
-        const activePanel = document.querySelector('.tab-panel.active');
+        const activePanel = document.querySelector('.tab-panel:not(.hidden)');
         
         if (activePanel) {
           const cards = activePanel.querySelectorAll('.card');

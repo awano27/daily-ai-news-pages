@@ -839,9 +839,24 @@ def main():
         # X投稿も追加（postsカテゴリのみ）
         if category == 'posts':
             print(f"🔍 DEBUG: postsカテゴリでX投稿取得開始...")
+            print(f"🔍 DEBUG: X_POSTS_CSV環境変数 = {X_POSTS_CSV}")
+            print(f"🔍 DEBUG: HOURS_LOOKBACK = {HOURS_LOOKBACK}")
+            
             x_items = fetch_x_posts()
             print(f"🔍 DEBUG: X投稿取得完了 - {len(x_items)}件")
-            category_items.extend(x_items)
+            
+            if x_items:
+                # Xポストのスコアを強制的に高くして優先表示
+                for i, item in enumerate(x_items):
+                    item['engineer_score'] = 10.0  # 最高スコア設定
+                    print(f"🔍 DEBUG: Xポスト[{i+1}] - タイトル: {item['title'][:50]}... (スコア: {item['engineer_score']})")
+                    print(f"🔍 DEBUG: Xポスト[{i+1}] - URL: {item.get('url', 'N/A')}")
+                
+                # Xポストを category_items に追加
+                category_items.extend(x_items)
+                print(f"🔍 DEBUG: Xポスト統合後の総記事数: {len(category_items)}件")
+            else:
+                print(f"⚠️ DEBUG: X投稿が取得されませんでした - 原因調査が必要")
         
         # エンジニア関連度でソート
         category_items.sort(key=lambda x: x['engineer_score'], reverse=True)

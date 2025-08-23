@@ -1,41 +1,36 @@
 @echo off
-chcp 65001 >nul
+echo 🚀 Simple Deploy to GitHub Pages
+echo ===============================
+
 cd /d "C:\Users\yoshitaka\daily-ai-news"
 
-echo 🎯 403エラー根本的解決をGitHubにデプロイ中...
+echo 📝 Setting environment variables...
+set TRANSLATE_TO_JA=1
+set TRANSLATE_ENGINE=google
+set HOURS_LOOKBOOK=24
+set MAX_ITEMS_PER_CATEGORY=25
 
-echo 📝 全ファイルをコミット...
-git add .
-git commit -m "fix: Complete elimination of 403 error URLs
+echo 🔨 Building site...
+python build_simple_ranking.py
 
-🎯 根本的403エラー解決:
-✅ url_filter.py - 403 URL完全除外システム
-✅ 403 URLパターンマッチング  
-✅ HTML テンプレートで403 URL非表示
-✅ ユーザー体験向上（リンク切れ解消）
+echo 📋 Checking build output...
+if exist index.html (
+    echo ✅ index.html generated successfully
+) else (
+    echo ❌ Build failed - index.html not found
+    pause
+    exit /b 1
+)
 
-🚫 除外対象:
-• Google News CBM エンコードURL
-• news.google.com/rss/articles/*
-• 403エラー既知URL
+echo 📤 Adding and committing changes...
+git add index.html style.css
+git commit -m "feat: Update site content %date% %time%"
 
-✨ 効果:
-• ユーザーが403エラーに遭遇しない
-• 健全なリンクのみ表示
-• 完全なユーザビリティ
+echo 🌐 Deploying to gh-pages branch...
+git push origin main:gh-pages --force
 
-[skip ci]"
+echo ✅ Deployment completed!
+echo 🌐 Site should update at: https://awano27.github.io/daily-ai-news-pages/
+echo 🕐 Allow 2-5 minutes for changes to appear
 
-echo 📤 GitHubにプッシュ...
-git push origin main
-
-echo.
-echo ✅ 403エラー根本解決版がGitHub Pagesにデプロイ完了!
-echo 🔗 https://awano27.github.io/daily-ai-news/
-echo.
-echo 🎉 改善効果:
-echo • 403エラーURL完全除外
-echo • ユーザーに健全なリンクのみ提供  
-echo • リンク切れ問題解消
-echo • 完璧なユーザー体験
 pause

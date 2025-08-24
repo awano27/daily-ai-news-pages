@@ -20,10 +20,12 @@ import yaml
 import feedparser
 import requests
 import random
+from bs4 import BeautifulSoup
 
 # 基本設定
 HOURS_LOOKBACK = int(os.getenv('HOURS_LOOKBACK', '24'))
 MAX_ITEMS_PER_CATEGORY = int(os.getenv('MAX_ITEMS_PER_CATEGORY', '25'))
+TOP_PICKS_COUNT = int(os.getenv('TOP_PICKS_COUNT', '10'))
 TRANSLATE_TO_JA = os.getenv('TRANSLATE_TO_JA', '1') == '1'
 TRANSLATE_ENGINE = os.getenv('TRANSLATE_ENGINE', 'google')
 X_POSTS_CSV = os.getenv('X_POSTS_CSV', 'https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0')
@@ -38,13 +40,13 @@ except ImportError:
     TRANSLATE_AVAILABLE = False
 
 class SimpleEngineerRanking:
-    """シンプルなエンジニア関連度ランキング"""
+    """AIエンジニア/業務効率化 有用度ランキング"""
     
     # エンジニア重要キーワード（重み付き）
     TECH_KEYWORDS = {
         # 高優先度 (3.0倍)
         'code': 3.0, 'api': 3.0, 'sdk': 3.0, 'github': 3.0, 'implementation': 3.0,
-        'tutorial': 3.0, 'framework': 3.0, 'library': 3.0,
+        'tutorial': 3.0, 'framework': 3.0, 'library': 3.0, 'sample': 2.8,
         
         # AI/ML (2.5倍)
         'pytorch': 2.5, 'tensorflow': 2.5, 'huggingface': 2.5, 'gpt': 2.5, 
@@ -62,17 +64,36 @@ class SimpleEngineerRanking:
         'research': 1.5, 'paper': 1.5, 'arxiv': 1.5, 'algorithm': 1.5,
         'method': 1.5, 'evaluation': 1.5
     }
+
+    # 業務効率化・実務活用のキーワード（重み付き）
+    EFFICIENCY_KEYWORDS = {
+        # 強い意図（3.0倍）
+        'automation': 3.0, 'automate': 3.0, 'workflow': 3.0, 'rpa': 3.0,
+        'copilot': 3.0, 'prompt': 2.6, 'prompt engineering': 2.8,
+        'zapier': 2.8, 'make.com': 2.4, 'notion': 2.2, 'slack': 2.0,
+        'excel': 2.4, 'spreadsheet': 2.2, 'power automate': 2.6,
+        'powerapps': 2.2, 'power bi': 2.2, 'apps script': 2.4, 'gas': 2.4,
+
+        # 日本語キーワード（2.0-3.0倍）
+        '自動化': 3.0, '効率化': 2.8, '業務効率': 2.6, '省力化': 2.4,
+        'ワークフロー': 2.6, '手順': 2.0, 'テンプレート': 2.0, '導入事例': 2.4,
+        '活用事例': 2.4, 'コツ': 2.0, '使い方': 2.2, '時短': 2.2,
+        'スクリプト': 2.2, 'マクロ': 2.2,
+    }
     
     # 信頼できるソース
     TRUSTED_DOMAINS = [
         'arxiv.org', 'github.com', 'pytorch.org', 'tensorflow.org', 
         'huggingface.co', 'openai.com', 'anthropic.com', 'deepmind.com',
-        'ai.googleblog.com', 'research.facebook.com'
+        'ai.googleblog.com', 'research.facebook.com', 'cloud.google.com',
+        'learn.microsoft.com', 'devblogs.microsoft.com', 'powerautomate.microsoft.com',
+        'zapier.com', 'notion.so', 'workspaceupdates.googleblog.com',
+        'salesforce.com', 'atlassian.com', 'ibm.com'
     ]
     
     @classmethod
     def calculate_score(cls, item):
-        """エンジニア関連度スコアを計算 (0-10)"""
+        """AIエンジニア/業務効率化の有用度スコア (0-10)"""
         title = item.get('title', '').lower()
         summary = item.get('summary', '').lower()
         url = item.get('url', '').lower()
@@ -84,20 +105,29 @@ class SimpleEngineerRanking:
         for keyword, weight in cls.TECH_KEYWORDS.items():
             if keyword in content:
                 score += weight
-                # タイトルにある場合は追加ボーナス
                 if keyword in title:
                     score += weight * 0.5
+        for keyword, weight in cls.EFFICIENCY_KEYWORDS.items():
+            if keyword in content:
+                score += weight
+                if keyword in title:
+                    score += weight * 0.6
         
         # 信頼できるソースボーナス
         domain = urlparse(url).netloc.lower()
         for trusted in cls.TRUSTED_DOMAINS:
             if trusted in domain:
-                score *= 1.3
+                score *= 1.25
                 break
         
-        # コード・実装の特別ボーナス
-        if any(indicator in content for indicator in ['```', 'code example', 'implementation', 'github.com']):
-            score *= 1.2
+        # 実装/ハウツー/コードの特別ボーナス
+        howto_indicators = [
+            'how to', 'step-by-step', 'guide', 'tutorial', 'best practices',
+            'チュートリアル', '手順', '入門', '使い方', '導入事例', '活用事例'
+        ]
+        code_indicators = ['```', 'code example', 'implementation', 'github.com', 'gist.github.com']
+        if any(x in content for x in howto_indicators + code_indicators):
+            score *= 1.15
         
         # 10点満点に正規化
         return min(score, 10.0)
@@ -241,6 +271,98 @@ def fetch_feed_items(url, source_name, max_items=25):
         print(f"❌ {source_name} エラー: {e}")
         return []
 
+def _clean_tweet_text(text: str) -> str:
+    if not text:
+        return ""
+    text = re.sub(r"https?://\S+", "", text)  # URLs削除
+    text = re.sub(r"\s+", " ", text).strip()  # 余分な空白を圧縮
+    text = re.sub(r"(#[\w一-龥ぁ-んァ-ンー]+\s*)+$", "", text)  # 末尾のハッシュタグ群を削除
+    text = re.sub(r"(@[\w_]+\s*)+$", "", text)  # 末尾のメンション群を削除
+    return text.strip()
+
+def _extract_external_url(text: str) -> str | None:
+    if not text:
+        return None
+    urls = re.findall(r"https?://\S+", text)
+    for u in urls:
+        try:
+            host = urlparse(u).netloc.lower()
+            if any(x in host for x in ["x.com", "twitter.com", "t.co"]):
+                continue
+            return u
+        except Exception:
+            continue
+    return None
+
+def _fetch_og_title(url: str, timeout: int = 8) -> str | None:
+    if not url:
+        return None
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (compatible; AI-News-Bot/1.0)'}
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        if resp.status_code != 200:
+            return None
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        tag = soup.find('meta', attrs={'property': 'og:title'})
+        if tag and tag.get('content'):
+            return tag.get('content').strip()
+        if soup.title and soup.title.string:
+            return soup.title.string.strip()
+    except Exception:
+        return None
+    return None
+
+def _username_from_status_url(x_status_url: str) -> str | None:
+    try:
+        p = urlparse(x_status_url)
+        parts = [seg for seg in p.path.split('/') if seg]
+        if len(parts) >= 2 and parts[0].lower() not in ("i",):
+            return parts[0]
+    except Exception:
+        return None
+    return None
+
+def _guess_tag(text: str) -> str | None:
+    t = (text or '').lower()
+    jp = (text or '')
+    # 実装/チュートリアル系
+    if any(k in t for k in ['how to', 'tutorial', 'guide', 'step-by-step']) or any(k in jp for k in ['使い方', '手順', '入門', 'チュートリアル']):
+        return '実装'
+    # 業務効率化/自動化系
+    if any(k in t for k in ['workflow', 'automation', 'automate', 'copilot', 'zapier', 'notion', 'excel', 'apps script', 'power automate', 'prompt']) or any(k in jp for k in ['効率化', '自動化', '時短']):
+        return '効率化'
+    # 研究/論文系
+    if any(k in t for k in ['arxiv', 'paper', 'research']) or any(k in jp for k in ['論文', '研究']):
+        return '研究'
+    # リリース/発表
+    if any(k in t for k in ['release', 'launch', 'announce', 'announced']) or any(k in jp for k in ['発表', 'リリース']):
+        return '発表'
+    return None
+
+def _build_readable_summary(cleaned: str, og_title: str | None, domain: str | None) -> str:
+    tag = _guess_tag((og_title or '') + ' ' + (cleaned or ''))
+    parts = []
+    if tag:
+        parts.append(f"[{tag}]")
+    if og_title:
+        parts.append(og_title.strip())
+    # 投稿要約は重複しないときのみ添える
+    if cleaned:
+        if not og_title or og_title.lower() not in cleaned.lower():
+            # 短く整形
+            brief = cleaned.strip()
+            if len(brief) > 140:
+                brief = brief[:140] + '...'
+            parts.append(f"投稿要約: {brief}")
+    if domain:
+        parts.append(f"出典: {domain}")
+    # 仕上げ（全角区切りで視認性向上）
+    summary = ' ｜ '.join(p for p in parts if p)
+    # 最終長さ上限
+    if len(summary) > 280:
+        summary = summary[:277] + '...'
+    return summary
+
 def fetch_x_posts():
     """X(Twitter)投稿を取得"""
     try:
@@ -276,14 +398,13 @@ def fetch_x_posts_from_csv(csv_content):
         reader = csv.DictReader(io.StringIO(csv_content))
         
         posts = []
+        og_cache: dict[str, str] = {}
         for row in reader:
-            tweet_content = row.get('Tweet Content', '').strip()
-            username = row.get('Username', '').strip()
-            timestamp_str = row.get('Timestamp', '').strip()
-            
+            tweet_content = (row.get('Tweet Content', '') or '').strip()
+            username = (row.get('Username', '') or '').strip()
+            timestamp_str = (row.get('Timestamp', '') or '').strip()
             if not tweet_content:
                 continue
-            
             try:
                 from dateutil import parser
                 post_date = parser.parse(timestamp_str)
@@ -292,23 +413,39 @@ def fetch_x_posts_from_csv(csv_content):
             except Exception as e:
                 print(f"⚠️ 日付解析エラー: {timestamp_str} - {e}")
                 continue
-            
-            post_url = row.get('Source Link 1', '').strip() or row.get('Source Link 2', '').strip()
-            title = tweet_content[:100] + '...' if len(tweet_content) > 100 else tweet_content
-            
-            post = {
+
+            cleaned = _clean_tweet_text(tweet_content)
+            ext_url = row.get('Source Link 1', '').strip() or row.get('Source Link 2', '').strip()
+            if not ext_url:
+                ext_url = _extract_external_url(tweet_content)
+
+            domain = urlparse(ext_url).netloc if ext_url else ''
+            og_title = None
+            if ext_url:
+                og_title = og_cache.get(ext_url)
+                if og_title is None:
+                    og_title = _fetch_og_title(ext_url)
+                    if og_title:
+                        og_cache[ext_url] = og_title
+
+            if og_title:
+                title = f"{og_title}（{domain}）"
+            else:
+                title = cleaned if len(cleaned) <= 100 else (cleaned[:100] + '...')
+
+            summary = _build_readable_summary(cleaned, og_title, domain)
+
+            source_label = f"X @{username}" if username else "X (Twitter)"
+            score_payload = {'title': title, 'summary': summary or cleaned, 'url': ext_url or ''}
+
+            posts.append({
                 'title': title,
-                'url': post_url,
-                'summary': f"@{username}: {tweet_content}",
+                'url': ext_url or '',
+                'summary': summary or cleaned,
                 'published': timestamp_str,
-                'source': 'X (Twitter)',
-                'engineer_score': SimpleEngineerRanking.calculate_score({
-                    'title': tweet_content,
-                    'summary': tweet_content,
-                    'url': post_url
-                })
-            }
-            posts.append(post)
+                'source': source_label,
+                'engineer_score': SimpleEngineerRanking.calculate_score(score_payload)
+            })
         
         print(f"✅ CSV形式X投稿: {len(posts)}件取得")
         return posts[:MAX_ITEMS_PER_CATEGORY]
@@ -379,6 +516,7 @@ def fetch_x_posts_from_text(text_content):
         
         # ポストオブジェクトに変換
         converted_posts = []
+        og_cache: dict[str, str] = {}
         for post_data in posts[:MAX_ITEMS_PER_CATEGORY]:
             if not post_data.get('content'):
                 continue
@@ -392,22 +530,39 @@ def fetch_x_posts_from_text(text_content):
             except:
                 continue
             
-            title = post_data['content'][:100] + '...' if len(post_data['content']) > 100 else post_data['content']
-            post_url = post_data['urls'][0] if post_data['urls'] else ''
-            
-            post = {
+            cleaned = _clean_tweet_text(post_data['content'])
+            ext_url = None
+            for u in post_data.get('urls', []):
+                host = urlparse(u).netloc.lower()
+                if not any(x in host for x in ["x.com", "twitter.com", "t.co"]):
+                    ext_url = u
+                    break
+            domain = urlparse(ext_url).netloc if ext_url else ''
+            og_title = None
+            if ext_url:
+                og_title = og_cache.get(ext_url)
+                if og_title is None:
+                    og_title = _fetch_og_title(ext_url)
+                    if og_title:
+                        og_cache[ext_url] = og_title
+
+            if og_title:
+                title = f"{og_title}（{domain}）"
+            else:
+                title = cleaned if len(cleaned) <= 100 else (cleaned[:100] + '...')
+
+            summary = _build_readable_summary(cleaned, og_title, domain)
+
+            source_label = f"X @{post_data.get('username', 'unknown')}"
+            score_payload = {'title': title, 'summary': summary or cleaned, 'url': ext_url or ''}
+            converted_posts.append({
                 'title': title,
-                'url': post_url,
-                'summary': f"@{post_data.get('username', 'unknown')}: {post_data['content']}",
+                'url': ext_url or '',
+                'summary': summary or cleaned,
                 'published': post_data['timestamp'],
-                'source': 'X (Twitter)',
-                'engineer_score': SimpleEngineerRanking.calculate_score({
-                    'title': post_data['content'],
-                    'summary': post_data['content'],
-                    'url': post_url
-                })
-            }
-            converted_posts.append(post)
+                'source': source_label,
+                'engineer_score': SimpleEngineerRanking.calculate_score(score_payload)
+            })
         
         print(f"✅ テキスト形式X投稿: {len(converted_posts)}件取得")
         return converted_posts
@@ -892,6 +1047,20 @@ def main():
     print(f"   高優先度: {high_priority}件")
     print(f"   情報源: {sum(len(feeds) for feeds in feeds_config.values())}個")
     
+    # Top Picks（全カテゴリ横断の上位）
+    all_items_flat = [it for items in all_categories.values() for it in items]
+    # URL重複除去（先に高スコアに並べてからユニーク化）
+    all_items_flat.sort(key=lambda x: x['engineer_score'], reverse=True)
+    seen = set()
+    top_picks = []
+    for it in all_items_flat:
+        u = it.get('url')
+        if u and u not in seen:
+            top_picks.append(it)
+            seen.add(u)
+        if len(top_picks) >= TOP_PICKS_COUNT:
+            break
+
     # HTMLテンプレート
     html_template = f'''<!doctype html>
 <html lang="ja">
@@ -910,7 +1079,7 @@ def main():
   <main class="container">
     <h1 class="page-title">今日の最新AI情報</h1>
     <p class="lead">
-        エンジニア関連度スコアでランキング表示。実装可能性・技術的価値・学習効果を重視した自動ソート。
+        有用度スコアでランキング表示（AIエンジニア/業務効率化向け）。実装可能性・効率化効果・学習価値を重視して自動ソート。
         豊富な情報量（{total_items}件）を維持しつつ、重要度で整理表示。
     </p>
 
@@ -934,6 +1103,49 @@ def main():
         <div class="kpi-value">{HOURS_LOOKBACK}h</div>
         <div class="kpi-label">収集範囲</div>
         <div class="kpi-note">最新性重視</div>
+      </div>
+    </section>
+
+    <!-- Top Picks: 有用度上位 -->
+    <section class="top-picks" aria-label="Top Picks">
+      <h2 class="section-title">🏆 Top Picks — 有用度上位（上位 {min(TOP_PICKS_COUNT, len(top_picks))} 件）</h2>
+      <div class="tab-content">
+'''
+
+    for item in top_picks:
+        score = item['engineer_score']
+        if score >= 7.0:
+            priority = 'high'; priority_text = '高'
+        elif score >= 4.0:
+            priority = 'medium'; priority_text = '中'
+        else:
+            priority = 'low'; priority_text = '低'
+
+        display_title = item.get('title_ja', item['title'])
+        display_summary = item.get('summary_ja', item['summary'])
+        time_ago = format_time_ago(item['published'])
+
+        html_template += f'''
+        <article class="enhanced-card" data-score="{score:.1f}" data-source="{item['source']}" data-time="{item['published']}">
+          <div class="card-priority {priority}">{priority_text} {score:.1f}</div>
+          <header class="card-header">
+            <h3 class="card-title">
+              <a href="{item['url']}" target="_blank" rel="noopener">{html.escape(display_title)}</a>
+            </h3>
+          </header>
+          <div class="card-meta">
+            <span class="card-source">{item['source']}</span>
+            {f'<span class="card-time">{time_ago}</span>' if time_ago else ''}
+          </div>
+          <div class="card-summary">{html.escape(display_summary[:200] + '...' if len(display_summary) > 200 else display_summary)}</div>
+          <footer class="card-footer">
+            <span class="card-score">有用度: {score:.1f}</span>
+            <span class="card-time">{time_ago}</span>
+          </footer>
+        </article>
+'''
+
+    html_template += '''
       </div>
     </section>
 
@@ -1022,7 +1234,7 @@ def main():
           </div>
           <div class="card-summary">{html.escape(display_summary[:200] + '...' if len(display_summary) > 200 else display_summary)}</div>
           <footer class="card-footer">
-            <span class="card-score">スコア: {score:.1f}</span>
+            <span class="card-score">有用度: {score:.1f}</span>
             <span class="card-time">{time_ago}</span>
           </footer>
         </article>

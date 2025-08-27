@@ -138,8 +138,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
+          # Check current branch
+          CURRENT_BRANCH=$(git branch --show-current)
+          echo "Current branch: ${CURRENT_BRANCH}"
+          
           # Pull latest changes first to avoid conflicts
-          git pull origin main --rebase || echo "No remote changes to pull"
+          git pull origin ${CURRENT_BRANCH} --rebase || echo "No remote changes to pull"
           
           # Add HTML files and CSS (skip cache due to .gitignore)
           git add *.html style.css || true
@@ -148,8 +152,8 @@ jobs:
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M JST')
           git commit -m "🤖 Enhanced AI News Update - ${TIMESTAMP} [skip ci]" || echo "No changes to commit"
           
-          # Force push to avoid conflicts
-          git push origin main
+          # Push to current branch
+          git push origin ${CURRENT_BRANCH}
           echo "✅ Enhanced content deployed"
           
       - name: Build summary

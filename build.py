@@ -410,14 +410,16 @@ def _extract_x_data_from_csv(raw: bytes) -> list[dict]:
                         print(f"[WARN] Date parse failed for '{date_str}', using current time")
                         dt = datetime.now(JST)
                     
-                    # 常に投稿を追加
+                    # 常に投稿を追加（デバッグ情報も含む）
                     data.append({
                         'url': tweet_url,
                         'username': username,
                         'text': text,
-                        'datetime': dt
+                        'datetime': dt,
+                        'debug_info': f"Row {row_count}: {date_str} | {username} | {text[:50]}..."
                     })
-                    print(f"[DEBUG] Added post: url={tweet_url}, user={username}, text_len={len(text)}")
+                    print(f"[DEBUG] Added X post {len(data)}: {username} -> {tweet_url}")
+                    print(f"[DEBUG] Text preview: {text[:100]}...")
                 else:
                     print(f"[DEBUG] Skipping invalid post: user={username}, text_len={len(text) if text else 0}")
     except Exception as e:

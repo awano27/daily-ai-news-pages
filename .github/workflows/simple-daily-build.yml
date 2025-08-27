@@ -46,9 +46,21 @@ jobs:
         run: |
           if grep -q "X / SNS" index.html; then
             echo "✅ X posts found in index.html"
+            echo "📊 X post URLs:"
+            grep -o 'href="https://x\.com/[^"]*"' index.html | head -5
           else
             echo "⚠️ X posts not found in index.html"
           fi
+          
+      - name: Debug X posts processing
+        env:
+          X_POSTS_CSV: "https://docs.google.com/spreadsheets/d/1uuLKCLIJw--a1vCcO6UGxSpBiLTtN8uGl2cdMb6wcfg/export?format=csv&gid=0"
+        run: |
+          echo "🔍 Debugging X posts CSV structure..."
+          curl -s "$X_POSTS_CSV" | head -3
+          echo ""
+          echo "🔗 Looking for X URLs in CSV..."
+          curl -s "$X_POSTS_CSV" | grep -o 'https://[^,]*x\.com[^,]*' | head -5 || echo "No x.com URLs found in top rows"
           
       - name: Commit and deploy
         run: |

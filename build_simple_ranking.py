@@ -395,63 +395,111 @@ def fetch_x_posts():
 def fetch_x_posts_from_csv(csv_content):
     """CSV形式のXポストを処理"""
     try:
-        reader = csv.DictReader(io.StringIO(csv_content))
-        
+        # CSVファイルに列名がない場合に対応（インデックスベースで処理）
+        lines = csv_content.strip().split('\n')
         posts = []
         og_cache: dict[str, str] = {}
-        for row in reader:
-            tweet_content = (row.get('Tweet Content', '') or '').strip()
-            username = (row.get('Username', '') or '').strip()
-            timestamp_str = (row.get('Timestamp', '') or '').strip()
-            if not tweet_content:
-                continue
+        
+        print(f"🔍 DEBUG: CSV行数: {len(lines)}")
+        print(f"🔍 DEBUG: 最初の3行:")
+        for i, line in enumerate(lines[:3]):
+            print(f"  行{i}: {line[:100]}...")
+        
+        for i, line in enumerate(lines):
             try:
-                from dateutil import parser
-                post_date = parser.parse(timestamp_str)
-                if not is_recent(post_date.strftime('%Y-%m-%d %H:%M:%S'), HOURS_LOOKBACK):
+                # CSVを手動で解析（列名なしを想定）
+                parts = list(csv.reader([line]))[0]
+                
+                if len(parts) < 3:  # 最低3列必要
                     continue
-            except Exception as e:
-                print(f"⚠️ 日付解析エラー: {timestamp_str} - {e}")
-                continue
+                
+                # CSV形式: [timestamp, username, content, image_url, tweet_url]
+                timestamp_str = parts[0].strip()
+                username = parts[1].strip().lstrip('@')  # @記号を除去
+                tweet_content = parts[2].strip()
+                
+                # ツイートURLは4列目または5列目
+                tweet_url = ''
+                if len(parts) > 4:
+                    tweet_url = parts[4].strip()
+                elif len(parts) > 3:
+                    tweet_url = parts[3].strip()
+                
+                print(f"🔍 DEBUG: 行{i+1} - ユーザー: @{username}, コンテンツ: {tweet_content[:50]}..., URL: {tweet_url}")
+                
+                if not tweet_content or not username:
+                    continue
+                
+                # 日付チェック
+                try:
+                    from dateutil import parser
+                    post_date = parser.parse(timestamp_str)
+                    if not is_recent(post_date.strftime('%Y-%m-%d %H:%M:%S'), HOURS_LOOKBACK):
+                        print(f"🔍 DEBUG: 古い投稿をスキップ: {timestamp_str}")
+                        continue
+                except Exception as e:
+                    print(f"⚠️ 日付解析エラー: {timestamp_str} - {e}")
+                    continue
 
-            cleaned = _clean_tweet_text(tweet_content)
-            ext_url = row.get('Source Link 1', '').strip() or row.get('Source Link 2', '').strip()
-            if not ext_url:
+                # テキストクリーニング
+                cleaned = _clean_tweet_text(tweet_content)
+                
+                # 外部URLを抽出
                 ext_url = _extract_external_url(tweet_content)
+                
+                # ツイートURL自体を外部URLとして使用（他に適切なURLがない場合）
+                if not ext_url and tweet_url:
+                    # TwitterのURLではない場合のみ使用
+                    if 'twitter.com' not in tweet_url and 'x.com' not in tweet_url:
+                        ext_url = tweet_url
 
-            domain = urlparse(ext_url).netloc if ext_url else ''
-            og_title = None
-            if ext_url:
-                og_title = og_cache.get(ext_url)
-                if og_title is None:
-                    og_title = _fetch_og_title(ext_url)
-                    if og_title:
-                        og_cache[ext_url] = og_title
+                domain = urlparse(ext_url).netloc if ext_url else ''
+                og_title = None
+                
+                # OGタイトル取得
+                if ext_url:
+                    og_title = og_cache.get(ext_url)
+                    if og_title is None:
+                        og_title = _fetch_og_title(ext_url)
+                        if og_title:
+                            og_cache[ext_url] = og_title
 
-            if og_title:
-                title = f"{og_title}（{domain}）"
-            else:
-                title = cleaned if len(cleaned) <= 100 else (cleaned[:100] + '...')
+                # タイトル生成
+                if og_title:
+                    title = f"🐦 @{username}: {og_title}"
+                else:
+                    title = f"🐦 @{username}: {cleaned[:80]}" if len(cleaned) > 80 else f"🐦 @{username}: {cleaned}"
 
-            summary = _build_readable_summary(cleaned, og_title, domain)
+                # 要約生成
+                summary = _build_readable_summary(cleaned, og_title, domain)
+                if not summary:
+                    summary = cleaned[:200] + '...' if len(cleaned) > 200 else cleaned
 
-            source_label = f"X @{username}" if username else "X (Twitter)"
-            score_payload = {'title': title, 'summary': summary or cleaned, 'url': ext_url or ''}
+                source_label = f"X @{username}"
+                score_payload = {'title': title, 'summary': summary, 'url': ext_url or tweet_url}
 
-            posts.append({
-                'title': title,
-                'url': ext_url or '',
-                'summary': summary or cleaned,
-                'published': timestamp_str,
-                'source': source_label,
-                'engineer_score': SimpleEngineerRanking.calculate_score(score_payload)
-            })
+                posts.append({
+                    'title': title,
+                    'url': ext_url or tweet_url or '',
+                    'summary': summary,
+                    'published': timestamp_str,
+                    'source': source_label,
+                    'engineer_score': SimpleEngineerRanking.calculate_score(score_payload)
+                })
+                
+                print(f"✅ X投稿処理完了: @{username} - スコア: {SimpleEngineerRanking.calculate_score(score_payload):.1f}")
+                
+            except Exception as e:
+                print(f"⚠️ 行{i+1}の処理エラー: {e}")
+                continue
         
         print(f"✅ CSV形式X投稿: {len(posts)}件取得")
         return posts[:MAX_ITEMS_PER_CATEGORY]
         
     except Exception as e:
         print(f"❌ CSV処理エラー: {e}")
+        import traceback
+        traceback.print_exc()
         return []
 
 def fetch_x_posts_from_text(text_content):

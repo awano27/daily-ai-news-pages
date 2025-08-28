@@ -1,6 +1,0 @@
-Workflow trigger for GitHub Actions - 2025-08-23
-
-This file is created to trigger the GitHub Actions workflow for daily-ai-news-pages deployment.
-The workflow will automatically build using build_simple_ranking.py and deploy to GitHub Pages.
-
-Expected outcome: https://awano27.github.io/daily-ai-news-pages/ should update with latest content and working tab functionality.

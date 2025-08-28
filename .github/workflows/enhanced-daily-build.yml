@@ -65,7 +65,7 @@ jobs:
           cat > .env << EOF
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL=gemini-2.5-flash
-          HOURS_LOOKBACK=${{ github.event.inputs.hours_lookback || '24' }}
+          HOURS_LOOKBACK=${{ github.event.inputs.hours_lookback || '48' }}
           MAX_ITEMS_PER_CATEGORY=${{ github.event.inputs.max_posts || '10' }}
           TRANSLATE_TO_JA=1
           TRANSLATE_ENGINE=google

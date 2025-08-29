@@ -53,11 +53,14 @@ body{
 
 /* ヘッダー */
 .site-header{
+  position:sticky; top:0; z-index:20;
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:var(--spacing-md);
-  background:var(--bg-subtle);
+  background:color-mix(in oklab, var(--bg) 85%, transparent);
+  -webkit-backdrop-filter:saturate(1.2) blur(6px);
+  backdrop-filter:saturate(1.2) blur(6px);
   border-bottom:1px solid var(--line);
   margin-bottom:var(--spacing-lg);
 }
@@ -163,6 +166,22 @@ body{
   margin-bottom:var(--spacing-lg);
   overflow-x:auto;
 }
+/* Support legacy markup that uses `.tab` instead of `.tab-button` */
+.tab{
+  background:none;
+  border:none;
+  padding:var(--spacing-md) var(--spacing-lg);
+  font-size:var(--font-size-base);
+  font-weight:600;
+  color:var(--muted);
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  white-space:nowrap;
+  transition:all 0.2s;
+}
+.tab:hover{ color:var(--fg); background:var(--bg-subtle); }
+.tab.active{ color:var(--brand); border-bottom-color:var(--brand); background:var(--brand-weak); }
+.tab:focus{ outline:none; box-shadow:var(--focus-ring); }
 .tab-button{
   background:none;
   border:none;
@@ -195,9 +214,7 @@ body{
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:var(--spacing-md);
 }
-.tab-panel{
-  transition:opacity 0.3s ease;
-}
+.tab-panel{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:var(--spacing-md); transition:opacity 0.3s ease; }
 .tab-panel.hidden{
   display:none;
 }
@@ -217,6 +234,15 @@ body{
   box-shadow:var(--shadow-lg);
   border-color:var(--brand-light);
 }
+.card{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:var(--border-radius);
+  padding:var(--spacing-md);
+  box-shadow:var(--shadow);
+  transition:box-shadow .2s, transform .2s;
+}
+.card:hover{ box-shadow:var(--shadow-lg); transform:translateY(-1px); }
 .card-priority{
   position:absolute;
   top:var(--spacing-sm);
@@ -287,6 +313,11 @@ body{
   color:var(--muted);
 }
 
+/* 検索 UI */
+.search-container{ display:flex; flex-direction:column; gap:var(--spacing-sm); }
+#searchBox{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:16px; background:var(--bg); color:var(--fg); }
+#searchBox:focus{ outline:none; box-shadow:var(--focus-ring); }
+
 /* レスポンシブ */
 @media (max-width: 768px) {
   .container{
@@ -314,6 +345,9 @@ body{
     font-size:var(--font-size-sm);
   }
   .tab-content{
+    grid-template-columns:1fr;
+  }
+  .tab-panel{
     grid-template-columns:1fr;
   }
 }

@@ -3,1183 +3,2281 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Daily AI News — 2025-10-19 00:12 JST</title>
+  <title>Daily AI News — 2025-10-19 00:51 JST</title>
+  <meta name="description" content="Daily AI News は AI 動向を俯瞰できる日本語ダイジェストです。最終更新：2025-10-19 00:51 JST、対象期間：過去 48 時間。"/>
+  <meta name="color-scheme" content="light dark"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
-  <!-- Last update: 2025-10-19 00:12:05 JST -->
+  <!-- Last update: 2025-10-19 00:51:49 JST -->
 </head>
 <body>
   <a class="skip-link" href="#mainContent">本文へスキップ</a>
-  <header class="site-header" role="banner">
+
+  <header class="site-header" id="top" role="banner">
     <div class="header-inner">
       <div class="brand-area" aria-label="Daily AI News">
-        <div class="brand-logo" aria-hidden="true">📰</div>
+        <span class="brand-logo" aria-hidden="true">📰</span>
         <div class="brand-copy">
           <span class="brand-name">Daily AI News</span>
           <span class="brand-tagline">AIの最前線を日本語でスピーディに把握</span>
         </div>
       </div>
-      <div class="header-actions">
-        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="テーマを切り替え">
-          <span class="toggle-icon" aria-hidden="true">🌞</span>
-          <span class="toggle-label">ライト</span>
-        </button>
-      </div>
+
+      <nav class="site-nav" aria-label="主要ナビゲーション">
+        <ul class="site-nav__list">
+          <li><a href="#insights">指標</a></li>
+          <li><a href="#filters">検索</a></li>
+          <li><a href="#newsResults">最新記事</a></li>
+          <li><a href="#aboutSection">サイトについて</a></li>
+          <li><a href="#contactSection">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="テーマを切り替え">
+        <span class="theme-toggle__icon" aria-hidden="true">🌞</span>
+        <span class="theme-toggle__label">ライト</span>
+      </button>
     </div>
   </header>
 
-  <main id="mainContent">
-    <h1 class="page-title">今日の最新AI情報</h1>
-    <p class="lead">
-      エンジニア関連度スコアでランキング表示。実装可能性・技術的価値・学習効果を重視した自動ソート。
-      豊富な情報量を維持しつつ、重要度で整理表示。
-    </p>
-
-    <section class="status-overview" aria-label="更新状況と主要指標">
-      <div class="status-meta" aria-live="polite">
-        <span class="status-updated">最終更新：2025-10-19 00:12 JST</span>
-        <span class="status-window">対象期間：過去48時間</span>
-      </div>
-
-      <div class="kpi-grid metrics-grid" aria-label="主要指標">
-      <article class="kpi-card metric-card" role="group" aria-label="総記事数">
-        <div class="kpi-value metric-value">34件</div>
-        <div class="kpi-label metric-label">総記事数</div>
-        <div class="kpi-note metric-note">情報量維持</div>
-      </article>
-      <article class="kpi-card metric-card" role="group" aria-label="高優先度記事">
-        <div class="kpi-value metric-value">34件</div>
-        <div class="kpi-label metric-label">高優先度記事</div>
-        <div class="kpi-note metric-note">スコア7.0+</div>
-      </article>
-      <article class="kpi-card metric-card" role="group" aria-label="情報源">
-        <div class="kpi-value metric-value">11個</div>
-        <div class="kpi-label metric-label">情報源</div>
-        <div class="kpi-note metric-note">多角的収集</div>
-      </article>
-      <article class="kpi-card metric-card" role="group" aria-label="収集範囲">
-        <div class="kpi-value metric-value">48h</div>
-        <div class="kpi-label metric-label">収集範囲</div>
-        <div class="kpi-note metric-note">最新性重視</div>
-      </article>
-      </div>
+  <main id="mainContent" class="page-content">
+    <section class="hero" aria-labelledby="heroTitle">
+      <h1 id="heroTitle">今日の最新AI情報</h1>
+      <p class="lead">
+        世界の生成AI・機械学習に関する公式発表、資金調達、研究論文、開発者コミュニティの投稿を横断的に収集。
+        重要度と鮮度で優先順位付けし、日本語サマリーと原文リンクをセットでお届けします。
+      </p>
+      <dl class="hero-meta">
+        <div>
+          <dt>最終更新</dt>
+          <dd>2025-10-19 00:51 JST</dd>
+        </div>
+        <div>
+          <dt>対象期間</dt>
+          <dd>過去 48 時間</dd>
+        </div>
+      </dl>
     </section>
 
-    <section class="filters filter-bar" aria-label="記事フィルター">
+    <section id="insights" class="status-overview" aria-labelledby="insightTitle">
+      <div class="section-header">
+        <h2 id="insightTitle">主要指標</h2>
+        <p class="section-note">記事件数・注目度・情報源など、ダッシュボード全体のスナップショットです。</p>
+      </div>
+      <div class="metrics-grid" role="list">
+        <article class="metric-card" role="listitem">
+          <span class="metric-card__value">35件</span>
+          <span class="metric-card__label">掲載記事数</span>
+          <span class="metric-card__note">全カテゴリ合計</span>
+        </article>
+        <article class="metric-card" role="listitem">
+          <span class="metric-card__value">24件</span>
+          <span class="metric-card__label">重要度 高</span>
+          <span class="metric-card__note">スコア 7.0 以上</span>
+        </article>
+        <article class="metric-card" role="listitem">
+          <span class="metric-card__value">12件</span>
+          <span class="metric-card__label">情報源</span>
+          <span class="metric-card__note">多角的なソース</span>
+        </article>
+        <article class="metric-card" role="listitem">
+          <span class="metric-card__value">48h</span>
+          <span class="metric-card__label">収集範囲</span>
+          <span class="metric-card__note">最新性を重視</span>
+        </article>
+      </div>
+      <ul class="metric-summary">
+        <li>ビジネス：12件</li>
+        <li>ツール：11件</li>
+        <li>SNS / 論文：12件</li>
+      </ul>
+    </section>
+
+    <section id="filters" class="filter-panel" aria-labelledby="filterTitle">
+      <div class="section-header">
+        <h2 id="filterTitle">検索とフィルタ</h2>
+        <p class="section-note">キーワードと複数フィルタを組み合わせて、目的の記事を素早く見つけましょう。</p>
+      </div>
       <form class="filters-form" role="search">
-        <div class="filter-group">
+        <div class="filter-field filter-field--search">
           <label class="filter-label" for="searchInput">キーワード検索</label>
-          <input type="search" id="searchInput" class="filter-input" placeholder="例：LLM、OpenAI、ビジネス" aria-label="記事を検索"/>
+          <input type="search" id="searchInput" class="filter-input" autocomplete="off" placeholder="例：LLM、OpenAI、Gemini、論文など" aria-describedby="searchHelp"/>
+          <p id="searchHelp" class="filter-help">Enter キーでキーワードを追加できます。</p>
           <div id="searchTags" class="search-tags" aria-live="polite" role="list"></div>
         </div>
-        <div class="filter-group">
+
+        <div class="filter-field">
           <label class="filter-label" for="importanceFilter">重要度</label>
-          <select id="importanceFilter" class="filter-select" aria-label="重要度で絞り込み">
+          <select id="importanceFilter" class="filter-select" title="記事の重要度を基準に絞り込みます">
             <option value="all">すべて</option>
             <option value="high">高 (7.0+)</option>
             <option value="medium">中 (4.0-6.9)</option>
             <option value="low">低 (0-3.9)</option>
           </select>
         </div>
-        <div class="filter-group">
+
+        <div class="filter-field">
           <label class="filter-label" for="freshnessFilter">鮮度</label>
-          <select id="freshnessFilter" class="filter-select" aria-label="掲載からの時間で絞り込み">
+          <select id="freshnessFilter" class="filter-select" title="掲載からの経過時間で絞り込みます">
             <option value="all">すべての期間</option>
             <option value="24h">24時間以内</option>
             <option value="72h">3日以内</option>
             <option value="168h">7日以内</option>
           </select>
         </div>
-        <div class="filter-group">
+
+        <div class="filter-field">
           <label class="filter-label" for="sortBy">並び順</label>
-          <select id="sortBy" class="filter-select" aria-label="記事の並び順を選択">
+          <select id="sortBy" class="filter-select" title="表示順序を変更します">
             <option value="importance">重要度順</option>
             <option value="freshness">鮮度順</option>
-            <option value="time">時間順</option>
-            <option value="none">ソートなし</option>
+            <option value="time">公開が新しい順</option>
+            <option value="source">情報源順</option>
+            <option value="original">元の順序</option>
           </select>
         </div>
+
+        <div class="filter-actions">
+          <button type="button" id="clearFilters" class="button button--secondary" disabled>フィルタをリセット</button>
+        </div>
       </form>
-      <div class="filter-results" id="resultsCount" aria-live="polite"></div>
+
+      <div class="category-switch" role="group" aria-label="カテゴリを選択">
+        <button type="button" class="category-switch__button is-active" data-category="all" aria-pressed="true">すべて</button>
+        <button type="button" class="category-switch__button" data-category="business" aria-pressed="false">ビジネス</button>
+        <button type="button" class="category-switch__button" data-category="tools" aria-pressed="false">ツール</button>
+        <button type="button" class="category-switch__button" data-category="posts" aria-pressed="false">SNS / 論文</button>
+      </div>
+
+      <p id="resultsCount" class="results-summary" role="status" aria-live="polite">
+        すべて：35件表示（全35件）
+      </p>
     </section>
 
-    <section class="category-filter" aria-label="カテゴリフィルター">
-      <div class="category-filter__group" role="group" aria-label="カテゴリを選択">
-        <button type="button" class="category-button is-active" data-category="all" aria-pressed="true" aria-label="すべてのニュースを表示">
-          <span aria-hidden="true">🌐</span>
-          <span class="category-button__label">すべて</span>
-        </button>
-        <button type="button" class="category-button" data-category="business" aria-pressed="false" aria-label="ビジネスニュースのみを表示">
-          <span aria-hidden="true">📈</span>
-          <span class="category-button__label">ビジネスニュース</span>
-        </button>
-        <button type="button" class="category-button" data-category="tools" aria-pressed="false" aria-label="ツールニュースのみを表示">
-          <span aria-hidden="true">🛠️</span>
-          <span class="category-button__label">ツールニュース</span>
-        </button>
-        <button type="button" class="category-button" data-category="posts" aria-pressed="false" aria-label="SNSや論文ポストのみを表示">
-          <span aria-hidden="true">💬</span>
-          <span class="category-button__label">SNS/論文ポスト</span>
-        </button>
+    <section id="newsResults" class="news-results" aria-labelledby="newsResultsTitle">
+      <div class="section-header">
+        <h2 id="newsResultsTitle">最新記事</h2>
+        <p class="section-note">カード内には翻訳済み要約、原文リンク、信頼度、更新時刻を記載しています。</p>
+      </div>
+      <div id="newsGrid" class="news-grid" role="list" aria-live="polite">
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="26.50"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760690700000"
+        data-rank="1"
+        data-tags="ビジネス,注目,最近"
+        data-source="venturebeatai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 1">#01</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents" target="_blank" rel="noopener">Codev lets enterprises avoid vibe coding hangovers with a team of agents that generate and document code</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 26.5">スコア 26.5</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">For many software developers using generative AI, vibe coding is a double-edged sword. The process delivers rapid prototypes but often leaves a trail of brittle, undocumented code that creates significant technical debt. A new open-source platform, Codev, addresses this by proposing a fundamental sh...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>VentureBeat AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T17:45:00+09:00" title="2025-10-17 17:45 JST">10/17 17:45</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="16.90"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760638866000"
+        data-rank="2"
+        data-tags="ビジネス,注目,最近"
+        data-source="techcrunchjapan">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 2">#02</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/" target="_blank" rel="noopener">OpenAI pauses Sora video generations of Martin Luther King Jr.</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 16.9">スコア 16.9</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">Sora の立ち上げは、AI によって生成されたビデオの危険性と、プラットフォームがテクノロジーの周囲にガードレールを実装する方法をめぐって、熱烈な世間の議論を巻き起こしました。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>TechCrunch Japan</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T03:21:06+09:00" title="2025-10-17 03:21 JST">10/17 03:21</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="16.25"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760694392000"
+        data-rank="3"
+        data-tags="ビジネス,注目,最近"
+        data-source="aibusinessnews">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://aibusiness.com/generative-ai/anthropic-claude-integrated-microsoft-365" target="_blank" rel="noopener">Anthropic's Claude Integrated with Microsoft 365</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 16.2">スコア 16.2</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">この新たな提携は、MicrosoftがAIポートフォリオの多様化を目指している中で実現した。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>AI Business News</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T18:46:32+09:00" title="2025-10-17 18:46 JST">10/17 18:46</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://aibusiness.com/generative-ai/anthropic-claude-integrated-microsoft-365" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="16.00"
+        data-freshness="80"
+        data-freshness-bucket="24h"
+        data-published-ms="1760718090000"
+        data-rank="4"
+        data-tags="ビジネス,注目,新着"
+        data-source="techcrunchjapan">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://techcrunch.com/2025/10/17/silicon-valley-spooks-the-ai-safety-advocates/" target="_blank" rel="noopener">Silicon Valley spooks the AI safety advocates</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
+              <span class="news-card__score" aria-label="重要度スコア 16.0">スコア 16.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">ホワイトハウスのデービッド・サックス氏とオープンAIのジェイソン・クォン氏は今週、AIの安全性を推進する団体に関するコメントでネット上で波紋を呼んだ。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>TechCrunch Japan</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-18T01:21:30+09:00" title="2025-10-18 01:21 JST">10/18 01:21</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://techcrunch.com/2025/10/17/silicon-valley-spooks-the-ai-safety-advocates/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="16.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760689800000"
+        data-rank="5"
+        data-tags="ビジネス,注目,最近"
+        data-source="techcrunchjapan">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 5">#05</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://techcrunch.com/podcast/from-sb-243-to-chatgpt-why-its-not-cool-to-be-cautious-about-ai/" target="_blank" rel="noopener">From SB 243 to ChatGPT: Why it’s ‘not cool’ to be cautious about AI</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 16.0">スコア 16.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">シリコンバレーのルール？慎重になるのはクールではありません。 OpenAI がガードレールを取り除き、VC が Anthropic のような企業を AI の安全規制を支持していると批判する中、誰が AI 開発を主導すべきであると業界が考えているのかがより明確になりつつあります。 Equity のこのエピソードでは、Kirsten Korosec、Anthony Ha、Max Zeff が、イノベーションと責任の間の境界線がどのように決まるのかについて議論します [&amp;#8230;]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>TechCrunch Japan</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T17:30:00+09:00" title="2025-10-17 17:30 JST">10/17 17:30</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://techcrunch.com/podcast/from-sb-243-to-chatgpt-why-its-not-cool-to-be-cautious-about-ai/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="15.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760695200000"
+        data-rank="6"
+        data-tags="ビジネス,注目,最近"
+        data-source="techcrunchjapan">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://techcrunch.com/video/should-ai-do-everything-openai-thinks-so/" target="_blank" rel="noopener">Should AI do everything? OpenAI thinks so</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 15.0">スコア 15.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">シリコンバレーのルール？慎重になるのはクールではありません。 OpenAI がガードレールを取り除き、VC が Anthropic のような企業を AI の安全規制を支持していると批判する中、誰が AI 開発を主導すべきであると業界が考えているのかがより明確になりつつあります。 Equity のこのエピソードでは、Kirsten Korosec、Anthony Ha、Max Zeff が、イノベーションと責任の間の境界線がどのように決まるのかについて議論します [&amp;#8230;]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>TechCrunch Japan</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T19:00:00+09:00" title="2025-10-17 19:00 JST">10/17 19:00</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://techcrunch.com/video/should-ai-do-everything-openai-thinks-so/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="12.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760685325000"
+        data-rank="7"
+        data-tags="ビジネス,注目,最近"
+        data-source="awsaiblog">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://aws.amazon.com/blogs/machine-learning/how-tp-icap-transformed-crm-data-into-real-time-insights-with-amazon-bedrock/" target="_blank" rel="noopener">How TP ICAP transformed CRM data into real-time insights with Amazon Bedrock</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 12.0">スコア 12.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">この投稿では、TP ICAP が Amazon Bedrock Knowledge Bases と Amazon Bedrock Evaluation を使用して、AI を使用して CRM の洞察を抽出し、即座にビジネス価値を提供するための強化されたセキュリティ機能を備えたエンタープライズグレードのソリューションである ClientIQ を構築した方法を示します。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>AWS AI Blog</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T16:15:25+09:00" title="2025-10-17 16:15 JST">10/17 16:15</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://aws.amazon.com/blogs/machine-learning/how-tp-icap-transformed-crm-data-into-real-time-insights-with-amazon-bedrock/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="11.50"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760702253000"
+        data-rank="8"
+        data-tags="ビジネス,注目,最近"
+        data-source="redditai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1o9d0ws/openai_pauses_ai_generated_deepfakes_of_martin/" target="_blank" rel="noopener">OpenAI pauses AI generated deepfakes of Martin Luther King Jr. on Sora 2 app after ‘disrespectful’ depictions | Fortune</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 11.5">スコア 11.5</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">&amp;#32;によって送信されました &amp;#32;  /u/fortune [リンク] &amp;#32; [コメント]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T20:57:33+09:00" title="2025-10-17 20:57 JST">10/17 20:57</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1o9d0ws/openai_pauses_ai_generated_deepfakes_of_martin/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="11.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760671256000"
+        data-rank="9"
+        data-tags="ビジネス,注目,最近"
+        data-source="redditai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 9">#09</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1o8zsdu/openais_sora_bans_martin_luther_king_jr_deepfakes/" target="_blank" rel="noopener">OpenAI’s Sora bans Martin Luther King Jr. deepfakes after his family complained</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 11.0">スコア 11.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">&amp;#32;によって送信されました &amp;#32;  /u/cnn [リンク] &amp;#32; [コメント]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T12:20:56+09:00" title="2025-10-17 12:20 JST">10/17 12:20</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1o8zsdu/openais_sora_bans_martin_luther_king_jr_deepfakes/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="10.05"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760670600000"
+        data-rank="10"
+        data-tags="ビジネス,注目,最近"
+        data-source="mittechnologyreviewai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 10">#10</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.technologyreview.com/2025/10/17/1125895/the-download-the-rehabilitation-of-ai-art-and-the-scary-truth-about-antimicrobial-resistance/" target="_blank" rel="noopener">The Download: the rehabilitation of AI art, and the scary truth about antimicrobial resistance</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.1">スコア 10.1</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">これは、テクノロジーの世界で何が起こっているかを毎日提供する平日のニュースレター、The Download の今日の版です。スロップからサザビーズまで？ AI アートが新たな段階に突入 AI が低迷するこの時代において、Midjourney や Runway のような生成 AI ツールをアートの作成に使用できるという考えは、新しい段階に入ります。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>MIT Technology Review AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T12:10:00+09:00" title="2025-10-17 12:10 JST">10/17 12:10</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.technologyreview.com/2025/10/17/1125895/the-download-the-rehabilitation-of-ai-art-and-the-scary-truth-about-antimicrobial-resistance/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="9.50"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760685198000"
+        data-rank="11"
+        data-tags="ビジネス,注目,最近"
+        data-source="awsaiblog">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 11">#11</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://aws.amazon.com/blogs/machine-learning/principal-financial-group-accelerates-build-test-and-deployment-of-amazon-lex-v2-bots-through-automation/" target="_blank" rel="noopener">Principal Financial Group accelerates build, test, and deployment of Amazon Lex V2 bots through automation</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 9.5">スコア 9.5</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">Principal Financial Group が Genesys、Amazon Lex、Amazon QuickSight を使用して音声仮想アシスタントのパフォーマンスを向上させるという投稿では、Genesys Cloud、Amazon Lex V2、複数の AWS サービス、Amazon QuickSight を使用したカスタム レポートおよび分析ソリューションを使用した全体的なプリンシパル仮想アシスタント ソリューションについて説明しました。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>AWS AI Blog</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T16:13:18+09:00" title="2025-10-17 16:13 JST">10/17 16:13</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://aws.amazon.com/blogs/machine-learning/principal-financial-group-accelerates-build-test-and-deployment-of-amazon-lex-v2-bots-through-automation/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="9.50"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760684761000"
+        data-rank="12"
+        data-tags="ビジネス,注目,最近"
+        data-source="awsaiblog">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 12">#12</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://aws.amazon.com/blogs/machine-learning/splash-music-transforms-music-generation-using-aws-trainium-and-amazon-sagemaker-hyperpod/" target="_blank" rel="noopener">Splash Music transforms music generation using AWS Trainium and Amazon SageMaker HyperPod</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 9.5">スコア 9.5</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">この投稿では、Splash Music が Amazon SageMaker HyperPod 上の AWS Trainium と高度な HummingLM モデルを使用して、AI を活用した音楽作成の新しい標準をどのように確立しているかを示します。 2024 年の AWS Generative AI Accelerator に選ばれたスタートアップとして、Splash Music は AWS Startups および AWS Generative AI Innovation Center (GenAIIC) と緊密に連携して、イノベーションを加速し、音楽生成 FM 開発ライフサイクルを加速し...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>AWS AI Blog</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T16:06:01+09:00" title="2025-10-17 16:06 JST">10/17 16:06</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://aws.amazon.com/blogs/machine-learning/splash-music-transforms-music-generation-using-aws-trainium-and-amazon-sagemaker-hyperpod/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="90"
+        data-freshness-bucket="24h"
+        data-published-ms="1760769888000"
+        data-rank="1"
+        data-tags="ツール,新着"
+        data-source="theverge">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 1">#01</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.theverge.com/tech/801962/motorola-razr-ultra-2025-foldable-marshall-emberton-ii-speaker-deal-sale" target="_blank" rel="noopener">Motorola’s Razr Ultra and the Marshall Emberton II top this week’s best deals</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">本当に目立つ折りたたみ式携帯電話の購入を考えているなら、2025 Motorola Razr Ultra に匹敵するモデルはほとんどありません。現在 Amazon と Best Buy で販売されており、16 GB の RAM と 512 GB を搭載し、これまでの最低価格である 999.99 ドル (300 ドル引き) から販売されています。画像で分からない場合は[&amp;#8230;]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>The Verge</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-18T15:44:48+09:00" title="2025-10-18 15:44 JST">10/18 15:44</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 75点">
+              <span class="news-card__trust-bar" style="--trust-level:75%"></span>
+              信頼度 75/100
+            </span>
+            <a class="news-card__cta" href="https://www.theverge.com/tech/801962/motorola-razr-ultra-2025-foldable-marshall-emberton-ii-speaker-deal-sale" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="80"
+        data-freshness-bucket="24h"
+        data-published-ms="1760757107000"
+        data-rank="2"
+        data-tags="ツール,新着"
+        data-source="redditmachinelearning">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 2">#02</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1o9u4cx/d_dan_bricklin_lessons_from_building_the_first/" target="_blank" rel="noopener">[D] Dan Bricklin: Lessons from Building the First Killer App | Learning from Machine Learning #14</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">パーソナル コンピューター革命を引き起こした最初の電子スプレッドシートである VisiCalc の共同作成者である Dan Bricklin との機械学習から学ぶの新しいエピソード。画期的なイノベーションに関する彼の洞察: イノベーションは段階的に改善されるのではなく、100 倍改善されなければなりません。彼の枠組みはシンプルです。何かが本当に重要かどうかを評価するときは、次のように考えてください。これは本当に優れている点は何ですか?以前は不可能だったことは何でしょうか?人々はどのようなトレードオフを受け入れるでしょうか?すぐに元が取れますか？  これらと同じ疑問がスプレッドシートを必然化し、...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit MachineLearning</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-18T12:11:47+09:00" title="2025-10-18 12:11 JST">10/18 12:11</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1o9u4cx/d_dan_bricklin_lessons_from_building_the_first/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="80"
+        data-freshness-bucket="24h"
+        data-published-ms="1760740786000"
+        data-rank="3"
+        data-tags="ツール,新着"
+        data-source="redditmachinelearning">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1o9pnaz/p_beensminimax_103m_moe_llm_from_scratch/" target="_blank" rel="noopener">[P]: Beens-MiniMax: 103M MoE LLM from Scratch</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">私は、この非常に単純な MoE [ Beens-MiniMax ] を 5 日間でゼロから構築し、トレーニングしました。詳細については、こちらのレポートをご覧ください。  &amp;#32;によって送信されました &amp;#32;  /u/外部_Mushroom978 [リンク] &amp;#32; [コメント]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit MachineLearning</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-18T07:39:46+09:00" title="2025-10-18 07:39 JST">10/18 07:39</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1o9pnaz/p_beensminimax_103m_moe_llm_from_scratch/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760691644000"
+        data-rank="4"
+        data-tags="ツール,最近"
+        data-source="machinelearningmastery">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://machinelearningmastery.com/revolutionizing-mlops-enhanced-bigquery-ml-ui-for-seamless-model-creation-and-management/" target="_blank" rel="noopener">Revolutionizing MLOps: Enhanced BigQuery ML UI for Seamless Model Creation and Management</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">BigQuery ML (BQML) ユーザーにとって嬉しいニュースです。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Machine Learning Mastery</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T18:00:44+09:00" title="2025-10-17 18:00 JST">10/17 18:00</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://machinelearningmastery.com/revolutionizing-mlops-enhanced-bigquery-ml-ui-for-seamless-model-creation-and-management/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760688940000"
+        data-rank="5"
+        data-tags="ツール,最近"
+        data-source="towardsdatascience">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 5">#05</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://towardsdatascience.com/machine-learning-meets-panel-data-what-practitioners-need-to-know/" target="_blank" rel="noopener">Machine Learning Meets Panel Data: What Practitioners Need to Know</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">隠れたデータ漏洩による機械学習モデルのパフォーマンス、有用性、現実世界への適用可能性の過大評価を避ける方法
+      この投稿「機械学習とパネル データの出会い: 実務者が知っておくべきこと」は、最初に「データ サイエンスに向けて」に掲載されました。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Towards Data Science</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T17:15:40+09:00" title="2025-10-17 17:15 JST">10/17 17:15</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://towardsdatascience.com/machine-learning-meets-panel-data-what-practitioners-need-to-know/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760687497000"
+        data-rank="6"
+        data-tags="ツール,最近"
+        data-source="redditmachinelearning">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1o96m84/d_gcp_credits_vs_mac_book_pro_5_vs_nvidia_dgx/" target="_blank" rel="noopener">[D] GCP credits vs mac book Pro 5 vs Nvidia DGX?</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">こんにちは、私は本当に助けが必要なジレンマを抱えています。古い MacBook Pro が壊れたので、できるだけ早く新しいのが必要ですが、MacBook Pro 5 Pro/Max を購入するにはおそらく数週間か数か月かかるでしょう。 Nvidia DGX を数か月前に予約しており、購入する機会がありますが、購入できる最終日は明日です。 GCP クレジットを購入することもできます。来年の私の研究プロジェクトは、主にオープンソースとクローズドソースの LLM の推論であり、いくつかのマルチモーダル モデル (おそらく小規模な言語モデル、パラメーターの数は不明) を開発するプロジェクトもいくつかあ...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit MachineLearning</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T16:51:37+09:00" title="2025-10-17 16:51 JST">10/17 16:51</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1o96m84/d_gcp_credits_vs_mac_book_pro_5_vs_nvidia_dgx/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760686487000"
+        data-rank="7"
+        data-tags="ツール,最近"
+        data-source="machinelearningmastery">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://machinelearningmastery.com/the-complete-guide-to-vector-databases-for-machine-learning/" target="_blank" rel="noopener">The Complete Guide to Vector Databases for Machine Learning</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">ベクトル データベースは、ほとんどの最新の AI アプリケーションに不可欠なものになっています。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Machine Learning Mastery</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T16:34:47+09:00" title="2025-10-17 16:34 JST">10/17 16:34</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://machinelearningmastery.com/the-complete-guide-to-vector-databases-for-machine-learning/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760681575000"
+        data-rank="8"
+        data-tags="ツール,最近"
+        data-source="techcrunch">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://techcrunch.com/2025/10/17/stellantis-teams-up-with-pony-ai-to-develop-robotaxis-in-europe/" target="_blank" rel="noopener">Stellantis teams up with Pony AI to develop robotaxis in Europe</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">この提携により、ポニーの自動運転ソフトウェアが、自動運転車をサポートする高度なセンサーを搭載したステランティスの中型電動バンプラットフォームに統合されます。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>TechCrunch</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T15:12:55+09:00" title="2025-10-17 15:12 JST">10/17 15:12</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 80点">
+              <span class="news-card__trust-bar" style="--trust-level:80%"></span>
+              信頼度 80/100
+            </span>
+            <a class="news-card__cta" href="https://techcrunch.com/2025/10/17/stellantis-teams-up-with-pony-ai-to-develop-robotaxis-in-europe/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760677200000"
+        data-rank="9"
+        data-tags="ツール,最近"
+        data-source="towardsdatascience">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 9">#09</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://towardsdatascience.com/how-i-used-machine-learning-to-predict-41-of-project-delays-before-they-happened/" target="_blank" rel="noopener">How I Used Machine Learning to Predict 41% of Project Delays Before They Happened</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">データ サイエンスはプロジェクト マネージャーがリスクを予測し、時間を節約するのにどのように役立つか
+      この記事は、「機械学習を使用してプロジェクトの遅延の 41% を事前に予測した方法」という記事で、最初に「Towards Data Science」に掲載されました。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Towards Data Science</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T14:00:00+09:00" title="2025-10-17 14:00 JST">10/17 14:00</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://towardsdatascience.com/how-i-used-machine-learning-to-predict-41-of-project-delays-before-they-happened/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760655763000"
+        data-rank="10"
+        data-tags="ツール,最近"
+        data-source="redditmachinelearning">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 10">#10</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1o8ve9w/d_what_mlai_research_areas_are_actively_being/" target="_blank" rel="noopener">[D] What ML/AI research areas are actively being pursued in industry right now?</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">皆さん、こんにちは。今日、民間部門でどのような ML/AI 分野が活発な研究開発に焦点を当てているかを知りたいと思っています。私は現在データ サイエンティストとして働いており (2 年前に博士号を取得しました)、より研究に重点を置いた役割への移行を検討しています。私は自分の努力を導くために、どの分野が需要があるのか​​、そしてどのような知識が私をこれらのポジションでより強力な候補者にするのかを理解しようとしています。私のバックグラウンドは古典的な ML と統計に強いので、NLP や CV についてはあまり得意ではありません (ある時点で両方の基礎を学んだことはありますが)。私はこれらの古典的な...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit MachineLearning</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T08:02:43+09:00" title="2025-10-17 08:02 JST">10/17 08:02</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1o8ve9w/d_what_mlai_research_areas_are_actively_being/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1760639945000"
+        data-rank="11"
+        data-tags="ツール,最近"
+        data-source="redditmachinelearning">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 11">#11</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1o8qy15/p_gotorch_deep_learning_framework_from_scratch/" target="_blank" rel="noopener">[P]: Go-torch: Deep Learning framework from scratch</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
+              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
+              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">私は、Torch のようなフレームワークの内部を学ぶために、この深層学習フレームワーク [ go-torch ] を最初から構築しました。この [ ブログ ] の投稿から学ぶことができます。  &amp;#32;によって送信されました &amp;#32;  /u/外部_Mushroom978 [リンク] &amp;#32; [コメント]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit MachineLearning</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-17T03:39:05+09:00" title="2025-10-17 03:39 JST">10/17 03:39</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1o8qy15/p_gotorch_deep_learning_framework_from_scratch/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="1"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 1">#01</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">Xポスト oikon48</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">Codex Meetup Tokyo #1 所感とスライド ・AIコードレビューはみんな幸せになる! ・新しいライブラリを使う時は、テンプレートプロジェクトの用意をするのがおすすめ ・人がボトルネックにどんどんなっていく ・Code environmentのDockerファイルはかなり柔軟で良さそう! ・CodeRabbit の名前 Hoopy https://t.co/qIAuWJlJyC</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424256+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="2"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 2">#02</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">Xポスト itm_aiplus</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">生成AI導入に必要なのは「嫌われる勇気」──“オレ流”で貫く、組織改革のススメ https://t.co/IEpfmZPByn</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424251+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="3"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">Xポスト dani_avila7</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">クロード コード テンプレートのダウンロード数が 10 万件に達しました 🎉 新しい分析が公開されました: - コンポーネントをダウンロードしている上位の国 - カテゴリ別の成長傾向 - 125 か国の 562 のコンポーネント エージェントがチャートを独占 データにより、コミュニティが実際に https://t.co/9PfREb1zNk をどのように使用しているかが明らかになり始めています</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424248+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="4"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">Xポスト MinoDriven</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">AIで開発プロセス全体を爆速化する手法を、AWSさんで学んできたレポートです。 人間が全くコードを書かず、AIへの指示だけで動作可能なものを高速開発!僕も設計スペシャリストという立ち位置で参加してきました。 https://t.co/k11oYoEfiy</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424243+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="5"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 5">#05</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">Xポスト testingcatalog</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">速報 🚨: OpenAI は API で GPT-5 を利用した新しい検索モデルをリリースします。すでに OpenAI プラットフォームで利用可能です。 - gpt-5-search-api-2025-10-14 - gpt-5-search-api h/t @legit_api https://t.co/7lqhNywrDa</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424239+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="6"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">Xポスト tmiyata25</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">Azureで構築したMCPサーバとCopilot Studioの連携方法について解説されたブログ、めちゃ分かりやすい https://t.co/HfWpczNGkq</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424236+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="7"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">Xポスト yugen_matuni</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">10/21に開催される「Biz × Dify Meetup」に登壇します! やはり使ってもらってなんぼの生成AIで、「どうやったら真に使ってもらえるんだろう」みたいな現場に沿った内容をお話ししたり、共有できる場になると思うので、ぜひぜひビジネス側の方でもご参加いただけたらと思います! https://t.co/TP3uQhEoci</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424232+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="8"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">Xポスト NGO275</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">nanochatを動かしてみてる。LLMの勉強にはこれが一番早いと思う。本読むより手触り感があってイメージがつきやすい https://t.co/wWIZpQ08dO https://t.co/nx2Aw1XTGk</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424224+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="9"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 9">#09</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">Xポスト tetumemo</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">📝ワークフロー構築アプリ「Google Opalが優秀!」 1テーマを投げるだけで... - 調査用プロンプト - Deep Research結果 - タイトル案 - リード文案 - アジェンダ案 - 1万文字以上の記事 - メインとセクションサムネプロンプト&amp;画像 - Xポスト文案 これ全部出力できて無料利用! https://t.co/VWqoWjmS6M https://t.co/FF6xPpbEoB</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424220+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="10"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 10">#10</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">Xポスト kosuke_agos</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">AIが、職場に「新たな格差」を生み出しているという、衝撃的な事実がアメリカのウォール・ストリート・ジャーナルによって報じられました。 優秀な社員ほどAIを使いこなし、生産性が爆発的に向上する一方で、他の従業員との差が拡大。 https://t.co/U81pS6BD73</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424212+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="11"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 11">#11</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">Xポスト Majin_AppSheet</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">AIやDXの社内推進で大事なのは、 最新技術よりも「整合性」です。 どんなに便利なノーコードツールでアプリを作っても、 作った本人しか直せず、周りが再現できないなら、 それは新しい“属人化”にすぎません。 その仕組みが職場にちゃんと馴染んで、 誰もが「これなら安心だ」と思えること。 https://t.co/3mlltCQeAc</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424208+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1760802975424"
+        data-rank="12"
+        data-tags="sns/論文,注目,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 12">#12</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">Xポスト shota7180</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
+              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
+              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">n8n、AI Workflow Builderのベータ版を発表! プロンプトを入力すれば、ノード・ロジック・構造を自動で生成。 ワークフロー構築のスピードと柔軟性が飛躍的に向上します。 今週よりn8n Cloudユーザーに順次展開予定です。 https://t.co/WAjmIYdZHX</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2025-10-19T00:56:15.424204+09:00" title="2025-10-19 00:56 JST">10/19 00:56</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="信頼度 50点">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              信頼度 50/100
+            </span>
+            <a class="news-card__cta" href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
       </div>
     </section>
 
-    <section class="news-results" aria-label="ニュース記事一覧">
-      <div id="newsGrid" class="news-grid" role="list"></div>
-    </section>
-
-            <section id="business" class="tab-panel ">
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents" target="_blank" rel="noopener">Codev lets enterprises avoid vibe coding hangovers with a team of agents that generate and document code</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">For many software developers using generative AI, vibe coding is a double-edged sword. The process delivers rapid prototypes but often leaves a trail of brittle, undocumented code that creates significant technical debt. A new open-source platform, Codev, addresses this by proposing a fundamental sh...</p>
-        <div class="chips">
-          <span class="chip">VentureBeat AI</span>
-          <span class="chip ghost">原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents" target="_blank" rel="noopener">https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/" target="_blank" rel="noopener">OpenAI pauses Sora video generations of Martin Luther King Jr.</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">Sora の立ち上げは、AI によって生成されたビデオの危険性と、プラットフォームがテクノロジーの周囲にガードレールを実装する方法をめぐって、熱烈な世間の議論を巻き起こしました。</p>
-        <div class="chips">
-          <span class="chip">TechCrunch Japan</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://aibusiness.com/generative-ai/anthropic-claude-integrated-microsoft-365" target="_blank" rel="noopener">Anthropic's Claude Integrated with Microsoft 365</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">この新しい提携は、MicrosoftがAIポートフォリオの多様化を目指している中で実現した。</p>
-        <div class="chips">
-          <span class="chip">AI Business News</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://aibusiness.com/generative-ai/anthropic-claude-integrated-microsoft-365" target="_blank" rel="noopener">https://aibusiness.com/generative-ai/anthropic-claude-integrated-microsoft-365</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://techcrunch.com/2025/10/17/silicon-valley-spooks-the-ai-safety-advocates/" target="_blank" rel="noopener">Silicon Valley spooks the AI safety advocates</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">ホワイトハウスのデービッド・サックス氏とオープンAIのジェイソン・クォン氏は今週、AIの安全性を推進する団体に関するコメントでネット上で波紋を呼んだ。</p>
-        <div class="chips">
-          <span class="chip">TechCrunch Japan</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">22時間前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/17/silicon-valley-spooks-the-ai-safety-advocates/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/17/silicon-valley-spooks-the-ai-safety-advocates/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://techcrunch.com/podcast/from-sb-243-to-chatgpt-why-its-not-cool-to-be-cautious-about-ai/" target="_blank" rel="noopener">From SB 243 to ChatGPT: Why it’s ‘not cool’ to be cautious about AI</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">シリコンバレーのルール？慎重になるのはクールではありません。 OpenAI がガードレールを取り除き、VC が Anthropic のような企業を AI の安全規制を支持していると批判する中、誰が AI 開発を主導すべきであると業界が考えているのかがより明確になりつつあります。 Equity のこのエピソードでは、Kirsten Korosec、Anthony Ha、Max Zeff が、イノベーションと責任の間の境界線がどのように決まるのかについて議論します [&amp;#8230;]</p>
-        <div class="chips">
-          <span class="chip">TechCrunch Japan</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://techcrunch.com/podcast/from-sb-243-to-chatgpt-why-its-not-cool-to-be-cautious-about-ai/" target="_blank" rel="noopener">https://techcrunch.com/podcast/from-sb-243-to-chatgpt-why-its-not-cool-to-be-cautious-about-ai/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://techcrunch.com/video/should-ai-do-everything-openai-thinks-so/" target="_blank" rel="noopener">Should AI do everything? OpenAI thinks so</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">シリコンバレーのルール？慎重になるのはクールではありません。 OpenAI がガードレールを撤去し、VC が Anthropic のような企業を AI の安全規制を支持していると批判する中、誰が AI 開発を主導すべきであると業界が考えているのかがより明確になりつつあります。 Equity のこのエピソードでは、Kirsten Korosec、Anthony Ha、Max Zeff が、イノベーションと責任の間の境界線がどのように決まるのかについて議論します [&amp;#8230;]</p>
-        <div class="chips">
-          <span class="chip">TechCrunch Japan</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://techcrunch.com/video/should-ai-do-everything-openai-thinks-so/" target="_blank" rel="noopener">https://techcrunch.com/video/should-ai-do-everything-openai-thinks-so/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://aws.amazon.com/blogs/machine-learning/how-tp-icap-transformed-crm-data-into-real-time-insights-with-amazon-bedrock/" target="_blank" rel="noopener">How TP ICAP transformed CRM data into real-time insights with Amazon Bedrock</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">この投稿では、TP ICAP が Amazon Bedrock Knowledge Bases と Amazon Bedrock Evaluation を使用して、AI を使用して CRM の洞察を抽出し、即座にビジネス価値を提供するための強化されたセキュリティ機能を備えたエンタープライズグレードのソリューションである ClientIQ を構築した方法を示します。</p>
-        <div class="chips">
-          <span class="chip">AWS AI Blog</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://aws.amazon.com/blogs/machine-learning/how-tp-icap-transformed-crm-data-into-real-time-insights-with-amazon-bedrock/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/how-tp-icap-transformed-crm-data-into-real-time-insights-with-amazon-bedrock/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1o9d0ws/openai_pauses_ai_generated_deepfakes_of_martin/" target="_blank" rel="noopener">OpenAI pauses AI generated deepfakes of Martin Luther King Jr. on Sora 2 app after ‘disrespectful’ depictions | Fortune</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">&amp;#32;によって送信されました &amp;#32;  /u/fortune [リンク] &amp;#32; [コメント]</p>
-        <div class="chips">
-          <span class="chip">Reddit AI</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1o9d0ws/openai_pauses_ai_generated_deepfakes_of_martin/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1o9d0ws/openai_pauses_ai_generated_deepfakes_of_martin/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1o8zsdu/openais_sora_bans_martin_luther_king_jr_deepfakes/" target="_blank" rel="noopener">OpenAI’s Sora bans Martin Luther King Jr. deepfakes after his family complained</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">&amp;#32;によって送信されました &amp;#32;  /u/cnn [リンク] &amp;#32; [コメント]</p>
-        <div class="chips">
-          <span class="chip">Reddit AI</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1o8zsdu/openais_sora_bans_martin_luther_king_jr_deepfakes/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1o8zsdu/openais_sora_bans_martin_luther_king_jr_deepfakes/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.technologyreview.com/2025/10/17/1125895/the-download-the-rehabilitation-of-ai-art-and-the-scary-truth-about-antimicrobial-resistance/" target="_blank" rel="noopener">The Download: the rehabilitation of AI art, and the scary truth about antimicrobial resistance</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">これは、テクノロジーの世界で何が起こっているかを毎日提供する平日のニュースレター、The Download の今日の版です。スロップからサザビーズまで？ AI アートが新たな段階に突入 AI が低迷するこの時代において、Midjourney や Runway のような生成 AI ツールをアートの作成に使用できるという考えは、新しい段階に入ります。</p>
-        <div class="chips">
-          <span class="chip">MIT Technology Review AI</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.technologyreview.com/2025/10/17/1125895/the-download-the-rehabilitation-of-ai-art-and-the-scary-truth-about-antimicrobial-resistance/" target="_blank" rel="noopener">https://www.technologyreview.com/2025/10/17/1125895/the-download-the-rehabilitation-of-ai-art-and-the-scary-truth-about-antimicrobial-resistance/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://aws.amazon.com/blogs/machine-learning/principal-financial-group-accelerates-build-test-and-deployment-of-amazon-lex-v2-bots-through-automation/" target="_blank" rel="noopener">Principal Financial Group accelerates build, test, and deployment of Amazon Lex V2 bots through automation</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">Principal Financial Group が Genesys、Amazon Lex、Amazon QuickSight を使用して音声仮想アシスタントのパフォーマンスを向上させるという投稿では、Genesys Cloud、Amazon Lex V2、複数の AWS サービス、Amazon QuickSight を使用したカスタム レポートおよび分析ソリューションを使用した全体的なプリンシパル仮想アシスタント ソリューションについて説明しました。</p>
-        <div class="chips">
-          <span class="chip">AWS AI Blog</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://aws.amazon.com/blogs/machine-learning/principal-financial-group-accelerates-build-test-and-deployment-of-amazon-lex-v2-bots-through-automation/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/principal-financial-group-accelerates-build-test-and-deployment-of-amazon-lex-v2-bots-through-automation/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://aws.amazon.com/blogs/machine-learning/splash-music-transforms-music-generation-using-aws-trainium-and-amazon-sagemaker-hyperpod/" target="_blank" rel="noopener">Splash Music transforms music generation using AWS Trainium and Amazon SageMaker HyperPod</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">この投稿では、Splash Music が Amazon SageMaker HyperPod 上の AWS Trainium と高度な HummingLM モデルを使用して、AI を活用した音楽作成の新しい標準をどのように確立しているかを示します。 2024 年の AWS Generative AI Accelerator に選ばれたスタートアップとして、Splash Music は AWS Startups および AWS Generative AI Innovation Center (GenAIIC) と緊密に連携して、イノベーションを加速し、音楽生成 FM 開発ライフサイクルを加速し...</p>
-        <div class="chips">
-          <span class="chip">AWS AI Blog</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://aws.amazon.com/blogs/machine-learning/splash-music-transforms-music-generation-using-aws-trainium-and-amazon-sagemaker-hyperpod/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/splash-music-transforms-music-generation-using-aws-trainium-and-amazon-sagemaker-hyperpod/</a></div>
-    </article>
-
-    </section>
-
-
-    <section id="tools" class="tab-panel hidden">
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1o9u4cx/d_dan_bricklin_lessons_from_building_the_first/" target="_blank" rel="noopener">[D] Dan Bricklin: Lessons from Building the First Killer App | Learning from Machine Learning #14</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">パーソナル コンピューター革命を引き起こした最初の電子スプレッドシートである VisiCalc の共同作成者である Dan Bricklin との機械学習から学ぶの新しいエピソード。画期的なイノベーションに関する彼の洞察: イノベーションは段階的に改善されるのではなく、100 倍改善されなければなりません。彼の枠組みはシンプルです。何かが本当に重要かどうかを評価するときは、次のように考えてください。これは本当に優れている点は何ですか?以前は不可能だったことは何でしょうか?人々はどのようなトレードオフを受け入れるでしょうか?すぐに元が取れますか？  これらと同じ疑問がスプレッドシートを必然化し、...</p>
-        <div class="chips">
-          <span class="chip">Reddit MachineLearning</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">12時間前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1o9u4cx/d_dan_bricklin_lessons_from_building_the_first/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1o9u4cx/d_dan_bricklin_lessons_from_building_the_first/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1o9pnaz/p_beensminimax_103m_moe_llm_from_scratch/" target="_blank" rel="noopener">[P]: Beens-MiniMax: 103M MoE LLM from Scratch</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">私は、この非常に単純な MoE [ Beens-MiniMax ] を 5 日間でゼロから構築し、トレーニングしました。詳細については、こちらのレポートをご覧ください。  &amp;#32;によって送信されました &amp;#32;  /u/外部_Mushroom978 [リンク] &amp;#32; [コメント]</p>
-        <div class="chips">
-          <span class="chip">Reddit MachineLearning</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">16時間前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1o9pnaz/p_beensminimax_103m_moe_llm_from_scratch/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1o9pnaz/p_beensminimax_103m_moe_llm_from_scratch/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://machinelearningmastery.com/revolutionizing-mlops-enhanced-bigquery-ml-ui-for-seamless-model-creation-and-management/" target="_blank" rel="noopener">Revolutionizing MLOps: Enhanced BigQuery ML UI for Seamless Model Creation and Management</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">BigQuery ML (BQML) ユーザーにとって嬉しいニュースです。</p>
-        <div class="chips">
-          <span class="chip">Machine Learning Mastery</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://machinelearningmastery.com/revolutionizing-mlops-enhanced-bigquery-ml-ui-for-seamless-model-creation-and-management/" target="_blank" rel="noopener">https://machinelearningmastery.com/revolutionizing-mlops-enhanced-bigquery-ml-ui-for-seamless-model-creation-and-management/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://towardsdatascience.com/machine-learning-meets-panel-data-what-practitioners-need-to-know/" target="_blank" rel="noopener">Machine Learning Meets Panel Data: What Practitioners Need to Know</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">隠れたデータ漏洩による機械学習モデルのパフォーマンス、有用性、現実世界への適用可能性の過大評価を避ける方法
-    この投稿「機械学習とパネル データの出会い: 実務者が知っておくべきこと」は、最初に「データ サイエンスに向けて」に掲載されました。</p>
-        <div class="chips">
-          <span class="chip">Towards Data Science</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://towardsdatascience.com/machine-learning-meets-panel-data-what-practitioners-need-to-know/" target="_blank" rel="noopener">https://towardsdatascience.com/machine-learning-meets-panel-data-what-practitioners-need-to-know/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1o96m84/d_gcp_credits_vs_mac_book_pro_5_vs_nvidia_dgx/" target="_blank" rel="noopener">[D] GCP credits vs mac book Pro 5 vs Nvidia DGX?</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">こんにちは、私は本当に助けが必要なジレンマを抱えています。古い MacBook Pro が壊れたので、できるだけ早く新しい MacBook Pro が必要ですが、MacBook Pro 5 Pro/Max を購入するにはおそらく数週間か数か月かかるでしょう。 Nvidia DGX を数か月前に予約しており、購入する機会がありますが、購入できる最終日は明日です。 GCP クレジットを購入することもできます。来年の私の研究プロジェクトは、主にオープンソースとクローズドソースの LLM の推論であり、いくつかのマルチモーダル モデル (おそらく小規模な言語モデル、パラメーターの数は不明) を開発する...</p>
-        <div class="chips">
-          <span class="chip">Reddit MachineLearning</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1o96m84/d_gcp_credits_vs_mac_book_pro_5_vs_nvidia_dgx/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1o96m84/d_gcp_credits_vs_mac_book_pro_5_vs_nvidia_dgx/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://machinelearningmastery.com/the-complete-guide-to-vector-databases-for-machine-learning/" target="_blank" rel="noopener">The Complete Guide to Vector Databases for Machine Learning</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">ベクトル データベースは、ほとんどの最新の AI アプリケーションに不可欠なものになっています。</p>
-        <div class="chips">
-          <span class="chip">Machine Learning Mastery</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://machinelearningmastery.com/the-complete-guide-to-vector-databases-for-machine-learning/" target="_blank" rel="noopener">https://machinelearningmastery.com/the-complete-guide-to-vector-databases-for-machine-learning/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://techcrunch.com/2025/10/17/stellantis-teams-up-with-pony-ai-to-develop-robotaxis-in-europe/" target="_blank" rel="noopener">Stellantis teams up with Pony AI to develop robotaxis in Europe</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">この提携により、ポニーの自動運転ソフトウェアが、自動運転車をサポートする高度なセンサーを搭載したステランティスの中型電動バンプラットフォームに統合されます。</p>
-        <div class="chips">
-          <span class="chip">TechCrunch</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/17/stellantis-teams-up-with-pony-ai-to-develop-robotaxis-in-europe/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/17/stellantis-teams-up-with-pony-ai-to-develop-robotaxis-in-europe/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://towardsdatascience.com/how-i-used-machine-learning-to-predict-41-of-project-delays-before-they-happened/" target="_blank" rel="noopener">How I Used Machine Learning to Predict 41% of Project Delays Before They Happened</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">データ サイエンスはプロジェクト マネージャーがリスクを予測し、時間を節約するのにどのように役立つか
-    「機械学習を使用してプロジェクトの遅延の 41% を事前に予測した方法」という投稿は、最初に「データ サイエンスに向けて」に掲載されました。</p>
-        <div class="chips">
-          <span class="chip">Towards Data Science</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://towardsdatascience.com/how-i-used-machine-learning-to-predict-41-of-project-delays-before-they-happened/" target="_blank" rel="noopener">https://towardsdatascience.com/how-i-used-machine-learning-to-predict-41-of-project-delays-before-they-happened/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1o8ve9w/d_what_mlai_research_areas_are_actively_being/" target="_blank" rel="noopener">[D] What ML/AI research areas are actively being pursued in industry right now?</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">皆さん、こんにちは。今日、民間部門でどのような ML/AI 分野が活発な研究開発に焦点を当てているかを知りたいと思っています。私は現在データ サイエンティストとして働いており (2 年前に博士号を取得しました)、より研究に重点を置いた役割への移行を検討しています。私は自分の努力を導くために、どの分野が需要があるのか​​、またどのような知識があればこれらのポジションでより強力な候補者となるのかを理解しようとしています。私のバックグラウンドは古典的な ML と統計に強いので、NLP や CV についてはあまり得意ではありません (ある時点で両方の基礎を学んだことはありますが)。私はこれらの古典的な...</p>
-        <div class="chips">
-          <span class="chip">Reddit MachineLearning</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1o8ve9w/d_what_mlai_research_areas_are_actively_being/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1o8ve9w/d_what_mlai_research_areas_are_actively_being/</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1o8qy15/p_gotorch_deep_learning_framework_from_scratch/" target="_blank" rel="noopener">[P]: Go-torch: Deep Learning framework from scratch</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">私は、Torch のようなフレームワークの内部を学ぶために、この深層学習フレームワーク [ go-torch ] を最初から構築しました。この [ ブログ ] の投稿から学ぶことができます。  &amp;#32;によって送信されました &amp;#32;  /u/外部_Mushroom978 [リンク] &amp;#32; [コメント]</p>
-        <div class="chips">
-          <span class="chip">Reddit MachineLearning</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">1日前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1o8qy15/p_gotorch_deep_learning_framework_from_scratch/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1o8qy15/p_gotorch_deep_learning_framework_from_scratch/</a></div>
-    </article>
-
-    </section>
-
-
-    <section id="posts" class="tab-panel hidden">
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">Xポスト oikon48</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">Codex Meetup Tokyo #1 所感とスライド ・AIコードレビューはみんな幸せになる! ・新しいライブラリを使う時は、テンプレートプロジェクトの用意をするのがおすすめ ・人がボトルネックにどんどんなっていく ・Code environmentのDockerファイルはかなり柔軟で良さそう! ・CodeRabbit の名前 Hoopy https://t.co/qIAuWJlJyC</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">https://twitter.com/oikon48/status/1978090595815137416</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">Xポスト itm_aiplus</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">生成AI導入に必要なのは「嫌われる勇気」──“オレ流”で貫く、組織改革のススメ https://t.co/IEpfmZPByn</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">https://twitter.com/itm_aiplus/status/1977933650906984951</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">Xポスト dani_avila7</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">クロード コード テンプレートのダウンロード数が 10 万件に達しました 🎉 新しい分析が公開されました: - コンポーネントをダウンロードしている上位の国 - カテゴリ別の成長傾向 - 125 か国の 562 のコンポーネント エージェントがチャートを独占 データにより、コミュニティが実際に https://t.co/9PfREb1zNk をどのように使用しているかが明らかになり始めています</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">https://twitter.com/dani_avila7/status/1978167030659326031</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">Xポスト MinoDriven</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">AIで開発プロセス全体を爆速化する手法を、AWSさんで学んできたレポートです。 人間が全くコードを書かず、AIへの指示だけで動作可能なものを高速開発!僕も設計スペシャリストという立ち位置で参加してきました。 https://t.co/k11oYoEfiy</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">https://twitter.com/MinoDriven/status/1978021658096021548</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">Xポスト testingcatalog</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">速報 🚨: OpenAI は API で GPT-5 を利用した新しい検索モデルをリリースします。すでに OpenAI プラットフォームで利用可能です。 - gpt-5-search-api-2025-10-14 - gpt-5-search-api h/t @legit_api https://t.co/7lqhNywrDa</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">https://twitter.com/testingcatalog/status/1978153397552374168</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">Xポスト tmiyata25</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">Azureで構築したMCPサーバとCopilot Studioの連携方法について解説されたブログ、めちゃ分かりやすい https://t.co/HfWpczNGkq</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">https://twitter.com/tmiyata25/status/1977892647760208258</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">Xポスト yugen_matuni</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">10/21に開催される「Biz × Dify Meetup」に登壇します! やはり使ってもらってなんぼの生成AIで、「どうやったら真に使ってもらえるんだろう」みたいな現場に沿った内容をお話ししたり、共有できる場になると思うので、ぜひぜひビジネス側の方でもご参加いただけたらと思います! https://t.co/TP3uQhEoci</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">https://twitter.com/yugen_matuni/status/1978076652392374497</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">Xポスト NGO275</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">nanochatを動かしてみてる。LLMの勉強にはこれが一番早いと思う。本読むより手触り感があってイメージがつきやすい https://t.co/wWIZpQ08dO https://t.co/nx2Aw1XTGk</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">https://twitter.com/NGO275/status/1977972667153346920</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">Xポスト tetumemo</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">📝ワークフロー構築アプリ「Google Opalが優秀!」 1テーマを投げるだけで... - 調査用プロンプト - Deep Research結果 - タイトル案 - リード文案 - アジェンダ案 - 1万文字以上の記事 - メインとセクションサムネプロンプト&amp;画像 - Xポスト文案 これ全部出力できて無料利用! https://t.co/VWqoWjmS6M https://t.co/FF6xPpbEoB</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">https://twitter.com/tetumemo/status/1977853238583173421</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">Xポスト kosuke_agos</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">AIが、職場に「新たな格差」を生み出しているという、衝撃的な事実がアメリカのウォール・ストリート・ジャーナルによって報じられました。 優秀な社員ほどAIを使いこなし、生産性が爆発的に向上する一方で、他の従業員との差が拡大。 https://t.co/U81pS6BD73</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">https://twitter.com/kosuke_agos/status/1977953565550493978</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">Xポスト Majin_AppSheet</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">AIやDXの社内推進で大事なのは、 最新技術よりも「整合性」です。 どんなに便利なノーコードツールでアプリを作っても、 作った本人しか直せず、周りが再現できないなら、 それは新しい“属人化”にすぎません。 その仕組みが職場にちゃんと馴染んで、 誰もが「これなら安心だ」と思えること。 https://t.co/3mlltCQeAc</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">https://twitter.com/Majin_AppSheet/status/1977921584481603612</a></div>
-    </article>
-
-
-    <article class="card">
-      <div class="card-header">
-        <a class="card-title" href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">Xポスト shota7180</a>
-      </div>
-      <div class="card-body">
-        <p class="card-summary">n8n、AI Workflow Builderのベータ版を発表! プロンプトを入力すれば、ノード・ロジック・構造を自動で生成。 ワークフロー構築のスピードと柔軟性が飛躍的に向上します。 今週よりn8n Cloudユーザーに順次展開予定です。 https://t.co/WAjmIYdZHX</p>
-        <div class="chips">
-          <span class="chip">X / SNS (Enhanced)</span>
-          <span class="chip ghost">原文: 日本語</span>
-          <span class="chip ghost">0秒前</span>
-        </div>
-      </div>
-      <div class="card-footer">出典: <a href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">https://twitter.com/shota7180/status/1977872000895848658</a></div>
-    </article>
-
-    </section>
-
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const root = document.documentElement;
-        const themeToggle = document.getElementById('themeToggle');
-        const searchForm = document.querySelector('.filters-form');
-        const searchInput = document.getElementById('searchInput');
-        const searchTagsContainer = document.getElementById('searchTags');
-        const importanceSelect = document.getElementById('importanceFilter');
-        const freshnessSelect = document.getElementById('freshnessFilter');
-        const sortSelect = document.getElementById('sortBy');
-        const resultsRegion = document.getElementById('resultsCount');
-        const categoryButtons = Array.from(document.querySelectorAll('.category-button'));
-        const newsGrid = document.getElementById('newsGrid');
-        const legacyPanels = Array.from(document.querySelectorAll('.tab-panel'));
-
-        if (!newsGrid || legacyPanels.length === 0) {
-          return;
-        const labelByCategory = new Map([
-          ['all', 'すべて'],
-          ['business', 'ビジネスニュース'],
-          ['tools', 'ツールニュース'],
-          ['posts', 'SNS/論文ポスト']
-        ]);
-
-        const absoluteFormatter = new Intl.DateTimeFormat('ja-JP', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        });
-        const relativeFormatter = new Intl.RelativeTimeFormat('ja', { numeric: 'auto' });
-
-        const toRelative = (diffMs) => {
-          const units = [
-            { unit: 'year', value: 1000 * 60 * 60 * 24 * 365 },
-            { unit: 'month', value: 1000 * 60 * 60 * 24 * 30 },
-            { unit: 'week', value: 1000 * 60 * 60 * 24 * 7 },
-            { unit: 'day', value: 1000 * 60 * 60 * 24 },
-            { unit: 'hour', value: 1000 * 60 * 60 },
-            { unit: 'minute', value: 1000 * 60 },
-            { unit: 'second', value: 1000 }
-          ];
-
-          for (const { unit, value } of units) {
-            if (Math.abs(diffMs) >= value) {
-              return relativeFormatter.format(Math.round(diffMs / value), unit);
-          }
-
-          return relativeFormatter.format(0, 'second');
-        };
-
-        const getImportanceLevel = (score) => {
-          if (!Number.isFinite(score)) return 'medium';
-          if (score >= 7) return 'high';
-          if (score >= 4) return 'medium';
-          return 'low';
-        };
-
-        const buildThumbnailUrl = (href) => {
-          if (!href) return '';
-            const url = new URL(href);
-            return `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent(url.origin)}`;
-            return '';
-        };
-
-        const cardRecords = [];
-
-        legacyPanels.forEach((panel) => {
-          const category = panel.dataset.category || 'all';
-          const cards = Array.from(panel.querySelectorAll('.enhanced-card'));
-          cards.forEach((card) => {
-            const originalIndex = cardRecords.length;
-            const link = card.querySelector('a');
-            const href = link?.href || '';
-            const titleText = link?.textContent?.trim() || card.querySelector('.card-title')?.textContent?.trim() || '記事詳細';
-            const sourceText = card.dataset.source || card.querySelector('.card-source')?.textContent?.trim() || '';
-            const summaryText = card.querySelector('.card-summary')?.textContent?.trim() || '';
-            const score = Number.parseFloat(card.dataset.score || '0');
-            const importance = getImportanceLevel(score);
-
-            const rawTime = card.dataset.time || '';
-            let publishedMs = Number.NaN;
-            let absoluteText = '';
-            let relativeText = '';
-
-            if (rawTime) {
-              const parsed = Date.parse(rawTime);
-              if (!Number.isNaN(parsed)) {
-                publishedMs = parsed;
-                absoluteText = absoluteFormatter.format(new Date(parsed));
-                relativeText = toRelative(parsed - Date.now());
-              }
-
-            card.innerHTML = '';
-            card.className = 'news-card';
-            card.setAttribute('role', 'listitem');
-            card.dataset.category = category;
-            card.dataset.importance = importance;
-            card.dataset.score = Number.isFinite(score) ? String(score) : '0';
-            card.dataset.publishedMs = Number.isFinite(publishedMs) ? String(publishedMs) : '';
-            card.dataset.searchText = [titleText, summaryText, sourceText].join(' ').replace(/\s+/g, ' ').toLowerCase();
-            card.dataset.originalIndex = String(originalIndex);
-
-            const titleId = `news-card-title-${originalIndex + 1}`;
-            card.setAttribute('aria-labelledby', titleId);
-
-            const cardLink = document.createElement('a');
-            cardLink.className = 'news-card__link';
-            cardLink.href = href || '#';
-            cardLink.target = href ? '_blank' : '_self';
-            cardLink.rel = 'noopener';
-            cardLink.setAttribute('aria-label', `${titleText}の原文を開く`);
-
-            const container = document.createElement('div');
-            container.className = 'news-card__container';
-
-            const media = document.createElement('figure');
-            media.className = 'news-card__media';
-            const thumbnailUrl = buildThumbnailUrl(href);
-            if (thumbnailUrl) {
-              const img = document.createElement('img');
-              img.src = thumbnailUrl;
-              img.loading = 'lazy';
-              img.decoding = 'async';
-              img.alt = `${sourceText || titleText}のサムネイル`;
-              media.appendChild(img);
-            }
-            const caption = document.createElement('figcaption');
-            caption.textContent = sourceText || '情報源';
-            media.appendChild(caption);
-
-            const body = document.createElement('div');
-            body.className = 'news-card__body';
-
-            const header = document.createElement('header');
-            header.className = 'news-card__header';
-
-            if (importance) {
-              const badge = document.createElement('span');
-              badge.className = `news-card__badge badge-${importance}`;
-              badge.textContent = importance === 'high' ? '重要度 高' : importance === 'medium' ? '重要度 中' : '重要度 低';
-              header.appendChild(badge);
-            }
-
-            const title = document.createElement('h3');
-            title.className = 'news-card__title';
-            title.id = titleId;
-            title.textContent = titleText;
-            header.appendChild(title);
-
-            body.appendChild(header);
-
-            if (summaryText) {
-              const summary = document.createElement('p');
-              summary.className = 'news-card__summary';
-              summary.textContent = summaryText;
-              body.appendChild(summary);
-            }
-
-            const meta = document.createElement('div');
-            meta.className = 'news-card__meta';
-
-            if (sourceText) {
-              const source = document.createElement('span');
-              source.className = 'news-card__meta-item';
-              source.textContent = sourceText;
-              meta.appendChild(source);
-            }
-
-            if (Number.isFinite(score)) {
-              const scoreEl = document.createElement('span');
-              scoreEl.className = 'news-card__meta-item';
-              scoreEl.textContent = `スコア: ${score.toFixed(1)}`;
-              meta.appendChild(scoreEl);
-            }
-
-            if (Number.isFinite(publishedMs)) {
-              const timeItem = document.createElement('time');
-              timeItem.className = 'news-card__meta-item';
-              timeItem.dateTime = new Date(publishedMs).toISOString();
-              timeItem.textContent = `${absoluteText} · ${relativeText}`;
-              timeItem.setAttribute('aria-label', `${absoluteText}（${relativeText}）`);
-              meta.appendChild(timeItem);
-            }
-
-            body.appendChild(meta);
-
-            const cta = document.createElement('span');
-            cta.className = 'news-card__cta';
-            cta.textContent = '原文リンクを開く';
-            body.appendChild(cta);
-
-            container.append(media, body);
-            cardLink.appendChild(container);
-            card.appendChild(cardLink);
-
-            if (!thumbnailUrl) {
-              card.classList.add('news-card--no-thumbnail');
-            }
-
-            newsGrid.appendChild(card);
-
-            cardRecords.push({
-              element: card,
-              category,
-              score,
-              importance,
-              publishedMs,
-              searchText: card.dataset.searchText,
-              originalIndex
-            });
-          });
-        });
-
-        legacyPanels.forEach((panel) => panel.remove());
-
-        const state = {
-          category: 'all',
-          keywords: [],
-          currentInput: '',
-          sort: sortSelect?.value || 'importance'
-        };
-
-        const applyTheme = (theme) => {
-          const next = theme === 'dark' ? 'dark' : 'light';
-          root.dataset.theme = next;
-          if (themeToggle) {
-            themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
-            const icon = themeToggle.querySelector('.toggle-icon');
-            const label = themeToggle.querySelector('.toggle-label');
-            if (icon) icon.textContent = next === 'dark' ? '🌙' : '🌞';
-            if (label) label.textContent = next === 'dark' ? 'ダーク' : 'ライト';
-        };
-
-        const storedTheme = (() => {
-          try {
-            return localStorage.getItem('daily-ai-news-theme');
-          } catch (error) {
-            return null;
-          }
-        })();
-
-        if (storedTheme) {
-          applyTheme(storedTheme);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          applyTheme('dark');
-
-        const handleThemeToggle = () => {
-          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-          applyTheme(nextTheme);
-          try {
-            localStorage.setItem('daily-ai-news-theme', nextTheme);
-          } catch (error) {
-            // ignore
-        };
-        themeToggle?.addEventListener('click', handleThemeToggle);
-        themeToggle?.addEventListener('keydown', (event) => {
-          if (event.key === ' ' || event.key === 'Enter') {
-            event.preventDefault();
-            handleThemeToggle();
-        });
-
-        const renderTags = () => {
-          if (!searchTagsContainer) return;
-          searchTagsContainer.textContent = '';
-          if (state.keywords.length === 0) {
-            const placeholder = document.createElement('span');
-            placeholder.className = 'search-tags__placeholder';
-            placeholder.setAttribute('role', 'listitem');
-            placeholder.textContent = 'キーワードを追加するとタグとして表示されます';
-            searchTagsContainer.appendChild(placeholder);
-            return;
-
-          state.keywords.forEach((keyword, index) => {
-            const tag = document.createElement('span');
-            tag.className = 'search-tag';
-            tag.setAttribute('role', 'listitem');
-            tag.textContent = keyword;
-
-            const removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.className = 'search-tag__remove';
-            removeButton.setAttribute('aria-label', `検索タグ「${keyword}」を削除`);
-            removeButton.innerHTML = '<span aria-hidden="true">×</span>';
-            removeButton.addEventListener('click', () => {
-              state.keywords.splice(index, 1);
-              renderTags();
-              applyFilters();
-            });
-
-            removeButton.addEventListener('keydown', (event) => {
-              visible = false;
-            }
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                state.keywords.splice(index, 1);
-                renderTags();
-                applyFilters();
-              }
-            });
-
-            tag.appendChild(removeButton);
-            searchTagsContainer.appendChild(tag);
-          });
-        };
-
-        const applyFilters = () => {
-          const activeKeywords = [...state.keywords, state.currentInput].filter(Boolean);
-          const importanceFilter = importanceSelect?.value || 'all';
-          const freshnessFilter = freshnessSelect?.value || 'all';
-          const now = Date.now();
-
-          let visibleCount = 0;
-
-          cardRecords.forEach((record) => {
-            const { element } = record;
-            let visible = true;
-
-            if (state.category !== 'all' && record.category !== state.category) {
-
-            if (visible && importanceFilter !== 'all') {
-              visible = record.importance === importanceFilter;
-            }
-
-            if (visible && freshnessFilter !== 'all') {
-              if (Number.isFinite(record.publishedMs)) {
-                const hours = (now - record.publishedMs) / 36e5;
-                if (freshnessFilter === '24h' && hours > 24) visible = false;
-                if (freshnessFilter === '72h' && hours > 72) visible = false;
-                if (freshnessFilter === '168h' && hours > 168) visible = false;
-              } else {
-                visible = false;
-              }
-            }
-
-            if (visible && activeKeywords.length) {
-              const text = record.searchText;
-              visible = activeKeywords.every((keyword) => text.includes(keyword));
-            }
-
-            element.hidden = !visible;
-            element.classList.toggle('is-hidden', !visible);
-            element.setAttribute('aria-hidden', String(!visible));
-
-            if (visible) {
-              visibleCount += 1;
-            }
-          });
-
-          const total = state.category === 'all' ? cardRecords.length : cardRecords.filter((record) => record.category === state.category).length;
-
-          if (resultsRegion) {
-            const label = labelByCategory.get(state.category) || 'すべて';
-            resultsRegion.textContent = `${label}：${visibleCount}件表示中（全${total}件）`;
-        };
-
-        const sortCards = () => {
-          const sortBy = state.sort;
-          const sorted = [...cardRecords].sort((a, b) => {
-            if (sortBy === 'importance') {
-              return (Number.isFinite(b.score) ? b.score : -Infinity) - (Number.isFinite(a.score) ? a.score : -Infinity);
-            }
-            if (sortBy === 'freshness') {
-              return (Number.isFinite(b.publishedMs) ? b.publishedMs : -Infinity) - (Number.isFinite(a.publishedMs) ? a.publishedMs : -Infinity);
-            }
-            if (sortBy === 'time') {
-              return (Number.isFinite(a.publishedMs) ? a.publishedMs : Infinity) - (Number.isFinite(b.publishedMs) ? b.publishedMs : Infinity);
-            }
-            return a.originalIndex - b.originalIndex;
-          });
-
-          sorted.forEach((record) => {
-            newsGrid.appendChild(record.element);
-          });
-        };
-
-        const applySortAndFilter = () => {
-          sortCards();
-          applyFilters();
-        };
-
-        categoryButtons.forEach((button) => {
-          button.addEventListener('click', () => {
-            const category = button.dataset.category || 'all';
-            state.category = category;
-            categoryButtons.forEach((target) => {
-              const isActive = target === button;
-              target.classList.toggle('is-active', isActive);
-              target.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-            });
-            applySortAndFilter();
-          });
-
-          button.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              button.click();
-            }
-          });
-
-        searchForm?.addEventListener('submit', (event) => {
-          event.preventDefault();
-          const value = searchInput?.value.trim();
-          if (!value) return;
-          const normalized = value.toLowerCase();
-          if (!state.keywords.includes(normalized)) {
-            state.keywords.push(normalized);
-          if (searchInput) {
-            searchInput.value = '';
-          state.currentInput = '';
-          renderTags();
-          applySortAndFilter();
-
-        searchInput?.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            searchForm?.dispatchEvent(new Event('submit', { cancelable: true }));
-          }
-          if (event.key === 'Backspace' && !searchInput.value && state.keywords.length) {
-            state.keywords.pop();
-            renderTags();
-            applySortAndFilter();
-
-        searchInput?.addEventListener('input', () => {
-          state.currentInput = (searchInput.value || '').trim().toLowerCase();
-          applyFilters();
-        importanceSelect?.addEventListener('change', applyFilters);
-        freshnessSelect?.addEventListener('change', applyFilters);
-
-        sortSelect?.addEventListener('change', (event) => {
-          state.sort = event.target.value;
-          applySortAndFilter();
-        });
-
-        applySortAndFilter();
-        renderTags();
-    </script>
-
-  new DashboardUI();
-        return parseFloat(b.dataset.score) - parseFloat(a.dataset.score);
-      } else if (sortBy === 'time') {
-        const timeA = new Date(a.dataset.time || 0);
-        const timeB = new Date(b.dataset.time || 0);
-        return timeB - timeA;
-      } else if (sortBy === 'source') {
-        return a.dataset.source.localeCompare(b.dataset.source);
-      }
-      return 0;
-    });
-    
-    // DOM再構築
-    cards.forEach(card => container.appendChild(card));
-    
-    // フィルター再適用
-    this.applyFilters();
-  }
-}
-
-// 初期化
-document.addEventListener('DOMContentLoaded', () => {
-  const controller = new TabController();
-
-  // タブのスワイプ切替（モバイル最適化）
-  const tabsOrder = ['business','tools','posts'];
-  const getActiveTab = () => document.querySelector('.tab-button.active')?.dataset.tab || 'business';
-  const switchRelative = (dir) => {
-    const current = getActiveTab();
-    const idx = tabsOrder.indexOf(current);
-    const next = tabsOrder[Math.min(Math.max(idx + dir, 0), tabsOrder.length - 1)];
-    if (next !== current) {
-      controller.switchTab(next);
-      try { document.querySelector(`[data-tab="${next}"]`)?.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'}); } catch(e) {}
-    }
-  };
-
-  const area = document.querySelector('main') || document.body;
-  let startX = 0, startY = 0;
-  const threshold = 50, restraint = 80;
-  area.addEventListener('touchstart', (e) => {
-    const t = e.changedTouches[0]; startX = t.pageX; startY = t.pageY;
-  }, {passive:true});
-  area.addEventListener('touchend', (e) => {
-    const t = e.changedTouches[0];
-    const dx = t.pageX - startX; const dy = t.pageY - startY;
-    if (Math.abs(dx) > threshold && Math.abs(dy) < restraint) {
-      if (dx < 0) switchRelative(1); else switchRelative(-1);
-    }
-  }, {passive:true});
-});
-</script>
+    <aside class="additional-info">
+      <section id="aboutSection" class="info-section" aria-labelledby="aboutHeading">
+        <h2 id="aboutHeading">サイトについて</h2>
+        <p>
+          Daily AI News は、エンジニア・研究者・ビジネスリーダーが最新情報を効率良くチェックできるように設計した非公式ダッシュボードです。
+          重要度スコア、鮮度指標、ソース信頼度を組み合わせ、注目トピックを優先的に表示します。
+        </p>
+        <p class="info-highlight">
+          収集した主な情報源（抜粋）：AI Business News、AWS AI Blog、MIT Technology Review AI、Machine Learning Mastery、Reddit AI、Reddit MachineLearning、TechCrunch、TechCrunch Japan、The Verge、Towards Data Science
+        </p>
+      </section>
+
+      <section id="contactSection" class="info-section" aria-labelledby="contactHeading">
+        <h2 id="contactHeading">お問い合わせ</h2>
+        <p>改善要望やフィード追加のご相談は、<a href="mailto:awano27@gmail.com">awano27@gmail.com</a> までご連絡ください。</p>
+        <p>GitHub Pages を利用し、テーマ切り替え・キーボード操作・スクリーンリーダーに配慮したアクセシブルな構成を目指しています。</p>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 Daily AI News. 情報は自動収集のため正確性を保証するものではありません。</small>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -1188,164 +2286,49 @@ document.addEventListener('DOMContentLoaded', () => {
       const searchForm = document.querySelector('.filters-form');
       const searchInput = document.getElementById('searchInput');
       const searchTagsContainer = document.getElementById('searchTags');
+      const categoryButtons = Array.from(document.querySelectorAll('.category-switch__button'));
       const importanceSelect = document.getElementById('importanceFilter');
       const freshnessSelect = document.getElementById('freshnessFilter');
       const sortSelect = document.getElementById('sortBy');
+      const clearButton = document.getElementById('clearFilters');
       const resultsRegion = document.getElementById('resultsCount');
-      const categoryButtons = Array.from(document.querySelectorAll('.category-button'));
       const newsGrid = document.getElementById('newsGrid');
-      const legacyPanels = Array.from(document.querySelectorAll('.tab-panel'));
 
-      if (!newsGrid || legacyPanels.length === 0) {
-        return;
-      }
-
+      const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
       const labelByCategory = new Map([
         ['all', 'すべて'],
-        ['business', 'ビジネスニュース'],
-        ['tools', 'ツールニュース'],
-        ['posts', 'SNS/論文ポスト']
+        ['business', 'ビジネス'],
+        ['tools', 'ツール'],
+        ['posts', 'SNS / 論文']
       ]);
 
-      [importanceSelect, freshnessSelect, sortSelect]
-        .filter(Boolean)
-        .forEach((select) => {
-          select.disabled = true;
-          select.title = 'このフィルターは現在利用できません';
-        });
+      const records = cards.map((card, index) => {
+        const textContent = (card.textContent || '').toLowerCase();
+        const tags = (card.dataset.tags || '')
+          .split(',')
+          .map(tag => tag.trim())
+          .filter(Boolean);
 
-      const buildThumbnailUrl = (href) => {
-        if (!href) {
-          return '';
-        }
-        try {
-          const url = new URL(href);
-          return `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent(url.origin)}`;
-        } catch (error) {
-          return '';
-        }
-      };
-
-      const records = [];
-
-      legacyPanels.forEach((panel) => {
-        const category = (panel.dataset.category || panel.id || 'all').toLowerCase();
-        panel.querySelectorAll('.enhanced-card, .card').forEach((legacyCard) => {
-          const link = legacyCard.querySelector('a');
-          const href = link?.href?.trim() || '';
-          const titleText = link?.textContent?.trim()
-            || legacyCard.querySelector('.card-title')?.textContent?.trim()
-            || '記事詳細';
-          const summaryText = legacyCard.querySelector('.card-summary')?.textContent?.trim() || '';
-          const chips = Array.from(legacyCard.querySelectorAll('.chips .chip'));
-          const sourceText = legacyCard.dataset.source
-            || chips[0]?.textContent?.trim()
-            || legacyCard.querySelector('.card-source')?.textContent?.trim()
-            || '';
-
-          const thumbnailUrl = buildThumbnailUrl(href);
-
-          legacyCard.innerHTML = '';
-          legacyCard.className = 'news-card';
-          legacyCard.setAttribute('role', 'listitem');
-          legacyCard.dataset.category = category;
-          legacyCard.dataset.importance = 'medium';
-          legacyCard.dataset.score = '';
-          legacyCard.dataset.publishedMs = '';
-          legacyCard.dataset.searchText = [titleText, summaryText, sourceText]
-            .join(' ')
-            .replace(/\s+/g, ' ')
-            .toLowerCase();
-
-          const linkEl = document.createElement('a');
-          linkEl.className = 'news-card__link';
-          linkEl.href = href || '#';
-          linkEl.target = href ? '_blank' : '_self';
-          linkEl.rel = href ? 'noopener' : '';
-          linkEl.setAttribute('aria-label', `${titleText}の原文を開く`);
-
-          const container = document.createElement('div');
-          container.className = 'news-card__container';
-
-          const media = document.createElement('figure');
-          media.className = 'news-card__media';
-          if (thumbnailUrl) {
-            const img = document.createElement('img');
-            img.src = thumbnailUrl;
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            img.alt = `${sourceText || titleText}のサムネイル`;
-            media.appendChild(img);
-          }
-          const caption = document.createElement('figcaption');
-          caption.textContent = sourceText || '情報源';
-          media.appendChild(caption);
-
-          const body = document.createElement('div');
-          body.className = 'news-card__body';
-
-          const header = document.createElement('header');
-          header.className = 'news-card__header';
-
-          const badge = document.createElement('span');
-          badge.className = 'news-card__badge badge-medium';
-          badge.textContent = '重要度 中';
-          header.appendChild(badge);
-
-          const titleEl = document.createElement('h3');
-          titleEl.className = 'news-card__title';
-          titleEl.id = `news-card-title-${records.length + 1}`;
-          titleEl.textContent = titleText;
-          header.appendChild(titleEl);
-
-          body.appendChild(header);
-
-          if (summaryText) {
-            const summaryEl = document.createElement('p');
-            summaryEl.className = 'news-card__summary';
-            summaryEl.textContent = summaryText;
-            body.appendChild(summaryEl);
-          }
-
-          const meta = document.createElement('div');
-          meta.className = 'news-card__meta';
-
-          if (sourceText) {
-            const sourceEl = document.createElement('span');
-            sourceEl.className = 'news-card__meta-item';
-            sourceEl.textContent = sourceText;
-            meta.appendChild(sourceEl);
-          }
-
-          body.appendChild(meta);
-
-          const cta = document.createElement('span');
-          cta.className = 'news-card__cta';
-          cta.textContent = '原文リンクを開く';
-          body.appendChild(cta);
-
-          container.append(media, body);
-          linkEl.appendChild(container);
-          legacyCard.appendChild(linkEl);
-
-          if (!thumbnailUrl) {
-            legacyCard.classList.add('news-card--no-thumbnail');
-          }
-
-          newsGrid.appendChild(legacyCard);
-
-          records.push({
-            element: legacyCard,
-            category,
-            searchText: legacyCard.dataset.searchText
-          });
-        });
-
-        panel.remove();
+        return {
+          element: card,
+          baseIndex: index,
+          category: (card.dataset.category || 'all'),
+          importance: (card.dataset.importance || 'medium'),
+          score: Number(card.dataset.score || '0'),
+          freshness: Number(card.dataset.freshness || '0'),
+          freshnessBucket: (card.dataset.freshnessBucket || 'all'),
+          published: Number(card.dataset.publishedMs || '0'),
+          source: (card.dataset.source || '').toLowerCase(),
+          tags,
+          text: `${textContent} ${tags.join(' ').toLowerCase()}`
+        };
       });
 
       const state = {
         category: 'all',
+        importance: 'all',
+        freshness: 'all',
+        sort: 'importance',
         keywords: [],
         currentInput: ''
       };
@@ -1353,53 +2336,48 @@ document.addEventListener('DOMContentLoaded', () => {
       const applyTheme = (theme) => {
         const next = theme === 'dark' ? 'dark' : 'light';
         root.dataset.theme = next;
-        if (themeToggle) {
-          themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
-          const icon = themeToggle.querySelector('.toggle-icon');
-          const label = themeToggle.querySelector('.toggle-label');
-          if (icon) icon.textContent = next === 'dark' ? '🌙' : '🌞';
-          if (label) label.textContent = next === 'dark' ? 'ダーク' : 'ライト';
-        }
+        const isDark = next === 'dark';
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        const icon = themeToggle.querySelector('.theme-toggle__icon');
+        const label = themeToggle.querySelector('.theme-toggle__label');
+        if (icon) icon.textContent = isDark ? '🌙' : '🌞';
+        if (label) label.textContent = isDark ? 'ダーク' : 'ライト';
       };
 
+      const storageKey = 'daily-ai-news-theme';
       try {
-        const storedTheme = localStorage.getItem('daily-ai-news-theme');
+        const storedTheme = localStorage.getItem(storageKey);
         if (storedTheme) {
           applyTheme(storedTheme);
         } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
           applyTheme('dark');
+        } else {
+          applyTheme('light');
         }
       } catch (error) {
-        // ignore storage errors
+        applyTheme('light');
       }
 
-      if (themeToggle) {
-        const handleThemeToggle = () => {
-          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-          applyTheme(nextTheme);
-          try {
-            localStorage.setItem('daily-ai-news-theme', nextTheme);
-          } catch (error) {
-            // ignore storage errors
-          }
-        };
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        try {
+          localStorage.setItem(storageKey, nextTheme);
+        } catch (error) {
+          /* ignore */
+        }
+      });
 
-        themeToggle.addEventListener('click', handleThemeToggle);
-        themeToggle.addEventListener('keydown', (event) => {
-          if (event.key === ' ' || event.key === 'Enter') {
-            event.preventDefault();
-            handleThemeToggle();
-          }
+      const renderCategoryButtons = () => {
+        categoryButtons.forEach((button) => {
+          const isActive = button.dataset.category === state.category;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
         });
-      }
+      };
 
       const renderTags = () => {
-        if (!searchTagsContainer) {
-          return;
-        }
-
         searchTagsContainer.textContent = '';
-
         if (state.keywords.length === 0) {
           const placeholder = document.createElement('span');
           placeholder.className = 'search-tags__placeholder';
@@ -1420,20 +2398,10 @@ document.addEventListener('DOMContentLoaded', () => {
           removeButton.className = 'search-tag__remove';
           removeButton.setAttribute('aria-label', `検索タグ「${keyword}」を削除`);
           removeButton.innerHTML = '<span aria-hidden="true">×</span>';
-
           removeButton.addEventListener('click', () => {
             state.keywords.splice(index, 1);
             renderTags();
-            applyFilters();
-          });
-
-          removeButton.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              state.keywords.splice(index, 1);
-              renderTags();
-              applyFilters();
-            }
+            applySortAndFilter(false);
           });
 
           tag.appendChild(removeButton);
@@ -1441,25 +2409,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       };
 
+      const sortRecords = () => {
+        const sorted = [...records];
+        switch (state.sort) {
+          case 'freshness':
+            sorted.sort((a, b) => b.freshness - a.freshness || b.published - a.published || a.baseIndex - b.baseIndex);
+            break;
+          case 'time':
+            sorted.sort((a, b) => b.published - a.published || b.score - a.score || a.baseIndex - b.baseIndex);
+            break;
+          case 'source':
+            sorted.sort((a, b) => a.source.localeCompare(b.source) || a.baseIndex - b.baseIndex);
+            break;
+          case 'original':
+            sorted.sort((a, b) => a.baseIndex - b.baseIndex);
+            break;
+          case 'importance':
+          default:
+            sorted.sort((a, b) => b.score - a.score || b.freshness - a.freshness || a.baseIndex - b.baseIndex);
+            break;
+        }
+        sorted.forEach((record) => newsGrid.appendChild(record.element));
+      };
+
       const applyFilters = () => {
-        const activeKeywords = state.currentInput
-          ? [...state.keywords, state.currentInput]
-          : [...state.keywords];
+        const keywordsLower = state.keywords.map(keyword => keyword.toLowerCase());
+        const extraKeywords = state.currentInput
+          ? state.currentInput.split(/\s+/).map(word => word.trim()).filter(Boolean)
+          : [];
+        const allKeywords = keywordsLower.concat(extraKeywords.map(word => word.toLowerCase()));
 
         let visibleCount = 0;
-        const totalInCategory = state.category === 'all'
-          ? records.length
-          : records.filter((record) => record.category === state.category).length;
+        let totalInCategory = 0;
 
         records.forEach((record) => {
-          let visible = true;
-
-          if (state.category !== 'all' && record.category !== state.category) {
-            visible = false;
+          const matchesCategory = state.category === 'all' || record.category === state.category;
+          if (matchesCategory) {
+            totalInCategory += 1;
           }
 
-          if (visible && activeKeywords.length) {
-            visible = activeKeywords.every((keyword) => record.searchText.includes(keyword));
+          let visible = matchesCategory;
+
+          if (visible && state.importance !== 'all') {
+            visible = record.importance === state.importance;
+          }
+
+          if (visible && state.freshness !== 'all') {
+            visible = record.freshnessBucket === state.freshness;
+          }
+
+          if (visible && allKeywords.length) {
+            visible = allKeywords.every((keyword) => {
+              if (!keyword) return true;
+              return record.text.includes(keyword);
+            });
           }
 
           record.element.hidden = !visible;
@@ -1471,21 +2474,45 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        if (resultsRegion) {
-          const label = labelByCategory.get(state.category) || 'すべて';
-          resultsRegion.textContent = `${label}：${visibleCount}件表示中（全${totalInCategory}件）`;
+        const label = labelByCategory.get(state.category) || 'すべて';
+        resultsRegion.textContent = `${label}：${visibleCount}件表示（全${totalInCategory}件）`;
+        clearButton.disabled = (
+          state.category === 'all' &&
+          state.importance === 'all' &&
+          state.freshness === 'all' &&
+          state.sort === 'importance' &&
+          state.keywords.length === 0 &&
+          !state.currentInput
+        );
+      };
+
+      const applySortAndFilter = (shouldSort = true) => {
+        if (shouldSort) {
+          sortRecords();
+        }
+        applyFilters();
+      };
+
+      const addKeyword = (value) => {
+        const trimmed = value.trim();
+        if (!trimmed) return;
+        const normalized = trimmed.toLowerCase();
+        const duplicated = state.keywords.some((keyword) => keyword.toLowerCase() === normalized);
+        if (!duplicated) {
+          state.keywords.push(trimmed);
+          renderTags();
+          applySortAndFilter(false);
         }
       };
 
       categoryButtons.forEach((button) => {
         button.addEventListener('click', () => {
-          state.category = button.dataset.category || 'all';
-          categoryButtons.forEach((target) => {
-            const isActive = target === button;
-            target.classList.toggle('is-active', isActive);
-            target.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-          });
-          applyFilters();
+          const category = button.dataset.category || 'all';
+          if (state.category !== category) {
+            state.category = category;
+            renderCategoryButtons();
+            applySortAndFilter(false);
+          }
         });
 
         button.addEventListener('keydown', (event) => {
@@ -1496,53 +2523,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      if (searchForm) {
-        searchForm.addEventListener('submit', (event) => {
+      importanceSelect.addEventListener('change', () => {
+        state.importance = importanceSelect.value;
+        applySortAndFilter(false);
+      });
+
+      freshnessSelect.addEventListener('change', () => {
+        state.freshness = freshnessSelect.value;
+        applySortAndFilter(false);
+      });
+
+      sortSelect.addEventListener('change', () => {
+        state.sort = sortSelect.value || 'importance';
+        applySortAndFilter(true);
+      });
+
+      searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = searchInput.value;
+        addKeyword(value);
+        searchInput.value = '';
+        state.currentInput = '';
+        applySortAndFilter(false);
+      });
+
+      searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
           event.preventDefault();
-          const value = searchInput?.value.trim();
-          if (!value) {
-            return;
-          }
-
-          const normalized = value.toLowerCase();
-          if (!state.keywords.includes(normalized)) {
-            state.keywords.push(normalized);
-          }
-
-          if (searchInput) {
-            searchInput.value = '';
-          }
-
+          addKeyword(searchInput.value);
+          searchInput.value = '';
           state.currentInput = '';
-          renderTags();
-          applyFilters();
-        });
-      }
+          applySortAndFilter(false);
+        }
+      });
 
-      if (searchInput) {
-        searchInput.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            searchForm?.dispatchEvent(new Event('submit', { cancelable: true }));
-          }
+      searchInput.addEventListener('input', () => {
+        state.currentInput = searchInput.value.trim().toLowerCase();
+        applySortAndFilter(false);
+      });
 
-          if (event.key === 'Backspace' && !searchInput.value && state.keywords.length) {
-            state.keywords.pop();
-            renderTags();
-            applyFilters();
-          }
-        });
+      clearButton.addEventListener('click', () => {
+        state.category = 'all';
+        state.importance = 'all';
+        state.freshness = 'all';
+        state.sort = 'importance';
+        state.keywords = [];
+        state.currentInput = '';
 
-        searchInput.addEventListener('input', () => {
-          state.currentInput = (searchInput.value || '').trim().toLowerCase();
-          applyFilters();
-        });
-      }
+        categoryButtons[0].focus();
+        renderCategoryButtons();
 
-      applyFilters();
+        importanceSelect.value = 'all';
+        freshnessSelect.value = 'all';
+        sortSelect.value = 'importance';
+        searchInput.value = '';
+        renderTags();
+        applySortAndFilter(true);
+      });
+
+      renderCategoryButtons();
       renderTags();
+      applySortAndFilter(true);
+
+      if (window.matchMedia) {
+        const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addEventListener('change', (event) => {
+          if (!localStorage.getItem(storageKey)) {
+            applyTheme(event.matches ? 'dark' : 'light');
+          }
+        });
+      }
     });
   </script>
-
 </body>
 </html>

@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AI News Archive - Interactive Rankings</title>
+  <meta name="description" content="過去のAIニュースランキングを閲覧・検索できるインタラクティブアーカイブ"/>
+  <meta name="color-scheme" content="light dark"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    /* Archive-specific styles */
+    .archive-header {
+      background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 2rem;
+    }
+
+    .archive-header__inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .archive-header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-family: var(--font-heading);
+    }
+
+    .archive-header p {
+      margin: 0;
+      opacity: 0.95;
+      font-size: 1.05rem;
+    }
+
+    .controls-bar {
+      max-width: var(--content-width);
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1 1 300px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 0.95rem;
+      transition: border-color var(--transition);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-focus);
+    }
+
+    .search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .filter-btn,
+    .sort-btn {
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-btn:hover,
+    .sort-btn:hover {
+      border-color: var(--color-accent);
+      background: var(--color-surface-alt);
+    }
+
+    .filter-btn.active {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+
+    .sort-select {
+      padding: 0.6rem 2rem 0.6rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234b5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+    }
+
+    .stats-bar {
+      max-width: var(--content-width);
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-card__value {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-card__label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .archive-grid {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .archive-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-border);
+    }
+
+    .archive-card:hover {
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-2px);
+    }
+
+    .archive-card__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .archive-card__rank {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      min-width: 3rem;
+      text-align: center;
+    }
+
+    .archive-card__content {
+      flex: 1;
+    }
+
+    .archive-card__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+      line-height: 1.4;
+    }
+
+    .archive-card__title a {
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .archive-card__title a:hover {
+      color: var(--color-accent-strong);
+    }
+
+    .archive-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .badge--high {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      color: white;
+    }
+
+    .badge--medium {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+    }
+
+    .badge--category {
+      background: var(--color-surface-alt);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .archive-card__summary {
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0 0 1rem;
+    }
+
+    .archive-card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .archive-card__score {
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    .no-results {
+      max-width: var(--content-width);
+      margin: 4rem auto;
+      padding: 3rem 1rem;
+      text-align: center;
+      color: var(--color-text-muted);
+    }
+
+    .no-results__icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .no-results h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .back-link {
+      max-width: var(--content-width);
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+
+    .back-link a:hover {
+      background: var(--color-surface-alt);
+      border-color: var(--color-accent);
+    }
+
+    .theme-toggle-archive {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-soft);
+      z-index: 100;
+      transition: all var(--transition);
+    }
+
+    .theme-toggle-archive:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        flex: 1 1 100%;
+      }
+
+      .filter-group {
+        justify-content: center;
+      }
+
+      .archive-card__header {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .archive-card__rank {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="themeToggle" class="theme-toggle-archive" type="button" aria-label="テーマを切り替え">
+    <span class="theme-icon">🌞</span>
+    <span class="theme-label">ライト</span>
+  </button>
+
+  <header class="archive-header">
+    <div class="archive-header__inner">
+      <h1>📊 AI News Interactive Archive</h1>
+      <p>過去のAIニュースランキングをインタラクティブに閲覧・検索</p>
+    </div>
+  </header>
+
+  <div class="back-link">
+    <a href="../index.html">← Daily AI News ホームに戻る</a>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-card">
+      <span class="stat-card__value" id="totalCount">0</span>
+      <span class="stat-card__label">総記事数</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card__value" id="filteredCount">0</span>
+      <span class="stat-card__label">表示中</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card__value" id="highImportance">0</span>
+      <span class="stat-card__label">重要度 高</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-card__value" id="avgScore">0</span>
+      <span class="stat-card__label">平均スコア</span>
+    </div>
+  </div>
+
+  <div class="controls-bar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="タイトルや説明文で検索..." aria-label="検索">
+    </div>
+
+    <div class="filter-group">
+      <button class="filter-btn active" data-category="all">すべて</button>
+      <button class="filter-btn" data-category="business">ビジネス</button>
+      <button class="filter-btn" data-category="tools">ツール</button>
+      <button class="filter-btn" data-category="posts">投稿・論文</button>
+    </div>
+
+    <select class="sort-select" id="sortSelect" aria-label="並び替え">
+      <option value="rank">ランク順</option>
+      <option value="score-desc">スコア: 高い順</option>
+      <option value="score-asc">スコア: 低い順</option>
+      <option value="date-desc">日付: 新しい順</option>
+      <option value="date-asc">日付: 古い順</option>
+    </select>
+  </div>
+
+  <div class="archive-grid" id="archiveGrid">
+    <!-- Cards will be dynamically inserted here -->
+  </div>
+
+  <div class="no-results" id="noResults" style="display: none;">
+    <div class="no-results__icon">🔍</div>
+    <h2>該当する記事が見つかりませんでした</h2>
+    <p>検索条件やフィルターを変更してお試しください</p>
+  </div>
+
+  <script>
+    // Sample data - In production, this would be fetched from an API or data file
+    const newsData = [
+      {
+        rank: 1,
+        title: "Codev lets enterprises avoid vibe coding hangovers with a team of agents that generate and document code",
+        url: "https://venturebeat.com/ai/codev-lets-enterprises-avoid-vibe-coding-hangovers-with-a-team-of-agents",
+        summary: "For many software developers using generative AI, vibe coding is a double-edged sword. The process delivers rapid prototypes but often leaves a trail of brittle, undocumented code that creates significant technical debt. A new open-source platform, Codev, addresses this by proposing a fundamental shift...",
+        category: "business",
+        importance: "high",
+        score: 26.50,
+        publishedMs: 1760690700000,
+        source: "VentureBeat AI"
+      },
+      {
+        rank: 2,
+        title: "OpenAI pauses Sora video generations of Martin Luther King Jr.",
+        url: "https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr/",
+        summary: "OpenAI has temporarily paused the ability to generate videos of Martin Luther King Jr. using its Sora AI video generation tool, citing concerns about historical accuracy and ethical considerations.",
+        category: "business",
+        importance: "high",
+        score: 16.90,
+        publishedMs: 1760638866000,
+        source: "TechCrunch"
+      },
+      {
+        rank: 3,
+        title: "Google's new AI model can predict weather faster than traditional methods",
+        url: "https://example.com/google-ai-weather",
+        summary: "Google Research has unveiled a new AI model that can generate weather forecasts in seconds, significantly faster than conventional numerical weather prediction systems while maintaining comparable accuracy.",
+        category: "tools",
+        importance: "high",
+        score: 15.20,
+        publishedMs: 1760600000000,
+        source: "Google AI Blog"
+      },
+      {
+        rank: 4,
+        title: "Meta releases Llama 3.5 with improved reasoning capabilities",
+        url: "https://example.com/meta-llama-3.5",
+        summary: "Meta AI has announced Llama 3.5, the latest iteration of its open-source large language model, featuring enhanced reasoning capabilities and better performance on complex mathematical and coding tasks.",
+        category: "business",
+        importance: "high",
+        score: 14.80,
+        publishedMs: 1760580000000,
+        source: "Meta AI"
+      },
+      {
+        rank: 5,
+        title: "New research shows AI can detect early signs of Alzheimer's disease",
+        url: "https://example.com/ai-alzheimers-detection",
+        summary: "A groundbreaking study published in Nature demonstrates that AI models can detect early biomarkers of Alzheimer's disease from brain scans with 95% accuracy, potentially enabling earlier intervention.",
+        category: "posts",
+        importance: "high",
+        score: 13.50,
+        publishedMs: 1760560000000,
+        source: "Nature Journal"
+      },
+      {
+        rank: 6,
+        title: "Anthropic announces Claude 3.5 Opus with extended context window",
+        url: "https://example.com/claude-3.5-opus",
+        summary: "Anthropic has released Claude 3.5 Opus, featuring a 500K token context window and improved capabilities for complex document analysis and code generation tasks.",
+        category: "business",
+        importance: "medium",
+        score: 12.90,
+        publishedMs: 1760540000000,
+        source: "Anthropic"
+      },
+      {
+        rank: 7,
+        title: "AI-powered code completion tool reaches 1M developers",
+        url: "https://example.com/code-completion-1m",
+        summary: "GitHub Copilot has surpassed 1 million active developers, demonstrating the rapid adoption of AI-assisted coding tools in professional software development.",
+        category: "tools",
+        importance: "medium",
+        score: 11.70,
+        publishedMs: 1760520000000,
+        source: "GitHub Blog"
+      },
+      {
+        rank: 8,
+        title: "Researchers develop AI that can explain its reasoning process",
+        url: "https://example.com/explainable-ai-research",
+        summary: "A team at MIT has created an AI system that can provide human-understandable explanations for its decisions, addressing one of the key challenges in AI transparency and accountability.",
+        category: "posts",
+        importance: "high",
+        score: 11.20,
+        publishedMs: 1760500000000,
+        source: "MIT CSAIL"
+      },
+      {
+        rank: 9,
+        title: "Stability AI releases Stable Diffusion 4.0 with video generation",
+        url: "https://example.com/stable-diffusion-4",
+        summary: "Stability AI has launched Stable Diffusion 4.0, adding native video generation capabilities alongside improved image quality and faster processing times.",
+        category: "tools",
+        importance: "high",
+        score: 10.80,
+        publishedMs: 1760480000000,
+        source: "Stability AI"
+      },
+      {
+        rank: 10,
+        title: "AI startup raises $100M to develop autonomous research agents",
+        url: "https://example.com/ai-startup-funding",
+        summary: "A Silicon Valley startup has secured $100M in Series B funding to develop AI agents capable of conducting independent scientific research and hypothesis testing.",
+        category: "business",
+        importance: "medium",
+        score: 9.90,
+        publishedMs: 1760460000000,
+        source: "VentureBeat"
+      },
+      {
+        rank: 11,
+        title: "Neural network achieves breakthrough in protein folding prediction",
+        url: "https://example.com/protein-folding-breakthrough",
+        summary: "DeepMind's AlphaFold 3 has achieved unprecedented accuracy in predicting protein structures, potentially accelerating drug discovery and disease research.",
+        category: "posts",
+        importance: "high",
+        score: 9.50,
+        publishedMs: 1760440000000,
+        source: "Nature"
+      },
+      {
+        rank: 12,
+        title: "Microsoft integrates GPT-5 into Office suite",
+        url: "https://example.com/microsoft-gpt5-office",
+        summary: "Microsoft has announced the integration of GPT-5 across its Office suite, bringing advanced AI capabilities to Word, Excel, and PowerPoint users.",
+        category: "business",
+        importance: "medium",
+        score: 8.80,
+        publishedMs: 1760420000000,
+        source: "Microsoft"
+      }
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let currentSort = 'rank';
+    let searchQuery = '';
+
+    // DOM Elements
+    const archiveGrid = document.getElementById('archiveGrid');
+    const noResults = document.getElementById('noResults');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Initialize
+    function init() {
+      renderCards();
+      updateStats();
+      setupEventListeners();
+      initTheme();
+    }
+
+    // Render cards
+    function renderCards() {
+      const filtered = filterAndSortData();
+
+      if (filtered.length === 0) {
+        archiveGrid.style.display = 'none';
+        noResults.style.display = 'block';
+        return;
+      }
+
+      archiveGrid.style.display = 'grid';
+      noResults.style.display = 'none';
+
+      archiveGrid.innerHTML = filtered.map(item => `
+        <article class="archive-card">
+          <div class="archive-card__header">
+            <div class="archive-card__rank">#${String(item.rank).padStart(2, '0')}</div>
+            <div class="archive-card__content">
+              <h3 class="archive-card__title">
+                <a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
+              </h3>
+              <div class="archive-card__meta">
+                <span class="badge badge--${item.importance}">${item.importance === 'high' ? '重要度 高' : '重要度 中'}</span>
+                <span class="badge badge--category">${getCategoryLabel(item.category)}</span>
+                <span>${formatDate(item.publishedMs)}</span>
+              </div>
+            </div>
+          </div>
+          <p class="archive-card__summary">${item.summary}</p>
+          <div class="archive-card__footer">
+            <span>${item.source}</span>
+            <span class="archive-card__score">スコア: ${item.score.toFixed(1)}</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Filter and sort data
+    function filterAndSortData() {
+      let data = [...newsData];
+
+      // Apply category filter
+      if (currentFilter !== 'all') {
+        data = data.filter(item => item.category === currentFilter);
+      }
+
+      // Apply search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        data = data.filter(item =>
+          item.title.toLowerCase().includes(query) ||
+          item.summary.toLowerCase().includes(query)
+        );
+      }
+
+      // Apply sorting
+      switch (currentSort) {
+        case 'score-desc':
+          data.sort((a, b) => b.score - a.score);
+          break;
+        case 'score-asc':
+          data.sort((a, b) => a.score - b.score);
+          break;
+        case 'date-desc':
+          data.sort((a, b) => b.publishedMs - a.publishedMs);
+          break;
+        case 'date-asc':
+          data.sort((a, b) => a.publishedMs - b.publishedMs);
+          break;
+        default: // rank
+          data.sort((a, b) => a.rank - b.rank);
+      }
+
+      return data;
+    }
+
+    // Update statistics
+    function updateStats() {
+      const filtered = filterAndSortData();
+      const highImportanceCount = newsData.filter(item => item.importance === 'high').length;
+      const avgScore = newsData.reduce((sum, item) => sum + item.score, 0) / newsData.length;
+
+      document.getElementById('totalCount').textContent = newsData.length;
+      document.getElementById('filteredCount').textContent = filtered.length;
+      document.getElementById('highImportance').textContent = highImportanceCount;
+      document.getElementById('avgScore').textContent = avgScore.toFixed(1);
+    }
+
+    // Event listeners
+    function setupEventListeners() {
+      // Category filters
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.category;
+          renderCards();
+          updateStats();
+        });
+      });
+
+      // Search
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderCards();
+        updateStats();
+      });
+
+      // Sort
+      sortSelect.addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        renderCards();
+      });
+
+      // Theme toggle
+      themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    // Theme management
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeButton(savedTheme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeButton(newTheme);
+    }
+
+    function updateThemeButton(theme) {
+      const icon = themeToggle.querySelector('.theme-icon');
+      const label = themeToggle.querySelector('.theme-label');
+      if (theme === 'dark') {
+        icon.textContent = '🌙';
+        label.textContent = 'ダーク';
+      } else {
+        icon.textContent = '🌞';
+        label.textContent = 'ライト';
+      }
+    }
+
+    // Utility functions
+    function getCategoryLabel(category) {
+      const labels = {
+        business: 'ビジネス',
+        tools: 'ツール',
+        posts: '投稿・論文',
+        all: 'すべて'
+      };
+      return labels[category] || category;
+    }
+
+    function formatDate(ms) {
+      const date = new Date(ms);
+      const now = new Date();
+      const diffMs = now - date;
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const diffDays = Math.floor(diffHours / 24);
+
+      if (diffHours < 24) {
+        return `${diffHours}時間前`;
+      } else if (diffDays < 7) {
+        return `${diffDays}日前`;
+      } else {
+        return date.toLocaleDateString('ja-JP', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      }
+    }
+
+    // Start the app
+    init();
+  </script>
+</body>
+</html>

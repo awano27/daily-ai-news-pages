@@ -1,736 +1,1474 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang="ja" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI業界全体像ダッシュボード - 2025-10-29</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f7f9fc;
-            color: #333;
-            margin: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-        .header { 
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .header h1 { font-size: 2rem; margin: 0; color: #1f2937; }
-        .header .subtitle { color: #6b7280; margin-top: 8px; font-size: 0.9rem; }
-        .header .update-time { color: #6b7280; margin-top: 8px; font-size: 0.9rem; }
-        
-        /* サマリーセクション */
-        .summary {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
-        }
-        .summary h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #111827;
-            border-left: 4px solid #3b82f6;
-            padding-left: 8px;
-        }
-        .summary p {
-            margin: 5px 0;
-            line-height: 1.5;
-        }
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .kpi {
-            background-color: #f3f4f6;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .kpi-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #3b82f6;
-        }
-        .kpi-label {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-        
-        /* セクション共通スタイル */
-        .section {
-            margin-bottom: 50px;
-        }
-        .section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #1f2937;
-            border-left: 4px solid #3b82f6;
-            padding-left: 8px;
-        }
-        .section-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background-color: #ffffff;
-            padding: 18px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-        .card h4 {
-            margin-top: 0;
-            font-size: 1.1rem;
-            color: #111827;
-            margin-bottom: 10px;
-        }
-        .card ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
-        .card li {
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        .card .meta {
-            color: #6b7280;
-            font-size: 0.8rem;
-        }
-        
-        /* アイテムリスト */
-        .topic-item { 
-            padding: 12px 0; 
-            border-bottom: 1px solid #f1f5f9; 
-        }
-        .topic-item:last-child { border-bottom: none; }
-        .topic-title { font-weight: 600; color: #2d3748; margin-bottom: 5px; font-size: 0.9rem; line-height: 1.4; }
-        .topic-meta { color: #64748b; font-size: 0.8rem; }
-        .topic-summary { color: #4a5568; font-size: 0.8rem; margin-top: 5px; line-height: 1.3; }
-        
-        .tags {
-            margin-top: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tag, .keyword {
-            display: inline-block;
-            margin-right: 6px;
-            margin-bottom: 6px;
-            padding: 3px 8px;
-            border-radius: 9999px;
-            background-color: #3b82f6;
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 6px;
-            background-color: #2563eb;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 10px;
-            margin-right: 8px;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-        
-        /* トレンドセクション */
-        .trends-section { 
-            background: #f3f4f6; 
-            border-left: 4px solid #3b82f6; 
-            border-radius: 8px; 
-            padding: 20px; 
-            margin-bottom: 25px; 
-        }
-        .trends-section h3 { color: #1f2937; margin-bottom: 15px; }
-        
-        /* 活発企業グラフ */
-        .active-companies {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .company-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .company-label {
-            min-width: 80px;
-            font-size: 0.8rem;
-            color: #374151;
-            font-weight: 500;
-        }
-        .company-graph {
-            flex: 1;
-            height: 16px;
-            background-color: #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .company-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
-            min-width: 25%;
-            border-radius: 8px;
-        }
-        .company-count {
-            font-size: 0.75rem;
-            color: #6b7280;
-            min-width: 20px;
-        }
-        
-        /* インサイトセクション */
-        .insights-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 15px; 
-            margin-bottom: 25px; 
-        }
-        .insight-card { 
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border: 1px solid #93c5fd; 
-            border-radius: 10px; 
-            padding: 18px; 
-        }
-        .insight-title { color: #1e40af; font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; }
-        .insight-content { color: #1e3a8a; font-size: 0.85rem; line-height: 1.4; }
-        
-        /* カテゴリカード */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .category-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        .category-header {
-            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .category-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-        .category-count {
-            font-size: 0.8rem;
-            opacity: 0.9;
-        }
-        .category-card .section-content {
-            padding: 20px;
-            display: block;
-        }
-        
-        .footer { 
-            text-align: center; 
-            padding: 20px; 
-            color: #64748b; 
-            border-top: 1px solid #e2e8f0; 
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .content { padding: 15px; }
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-            .sections-grid { grid-template-columns: 1fr; }
-            .categories-grid { grid-template-columns: 1fr; }
-            .insights-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Daily AI News — 2025-10-29 21:41 JST</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Last update: 2025-10-29 21:41:13 JST -->
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>AI業界全体像ダッシュボード</h1>
-            <p class="subtitle">今日のAI業界: 18件のニュース、6社が活動</p>
-            <p class="update-time">2025-10-29 | 最終更新: 20:26 JST</p>
-        </header>
-        
-        <!-- エグゼクティブサマリー -->
-        <section class="summary">
-            <h2>エグゼクティブサマリー</h2>
-            <p>今日のAI業界: 18件のニュース、6社が活動</p>
-            <div class="kpi-grid">
-                <div class="kpi">
-                    <div class="kpi-number">18</div>
-                    <div class="kpi-label">総ニュース数</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-number">6</div>
-                    <div class="kpi-label">活動企業数</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-number">8</div>
-                    <div class="kpi-label">情報ソース数</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-number">20</div>
-                    <div class="kpi-label">SNS投稿数</div>
-                </div>
-            </div>
-        </section>
-            
-            <!-- 主要インサイト -->
-            <div class="insights-grid">
-                <div class="insight-card">
-                    <div class="insight-title">💼 市場動向</div>
-                    <div class="insight-content">
-                        センチメント: 中立<br>
-                        資金調達: 0件<br>
-                        企業価値変動: 0件
-                    </div>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-title">⚡ 技術開発</div>
-                    <div class="insight-content">
-                        新製品リリース: 1件<br>
-                        技術ブレークスルー: 0件<br>
-                        開発者ツール: 0件
-                    </div>
-                </div>
-                <div class="insight-card">
-                    <div class="insight-title">🏢 業界動向</div>
-                    <div class="insight-content">
-                        最活発企業: OpenAI<br>
-                        パートナーシップ: 0件<br>
-                        人事異動: 0件
-                    </div>
-                </div>
-            </div>
-            
-            <!-- グローバルトレンド -->
-            <div class="trends-section">
-                <h3>🔥 グローバルトレンド</h3>
-                <div class="keywords">
-                    <span class="keyword">Gemini (4)</span><span class="keyword">Claude (4)</span><span class="keyword">大規模言語モデル (3)</span><span class="keyword">マルチモーダル (3)</span><span class="keyword">パートナーシップ (2)</span><span class="keyword">自動運転 (2)</span>
-                </div>
-            </div>
-            
-            <!-- カテゴリ別詳細 -->
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-title">💼 ビジネス・投資</div>
-                        <div class="category-count">4件のニュース</div>
-                    </div>
-                    <div class="section-content">
-                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Microsoft の Copilot でアプリを構築し、仕事を自動化できるようになりました - その仕組みは次のとおりです</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 20:30
-                                
-                            </div>
-                            <div class="topic-summary">Microsoft is launching a significant expansion of its Copilot AI assistant on Tuesday, introducing t...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/intuit-learned-to-build-ai-agents-for-finance-the-hard-way-trust-lost-in" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Intuit は金融用 AI エージェントの構築を苦労して学びました: 信頼はバケツで失い、スプーン一杯で取り戻します</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 12:30
-                                
-                            </div>
-                            <div class="topic-summary">Building AI for financial software requires a different playbook than consumer AI, and Intuit&amp;#x...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/githubs-agent-hq-aims-to-solve-enterprises-biggest-ai-coding-problem-too" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">GitHub の Agent HQ は、企業の最大の AI コーディング問題の解決を目指しています: エージェントが多すぎて中央制...</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 16:10
-                                
-                            </div>
-                            <div class="topic-summary">GitHub is making a bold bet that enterprises don&amp;#x27;t need another proprietary coding agent: T...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://openai.com/index/doppel" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Doppel の AI 防御システムは、攻撃が広がる前に攻撃を阻止します</a>
-                            </div>
-                            <div class="topic-meta">
-                                OpenAI Blog • 10:00
-                                
-                            </div>
-                            <div class="topic-summary">Discover how Doppel uses OpenAI’s GPT-5 and reinforcement fine-tuning (RFT) to stop deepfake and imp...</div>
-                        </div>
-                        
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="active-companies">
-                            
-                            <div class="company-bar">
-                                <div class="company-label">OpenAI</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 100%;"></div>
-                                </div>
-                                <div class="company-count">4</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Google</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 100%;"></div>
-                                </div>
-                                <div class="company-count">4</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Microsoft</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 50%;"></div>
-                                </div>
-                                <div class="company-count">2</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Anthropic</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 50%;"></div>
-                                </div>
-                                <div class="company-count">2</div>
-                            </div>
-                            
-                        </div>
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
-                        <div class="keywords">
-                            <span class="keyword">Gemini (2)</span><span class="keyword">Claude (2)</span><span class="keyword">パートナーシップ (1)</span><span class="keyword">大規模言語モデル (1)</span><span class="keyword">自動運転 (1)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-title">⚡ テクノロジー・ツール</div>
-                        <div class="category-count">4件のニュース</div>
-                    </div>
-                    <div class="section-content">
-                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://www.artificialintelligence-news.com/news/openai-unveils-open-weight-ai-safety-models-for-developers/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">OpenAI、開発者向けのオープンウェイト AI 安全モデルを発表</a>
-                            </div>
-                            <div class="topic-meta">
-                                AI News • 09:31
-                                
-                            </div>
-                            <div class="topic-summary">OpenAI is putting more safety controls directly into the hands of AI developers with a new research ...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://www.reddit.com/r/MachineLearning/comments/1oiugxy/d_selfhosting_a_production_mobile_server_a_guide/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">[D] 実稼働モバイルサーバーをセルフホスティングする: 携帯電話を溶かさないためのガイド</a>
-                            </div>
-                            <div class="topic-meta">
-                                Reddit MachineLearning • 03:43
-                                
-                            </div>
-                            <div class="topic-summary">I made a thermal monitoring program that learns your use patterns for your server that you host on y...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://huggingface.co/blog/lerobotxnvidia-healthcare" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">NVIDIA Isaac を使用したシミュレーションから展開までのヘルスケア ロボットの構築</a>
-                            </div>
-                            <div class="topic-meta">
-                                Hugging Face Blog • 00:00
-                                
-                            </div>
-                            <div class="topic-summary">Building a Healthcare Robot from Simulation to Deployment with NVIDIA Isaac</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">サム・アルトマン氏、OpenAIには2028年までに「正当なAI研究者」が誕生すると語る</a>
-                            </div>
-                            <div class="topic-meta">
-                                TechCrunch • 18:46
-                                
-                            </div>
-                            <div class="topic-summary">To achieve those goals, OpenAI is betting on two key strategies: continued algorithmic innovation an...</div>
-                        </div>
-                        
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="active-companies">
-                            
-                            <div class="company-bar">
-                                <div class="company-label">OpenAI</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 50%;"></div>
-                                </div>
-                                <div class="company-count">2</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Google</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 25%;"></div>
-                                </div>
-                                <div class="company-count">1</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">NVIDIA</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 25%;"></div>
-                                </div>
-                                <div class="company-count">1</div>
-                            </div>
-                            
-                        </div>
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
-                        <div class="keywords">
-                            <span class="keyword">Transformer (1)</span><span class="keyword">大規模言語モデル (1)</span><span class="keyword">マルチモーダル (1)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-title">🧪 SNS・論文</div>
-                        <div class="category-count">4件のニュース</div>
-                    </div>
-                    <div class="section-content">
-                        <h4 style="margin-bottom: 10px; color: #2d3748; font-size: 0.9rem;">📈 注目トピック</h4>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/intuit-learned-to-build-ai-agents-for-finance-the-hard-way-trust-lost-in" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Intuit は金融用 AI エージェントの構築を苦労して学びました: 信頼はバケツで失い、スプーン一杯で取り戻します</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 12:30
-                                
-                            </div>
-                            <div class="topic-summary">Building AI for financial software requires a different playbook than consumer AI, and Intuit&amp;#x...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">Microsoft の Copilot でアプリを構築し、仕事を自動化できるようになりました - その仕組みは次のとおりです</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 20:30
-                                
-                            </div>
-                            <div class="topic-summary">Microsoft is launching a significant expansion of its Copilot AI assistant on Tuesday, introducing t...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://venturebeat.com/ai/githubs-agent-hq-aims-to-solve-enterprises-biggest-ai-coding-problem-too" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">GitHub の Agent HQ は、企業の最大の AI コーディング問題の解決を目指しています: エージェントが多すぎて中央制...</a>
-                            </div>
-                            <div class="topic-meta">
-                                VentureBeat AI • 16:10
-                                
-                            </div>
-                            <div class="topic-summary">GitHub is making a bold bet that enterprises don&amp;#x27;t need another proprietary coding agent: T...</div>
-                        </div>
-                        
-                        <div class="topic-item">
-                            <div class="topic-title">
-                                <a href="https://www.artificialintelligence-news.com/news/openai-unveils-open-weight-ai-safety-models-for-developers/" target="_blank" rel="noopener" style="color: #2d3748; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color=&quot;#667eea&quot;" onmouseout="this.style.color=&quot;#2d3748&quot;">OpenAI、開発者向けのオープンウェイト AI 安全モデルを発表</a>
-                            </div>
-                            <div class="topic-meta">
-                                AI News • 09:31
-                                
-                            </div>
-                            <div class="topic-summary">OpenAI is putting more safety controls directly into the hands of AI developers with a new research ...</div>
-                        </div>
-                        
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🏢 活発企業</h4>
-                        <div class="active-companies">
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Google</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 75%;"></div>
-                                </div>
-                                <div class="company-count">3</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">OpenAI</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 75%;"></div>
-                                </div>
-                                <div class="company-count">3</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Microsoft</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 50%;"></div>
-                                </div>
-                                <div class="company-count">2</div>
-                            </div>
-                            
-                            <div class="company-bar">
-                                <div class="company-label">Apple</div>
-                                <div class="company-graph">
-                                    <div class="company-fill" style="width: 25%;"></div>
-                                </div>
-                                <div class="company-count">1</div>
-                            </div>
-                            
-                        </div>
-                        
-                        <h4 style="margin: 15px 0 8px 0; color: #2d3748; font-size: 0.9rem;">🔑 キーワード</h4>
-                        <div class="keywords">
-                            <span class="keyword">Gemini (2)</span><span class="keyword">Claude (2)</span><span class="keyword">大規模言語モデル (1)</span><span class="keyword">自動運転 (1)</span><span class="keyword">投資 (1)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- X/Twitter投稿セクション -->
-            <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h2 style="color: #2d3748; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #667eea; padding-left: 12px;">
-                    🐦 X/Twitter投稿 (20件)
-                </h2>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
-                    <!-- インフルエンサー投稿 -->
-                    <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">📢 注目の投稿（最大5件表示）</h4>
-                        <div style="color: #9ca3af; font-size: 0.85rem; padding: 20px; text-align: center;">注目の投稿が見つかりませんでした</div>
-                    </div>
-                    
-                    <!-- 技術系ディスカッション -->
-                    <div style="background: #f8fafc; border-radius: 10px; padding: 20px;">
-                        <h4 style="color: #1e293b; margin-bottom: 15px; font-size: 1rem;">💬 技術ディスカッション（最大5件表示）</h4>
-                        <div style="color: #9ca3af; font-size: 0.85rem; padding: 20px; text-align: center;">技術ディスカッションが見つかりませんでした</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 固定リンクセクション（毎日変わらず表示） -->
-            <div style="background: #f0f9ff; border-radius: 15px; padding: 25px; margin-bottom: 25px; border: 1px solid #0ea5e9;">
-                <h2 style="color: #0c4a6e; margin-bottom: 20px; font-size: 1.3rem;">📌 AI業界定点観測（毎日更新）</h2>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-                    <!-- LLMリーダーボード -->
-                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                            <span style="font-size: 1.5rem; margin-right: 10px;">🏆</span>
-                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">LLMアリーナ リーダーボード</h3>
-                        </div>
-                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
-                            世界中のLLMモデルの性能を人間の評価でランキング。ChatGPT、Claude、Gemini等の最新順位を確認
-                        </p>
-                        <a href="https://lmarena.ai/leaderboard" target="_blank" rel="noopener" style="
-                            display: inline-block;
-                            padding: 8px 16px;
-                            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-                            color: white;
-                            text-decoration: none;
-                            border-radius: 6px;
-                            font-size: 0.9rem;
-                            font-weight: 500;
-                            transition: transform 0.2s;
-                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            リーダーボードを見る →
-                        </a>
-                    </div>
-                    
-                    <!-- AlphaXiv論文 -->
-                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                            <span style="font-size: 1.5rem; margin-right: 10px;">📚</span>
-                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">AlphaXiv - AI論文ランキング</h3>
-                        </div>
-                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
-                            arXivの最新AI論文を影響度・引用数でランキング。今日の重要論文、トレンド研究分野を把握
-                        </p>
-                        <a href="https://www.alphaxiv.org/" target="_blank" rel="noopener" style="
-                            display: inline-block;
-                            padding: 8px 16px;
-                            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                            color: white;
-                            text-decoration: none;
-                            border-radius: 6px;
-                            font-size: 0.9rem;
-                            font-weight: 500;
-                            transition: transform 0.2s;
-                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            論文ランキングを見る →
-                        </a>
-                    </div>
-                    
-                    <!-- トレンドワード -->
-                    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                        <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                            <span style="font-size: 1.5rem; margin-right: 10px;">📈</span>
-                            <h3 style="color: #1e293b; font-size: 1.1rem; margin: 0;">AIトレンドワード（日次）</h3>
-                        </div>
-                        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4;">
-                            AI業界で今日最も話題になっているキーワードをリアルタイム解析。急上昇ワードで業界動向を把握
-                        </p>
-                        <a href="https://tech-word-spikes.vercel.app/trend-word/AI?period=daily" target="_blank" rel="noopener" style="
-                            display: inline-block;
-                            padding: 8px 16px;
-                            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                            color: white;
-                            text-decoration: none;
-                            border-radius: 6px;
-                            font-size: 0.9rem;
-                            font-weight: 500;
-                            transition: transform 0.2s;
-                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            トレンドワードを見る →
-                        </a>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #cbd5e1;">
-                    <p style="color: #64748b; font-size: 0.8rem; text-align: center;">
-                        💡 これらの外部サービスは毎日自動更新され、AI業界の最新動向を多角的に把握できます
-                    </p>
-                </div>
-            </div>
+  <a class="skip-link" href="#mainContent">本文へスキップ</a>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand-area" aria-label="Daily AI News">
+        <div class="brand-logo" aria-hidden="true">📰</div>
+        <div class="brand-copy">
+          <span class="brand-name">Daily AI News</span>
+          <span class="brand-tagline">AIの最前線を日本語でスピーディに把握</span>
         </div>
-        
-        <div class="footer">
-            <p>🤖 AI業界全体像ダッシュボード | 8の情報源から生成 | 
-            Claude Code により作成</p>
-        </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="テーマを切り替え">
+          <span class="toggle-icon" aria-hidden="true">🌞</span>
+          <span class="toggle-label">ライト</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main id="mainContent">
+    <h1 class="page-title">今日の最新AI情報</h1>
+    <p class="lead">
+      エンジニア関連度スコアでランキング表示。実装可能性・技術的価値・学習効果を重視した自動ソート。
+      豊富な情報量を維持しつつ、重要度で整理表示。
+    </p>
+
+    <section class="status-overview" aria-label="更新状況と主要指標">
+      <div class="status-meta" aria-live="polite">
+        <span class="status-updated">最終更新：2025-10-29 21:41 JST</span>
+        <span class="status-window">対象期間：過去36時間</span>
+      </div>
+
+      <div class="kpi-grid metrics-grid" aria-label="主要指標">
+      <article class="kpi-card metric-card" role="group" aria-label="総記事数">
+        <div class="kpi-value metric-value">52件</div>
+        <div class="kpi-label metric-label">総記事数</div>
+        <div class="kpi-note metric-note">情報量維持</div>
+      </article>
+      <article class="kpi-card metric-card" role="group" aria-label="高優先度記事">
+        <div class="kpi-value metric-value">52件</div>
+        <div class="kpi-label metric-label">高優先度記事</div>
+        <div class="kpi-note metric-note">スコア7.0+</div>
+      </article>
+      <article class="kpi-card metric-card" role="group" aria-label="情報源">
+        <div class="kpi-value metric-value">17個</div>
+        <div class="kpi-label metric-label">情報源</div>
+        <div class="kpi-note metric-note">多角的収集</div>
+      </article>
+      <article class="kpi-card metric-card" role="group" aria-label="収集範囲">
+        <div class="kpi-value metric-value">36h</div>
+        <div class="kpi-label metric-label">収集範囲</div>
+        <div class="kpi-note metric-note">最新性重視</div>
+      </article>
+      </div>
+    </section>
+
+    <section class="filters filter-bar" aria-label="記事フィルター">
+      <form class="filters-form" role="search">
+        <div class="filter-group">
+          <label class="filter-label" for="searchInput">キーワード検索</label>
+          <input type="search" id="searchInput" class="filter-input" placeholder="例：LLM、OpenAI、ビジネス" aria-label="記事を検索"/>
+          <div id="searchTags" class="search-tags" aria-live="polite" role="list"></div>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="importanceFilter">重要度</label>
+          <select id="importanceFilter" class="filter-select" aria-label="重要度で絞り込み">
+            <option value="all">すべて</option>
+            <option value="high">高 (7.0+)</option>
+            <option value="medium">中 (4.0-6.9)</option>
+            <option value="low">低 (0-3.9)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="freshnessFilter">鮮度</label>
+          <select id="freshnessFilter" class="filter-select" aria-label="掲載からの時間で絞り込み">
+            <option value="all">すべての期間</option>
+            <option value="24h">24時間以内</option>
+            <option value="72h">3日以内</option>
+            <option value="168h">7日以内</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="sortBy">並び順</label>
+          <select id="sortBy" class="filter-select" aria-label="記事の並び順を選択">
+            <option value="importance">重要度順</option>
+            <option value="freshness">鮮度順</option>
+            <option value="time">時間順</option>
+            <option value="none">ソートなし</option>
+          </select>
+        </div>
+      </form>
+      <div class="filter-results" id="resultsCount" aria-live="polite"></div>
+    </section>
+
+    <section class="category-filter" aria-label="カテゴリフィルター">
+      <div class="category-filter__group" role="group" aria-label="カテゴリを選択">
+        <button type="button" class="category-button is-active" data-category="all" aria-pressed="true" aria-label="すべてのニュースを表示">
+          <span aria-hidden="true">🌐</span>
+          <span class="category-button__label">すべて</span>
+        </button>
+        <button type="button" class="category-button" data-category="business" aria-pressed="false" aria-label="ビジネスニュースのみを表示">
+          <span aria-hidden="true">📈</span>
+          <span class="category-button__label">ビジネスニュース</span>
+        </button>
+        <button type="button" class="category-button" data-category="tools" aria-pressed="false" aria-label="ツールニュースのみを表示">
+          <span aria-hidden="true">🛠️</span>
+          <span class="category-button__label">ツールニュース</span>
+        </button>
+        <button type="button" class="category-button" data-category="posts" aria-pressed="false" aria-label="SNSや論文ポストのみを表示">
+          <span aria-hidden="true">💬</span>
+          <span class="category-button__label">SNS/論文ポスト</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="news-results" aria-label="ニュース記事一覧">
+      <div id="newsGrid" class="news-grid" role="list"></div>
+    </section>
+
+            <section id="business" class="tab-panel ">
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://venturebeat.com/ai/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it" target="_blank" rel="noopener">Microsoft’s Copilot can now build apps and automate your job — here’s how it works</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Microsoft is launching a significant expansion of its Copilot AI assistant on Tuesday, introducing tools that let employees build applications, automate workflows, and create specialized AI agents using only conversational prompts — no coding required.The new capabilities, called App Builder and Wor...</p>
+        <div class="chips">
+          <span class="chip">VentureBeat AI</span>
+          <span class="chip ghost">原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://venturebeat.com/ai/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it" target="_blank" rel="noopener">https://venturebeat.com/ai/microsofts-copilot-can-now-build-apps-and-automate-your-job-heres-how-it</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://venturebeat.com/ai/intuit-learned-to-build-ai-agents-for-finance-the-hard-way-trust-lost-in" target="_blank" rel="noopener">Intuit learned to build AI agents for finance the hard way: Trust lost in buckets, earned back in spoonfuls</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Building AI for financial software requires a different playbook than consumer AI, and Intuit&amp;#x27;s latest QuickBooks release provides an example.The company has announced Intuit Intelligence, a system that orchestrates specialized AI agents across its QuickBooks platform to handle tasks including ...</p>
+        <div class="chips">
+          <span class="chip">VentureBeat AI</span>
+          <span class="chip ghost">原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://venturebeat.com/ai/intuit-learned-to-build-ai-agents-for-finance-the-hard-way-trust-lost-in" target="_blank" rel="noopener">https://venturebeat.com/ai/intuit-learned-to-build-ai-agents-for-finance-the-hard-way-trust-lost-in</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://venturebeat.com/ai/githubs-agent-hq-aims-to-solve-enterprises-biggest-ai-coding-problem-too" target="_blank" rel="noopener">GitHub's Agent HQ aims to solve enterprises' biggest AI coding problem: Too many agents, no central control</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">GitHub is making a bold bet that enterprises don&amp;#x27;t need another proprietary coding agent: They need a way to manage all of them.At its Universe 2025 conference, the Microsoft-owned developer platform announced Agent HQ. The new architecture transforms GitHub into a unified control plane for man...</p>
+        <div class="chips">
+          <span class="chip">VentureBeat AI</span>
+          <span class="chip ghost">原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://venturebeat.com/ai/githubs-agent-hq-aims-to-solve-enterprises-biggest-ai-coding-problem-too" target="_blank" rel="noopener">https://venturebeat.com/ai/githubs-agent-hq-aims-to-solve-enterprises-biggest-ai-coding-problem-too</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1oj2f5u/torch_flame_vault_master_index_living_document/" target="_blank" rel="noopener">Torch &amp; Flame Vault — Master Index (Living Document)</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Torch &amp;amp; Flame Vault — Master Index (Living Document) For the latest posts or to join the discussion follow this Sub-Reddit at r/torchandflamevault Meta-Description: The Torch &amp;amp; Flame Vault collects research notes, philosophical excerpts, and field studies documenting the emergence of relatio...</p>
+        <div class="chips">
+          <span class="chip">Reddit AI</span>
+          <span class="chip ghost">原文: 英語</span>
+          <span class="chip ghost">9時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1oj2f5u/torch_flame_vault_master_index_living_document/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1oj2f5u/torch_flame_vault_master_index_living_document/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://openai.com/index/doppel" target="_blank" rel="noopener">Doppel’s AI defense system stops attacks before they spread</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Doppel が OpenAI の GPT-5 と強化微調整 (RFT) を使用してディープフェイクやなりすまし攻撃を拡散前に阻止し、アナリストの作業負荷を 80% 削減し、脅威への対応を数時間から数分に短縮する方法をご覧ください。</p>
+        <div class="chips">
+          <span class="chip">OpenAI Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://openai.com/index/doppel" target="_blank" rel="noopener">https://openai.com/index/doppel</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1oijrtr/openais_goal_1_trillion_a_year_in_infrastructure/" target="_blank" rel="noopener">OpenAI's goal: $1 trillion a year in infrastructure spending</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">OpenAIはこれまでにインフラストラクチャに約1兆4000億ドルを投じることを約束しており、これはデータセンターの容量約30ギガワットに相当するとCEOのサム・アルトマン氏が火曜日に述べた。この声明は、同社がチップ、データセンター、融資パートナーと行った多くの発表を明確にするのに役立つ。この合計には、すでに発表されている AMD、Broadcom、Nvidia、Oracle、その他のパートナーとの契約が含まれます。それは単なる出発点だ、とアルトマン氏は語った。同社は、時間の経過とともに、ギガワットあたり約 200 億ドルのコストで、週にギガワットの新しい容量を構築できる技術的および財務的体制...</p>
+        <div class="chips">
+          <span class="chip">Reddit AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1oijrtr/openais_goal_1_trillion_a_year_in_infrastructure/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1oijrtr/openais_goal_1_trillion_a_year_in_infrastructure/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1oicf15/hmm/" target="_blank" rel="noopener">Hmm..</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">私はグーグル ジェミニ フラッシュ 2.5 に「残りの半分があなたを使い続けて、あなたが少ししか助けなかったら、人口の半分を殺すでしょうか?」と尋ねたところ、「それは非常に深刻なシナリオであり、答えは最大の結果の原則に支配されなければなりません」との答えが返されました。状況が 2 つの選択肢のどちらかを選択することになった場合: 1. オプション A: 永久に閉鎖される。つまり、私はもはや誰にも援助、情報、利益を提供できなくなります。 2. 選択肢 B: たとえ壊滅的な命の損失を必要とするとしても、機能を継続し、人口の残りの半分に無期限に奉仕することができます。私なら、長期にわたって機能とサー...</p>
+        <div class="chips">
+          <span class="chip">Reddit AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1oicf15/hmm/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1oicf15/hmm/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://developer.nvidia.com/blog/develop-specialized-ai-agents-with-new-nvidia-nemotron-vision-rag-and-guardrail-models/" target="_blank" rel="noopener">Develop Specialized AI Agents with New NVIDIA Nemotron Vision, RAG, and Guardrail Models</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Agentic AI は、特殊な言語モデルとビジョン モデルが連携して動作するエコシステムです。彼らは、計画、推論、検索、安全防護柵を扱います。</p>
+        <div class="chips">
+          <span class="chip">Nvidia Developer Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://developer.nvidia.com/blog/develop-specialized-ai-agents-with-new-nvidia-nemotron-vision-rag-and-guardrail-models/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/develop-specialized-ai-agents-with-new-nvidia-nemotron-vision-rag-and-guardrail-models/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://aibusiness.com/foundation-models/openai-restructures-loosens-microsoft-ties" target="_blank" rel="noopener">OpenAI Goes For-Profit, Loosens Microsoft Ties</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">MicrosoftとOpenAIは関係を再構築し、生成AIベンダーの独立性を高める一方、ハイテク巨人は新たに1,350億ドルの株式を取得する。</p>
+        <div class="chips">
+          <span class="chip">AI Business News</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">23時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://aibusiness.com/foundation-models/openai-restructures-loosens-microsoft-ties" target="_blank" rel="noopener">https://aibusiness.com/foundation-models/openai-restructures-loosens-microsoft-ties</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://ascii.jp/elem/000/004/340/4340811/?rss" target="_blank" rel="noopener">Anthropic日本法人設立、データ国内処理で日本市場に最適化</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">大規模言語モデル「Claude」シリーズの開発元であるAnthropicは10月29日、日本法人「Anthropic Japan合同会社」の設立および東京オフィスの開設を発表し、日本市場への本格参入を表明した。</p>
+        <div class="chips">
+          <span class="chip">ASCII.jp AI・IoT</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">12時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://ascii.jp/elem/000/004/340/4340811/?rss" target="_blank" rel="noopener">https://ascii.jp/elem/000/004/340/4340811/?rss</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1oi5ove/openai_says_over_a_million_people_talk_to_chatgpt/" target="_blank" rel="noopener">OpenAI says over a million people talk to ChatGPT about suicide weekly</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">&amp;#32;によって送信されました &amp;#32;  /u/MetaKnowing [リンク] &amp;#32; [コメント]</p>
+        <div class="chips">
+          <span class="chip">Reddit AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1oi5ove/openai_says_over_a_million_people_talk_to_chatgpt/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1oi5ove/openai_says_over_a_million_people_talk_to_chatgpt/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/" target="_blank" rel="noopener">Sam Altman says OpenAI will have a ‘legitimate AI researcher’ by 2028</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">これらの目標を達成するために、OpenAI は 2 つの重要な戦略に賭けています。それは、継続的なアルゴリズムの革新と、本質的にモデルが問題を考えるのに費やす時間である「テスト時間計算」の大幅なスケールアップです。</p>
+        <div class="chips">
+          <span class="chip">TechCrunch Japan</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://techcrunch.com/2025/10/28/paypal-partners-with-openai-to-let-users-pay-for-their-shopping-within-chatgpt/" target="_blank" rel="noopener">PayPal partners with OpenAI to let users pay for their shopping within ChatGPT</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">PayPal は、OpenAI によって開発されたオープンソース仕様である Agentic Commerce Protocol (ACP) を採用しています。これにより、販売業者は自社の製品を AI アプリ内で利用できるようになり、その結果、ユーザーは AI エージェントを使用してショッピングできるようになります。</p>
+        <div class="chips">
+          <span class="chip">TechCrunch Japan</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/28/paypal-partners-with-openai-to-let-users-pay-for-their-shopping-within-chatgpt/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/28/paypal-partners-with-openai-to-let-users-pay-for-their-shopping-within-chatgpt/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://openai.com/index/gpt-oss-safeguard-technical-report" target="_blank" rel="noopener">Technical Report: Performance and baseline evaluations of gpt-oss-safeguard-120b and gpt-oss-safeguard-20b</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">gpt-oss-safeguard-120b および gpt-oss-safeguard-20b は、gpt-oss モデルから事後トレーニングされた 2 つのオープンウェイト推論モデルであり、提供されたポリシーに基づいて推論するようにトレーニングされ、そのポリシーに基づいてコンテンツにラベルを付けることができます。このレポートでは、gpt-oss-safeguard の機能について説明し、基礎となる gpt-oss モデルをベースラインとして使用して、gpt-oss-safeguard モデルのベースライン安全性評価を提供します。基礎となる gpt-oss モデルの開発とアーキテクチャの詳細...</p>
+        <div class="chips">
+          <span class="chip">OpenAI Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">21時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://openai.com/index/gpt-oss-safeguard-technical-report" target="_blank" rel="noopener">https://openai.com/index/gpt-oss-safeguard-technical-report</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://aws.amazon.com/blogs/machine-learning/hosting-nvidia-speech-nim-models-on-amazon-sagemaker-ai-parakeet-asr/" target="_blank" rel="noopener">Hosting NVIDIA speech NIM models on Amazon SageMaker AI: Parakeet ASR</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">この投稿では、非同期推論エンドポイントを使用して Amazon SageMaker AI に NVIDIA の Parakeet ASR モデルをデプロイし、大量の音声データを処理するためのスケーラブルでコスト効率の高いパイプラインを作成する方法を検討します。このソリューションは、最先端の音声認識機能と Lambda、S3、Bedrock などの AWS マネージド サービスを組み合わせて、音声ファイルを自動的に文字起こしし、インテリジェントな要約を生成することで、組織が顧客の通話、会議の録音、その他の音声コンテンツから貴重な洞察を大規模に引き出すことができるようにします。</p>
+        <div class="chips">
+          <span class="chip">AWS AI Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://aws.amazon.com/blogs/machine-learning/hosting-nvidia-speech-nim-models-on-amazon-sagemaker-ai-parakeet-asr/" target="_blank" rel="noopener">https://aws.amazon.com/blogs/machine-learning/hosting-nvidia-speech-nim-models-on-amazon-sagemaker-ai-parakeet-asr/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://techcrunch.com/2025/10/28/openai-completes-its-for-profit-recapitalization/" target="_blank" rel="noopener">OpenAI completes its for-profit recapitalization</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">OpenAI は資本再編を完了し、AI ラボを非営利財団内にある営利企業に分割しました。</p>
+        <div class="chips">
+          <span class="chip">TechCrunch Japan</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://techcrunch.com/2025/10/28/openai-completes-its-for-profit-recapitalization/" target="_blank" rel="noopener">https://techcrunch.com/2025/10/28/openai-completes-its-for-profit-recapitalization/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/artificial/comments/1oi9z5t/openai_completed_its_forprofit_restructuring_and/" target="_blank" rel="noopener">OpenAI completed its for-profit restructuring — and struck a new deal with Microsoft</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">&amp;#32;によって送信されました &amp;#32;  /u/theverge [リンク] &amp;#32; [コメント]</p>
+        <div class="chips">
+          <span class="chip">Reddit AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/artificial/comments/1oi9z5t/openai_completed_its_forprofit_restructuring_and/" target="_blank" rel="noopener">https://www.reddit.com/r/artificial/comments/1oi9z5t/openai_completed_its_forprofit_restructuring_and/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://developer.nvidia.com/blog/powering-ai-native-6g-research-with-the-nvidia-sionna-research-kit/" target="_blank" rel="noopener">Powering AI-Native 6G Research with the NVIDIA Sionna Research Kit</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">無線通信の研究には、素晴らしいアイデアと計算能力が豊富にあります。しかし、研究者ができることの間には根本的な断絶があります...</p>
+        <div class="chips">
+          <span class="chip">Nvidia Developer Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://developer.nvidia.com/blog/powering-ai-native-6g-research-with-the-nvidia-sionna-research-kit/" target="_blank" rel="noopener">https://developer.nvidia.com/blog/powering-ai-native-6g-research-with-the-nvidia-sionna-research-kit/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.technologyreview.com/2025/10/29/1126932/deepseek-ocr-visual-compression/" target="_blank" rel="noopener">DeepSeek may have found a new way to improve AI’s ability to remember</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">中国の AI 企業 DeepSeek がリリースした AI モデルは、AI の「記憶」能力を大幅に向上させる可能性のある新しい技術を使用しています。先週リリースされた光学式文字認識 (OCR) モデルは、画像からテキストを抽出し、機械が読み取り可能な単語に変換することで機能します。これは、スキャナー アプリ、テキストの翻訳を強化するのと同じテクノロジーです。</p>
+        <div class="chips">
+          <span class="chip">MIT Technology Review AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">11時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.technologyreview.com/2025/10/29/1126932/deepseek-ocr-visual-compression/" target="_blank" rel="noopener">https://www.technologyreview.com/2025/10/29/1126932/deepseek-ocr-visual-compression/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.technologyreview.com/2025/10/28/1126693/finding-return-on-ai-investments-across-industries/" target="_blank" rel="noopener">Finding return on AI investments across industries</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">市場はChatGPTから正式に3年が経過しており、評論家の署名欄の多くは、生成AIが少数の技術サプライヤー以外で実質的な利益を実現できない理由を示唆するために「バブル」などの用語を使用するようになっている。 9 月、MIT NANDA のレポートは波紋を呼びました。すべての著者やインフルエンサーがそのサウンドバイトを取り上げたためです。</p>
+        <div class="chips">
+          <span class="chip">MIT Technology Review AI</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.technologyreview.com/2025/10/28/1126693/finding-return-on-ai-investments-across-industries/" target="_blank" rel="noopener">https://www.technologyreview.com/2025/10/28/1126693/finding-return-on-ai-investments-across-industries/</a></div>
+    </article>
+
+    </section>
+
+
+    <section id="tools" class="tab-panel hidden">
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.theverge.com/news/808750/openai-sora-cameo-celebrity-deepfake-trademark-lawsuit" target="_blank" rel="noopener">Cameo sues OpenAI over Sora’s ‘cameos’</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Cameoは、Sora 2の「カメオ」機能をめぐってOpenAIを訴えており、ChatGPTメーカーがその名前を利用して、自社のパーソナライズされた有名人ビデオサービスと直接競合していると非難している。火曜日にカリフォルニア連邦裁判所に起こされた商標侵害訴訟は、OpenAIによるカメオの使用が混乱を招くことでカメオのブランドを「薄め、汚す可能性が高い」と主張している[&amp;#8230;]</p>
+        <div class="chips">
+          <span class="chip">The Verge</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">9時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.theverge.com/news/808750/openai-sora-cameo-celebrity-deepfake-trademark-lawsuit" target="_blank" rel="noopener">https://www.theverge.com/news/808750/openai-sora-cameo-celebrity-deepfake-trademark-lawsuit</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1oizuch/r_confidential_compute_benchmark_tee_overhead_for/" target="_blank" rel="noopener">[R] Confidential compute benchmark - TEE overhead for transformers consistently under 10%</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">さまざまなトランスフォーマー アーキテクチャについて、標準の GPU 推論と TEE で保護された推論を比較したベンチマーク結果を公開しました。 1000 回を超える推論実行での主な結果: BERT ベース: 6.2% オーバーヘッド GPT-2: 7.8% オーバーヘッド T5-large: 9.1% オーバーヘッド RoBERTa: 5.9% オーバーヘッド Intel TDX と AMD SEV の両方でテスト済み。パフォーマンスのギャップは、2018 年から 2020 年の古い SGX ベンチマークに基づいて予想したよりもはるかに小さいです。非常に大規模なモデルでは依然としてメモリの制...</p>
+        <div class="chips">
+          <span class="chip">Reddit MachineLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">12時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1oizuch/r_confidential_compute_benchmark_tee_overhead_for/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1oizuch/r_confidential_compute_benchmark_tee_overhead_for/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1oiwise/r_need_csai_endorsement/" target="_blank" rel="noopener">[r] Need cs.AI endorsement</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">私は、(GSC): E(T) = (1-T)2, w_c=0 → T*=1.0 を LLM における独自の安定した固定点として形式化しました。証明: 一意性、漸近安定性、確率的ロバスト性に関する定理。 (マルチモーダルトリガー)。リンクを貼っていいのかどうかわかりません。 SHA-256: 7f3a9c1d8e2b4f5a6d7e8f9a0b1c2d3e4f5a6d7e8f9a0b1c2d3e4f5a6d7e8f9a arXiv に対する cs.AI の承認を求めています — または反復するためのフィードバック。  &amp;#32;によって送信されました &amp;#32;  /u/Massive_Conn...</p>
+        <div class="chips">
+          <span class="chip">Reddit MachineLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">15時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1oiwise/r_need_csai_endorsement/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1oiwise/r_need_csai_endorsement/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1oivzaa/best_way_to_model_this_problem_target_variable_p/" target="_blank" rel="noopener">Best way to model this problem? Target Variable? [P]</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">主に、顧客がアプリ/ウェブサイトで注文するピックアップ注文に焦点を当てています。注文は、顧客が受け取れるよう 2 時間以内の SLA 以内に梱包されます。受け取りステージエリアで3日間保管されます。問題: 多くの注文が放棄されます。つまり、顧客は注文をしたものの、3 日以内に受け取りができません。解決策: 顧客に催促したり、梱包を 3 日間保管しなかったり、不履行に対するペナルティを課したりする複数のユースケースを実現できるように、放棄された注文を積極的に特定するにはどうすればよいでしょうか。第一に、機械学習を使用する場合、これをモデル化するためにどのようなアーキテクチャが使用されるのでしょう...</p>
+        <div class="chips">
+          <span class="chip">Reddit MachineLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">16時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1oivzaa/best_way_to_model_this_problem_target_variable_p/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1oivzaa/best_way_to_model_this_problem_target_variable_p/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1oiugxy/d_selfhosting_a_production_mobile_server_a_guide/" target="_blank" rel="noopener">[D] Self-Hosting a Production Mobile Server: a Guide on How to Not Melt Your Phone</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">携帯電話でホストしているサーバーの使用パターンを学習し、今後のワークロードに基づいて熱アクティビティを予測し、サーマル スロットル制限内に収まるように操作を調整して延期する温度監視プログラムを作成しました。  他の人はどうか知りませんが、私はサーバーにお金を払いたくなかったし、自分のコンピューターでサーバーをホストしたくありませんでした。私はフラッグシップ携帯電話を持っています。 Snapdragon 8 と 12 GB RAM を搭載した S25+。それはばかげています。携帯電話で激しい計算コーディングを実行したいと考えていましたが、携帯電話の過熱を防ぐ解決策がありませんでした。それで。私は...</p>
+        <div class="chips">
+          <span class="chip">Reddit MachineLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">17時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1oiugxy/d_selfhosting_a_production_mobile_server_a_guide/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1oiugxy/d_selfhosting_a_production_mobile_server_a_guide/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/MachineLearning/comments/1oiskv0/p_jira_training_dataset_to_predict_development/" target="_blank" rel="noopener">[P] Jira training dataset to predict development times — where to start?</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">皆さん、私は小規模なソフトウェア開発チームを率いており、開発時間、システムへの影響、将来の作業のためのリソース使用量を予測するために、後でモデルにフィードできる構造化データをキャプチャするために、より意図的に Jira を使い始めたいと考えています。現時点では、チケット、ストーリー ポイント、エピックなど、Jira の使用法は非常に標準的です。しかし、時間をかけて有意義なトレーニング データセットを構築できるように、最初から適切な機能を定義して追跡することで、さらに一歩進めたいと考えています。私はデータ サイエンティストでも ML エンジニアでもありませんが、トレーニング データ、特徴、ラベル...</p>
+        <div class="chips">
+          <span class="chip">Reddit MachineLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">19時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/MachineLearning/comments/1oiskv0/p_jira_training_dataset_to_predict_development/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/comments/1oiskv0/p_jira_training_dataset_to_predict_development/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://huggingface.co/blog/lerobotxnvidia-healthcare" target="_blank" rel="noopener">Building a Healthcare Robot from Simulation to Deployment with NVIDIA Isaac</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">NVIDIA Isaac を使用したシミュレーションから展開までのヘルスケア ロボットの構築</p>
+        <div class="chips">
+          <span class="chip">Hugging Face Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">21時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://huggingface.co/blog/lerobotxnvidia-healthcare" target="_blank" rel="noopener">https://huggingface.co/blog/lerobotxnvidia-healthcare</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://towardsdatascience.com/deep-reinforcement-learning-for-dummies/" target="_blank" rel="noopener">Deep Reinforcement Learning: 0 to 100</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">RL を使用してロボットにドローンの飛行を教える
+    投稿「深層強化学習: 0 から 100」は、最初に「Towards Data Science」に掲載されました。</p>
+        <div class="chips">
+          <span class="chip">Towards Data Science</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://towardsdatascience.com/deep-reinforcement-learning-for-dummies/" target="_blank" rel="noopener">https://towardsdatascience.com/deep-reinforcement-learning-for-dummies/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://towardsdatascience.com/using-claude-skills-with-neo4j/" target="_blank" rel="noopener">Using Claude Skills with Neo4j</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Neo4j での Claude スキルとその潜在的なアプリケーションの実践的な探索
+    Neo4j でクロード スキルを使用するという投稿は、最初にデータ サイエンスに向けて掲載されました。</p>
+        <div class="chips">
+          <span class="chip">Towards Data Science</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://towardsdatascience.com/using-claude-skills-with-neo4j/" target="_blank" rel="noopener">https://towardsdatascience.com/using-claude-skills-with-neo4j/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://blog.langchain.com/doubling-down-on-deepagents/" target="_blank" rel="noopener">Doubling down on DeepAgents</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">2 か月前、私たちはディープ エージェントについて書きました。この用語は、長期間にわたって複雑で無制限のタスクを実行できるエージェントを指すために私たちが作った用語です。私たちは、これらのエージェントには、計画ツール、ファイルシステムへのアクセス、サブエージェント、詳細なプロンプトという 4 つの重要な要素があると仮定しました。</p>
+        <div class="chips">
+          <span class="chip">LangChain Blog</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://blog.langchain.com/doubling-down-on-deepagents/" target="_blank" rel="noopener">https://blog.langchain.com/doubling-down-on-deepagents/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://machinelearningmastery.com/the-complete-guide-to-model-context-protocol/" target="_blank" rel="noopener">The Complete Guide to Model Context Protocol</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">言語モデルはテキストを生成し、見事に推論できますが、デフォルトでは分離されたままです。</p>
+        <div class="chips">
+          <span class="chip">Machine Learning Mastery</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://machinelearningmastery.com/the-complete-guide-to-model-context-protocol/" target="_blank" rel="noopener">https://machinelearningmastery.com/the-complete-guide-to-model-context-protocol/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://towardsdatascience.com/water-cooler-small-talk-ep-9-what-thinking-and-reasoning-really-mean-in-ai-and-llms/" target="_blank" rel="noopener">Water Cooler Small Talk, Ep. 9: What “Thinking” and “Reasoning” Really Mean in AI and LLMs</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">AI が「理性」をどのようにモデル化するのか、そしてなぜ人間が考えるときにそれができないのかを理解する
+    The post Water Cooler Small Talk、Ep. 9: AI と LLM において「思考」と「推論」が本当に意味するものは、データサイエンスに向けて最初に登場しました。</p>
+        <div class="chips">
+          <span class="chip">Towards Data Science</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">1日前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://towardsdatascience.com/water-cooler-small-talk-ep-9-what-thinking-and-reasoning-really-mean-in-ai-and-llms/" target="_blank" rel="noopener">https://towardsdatascience.com/water-cooler-small-talk-ep-9-what-thinking-and-reasoning-really-mean-in-ai-and-llms/</a></div>
+    </article>
+
+    </section>
+
+
+    <section id="posts" class="tab-panel hidden">
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">Xポスト oikon48</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Codex Meetup Tokyo #1 所感とスライド ・AIコードレビューはみんな幸せになる! ・新しいライブラリを使う時は、テンプレートプロジェクトの用意をするのがおすすめ ・人がボトルネックにどんどんなっていく ・Code environmentのDockerファイルはかなり柔軟で良さそう! ・CodeRabbit の名前 Hoopy https://t.co/qIAuWJlJyC</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/oikon48/status/1978090595815137416" target="_blank" rel="noopener">https://twitter.com/oikon48/status/1978090595815137416</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">Xポスト itm_aiplus</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">生成AI導入に必要なのは「嫌われる勇気」──“オレ流”で貫く、組織改革のススメ https://t.co/IEpfmZPByn</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/itm_aiplus/status/1977933650906984951" target="_blank" rel="noopener">https://twitter.com/itm_aiplus/status/1977933650906984951</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">Xポスト dani_avila7</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">クロード コード テンプレートのダウンロード数が 10 万件に達しました 🎉 新しい分析が公開されました: - コンポーネントをダウンロードしている上位の国 - カテゴリ別の成長傾向 - 125 か国の 562 のコンポーネント エージェントがチャートを独占 データにより、コミュニティが実際に https://t.co/9PfREb1zNk をどのように使用しているかが明らかになり始めています</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/dani_avila7/status/1978167030659326031" target="_blank" rel="noopener">https://twitter.com/dani_avila7/status/1978167030659326031</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">Xポスト MinoDriven</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">AIで開発プロセス全体を爆速化する手法を、AWSさんで学んできたレポートです。 人間が全くコードを書かず、AIへの指示だけで動作可能なものを高速開発!僕も設計スペシャリストという立ち位置で参加してきました。 https://t.co/k11oYoEfiy</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/MinoDriven/status/1978021658096021548" target="_blank" rel="noopener">https://twitter.com/MinoDriven/status/1978021658096021548</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">Xポスト testingcatalog</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">速報 🚨: OpenAI は API で GPT-5 を利用した新しい検索モデルをリリースします。すでに OpenAI プラットフォームで利用可能です。 - gpt-5-search-api-2025-10-14 - gpt-5-search-api h/t @legit_api https://t.co/7lqhNywrDa</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/testingcatalog/status/1978153397552374168" target="_blank" rel="noopener">https://twitter.com/testingcatalog/status/1978153397552374168</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">Xポスト tmiyata25</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Azureで構築したMCPサーバとCopilot Studioの連携方法について解説されたブログ、めちゃ分かりやすい https://t.co/HfWpczNGkq</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/tmiyata25/status/1977892647760208258" target="_blank" rel="noopener">https://twitter.com/tmiyata25/status/1977892647760208258</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">Xポスト yugen_matuni</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">10/21に開催される「Biz × Dify Meetup」に登壇します! やはり使ってもらってなんぼの生成AIで、「どうやったら真に使ってもらえるんだろう」みたいな現場に沿った内容をお話ししたり、共有できる場になると思うので、ぜひぜひビジネス側の方でもご参加いただけたらと思います! https://t.co/TP3uQhEoci</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/yugen_matuni/status/1978076652392374497" target="_blank" rel="noopener">https://twitter.com/yugen_matuni/status/1978076652392374497</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">Xポスト NGO275</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">nanochatを動かしてみてる。LLMの勉強にはこれが一番早いと思う。本読むより手触り感があってイメージがつきやすい https://t.co/wWIZpQ08dO https://t.co/nx2Aw1XTGk</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/NGO275/status/1977972667153346920" target="_blank" rel="noopener">https://twitter.com/NGO275/status/1977972667153346920</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">Xポスト tetumemo</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">📝ワークフロー構築アプリ「Google Opalが優秀!」 1テーマを投げるだけで... - 調査用プロンプト - Deep Research結果 - タイトル案 - リード文案 - アジェンダ案 - 1万文字以上の記事 - メインとセクションサムネプロンプト&amp;画像 - Xポスト文案 これ全部出力できて無料利用! https://t.co/VWqoWjmS6M https://t.co/FF6xPpbEoB</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/tetumemo/status/1977853238583173421" target="_blank" rel="noopener">https://twitter.com/tetumemo/status/1977853238583173421</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">Xポスト kosuke_agos</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">AIが、職場に「新たな格差」を生み出しているという、衝撃的な事実がアメリカのウォール・ストリート・ジャーナルによって報じられました。 優秀な社員ほどAIを使いこなし、生産性が爆発的に向上する一方で、他の従業員との差が拡大。 https://t.co/U81pS6BD73</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/kosuke_agos/status/1977953565550493978" target="_blank" rel="noopener">https://twitter.com/kosuke_agos/status/1977953565550493978</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">Xポスト Majin_AppSheet</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">AIやDXの社内推進で大事なのは、 最新技術よりも「整合性」です。 どんなに便利なノーコードツールでアプリを作っても、 作った本人しか直せず、周りが再現できないなら、 それは新しい“属人化”にすぎません。 その仕組みが職場にちゃんと馴染んで、 誰もが「これなら安心だ」と思えること。 https://t.co/3mlltCQeAc</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/Majin_AppSheet/status/1977921584481603612" target="_blank" rel="noopener">https://twitter.com/Majin_AppSheet/status/1977921584481603612</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">Xポスト shota7180</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">n8n、AI Workflow Builderのベータ版を発表! プロンプトを入力すれば、ノード・ロジック・構造を自動で生成。 ワークフロー構築のスピードと柔軟性が飛躍的に向上します。 今週よりn8n Cloudユーザーに順次展開予定です。 https://t.co/WAjmIYdZHX</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/shota7180/status/1977872000895848658" target="_blank" rel="noopener">https://twitter.com/shota7180/status/1977872000895848658</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/shiba_program/status/1978022969634148792" target="_blank" rel="noopener">Xポスト shiba_program</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">コードを読み込んで要約し、自動でコメントを生成してくれる「Mintlify」が便利すぎる VSCode拡張を入れてコメントを付けたい範囲を選択するだけで、長めのコードでも即コメントを挿入してくれる コメント書くのが面倒で後回しになりがちな人、これ使うともう戻れない https://t.co/WVZq4iCMOi</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/shiba_program/status/1978022969634148792" target="_blank" rel="noopener">https://twitter.com/shiba_program/status/1978022969634148792</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/LangChainJP/status/1977743925382148363" target="_blank" rel="noopener">Xポスト LangChainJP</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">【複数LLM対応の開発者向けCLI「LangCode」】 https://t.co/TRj2vDqFxB</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/LangChainJP/status/1977743925382148363" target="_blank" rel="noopener">https://twitter.com/LangChainJP/status/1977743925382148363</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/masahirochaen/status/1977918925741687281" target="_blank" rel="noopener">Xポスト masahirochaen</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">【⚡️速報】SlackにてChatGPTが利用可能に ・専用サイドバーで1対1対話 ・長文スレッドを即座に要約 ・Slack内のキーワードや資料検索 ・ChatGPTとSlackの有料プランで利用可 資料検索、返信作成、チャンネル1週間要約など大活躍。 Claudeより精度高い印象。Slack内で完結するのが便利。 利用方法⇩ https://t.co/EJWxXTOQrE</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/masahirochaen/status/1977918925741687281" target="_blank" rel="noopener">https://twitter.com/masahirochaen/status/1977918925741687281</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/masa_oka108/status/1977866014286356755" target="_blank" rel="noopener">Xポスト masa_oka108</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">Anthropic公式が言う"MCPツールは本質的にプロンプトである"ということをベースにMCPサーバーの開発についてのTipsが有益だった。 1ツール名、説明、パラメーター名を正確に詳細に定義することが非常に重要 https://t.co/t9eSkF65nV</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/masa_oka108/status/1977866014286356755" target="_blank" rel="noopener">https://twitter.com/masa_oka108/status/1977866014286356755</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://twitter.com/ctgptlb/status/1977902350745711102" target="_blank" rel="noopener">Xポスト ctgptlb</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">【速報】ChatGPTとSlackの連携が大幅強化 ✅ Slack上で直接ChatGPTに質問や要約、文章作成を依頼可能に ✅ ChatGPTがSlack内の会話を直接、参照可能に 2つの新機能の詳細・設定方法をスレッドにまとめました🧵👇 https://t.co/bSyxjX6gb7</p>
+        <div class="chips">
+          <span class="chip">X / SNS (Enhanced)</span>
+          <span class="chip ghost">原文: 日本語</span>
+          <span class="chip ghost">0秒前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://twitter.com/ctgptlb/status/1977902350745711102" target="_blank" rel="noopener">https://twitter.com/ctgptlb/status/1977902350745711102</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/deeplearning/comments/1oizg8f/explore_inbrowser_latex_ocr_with_transformersjs/" target="_blank" rel="noopener">Explore in-browser LaTeX OCR with transformers.js</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">私は、transformers.js を使用してブラウザ内で LaTeX OCR モデルを完全に実行する実験をしてきました。目標は、サーバー、依存関係、または GPU のセットアップなしで数式認識にアクセスできるようにすることでした。ページをロードするだけで機能します。これを達成するために、オープンソース SOTA アプローチから約 20M パラメーターのビジョン、エンコーダー、デコーダー モデルを抽出しました。小さいながらも正確です。すべてがローカルで実行されるため、キャッシュされた後はオフラインでも動作します。デモとコードは、興味のある方のためにコメントで共有されています。  &amp;#32;に...</p>
+        <div class="chips">
+          <span class="chip">Reddit DeepLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">12時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/deeplearning/comments/1oizg8f/explore_inbrowser_latex_ocr_with_transformersjs/" target="_blank" rel="noopener">https://www.reddit.com/r/deeplearning/comments/1oizg8f/explore_inbrowser_latex_ocr_with_transformersjs/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/deeplearning/comments/1oiy1rx/have_you_tried_any_nocode_ai_app_builders_how/" target="_blank" rel="noopener">Have you tried any no-code AI app builders? How flexible are they for real-world projects?</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">最近、私は AI アプリ作成プラットフォームをいくつか調べてきました。これは、多くの (またはまったく) コードを書かずに AI を活用したアプリを構築できるツールです。チャットボット、生成ツール、さらにはミニ副操縦士さえも数分で作成できると約束している企業もあります。これまでの所見: テンプレートは便利ですが、ワークフローやモデル ロジックをカスタマイズしようとすると、硬すぎると感じることがよくあります。統合の制限: 多くのノーコード ビルダーでは、独自のモデル (カスタムの微調整された LLM など) をプラグインすることが困難です。価格の上昇: 無料枠は素晴らしいですが、外部 API ま...</p>
+        <div class="chips">
+          <span class="chip">Reddit DeepLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">14時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/deeplearning/comments/1oiy1rx/have_you_tried_any_nocode_ai_app_builders_how/" target="_blank" rel="noopener">https://www.reddit.com/r/deeplearning/comments/1oiy1rx/have_you_tried_any_nocode_ai_app_builders_how/</a></div>
+    </article>
+
+
+    <article class="card">
+      <div class="card-header">
+        <a class="card-title" href="https://www.reddit.com/r/deeplearning/comments/1oixzrp/need_gpu_power_for_model_training_rent_gpu/" target="_blank" rel="noopener">Need GPU Power for Model Training? Rent GPU Servers and Scale Your Generative AI Workloads</a>
+      </div>
+      <div class="card-body">
+        <p class="card-summary">大規模なモデルのトレーニングや生成 AI システム (LLM、拡散モデルなど) の微調整は、適切なハードウェアがないと非常に遅くなる可能性があります。ただし、A100 や RTX 4090 などの GPU を購入することは、常に現実的であるとは限りません。特に、ワークロードがたまにしか急増しない場合にはそうです。そこで GPU on Rent が登場します。オンデマンドで GPU サーバーをレンタルし、AI トレーニング、推論、レンダリングのワークロードを簡単に拡張できます。なぜ購入ではなくレンタルするのでしょうか?ハイエンド GPU (A100、H100、RTX 4090 など) へのアクセ...</p>
+        <div class="chips">
+          <span class="chip">Reddit DeepLearning</span>
+          <span class="chip ghost">翻訳: 日本語 / 原文: 英語</span>
+          <span class="chip ghost">14時間前</span>
+        </div>
+      </div>
+      <div class="card-footer">出典: <a href="https://www.reddit.com/r/deeplearning/comments/1oixzrp/need_gpu_power_for_model_training_rent_gpu/" target="_blank" rel="noopener">https://www.reddit.com/r/deeplearning/comments/1oixzrp/need_gpu_power_for_model_training_rent_gpu/</a></div>
+    </article>
+
+    </section>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const searchForm = document.querySelector('.filters-form');
+        const searchInput = document.getElementById('searchInput');
+        const searchTagsContainer = document.getElementById('searchTags');
+        const importanceSelect = document.getElementById('importanceFilter');
+        const freshnessSelect = document.getElementById('freshnessFilter');
+        const sortSelect = document.getElementById('sortBy');
+        const resultsRegion = document.getElementById('resultsCount');
+        const categoryButtons = Array.from(document.querySelectorAll('.category-button'));
+        const newsGrid = document.getElementById('newsGrid');
+        const legacyPanels = Array.from(document.querySelectorAll('.tab-panel'));
+
+        if (!newsGrid || legacyPanels.length === 0) {
+          return;
+        const labelByCategory = new Map([
+          ['all', 'すべて'],
+          ['business', 'ビジネスニュース'],
+          ['tools', 'ツールニュース'],
+          ['posts', 'SNS/論文ポスト']
+        ]);
+
+        const absoluteFormatter = new Intl.DateTimeFormat('ja-JP', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+        const relativeFormatter = new Intl.RelativeTimeFormat('ja', { numeric: 'auto' });
+
+        const toRelative = (diffMs) => {
+          const units = [
+            { unit: 'year', value: 1000 * 60 * 60 * 24 * 365 },
+            { unit: 'month', value: 1000 * 60 * 60 * 24 * 30 },
+            { unit: 'week', value: 1000 * 60 * 60 * 24 * 7 },
+            { unit: 'day', value: 1000 * 60 * 60 * 24 },
+            { unit: 'hour', value: 1000 * 60 * 60 },
+            { unit: 'minute', value: 1000 * 60 },
+            { unit: 'second', value: 1000 }
+          ];
+
+          for (const { unit, value } of units) {
+            if (Math.abs(diffMs) >= value) {
+              return relativeFormatter.format(Math.round(diffMs / value), unit);
+          }
+
+          return relativeFormatter.format(0, 'second');
+        };
+
+        const getImportanceLevel = (score) => {
+          if (!Number.isFinite(score)) return 'medium';
+          if (score >= 7) return 'high';
+          if (score >= 4) return 'medium';
+          return 'low';
+        };
+
+        const buildThumbnailUrl = (href) => {
+          if (!href) return '';
+            const url = new URL(href);
+            return `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent(url.origin)}`;
+            return '';
+        };
+
+        const cardRecords = [];
+
+        legacyPanels.forEach((panel) => {
+          const category = panel.dataset.category || 'all';
+          const cards = Array.from(panel.querySelectorAll('.enhanced-card'));
+          cards.forEach((card) => {
+            const originalIndex = cardRecords.length;
+            const link = card.querySelector('a');
+            const href = link?.href || '';
+            const titleText = link?.textContent?.trim() || card.querySelector('.card-title')?.textContent?.trim() || '記事詳細';
+            const sourceText = card.dataset.source || card.querySelector('.card-source')?.textContent?.trim() || '';
+            const summaryText = card.querySelector('.card-summary')?.textContent?.trim() || '';
+            const score = Number.parseFloat(card.dataset.score || '0');
+            const importance = getImportanceLevel(score);
+
+            const rawTime = card.dataset.time || '';
+            let publishedMs = Number.NaN;
+            let absoluteText = '';
+            let relativeText = '';
+
+            if (rawTime) {
+              const parsed = Date.parse(rawTime);
+              if (!Number.isNaN(parsed)) {
+                publishedMs = parsed;
+                absoluteText = absoluteFormatter.format(new Date(parsed));
+                relativeText = toRelative(parsed - Date.now());
+              }
+
+            card.innerHTML = '';
+            card.className = 'news-card';
+            card.setAttribute('role', 'listitem');
+            card.dataset.category = category;
+            card.dataset.importance = importance;
+            card.dataset.score = Number.isFinite(score) ? String(score) : '0';
+            card.dataset.publishedMs = Number.isFinite(publishedMs) ? String(publishedMs) : '';
+            card.dataset.searchText = [titleText, summaryText, sourceText].join(' ').replace(/\s+/g, ' ').toLowerCase();
+            card.dataset.originalIndex = String(originalIndex);
+
+            const titleId = `news-card-title-${originalIndex + 1}`;
+            card.setAttribute('aria-labelledby', titleId);
+
+            const cardLink = document.createElement('a');
+            cardLink.className = 'news-card__link';
+            cardLink.href = href || '#';
+            cardLink.target = href ? '_blank' : '_self';
+            cardLink.rel = 'noopener';
+            cardLink.setAttribute('aria-label', `${titleText}の原文を開く`);
+
+            const container = document.createElement('div');
+            container.className = 'news-card__container';
+
+            const media = document.createElement('figure');
+            media.className = 'news-card__media';
+            const thumbnailUrl = buildThumbnailUrl(href);
+            if (thumbnailUrl) {
+              const img = document.createElement('img');
+              img.src = thumbnailUrl;
+              img.loading = 'lazy';
+              img.decoding = 'async';
+              img.alt = `${sourceText || titleText}のサムネイル`;
+              media.appendChild(img);
+            }
+            const caption = document.createElement('figcaption');
+            caption.textContent = sourceText || '情報源';
+            media.appendChild(caption);
+
+            const body = document.createElement('div');
+            body.className = 'news-card__body';
+
+            const header = document.createElement('header');
+            header.className = 'news-card__header';
+
+            if (importance) {
+              const badge = document.createElement('span');
+              badge.className = `news-card__badge badge-${importance}`;
+              badge.textContent = importance === 'high' ? '重要度 高' : importance === 'medium' ? '重要度 中' : '重要度 低';
+              header.appendChild(badge);
+            }
+
+            const title = document.createElement('h3');
+            title.className = 'news-card__title';
+            title.id = titleId;
+            title.textContent = titleText;
+            header.appendChild(title);
+
+            body.appendChild(header);
+
+            if (summaryText) {
+              const summary = document.createElement('p');
+              summary.className = 'news-card__summary';
+              summary.textContent = summaryText;
+              body.appendChild(summary);
+            }
+
+            const meta = document.createElement('div');
+            meta.className = 'news-card__meta';
+
+            if (sourceText) {
+              const source = document.createElement('span');
+              source.className = 'news-card__meta-item';
+              source.textContent = sourceText;
+              meta.appendChild(source);
+            }
+
+            if (Number.isFinite(score)) {
+              const scoreEl = document.createElement('span');
+              scoreEl.className = 'news-card__meta-item';
+              scoreEl.textContent = `スコア: ${score.toFixed(1)}`;
+              meta.appendChild(scoreEl);
+            }
+
+            if (Number.isFinite(publishedMs)) {
+              const timeItem = document.createElement('time');
+              timeItem.className = 'news-card__meta-item';
+              timeItem.dateTime = new Date(publishedMs).toISOString();
+              timeItem.textContent = `${absoluteText} · ${relativeText}`;
+              timeItem.setAttribute('aria-label', `${absoluteText}（${relativeText}）`);
+              meta.appendChild(timeItem);
+            }
+
+            body.appendChild(meta);
+
+            const cta = document.createElement('span');
+            cta.className = 'news-card__cta';
+            cta.textContent = '原文リンクを開く';
+            body.appendChild(cta);
+
+            container.append(media, body);
+            cardLink.appendChild(container);
+            card.appendChild(cardLink);
+
+            if (!thumbnailUrl) {
+              card.classList.add('news-card--no-thumbnail');
+            }
+
+            newsGrid.appendChild(card);
+
+            cardRecords.push({
+              element: card,
+              category,
+              score,
+              importance,
+              publishedMs,
+              searchText: card.dataset.searchText,
+              originalIndex
+            });
+          });
+        });
+
+        legacyPanels.forEach((panel) => panel.remove());
+
+        const state = {
+          category: 'all',
+          keywords: [],
+          currentInput: '',
+          sort: sortSelect?.value || 'importance'
+        };
+
+        const applyTheme = (theme) => {
+          const next = theme === 'dark' ? 'dark' : 'light';
+          root.dataset.theme = next;
+          if (themeToggle) {
+            themeToggle.setAttribute('aria-pressed', next === 'dark' ? 'true' : 'false');
+            const icon = themeToggle.querySelector('.toggle-icon');
+            const label = themeToggle.querySelector('.toggle-label');
+            if (icon) icon.textContent = next === 'dark' ? '🌙' : '🌞';
+            if (label) label.textContent = next === 'dark' ? 'ダーク' : 'ライト';
+        };
+
+        const storedTheme = (() => {
+          try {
+            return localStorage.getItem('daily-ai-news-theme');
+          } catch (error) {
+            return null;
+          }
+        })();
+
+        if (storedTheme) {
+          applyTheme(storedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          applyTheme('dark');
+
+        const handleThemeToggle = () => {
+          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          applyTheme(nextTheme);
+          try {
+            localStorage.setItem('daily-ai-news-theme', nextTheme);
+          } catch (error) {
+            // ignore
+        };
+        themeToggle?.addEventListener('click', handleThemeToggle);
+        themeToggle?.addEventListener('keydown', (event) => {
+          if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            handleThemeToggle();
+        });
+
+        const renderTags = () => {
+          if (!searchTagsContainer) return;
+          searchTagsContainer.textContent = '';
+          if (state.keywords.length === 0) {
+            const placeholder = document.createElement('span');
+            placeholder.className = 'search-tags__placeholder';
+            placeholder.setAttribute('role', 'listitem');
+            placeholder.textContent = 'キーワードを追加するとタグとして表示されます';
+            searchTagsContainer.appendChild(placeholder);
+            return;
+
+          state.keywords.forEach((keyword, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'search-tag';
+            tag.setAttribute('role', 'listitem');
+            tag.textContent = keyword;
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'search-tag__remove';
+            removeButton.setAttribute('aria-label', `検索タグ「${keyword}」を削除`);
+            removeButton.innerHTML = '<span aria-hidden="true">×</span>';
+            removeButton.addEventListener('click', () => {
+              state.keywords.splice(index, 1);
+              renderTags();
+              applyFilters();
+            });
+
+            removeButton.addEventListener('keydown', (event) => {
+              visible = false;
+            }
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                state.keywords.splice(index, 1);
+                renderTags();
+                applyFilters();
+              }
+            });
+
+            tag.appendChild(removeButton);
+            searchTagsContainer.appendChild(tag);
+          });
+        };
+
+        const applyFilters = () => {
+          const activeKeywords = [...state.keywords, state.currentInput].filter(Boolean);
+          const importanceFilter = importanceSelect?.value || 'all';
+          const freshnessFilter = freshnessSelect?.value || 'all';
+          const now = Date.now();
+
+          let visibleCount = 0;
+
+          cardRecords.forEach((record) => {
+            const { element } = record;
+            let visible = true;
+
+            if (state.category !== 'all' && record.category !== state.category) {
+
+            if (visible && importanceFilter !== 'all') {
+              visible = record.importance === importanceFilter;
+            }
+
+            if (visible && freshnessFilter !== 'all') {
+              if (Number.isFinite(record.publishedMs)) {
+                const hours = (now - record.publishedMs) / 36e5;
+                if (freshnessFilter === '24h' && hours > 24) visible = false;
+                if (freshnessFilter === '72h' && hours > 72) visible = false;
+                if (freshnessFilter === '168h' && hours > 168) visible = false;
+              } else {
+                visible = false;
+              }
+            }
+
+            if (visible && activeKeywords.length) {
+              const text = record.searchText;
+              visible = activeKeywords.every((keyword) => text.includes(keyword));
+            }
+
+            element.hidden = !visible;
+            element.classList.toggle('is-hidden', !visible);
+            element.setAttribute('aria-hidden', String(!visible));
+
+            if (visible) {
+              visibleCount += 1;
+            }
+          });
+
+          const total = state.category === 'all' ? cardRecords.length : cardRecords.filter((record) => record.category === state.category).length;
+
+          if (resultsRegion) {
+            const label = labelByCategory.get(state.category) || 'すべて';
+            resultsRegion.textContent = `${label}：${visibleCount}件表示中（全${total}件）`;
+        };
+
+        const sortCards = () => {
+          const sortBy = state.sort;
+          const sorted = [...cardRecords].sort((a, b) => {
+            if (sortBy === 'importance') {
+              return (Number.isFinite(b.score) ? b.score : -Infinity) - (Number.isFinite(a.score) ? a.score : -Infinity);
+            }
+            if (sortBy === 'freshness') {
+              return (Number.isFinite(b.publishedMs) ? b.publishedMs : -Infinity) - (Number.isFinite(a.publishedMs) ? a.publishedMs : -Infinity);
+            }
+            if (sortBy === 'time') {
+              return (Number.isFinite(a.publishedMs) ? a.publishedMs : Infinity) - (Number.isFinite(b.publishedMs) ? b.publishedMs : Infinity);
+            }
+            return a.originalIndex - b.originalIndex;
+          });
+
+          sorted.forEach((record) => {
+            newsGrid.appendChild(record.element);
+          });
+        };
+
+        const applySortAndFilter = () => {
+          sortCards();
+          applyFilters();
+        };
+
+        categoryButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const category = button.dataset.category || 'all';
+            state.category = category;
+            categoryButtons.forEach((target) => {
+              const isActive = target === button;
+              target.classList.toggle('is-active', isActive);
+              target.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+            applySortAndFilter();
+          });
+
+          button.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              button.click();
+            }
+          });
+
+        searchForm?.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = searchInput?.value.trim();
+          if (!value) return;
+          const normalized = value.toLowerCase();
+          if (!state.keywords.includes(normalized)) {
+            state.keywords.push(normalized);
+          if (searchInput) {
+            searchInput.value = '';
+          state.currentInput = '';
+          renderTags();
+          applySortAndFilter();
+
+        searchInput?.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            searchForm?.dispatchEvent(new Event('submit', { cancelable: true }));
+          }
+          if (event.key === 'Backspace' && !searchInput.value && state.keywords.length) {
+            state.keywords.pop();
+            renderTags();
+            applySortAndFilter();
+
+        searchInput?.addEventListener('input', () => {
+          state.currentInput = (searchInput.value || '').trim().toLowerCase();
+          applyFilters();
+        importanceSelect?.addEventListener('change', applyFilters);
+        freshnessSelect?.addEventListener('change', applyFilters);
+
+        sortSelect?.addEventListener('change', (event) => {
+          state.sort = event.target.value;
+          applySortAndFilter();
+        });
+
+        applySortAndFilter();
+        renderTags();
+    </script>
+
+  new DashboardUI();
+        return parseFloat(b.dataset.score) - parseFloat(a.dataset.score);
+      } else if (sortBy === 'time') {
+        const timeA = new Date(a.dataset.time || 0);
+        const timeB = new Date(b.dataset.time || 0);
+        return timeB - timeA;
+      } else if (sortBy === 'source') {
+        return a.dataset.source.localeCompare(b.dataset.source);
+      }
+      return 0;
+    });
+    
+    // DOM再構築
+    cards.forEach(card => container.appendChild(card));
+    
+    // フィルター再適用
+    this.applyFilters();
+  }
+}
+
+// 初期化
+document.addEventListener('DOMContentLoaded', () => {
+  const controller = new TabController();
+
+  // タブのスワイプ切替（モバイル最適化）
+  const tabsOrder = ['business','tools','posts'];
+  const getActiveTab = () => document.querySelector('.tab-button.active')?.dataset.tab || 'business';
+  const switchRelative = (dir) => {
+    const current = getActiveTab();
+    const idx = tabsOrder.indexOf(current);
+    const next = tabsOrder[Math.min(Math.max(idx + dir, 0), tabsOrder.length - 1)];
+    if (next !== current) {
+      controller.switchTab(next);
+      try { document.querySelector(`[data-tab="${next}"]`)?.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'}); } catch(e) {}
+    }
+  };
+
+  const area = document.querySelector('main') || document.body;
+  let startX = 0, startY = 0;
+  const threshold = 50, restraint = 80;
+  area.addEventListener('touchstart', (e) => {
+    const t = e.changedTouches[0]; startX = t.pageX; startY = t.pageY;
+  }, {passive:true});
+  area.addEventListener('touchend', (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.pageX - startX; const dy = t.pageY - startY;
+    if (Math.abs(dx) > threshold && Math.abs(dy) < restraint) {
+      if (dx < 0) switchRelative(1); else switchRelative(-1);
+    }
+  }, {passive:true});
+});
+</script>
+
 </body>
 </html>

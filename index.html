@@ -3597,198 +3597,237 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('searchInput');
-      const searchTags = document.getElementById('searchTags');
-      const importanceFilter = document.getElementById('importanceFilter');
-      const freshnessFilter = document.getElementById('freshnessFilter');
-      const clearFilters = document.getElementById('clearFilters');
-      const resultsCount = document.getElementById('resultsCount');
-      const themeToggle = document.getElementById('themeToggle');
+      const GRID_CLASS = 'col-md-6 col-lg-4';
+      const CATEGORY_GRID_IDS = {
+        all: 'newsGrid',
+        business: 'businessGrid',
+        tools: 'toolsGrid',
+        posts: 'postsGrid',
+      };
+      const FRESHNESS_ALLOWED = {
+        '24h': ['24h'],
+        '3d': ['24h', '72h'],
+        '7d': ['24h', '72h', '168h'],
+      };
+
+      const elements = {
+        searchInput: document.getElementById('searchInput'),
+        searchTags: document.getElementById('searchTags'),
+        importanceFilter: document.getElementById('importanceFilter'),
+        freshnessFilter: document.getElementById('freshnessFilter'),
+        clearFilters: document.getElementById('clearFilters'),
+        resultsCount: document.getElementById('resultsCount'),
+        themeToggle: document.getElementById('themeToggle'),
+        newsGrid: document.getElementById('newsGrid'),
+      };
+
+      const requiredElements = [
+        'searchInput',
+        'searchTags',
+        'importanceFilter',
+        'freshnessFilter',
+        'clearFilters',
+        'resultsCount',
+        'themeToggle',
+        'newsGrid',
+      ];
+      if (requiredElements.some((key) => !elements[key])) {
+        return;
+      }
+
+      const state = { keywords: [] };
       const html = document.documentElement;
+      const themeIcon = elements.themeToggle.querySelector('i');
 
-      // Wrap news cards in Bootstrap grid columns
-      const newsGrid = document.getElementById('newsGrid');
-      const cards = newsGrid.querySelectorAll('.news-card');
-      cards.forEach(card => {
-        const col = document.createElement('div');
-        col.className = 'col-md-6 col-lg-4';
-        card.parentNode.insertBefore(col, card);
-        col.appendChild(card);
-      });
+      initializeTheme();
+      wrapCardsInColumns(elements.newsGrid);
+      populateCategoryTabs();
+      bindEvents();
+      applyFilters();
 
-      // Populate category tabs with cards
+      function bindEvents() {
+        elements.searchInput.addEventListener('keydown', handleKeywordSubmit);
+        elements.searchTags.addEventListener('click', handleKeywordRemove);
+        elements.importanceFilter.addEventListener('change', applyFilters);
+        elements.freshnessFilter.addEventListener('change', applyFilters);
+        elements.clearFilters.addEventListener('click', clearAllFilters);
+        elements.themeToggle.addEventListener('click', toggleTheme);
+
+        document
+          .querySelectorAll('#categoryTabs button[data-bs-toggle="tab"]')
+          .forEach((button) => {
+            button.addEventListener('shown.bs.tab', applyFilters);
+          });
+      }
+
+      function wrapCardsInColumns(grid) {
+        const directCards = Array.from(grid.children).filter((child) =>
+          child.classList.contains('news-card'),
+        );
+
+        directCards.forEach((card) => {
+          const col = document.createElement('div');
+          col.className = GRID_CLASS;
+          card.parentNode.insertBefore(col, card);
+          col.appendChild(card);
+        });
+      }
+
       function populateCategoryTabs() {
-        const businessGrid = document.getElementById('businessGrid');
-        const toolsGrid = document.getElementById('toolsGrid');
-        const postsGrid = document.getElementById('postsGrid');
+        const allColumns = elements.newsGrid.querySelectorAll('.col-md-6');
 
-        // Clear existing content
-        businessGrid.innerHTML = '';
-        toolsGrid.innerHTML = '';
-        postsGrid.innerHTML = '';
+        Object.entries(CATEGORY_GRID_IDS).forEach(([category, gridId]) => {
+          if (category === 'all') return;
+          const grid = document.getElementById(gridId);
+          if (grid) grid.innerHTML = '';
+        });
 
-        // Get all cards and clone them to category tabs
-        const allCards = newsGrid.querySelectorAll('.col-md-6');
-
-        allCards.forEach(colDiv => {
-          const card = colDiv.querySelector('.news-card');
+        allColumns.forEach((col) => {
+          const card = col.querySelector('.news-card');
           if (!card) return;
 
           const category =
             card.dataset.categorySlug ||
             card.dataset.category ||
-            card.getAttribute('data-category');
+            card.getAttribute('data-category') ||
+            'all';
+          const targetGrid = document.getElementById(CATEGORY_GRID_IDS[category]);
+          if (!targetGrid) return;
 
-          // Clone card with its wrapper
-          const clonedCol = colDiv.cloneNode(true);
-
-          // Add to appropriate category grid
-          if (category === 'business') {
-            businessGrid.appendChild(clonedCol);
-          } else if (category === 'tools') {
-            toolsGrid.appendChild(clonedCol);
-          } else if (category === 'posts') {
-            postsGrid.appendChild(clonedCol);
-          }
+          const clonedCol = col.cloneNode(true);
+          clonedCol.style.display = '';
+          targetGrid.appendChild(clonedCol);
         });
       }
 
-      // Populate tabs on load
-      populateCategoryTabs();
+      function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (!savedTheme) return;
+        applyTheme(savedTheme);
+      }
 
-      // Update visible count when tab changes
-      const tabButtons = document.querySelectorAll('#categoryTabs button[data-bs-toggle="tab"]');
-      tabButtons.forEach(button => {
-        button.addEventListener('shown.bs.tab', (event) => {
-          applyFilters();
-        });
-      });
-
-      // Theme toggle
-      themeToggle.addEventListener('click', () => {
+      function toggleTheme() {
         const currentTheme = html.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-bs-theme', newTheme);
-        const icon = themeToggle.querySelector('i');
-        icon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
-        localStorage.setItem('theme', newTheme);
-      });
-
-      // Load saved theme
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        html.setAttribute('data-bs-theme', savedTheme);
-        const icon = themeToggle.querySelector('i');
-        icon.className = savedTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
       }
 
-      // Search functionality
-      let keywords = [];
-
-      searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          const value = searchInput.value.trim();
-          if (value && !keywords.includes(value)) {
-            keywords.push(value);
-            renderSearchTags();
-            searchInput.value = '';
-            applyFilters();
-          }
+      function applyTheme(theme) {
+        html.setAttribute('data-bs-theme', theme);
+        if (themeIcon) {
+          themeIcon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
         }
-      });
+      }
+
+      function handleKeywordSubmit(event) {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+
+        const value = elements.searchInput.value.trim();
+        if (!value || state.keywords.includes(value)) return;
+
+        state.keywords.push(value);
+        elements.searchInput.value = '';
+        renderSearchTags();
+        applyFilters();
+      }
+
+      function handleKeywordRemove(event) {
+        const target = event.target.closest('[data-keyword]');
+        if (!target) return;
+
+        const keyword = target.dataset.keyword;
+        state.keywords = state.keywords.filter((item) => item !== keyword);
+        renderSearchTags();
+        applyFilters();
+      }
 
       function renderSearchTags() {
-        searchTags.innerHTML = keywords.map(keyword =>
-          `<span class="badge bg-primary me-2 mb-2" data-keyword="${keyword}">
-            ${keyword} <i class="bi bi-x" style="cursor:pointer"></i>
-          </span>`
-        ).join('');
+        elements.searchTags.textContent = '';
+        state.keywords.forEach((keyword) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'badge bg-primary border-0 me-2 mb-2';
+          button.dataset.keyword = keyword;
+          button.title = `検索タグを削除: ${keyword}`;
 
-        searchTags.querySelectorAll('.badge').forEach(badge => {
-          badge.addEventListener('click', (e) => {
-            const keyword = badge.dataset.keyword;
-            keywords = keywords.filter(k => k !== keyword);
-            renderSearchTags();
-            applyFilters();
-          });
+          const label = document.createElement('span');
+          label.textContent = keyword;
+
+          const icon = document.createElement('i');
+          icon.className = 'bi bi-x ms-1';
+          icon.setAttribute('aria-hidden', 'true');
+
+          button.appendChild(label);
+          button.appendChild(icon);
+          elements.searchTags.appendChild(button);
         });
+      }
+
+      function getActiveCategory() {
+        const activeTab = document.querySelector('#categoryTabs .nav-link.active');
+        if (!activeTab) return 'all';
+        const target = activeTab.getAttribute('data-bs-target') || '#all';
+        return target.replace('#', '');
+      }
+
+      function getTargetGrid() {
+        const activeCategory = getActiveCategory();
+        const gridId = CATEGORY_GRID_IDS[activeCategory] || CATEGORY_GRID_IDS.all;
+        return document.getElementById(gridId);
+      }
+
+      function passesImportanceFilter(card, importance) {
+        return importance === 'all' || card.dataset.importance === importance;
+      }
+
+      function passesFreshnessFilter(card, freshness) {
+        if (freshness === 'all') return true;
+        const allowed = FRESHNESS_ALLOWED[freshness];
+        if (!allowed) return true;
+        return allowed.includes(card.dataset.freshnessBucket);
+      }
+
+      function passesKeywordFilter(card) {
+        if (state.keywords.length === 0) return true;
+        const text = card.textContent.toLowerCase();
+        return state.keywords.every((keyword) => text.includes(keyword.toLowerCase()));
       }
 
       function applyFilters() {
-        // Get active tab
-        const activeTab = document.querySelector('#categoryTabs .nav-link.active');
-        const activeTabId = activeTab ? activeTab.getAttribute('data-bs-target').replace('#', '') : 'all';
-
-        // Get cards in the active tab
-        let targetGrid;
-        if (activeTabId === 'all') {
-          targetGrid = document.getElementById('newsGrid');
-        } else if (activeTabId === 'business') {
-          targetGrid = document.getElementById('businessGrid');
-        } else if (activeTabId === 'tools') {
-          targetGrid = document.getElementById('toolsGrid');
-        } else if (activeTabId === 'posts') {
-          targetGrid = document.getElementById('postsGrid');
-        }
-
+        const targetGrid = getTargetGrid();
         if (!targetGrid) return;
 
         const cards = targetGrid.querySelectorAll('.news-card');
-        const importance = importanceFilter.value;
-        const freshness = freshnessFilter.value;
+        const importance = elements.importanceFilter.value;
+        const freshness = elements.freshnessFilter.value;
         let visibleCount = 0;
 
-        cards.forEach(card => {
-          let visible = true;
+        cards.forEach((card) => {
+          const visible =
+            passesImportanceFilter(card, importance) &&
+            passesFreshnessFilter(card, freshness) &&
+            passesKeywordFilter(card);
 
-          // Importance filter
-          if (importance !== 'all') {
-            const cardImportance = card.dataset.importance;
-            if (cardImportance !== importance) visible = false;
-          }
+          const col = card.closest('.col-md-6');
+          if (!col) return;
 
-          // Freshness filter
-          if (freshness !== 'all' && visible) {
-            const cardFreshness = card.dataset.freshnessBucket;
-            if (freshness === '24h' && cardFreshness !== '24h') visible = false;
-            if (freshness === '3d' && !['24h', '72h'].includes(cardFreshness)) visible = false;
-            if (freshness === '7d' && !['24h', '72h', '168h'].includes(cardFreshness)) visible = false;
-          }
-
-          // Keyword filter
-          if (keywords.length > 0 && visible) {
-            const text = card.textContent.toLowerCase();
-            const hasAllKeywords = keywords.every(keyword =>
-              text.includes(keyword.toLowerCase())
-            );
-            if (!hasAllKeywords) visible = false;
-          }
-
-          const colDiv = card.closest('.col-md-6');
-          if (colDiv) {
-            colDiv.style.display = visible ? '' : 'none';
-            if (visible) visibleCount++;
-          }
+          col.style.display = visible ? '' : 'none';
+          if (visible) visibleCount += 1;
         });
 
-        resultsCount.textContent = `${visibleCount} 件の記事を表示中`;
+        elements.resultsCount.textContent = `${visibleCount} 件の記事を表示中`;
       }
 
-      importanceFilter.addEventListener('change', applyFilters);
-      freshnessFilter.addEventListener('change', applyFilters);
-
-      clearFilters.addEventListener('click', () => {
-        searchInput.value = '';
-        keywords = [];
+      function clearAllFilters() {
+        state.keywords = [];
+        elements.searchInput.value = '';
+        elements.importanceFilter.value = 'all';
+        elements.freshnessFilter.value = 'all';
         renderSearchTags();
-        importanceFilter.value = 'all';
-        freshnessFilter.value = 'all';
         applyFilters();
-      });
-
-      // Initial filter application
-      applyFilters();
+      }
     });
   </script>
 </body>

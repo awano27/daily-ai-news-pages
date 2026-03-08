@@ -3,171 +3,345 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Daily AI News — 2026-03-08 20:20 JST</title>
-  <meta name="description" content="Daily AI News は AI 動向を俯瞰できる日本語ダイジェストです。">
-
-  <!-- Bootstrap 5.3 CSS -->
+  <title>Daily AI News — 2026-03-08 22:32 JST</title>
+  <meta name="description" content="Daily AI News は、最新のAIニュースを見逃せない順に整理して表示するダイジェストです。">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 15px;
-    }
-    .navbar-brand {
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-    .news-card {
-      transition: transform 0.2s, box-shadow 0.2s;
-      height: 100%;
-    }
-    .news-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .badge-importance-high { background-color: #dc3545; }
-    .badge-importance-medium { background-color: #ffc107; color: #000; }
-    .badge-importance-low { background-color: #6c757d; }
-    .category-badge { font-size: 0.75rem; }
-    [data-bs-theme="dark"] .news-card {
-      background-color: #212529;
-      border-color: #495057;
-    }
-    [data-bs-theme="dark"] .news-card:hover {
-      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
-    }
-    .nav-tabs .nav-link {
-      cursor: pointer;
-    }
-    .search-tags .badge {
-      cursor: pointer;
+    :root {
+      --page-bg: #f3f6fb;
+      --panel-bg: rgba(255, 255, 255, 0.9);
+      --panel-border: rgba(15, 23, 42, 0.08);
+      --panel-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --text-soft: #64748b;
+      --brand: #0d6efd;
+      --brand-soft: rgba(13, 110, 253, 0.08);
+      --danger-soft: #b42318;
+      --warning-soft: #b54708;
+      --muted-soft: #475467;
     }
 
-    /* Support for legacy card styles from build.py */
+    [data-bs-theme="dark"] {
+      --page-bg: #09111f;
+      --panel-bg: rgba(15, 23, 42, 0.92);
+      --panel-border: rgba(148, 163, 184, 0.14);
+      --panel-shadow: 0 18px 40px rgba(2, 6, 23, 0.35);
+      --text-soft: #94a3b8;
+      --brand-soft: rgba(96, 165, 250, 0.12);
+      --danger-soft: #fda29b;
+      --warning-soft: #fecd57;
+      --muted-soft: #cbd5e1;
+    }
+
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(13, 110, 253, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(13, 110, 253, 0.04), transparent 26%),
+        var(--page-bg);
+      min-height: 100vh;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .surface-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      box-shadow: var(--panel-shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-note {
+      color: var(--text-soft);
+    }
+
+    .metric-card {
+      height: 100%;
+      border-radius: 1rem;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .metric-label {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0;
+    }
+
+    .guide-chip {
+      height: 100%;
+      border-radius: 1rem;
+      padding: 1rem;
+      background: var(--brand-soft);
+      border: 1px solid rgba(13, 110, 253, 0.12);
+    }
+
+    .guide-chip__label {
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    .guide-chip__copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .news-card {
+      position: relative;
+      height: 100%;
+      border-radius: 1rem;
+      border: 1px solid var(--panel-border);
+      background: var(--panel-bg);
+      box-shadow: var(--panel-shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      overflow: hidden;
+    }
+
+    .news-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(13, 110, 253, 0.22);
+    }
+
+    .news-card__header,
+    .news-card__body,
+    .news-card__footer {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
     .news-card__header {
-      padding: 1rem 1rem 0.5rem;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
     }
+
+    .news-card__body {
+      padding-top: 0.25rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .news-card__footer {
+      padding-top: 0.75rem;
+      padding-bottom: 1rem;
+      border-top: 1px solid var(--panel-border);
+    }
+
+    .news-card__rank {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
     .news-card__title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
+      display: inline-block;
       color: inherit;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.06rem;
+      line-height: 1.5;
+      padding-right: 3rem;
     }
+
     .news-card__title:hover {
-      color: #0d6efd;
+      color: var(--brand);
     }
+
     .news-card__meta-top {
       display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
       flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.6rem;
     }
+
+    .news-card__badge,
+    .news-card__freshness,
+    .news-card__reason,
+    .news-card__tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      line-height: 1;
+      padding: 0.45rem 0.7rem;
+    }
+
     .news-card__badge {
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .news-card__badge--high {
+      background: #b42318;
+    }
+
+    .news-card__badge--medium {
+      background: #b54708;
+    }
+
+    .news-card__badge--low {
+      background: #475467;
+    }
+
+    .news-card__freshness {
+      background: rgba(13, 110, 253, 0.1);
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .news-card__reason {
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--text-soft);
       font-weight: 600;
     }
-    .news-card__badge--high {
-      background-color: #dc3545;
-      color: white;
+
+    [data-bs-theme="dark"] .news-card__reason {
+      background: rgba(148, 163, 184, 0.12);
     }
-    .news-card__badge--medium {
-      background-color: #ffc107;
-      color: #000;
-    }
-    .news-card__badge--low {
-      background-color: #6c757d;
-      color: white;
-    }
-    .news-card__freshness,
-    .news-card__score {
-      font-size: 0.875rem;
-      color: #6c757d;
-    }
-    .news-card__body {
-      padding: 0.5rem 1rem;
-    }
+
     .news-card__summary {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 0.75rem;
+      margin: 0;
+      line-height: 1.7;
+      color: var(--muted-soft);
+      font-size: 0.95rem;
     }
+
     .news-card__taglist {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.25rem;
-      margin-bottom: 0.5rem;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
     }
+
     .news-card__tag {
-      display: inline-block;
-      padding: 0.15rem 0.5rem;
-      background-color: #e9ecef;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      text-decoration: none;
-      color: #495057;
-    }
-    .news-card__footer {
-      padding: 0.5rem 1rem 1rem;
-      border-top: 1px solid #dee2e6;
-      font-size: 0.875rem;
-    }
-    .news-card__details {
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-    }
-    .news-card__details > div {
-      display: flex;
-      gap: 0.25rem;
-    }
-    .news-card__details dt {
-      font-weight: 600;
-      color: #6c757d;
-    }
-    .news-card__details dd {
-      margin: 0;
-    }
-    .news-card__rank {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background-color: #0d6efd;
-      color: white;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
+      background: rgba(13, 110, 253, 0.07);
+      color: var(--brand);
       font-weight: 700;
     }
-    .news-card {
+
+    .news-card__details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.8rem;
+      margin: 0;
+    }
+
+    .news-card__details dt {
+      margin-bottom: 0.2rem;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .news-card__details dd {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .news-card__footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+    }
+
+    .news-card__trust {
       position: relative;
-      border: 1px solid #dee2e6;
-      border-radius: 0.5rem;
-      background-color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      padding-left: 1.9rem;
     }
-    [data-bs-theme="dark"] .news-card {
-      background-color: #212529;
-      border-color: #495057;
+
+    .news-card__trust::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1.5rem;
+      height: 0.36rem;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      background: rgba(13, 110, 253, 0.12);
     }
-    [data-bs-theme="dark"] .news-card__tag {
-      background-color: #495057;
-      color: #dee2e6;
+
+    .news-card__trust-bar {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: calc(var(--trust-level, 0) * 1%);
+      height: 0.36rem;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      background: var(--brand);
     }
-    [data-bs-theme="dark"] .news-card__footer {
-      border-top-color: #495057;
+
+    .news-card__trust-note {
+      color: var(--text-soft);
+      font-size: 0.82rem;
+    }
+
+    .news-card__cta {
+      margin-left: auto;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .news-card__cta:hover {
+      text-decoration: underline;
+    }
+
+    .tab-pane .row > [class*="col-"] {
+      margin-bottom: 0;
+    }
+
+    #legacyData {
+      display: none;
+    }
+
+    @media (max-width: 767.98px) {
+      .metric-value {
+        font-size: 1.7rem;
+      }
+
+      .news-card__title {
+        padding-right: 2.2rem;
+      }
+
+      .news-card__footer-meta {
+        align-items: flex-start;
+      }
+
+      .news-card__cta {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -175,131 +349,140 @@
       </a>
       <ul class="navbar-nav ms-auto me-3">
         <li class="nav-item">
-          <a class="nav-link text-white" href="research_resources.html">研究論文リソース</a>
+          <a class="nav-link text-white" href="research_resources.html">研究リソース</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center">
-        <span class="text-white me-3 small">
-          <i class="bi bi-clock"></i> 2026-03-08 20:20 JST
+      <div class="d-flex align-items-center gap-2">
+        <span class="text-white small">
+          <i class="bi bi-clock"></i> 2026-03-08 22:32 JST
         </span>
-        <button class="btn btn-outline-light btn-sm" id="themeToggle" type="button">
+        <button class="btn btn-outline-light btn-sm" id="themeToggle" type="button" aria-label="テーマ切替">
           <i class="bi bi-moon-stars"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <div class="container-fluid py-4">
-    <!-- Stats -->
-    <div class="row g-3 mb-4">
-      <div class="col-md-3 col-sm-6">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title mb-0">37</h5>
-            <p class="card-text text-muted small">総記事数</p>
-          </div>
-        </div>
+  <main class="container-fluid py-4 py-lg-5">
+    <section class="surface-card rounded-4 p-4 p-lg-5 mb-4">
+      <div class="hero-copy">
+        <h1 class="display-6 fw-bold mb-3">今日のAIニュースを、意味が分かる順番でまとめています。</h1>
+        <p class="hero-note mb-0">「スコア 10.0」「信頼度 50/100」のような内部数値は見せず、<strong>見逃せない</strong>、<strong>チェック推奨</strong>、<strong>参考メモ</strong> の3段階で整理しています。</p>
       </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title mb-0">11</h5>
-            <p class="card-text text-muted small">ビジネス</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title mb-0">6</h5>
-            <p class="card-text text-muted small">ツール</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title mb-0">20</h5>
-            <p class="card-text text-muted small">SNS/論文</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Search and Filters -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text"><i class="bi bi-search"></i></span>
-              <input type="text" class="form-control" id="searchInput" placeholder="キーワードで検索...">
-            </div>
-            <div id="searchTags" class="mt-2 search-tags"></div>
+    <section class="row g-3 mb-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="surface-card metric-card p-4">
+          <div class="metric-value">40</div>
+          <p class="metric-label">表示中の記事数</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="surface-card metric-card p-4">
+          <div class="metric-value">12</div>
+          <p class="metric-label">ビジネス</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="surface-card metric-card p-4">
+          <div class="metric-value">8</div>
+          <p class="metric-label">ツール</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="surface-card metric-card p-4">
+          <div class="metric-value">20</div>
+          <p class="metric-label">SNS / 論文</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-card rounded-4 p-4 mb-4">
+      <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-3">
+        <div>
+          <h2 class="h4 mb-2">このページの見方</h2>
+          <p class="text-secondary-emphasis mb-0">並び順は「影響の大きさ」と「新しさ」をもとに自動で決めています。まず上から見れば、大きな話題を追えます。</p>
+        </div>
+        <div class="small text-secondary-emphasis">
+          更新範囲: 36h<br>
+          一次情報や主要メディアは上位に来やすくなります
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="guide-chip">
+            <div class="guide-chip__label">見逃せない</div>
+            <p class="guide-chip__copy">公式発表、大型リリース、資金調達、研究成果など、影響が大きい話題です。</p>
           </div>
-          <div class="col-md-2">
-            <select class="form-select" id="importanceFilter">
-              <option value="all">すべての重要度</option>
-              <option value="high">高 (7.0+)</option>
-              <option value="medium">中 (4.0-6.9)</option>
-              <option value="low">低 (0-3.9)</option>
-            </select>
+        </div>
+        <div class="col-md-4">
+          <div class="guide-chip">
+            <div class="guide-chip__label">チェック推奨</div>
+            <p class="guide-chip__copy">今日の動向を追うなら押さえたい更新です。実用的な新機能や業界トピックが入ります。</p>
           </div>
-          <div class="col-md-2">
-            <select class="form-select" id="freshnessFilter">
-              <option value="all">すべての期間</option>
-              <option value="24h">24時間以内</option>
-              <option value="3d">3日以内</option>
-              <option value="7d">7日以内</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-outline-secondary w-100" id="clearFilters">
-              <i class="bi bi-x-circle"></i> クリア
-            </button>
+        </div>
+        <div class="col-md-4">
+          <div class="guide-chip">
+            <div class="guide-chip__label">参考メモ</div>
+            <p class="guide-chip__copy">個人投稿や補足情報など、背景理解や現場感をつかむための話題です。</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Tabs -->
-    <ul class="nav nav-tabs mb-4" id="categoryTabs" role="tablist">
+    <section class="surface-card rounded-4 p-4 mb-4">
+      <div class="row g-3 align-items-center">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" id="searchInput" placeholder="キーワードで絞り込み">
+          </div>
+          <div id="searchTags" class="mt-2"></div>
+        </div>
+        <div class="col-sm-4 col-lg-2">
+          <select class="form-select" id="importanceFilter" aria-label="注目度で絞り込み">
+            <option value="all">すべての注目度</option>
+            <option value="high">見逃せない</option>
+            <option value="medium">チェック推奨</option>
+            <option value="low">参考メモ</option>
+          </select>
+        </div>
+        <div class="col-sm-4 col-lg-2">
+          <select class="form-select" id="freshnessFilter" aria-label="新しさで絞り込み">
+            <option value="all">すべての時期</option>
+            <option value="24h">24時間以内</option>
+            <option value="3d">3日以内</option>
+            <option value="7d">1週間以内</option>
+          </select>
+        </div>
+        <div class="col-sm-4 col-lg-2">
+          <button class="btn btn-outline-secondary w-100" id="clearFilters" type="button">
+            <i class="bi bi-x-circle"></i> 条件をリセット
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <ul class="nav nav-tabs mb-3" id="categoryTabs" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
-                type="button" role="tab" data-category="all">
-          <i class="bi bi-grid"></i> すべて
-        </button>
+        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" data-category="all" type="button" role="tab">すべて</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business"
-                type="button" role="tab" data-category="business">
-          <i class="bi bi-briefcase"></i> ビジネス
-        </button>
+        <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" data-category="business" type="button" role="tab">ビジネス</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools"
-                type="button" role="tab" data-category="tools">
-          <i class="bi bi-tools"></i> ツール
-        </button>
+        <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools" data-category="tools" type="button" role="tab">ツール</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts"
-                type="button" role="tab" data-category="posts">
-          <i class="bi bi-chat-dots"></i> SNS/論文
-        </button>
+        <button class="nav-link" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" data-category="posts" type="button" role="tab">SNS / 論文</button>
       </li>
     </ul>
 
-    <!-- Results Count -->
-    <div class="alert alert-info" role="status" id="resultsCount">
-      37 件の記事を表示中
-    </div>
+    <div class="alert alert-primary mb-4" id="resultsCount" role="status">40件を表示中</div>
 
-    <!-- News Grid -->
-    <div class="tab-content" id="categoryTabContent">
-      <div class="tab-pane fade show active" id="all" role="tabpanel">
-        <div class="row g-4" id="newsGrid">
-                <article class="news-card"
+    <div id="legacyData">
+      <article class="news-card"
         role="listitem"
         data-category="business"
         data-importance="high"
@@ -315,9 +498,9 @@
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rnf8fx/i_created_a_mathematical_framework_for_ai/" target="_blank" rel="noopener">I created a mathematical framework for AI Alignment and I would like to work with people in the alignment community as collaborators. I appreciate all the help and support I can get.</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 21.7">スコア 21.7</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -349,10 +532,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rnf8fx/i_created_a_mathematical_framework_for_ai/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -363,21 +547,21 @@
         role="listitem"
         data-category="business"
         data-importance="high"
-        data-score="19.80"
-        data-freshness="80"
-        data-freshness-bucket="24h"
+        data-score="18.80"
+        data-freshness="60"
+        data-freshness-bucket="72h"
         data-published-ms="1772883865000"
         data-rank="2"
-        data-tags="ビジネス,注目,新着"
+        data-tags="ビジネス,注目,最近"
         data-source="techcrunchjapan">
         <header class="news-card__header">
           <span class="news-card__rank" aria-label="順位 2">#02</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://techcrunch.com/2026/03/07/openai-robotics-lead-caitlin-kalinowski-quits-in-response-to-pentagon-deal/" target="_blank" rel="noopener">OpenAI robotics lead Caitlin Kalinowski quits in response to Pentagon deal</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 19.8">スコア 19.8</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -386,7 +570,7 @@
           <div class="news-card__taglist">
             <span class="news-card__tag">ビジネス</span>
             <span class="news-card__tag">注目</span>
-            <span class="news-card__tag">新着</span>
+            <span class="news-card__tag">最近</span>
           </div>
         </div>
         <footer class="news-card__footer">
@@ -409,11 +593,73 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 業界メディア">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 業界メディア
             </span>
+            <span class="news-card__trust-note">専門メディアによる解説や報道</span>
             <a class="news-card__cta" href="https://techcrunch.com/2026/03/07/openai-robotics-lead-caitlin-kalinowski-quits-in-response-to-pentagon-deal/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="17.00"
+        data-freshness="90"
+        data-freshness-bucket="24h"
+        data-published-ms="1772941349000"
+        data-rank="3"
+        data-tags="ビジネス,注目,新着"
+        data-source="redditai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1ro3xzb/position_paper_on_ai_oversight_quality_as_a/" target="_blank" rel="noopener">Position paper on AI oversight quality as a training signal — written with Claude, by an actuary. Feedback welcome on whether the mechanism holds.</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">2月の人類対国防総省の状況をきっかけに、私はこのような枠組みで見たことのないガバナンスの問題について考えるようになった。つまり、AI企業が特定の用途を拒否すべきかどうかではなく、その出力に対する人間の監視が低品質だったりおざなりだったりした場合にAIモデルはどうなるのか、そのパターンがトレーニングデータに組み込まれるのだ。議論を簡単に説明すると、人間がその出力を純粋にレビューしていない状況で AI が成功し、その成功がポジティブなトレーニング信号として扱われる場合、人間の離脱を許容できるものとして扱うようにモデルを体系的にトレーニングしている可能性があります。問題は分布にあります。個々のレビュ...</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-08T12:42:29+09:00" title="2026-03-08 12:42 JST">03/08 12:42</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 コミュニティ
+            </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1ro3xzb/position_paper_on_ai_oversight_quality_as_a/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -427,17 +673,17 @@
         data-freshness="90"
         data-freshness-bucket="24h"
         data-published-ms="1772934815000"
-        data-rank="3"
+        data-rank="4"
         data-tags="ビジネス,注目,新着"
         data-source="redditai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1ro1ybn/anthropicc_claude_found_22_vulnerabilities_in/" target="_blank" rel="noopener">Anthropic'c Claude found 22 vulnerabilities in Firefox in just two weeks</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 16.5">スコア 16.5</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -469,71 +715,12 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1ro1ybn/anthropicc_claude_found_22_vulnerabilities_in/" target="_blank" rel="noopener">原文を開く</a>
-          </div>
-        </footer>
-      </article>
-
-
-      <article class="news-card"
-        role="listitem"
-        data-category="business"
-        data-importance="high"
-        data-score="14.40"
-        data-freshness="80"
-        data-freshness-bucket="24h"
-        data-published-ms="1772887473000"
-        data-rank="4"
-        data-tags="ビジネス,注目,新着"
-        data-source="redditai">
-        <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 4">#04</span>
-          <div class="news-card__headline">
-            <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rnmbpr/openai_robotics_head_resigns_after_deal_with/" target="_blank" rel="noopener">OpenAI Robotics head resigns after deal with Pentagon</a>
-            <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 14.4">スコア 14.4</span>
-            </div>
-          </div>
-        </header>
-        <div class="news-card__body">
-          <p class="news-card__summary">&amp;#32;によって送信されました &amp;#32;  /u/esporx [リンク] &amp;#32; [コメント]</p>
-          <div class="news-card__taglist">
-            <span class="news-card__tag">ビジネス</span>
-            <span class="news-card__tag">注目</span>
-            <span class="news-card__tag">新着</span>
-          </div>
-        </div>
-        <footer class="news-card__footer">
-          <dl class="news-card__details">
-            <div>
-              <dt>ソース</dt>
-              <dd>Reddit AI</dd>
-            </div>
-            <div>
-              <dt>更新</dt>
-              <dd><time datetime="2026-03-07T21:44:33+09:00" title="2026-03-07 21:44 JST">03/07 21:44</time></dd>
-            </div>
-            <div>
-              <dt>所要時間</dt>
-              <dd>1分で読めます</dd>
-            </div>
-            <div>
-              <dt>翻訳</dt>
-              <dd>翻訳: 日本語 / 原文: 英語</dd>
-            </div>
-          </dl>
-          <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
-              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
-            </span>
-            <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rnmbpr/openai_robotics_head_resigns_after_deal_with/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -555,9 +742,9 @@
           <div class="news-card__headline">
             <a class="news-card__title" href="https://techcrunch.com/2026/03/07/a-roadmap-for-ai-if-anyone-will-listen/" target="_blank" rel="noopener">A roadmap for AI, if anyone will listen</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 13.4">スコア 13.4</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -589,11 +776,73 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 業界メディア">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 業界メディア
             </span>
+            <span class="news-card__trust-note">専門メディアによる解説や報道</span>
             <a class="news-card__cta" href="https://techcrunch.com/2026/03/07/a-roadmap-for-ai-if-anyone-will-listen/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="high"
+        data-score="13.40"
+        data-freshness="60"
+        data-freshness-bucket="72h"
+        data-published-ms="1772887473000"
+        data-rank="6"
+        data-tags="ビジネス,注目,最近"
+        data-source="redditai">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rnmbpr/openai_robotics_head_resigns_after_deal_with/" target="_blank" rel="noopener">OpenAI Robotics head resigns after deal with Pentagon</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">&amp;#32;によって送信されました &amp;#32;  /u/esporx [リンク] &amp;#32; [コメント]</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Reddit AI</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-07T21:44:33+09:00" title="2026-03-07 21:44 JST">03/07 21:44</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 コミュニティ
+            </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
+            <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rnmbpr/openai_robotics_head_resigns_after_deal_with/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -607,17 +856,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772872121000"
-        data-rank="6"
+        data-rank="7"
         data-tags="ビジネス,注目,最近"
         data-source="techcrunchjapan">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://techcrunch.com/2026/03/07/openai-delays-chatgpts-adult-mode-again/" target="_blank" rel="noopener">OpenAI delays ChatGPT’s ‘adult mode’ again</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 12.4">スコア 12.4</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -649,10 +898,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 業界メディア">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 業界メディア
             </span>
+            <span class="news-card__trust-note">専門メディアによる解説や報道</span>
             <a class="news-card__cta" href="https://techcrunch.com/2026/03/07/openai-delays-chatgpts-adult-mode-again/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -667,17 +917,17 @@
         data-freshness="80"
         data-freshness-bucket="24h"
         data-published-ms="1772892000000"
-        data-rank="7"
+        data-rank="8"
         data-tags="ビジネス,注目,新着"
         data-source="itmediaai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://atmarkit.itmedia.co.jp/ait/articles/2603/08/news001.html" target="_blank" rel="noopener">“アフターAIの世界”、エンジニアは何者になるのか？</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 11.0">スコア 11.0</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -709,10 +959,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 業界メディア">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 業界メディア
             </span>
+            <span class="news-card__trust-note">専門メディアによる解説や報道</span>
             <a class="news-card__cta" href="https://atmarkit.itmedia.co.jp/ait/articles/2603/08/news001.html" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -727,22 +978,22 @@
         data-freshness="80"
         data-freshness-bucket="24h"
         data-published-ms="1772907699000"
-        data-rank="8"
+        data-rank="9"
         data-tags="ビジネス,注目,新着"
         data-source="redditai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 8">#08</span>
+          <span class="news-card__rank" aria-label="順位 9">#09</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rntuvm/how_long_do_you_think_before_pornstars_are/" target="_blank" rel="noopener">How long do you think before pornstars are completely replaced by AI?</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 8.2">スコア 8.2</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
         <div class="news-card__body">
-          <p class="news-card__summary">TLDR: 大人のスターたちはすぐに仕事を失ってしまいます。ここ数年で AI 生成ポルノが台頭し、その間にそれが急速に進歩したことを考えると、ポルノスターや Onlyfans クリエイターなどのアダルト エンターテイナーは 10 年以内に完全に人工知能に取って代わられる可能性があります。 AIポルノはすでにアダルトスター業界のほぼ半分を年間1,400億ドル以上の収益を生み出しており、2024年には推定655億ドルに達し、その数字は年々増加している。アダルトチャット内のやり取りのほとんどはすでにAIに置き換えられており、AIのビデオはpornhubなどのトップポルノサイトすべてで見られるようにな...</p>
+          <p class="news-card__summary">TLDR: 大人のスターたちはすぐに仕事を失ってしまいます。ここ数年で AI 生成ポルノが台頭し、その間にそれが急速に進歩したことを考えると、ポルノスターや Onlyfans クリエイターなどのアダルト エンターテイナーは 10 年以内に完全に人工知能に取って代わられる可能性があります。 AIポルノはすでにアダルトスター業界のほぼ半分を年間1,400億ドル以上の収益を生み出しており、2024年には推定655億ドルに達し、その数字は年々増加している。アダルトチャット内のやり取りのほとんどはすでにAIに置き換えられており、そのビデオはpornhubのようなトップポルノサイトのすべてで見つけることが...</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">ビジネス</span>
             <span class="news-card__tag">注目</span>
@@ -769,11 +1020,75 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rntuvm/how_long_do_you_think_before_pornstars_are/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="business"
+        data-importance="medium"
+        data-score="6.50"
+        data-freshness="90"
+        data-freshness-bucket="24h"
+        data-published-ms="1772942105000"
+        data-rank="10"
+        data-tags="ビジネス,新着"
+        data-source="hackernews">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 10">#10</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://huggingface.co/datasets/louidev/glassballai" target="_blank" rel="noopener">Show HN: I logged Gemini's stock predictions for 38 days to study LLM drift</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">記事URL：https://huggingface.co/datasets/louidev/glassballai
+      コメントURL：https://news.ycombinator.com/item?id=47296932
+      ポイント: 4
+      # コメント: 1</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ビジネス</span>
+            <span class="news-card__tag">新着</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Hacker News</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-08T12:55:05+09:00" title="2026-03-08 12:55 JST">03/08 12:55</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 参考情報">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 参考情報
+            </span>
+            <span class="news-card__trust-note">補助的に見るのが向いている情報</span>
+            <a class="news-card__cta" href="https://huggingface.co/datasets/louidev/glassballai" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -787,17 +1102,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772877207000"
-        data-rank="9"
+        data-rank="11"
         data-tags="ビジネス,最近"
         data-source="redditai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 9">#09</span>
+          <span class="news-card__rank" aria-label="順位 11">#11</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rnhzxx/codegraphcontext_an_mcp_server_that_converts_your/" target="_blank" rel="noopener">CodeGraphContext - An MCP server that converts your codebase into a graph database, enabling AI assistants and humans to retrieve precise, structured context</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 4.8">スコア 4.8</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -828,10 +1143,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rnhzxx/codegraphcontext_an_mcp_server_that_converts_your/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -841,84 +1157,22 @@
       <article class="news-card"
         role="listitem"
         data-category="business"
-        data-importance="low"
-        data-score="2.00"
-        data-freshness="90"
-        data-freshness-bucket="24h"
-        data-published-ms="1772927009000"
-        data-rank="10"
-        data-tags="ビジネス,新着"
-        data-source="hackernews">
-        <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 10">#10</span>
-          <div class="news-card__headline">
-            <a class="news-card__title" href="https://lr0.org/blog/p/gpt/" target="_blank" rel="noopener">I'm Not Consulting an LLM</a>
-            <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--low" aria-label="重要度 重要度 低">重要度 低</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 2.0">スコア 2.0</span>
-            </div>
-          </div>
-        </header>
-        <div class="news-card__body">
-          <p class="news-card__summary">記事URL：https://lr0.org/blog/p/gpt/
-      コメントURL：https://news.ycombinator.com/item?id=47295670
-      ポイント: 42
-      # コメント: 34</p>
-          <div class="news-card__taglist">
-            <span class="news-card__tag">ビジネス</span>
-            <span class="news-card__tag">新着</span>
-          </div>
-        </div>
-        <footer class="news-card__footer">
-          <dl class="news-card__details">
-            <div>
-              <dt>ソース</dt>
-              <dd>Hacker News</dd>
-            </div>
-            <div>
-              <dt>更新</dt>
-              <dd><time datetime="2026-03-08T08:43:29+09:00" title="2026-03-08 08:43 JST">03/08 08:43</time></dd>
-            </div>
-            <div>
-              <dt>所要時間</dt>
-              <dd>1分で読めます</dd>
-            </div>
-            <div>
-              <dt>翻訳</dt>
-              <dd>翻訳: 日本語 / 原文: 英語</dd>
-            </div>
-          </dl>
-          <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
-              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
-            </span>
-            <a class="news-card__cta" href="https://lr0.org/blog/p/gpt/" target="_blank" rel="noopener">原文を開く</a>
-          </div>
-        </footer>
-      </article>
-
-
-      <article class="news-card"
-        role="listitem"
-        data-category="business"
-        data-importance="low"
-        data-score="2.00"
-        data-freshness="80"
-        data-freshness-bucket="24h"
+        data-importance="high"
+        data-score="10.00"
+        data-freshness="60"
+        data-freshness-bucket="72h"
         data-published-ms="1772884514000"
-        data-rank="11"
-        data-tags="ビジネス,新着"
+        data-rank="12"
+        data-tags="ビジネス,注目,最近"
         data-source="redditai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 11">#11</span>
+          <span class="news-card__rank" aria-label="順位 12">#12</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/artificial/comments/1rnl3xu/when_doge_unleashed_chatgpt_on_the_humanities/" target="_blank" rel="noopener">When DOGE Unleashed ChatGPT on the Humanities (Gift Article)</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--low" aria-label="重要度 重要度 低">重要度 低</span>
-              <span class="news-card__freshness" aria-label="鮮度 🕐 新鮮">🕐 新鮮</span>
-              <span class="news-card__score" aria-label="重要度スコア 2.0">スコア 2.0</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -926,7 +1180,8 @@
           <p class="news-card__summary">LLM の悪用の特にひどい例: 「原告側の弁護士は、フォックス氏の最初の ChatGPT 検索で、奴隷労働者だったユダヤ人女性に関するドキュメンタリーを含む、ホロコーストに関連する多くのプロジェクトにフラグが立てられたことも指摘しました。ChatGPT に同意するかと問われ、フォックス氏は次のように述べました。「これはユダヤ人であり、特にユダヤ文化に焦点を当てており、その文化の中で疎外されている女性の声を増幅させています。」それは本質的にDEIに関連しています。そのためです。”” &amp;#32;によって送信されました &amp;#32;  /u/DrQuestDFA [リンク] &amp;#32; [コメント]</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">ビジネス</span>
-            <span class="news-card__tag">新着</span>
+            <span class="news-card__tag">注目</span>
+            <span class="news-card__tag">最近</span>
           </div>
         </div>
         <footer class="news-card__footer">
@@ -949,11 +1204,74 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/artificial/comments/1rnl3xu/when_doge_unleashed_chatgpt_on_the_humanities/" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="90"
+        data-freshness-bucket="24h"
+        data-published-ms="1772942400000"
+        data-rank="1"
+        data-tags="ツール,新着,一次情報"
+        data-source="towardsdatascience">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 1">#01</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://towardsdatascience.com/latentvla-latent-reasoning-models-for-autonomous-driving/" target="_blank" rel="noopener">LatentVLA: Latent Reasoning Models for Autonomous Driving</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">自然言語が運転に最適な抽象化ではない場合はどうなるでしょうか?
+      LatentVLA: 自動運転のための潜在的推論モデルの投稿は、Towards Data Science に最初に掲載されました。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">新着</span>
+            <span class="news-card__tag">一次情報</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Towards Data Science</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-08T13:00:00+09:00" title="2026-03-08 13:00 JST">03/08 13:00</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>翻訳: 日本語 / 原文: 英語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 研究ソース">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 研究ソース
+            </span>
+            <span class="news-card__trust-note">論文や研究機関の公開情報</span>
+            <a class="news-card__cta" href="https://towardsdatascience.com/latentvla-latent-reasoning-models-for-autonomous-driving/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -967,17 +1285,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772872975000"
-        data-rank="1"
+        data-rank="2"
         data-tags="ツール,最近"
         data-source="redditmachinelearning">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 1">#01</span>
+          <span class="news-card__rank" aria-label="順位 2">#02</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1rng5px/p_introducing_nnsight_v06_opensource/" target="_blank" rel="noopener">[P] Introducing NNsight v0.6: Open-source Interpretability Toolkit for LLMs</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1008,10 +1326,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1rng5px/p_introducing_nnsight_v06_opensource/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1026,17 +1345,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772868674000"
-        data-rank="2"
+        data-rank="3"
         data-tags="ツール,最近"
         data-source="redditmachinelearning">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 2">#02</span>
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1rnebal/p_combining_stanfords_ace_paper_with_the/" target="_blank" rel="noopener">[P] Combining Stanford's ACE paper with the Reflective Language Model pattern - agents that write code to analyze their own execution traces at scale</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1067,10 +1386,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1rnebal/p_combining_stanfords_ace_paper_with_the/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1085,17 +1405,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772867747000"
-        data-rank="3"
+        data-rank="4"
         data-tags="ツール,最近"
         data-source="redditmachinelearning">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1rndxi9/r_i_built_a_safety_oracle_for_l4_autonomous/" target="_blank" rel="noopener">[R] I built a "Safety Oracle" for L4 Autonomous Driving using Flow Matching (and why it's better than standard Heuristics).</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1126,10 +1446,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1rndxi9/r_i_built_a_safety_oracle_for_l4_autonomous/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1144,17 +1465,17 @@
         data-freshness="60"
         data-freshness-bucket="72h"
         data-published-ms="1772855166000"
-        data-rank="4"
+        data-rank="5"
         data-tags="ツール,最近"
         data-source="redditmachinelearning">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 4">#04</span>
+          <span class="news-card__rank" aria-label="順位 5">#05</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://www.reddit.com/r/MachineLearning/comments/1rn94cx/d_image_augmentation_in_practice_indistribution/" target="_blank" rel="noopener">[D] Image Augmentation in Practice: In-Distribution vs OOD Augmentations, TTA, and the Manifold View</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 📄 普通">📄 普通</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1185,10 +1506,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://www.reddit.com/r/MachineLearning/comments/1rn94cx/d_image_augmentation_in_practice_indistribution/" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1200,38 +1522,40 @@
         data-category="tools"
         data-importance="medium"
         data-score="5.00"
-        data-freshness="47"
-        data-freshness-bucket="168h"
-        data-published-ms="1772704800000"
-        data-rank="5"
-        data-tags="ツール"
-        data-source="humai">
+        data-freshness="58"
+        data-freshness-bucket="72h"
+        data-published-ms="1772787600000"
+        data-rank="6"
+        data-tags="ツール,最近,一次情報"
+        data-source="openai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 5">#05</span>
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
           <div class="news-card__headline">
-            <a class="news-card__title" href="https://humai.blog" target="_blank" rel="noopener">OpenAI launches GPT-5.4 with Native Computer Control and Enhanced Reasoning Capabilities</a>
+            <a class="news-card__title" href="https://openai.com/news/gpt-5-4-release" target="_blank" rel="noopener">OpenAIがGPT-5.4およびGPT-5.4 Proをリリース</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 🗂️ 古い">🗂️ 古い</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 3日以内">3日以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
         <div class="news-card__body">
-          <p class="news-card__summary">OpenAIは、推論能力を強化し、ネイティブなコンピュータ操作機能を備えた新モデル「GPT-5.4」をリリース。複雑なプログラミングや、ドキュメント・スプレッドシートを扱う専門的なワークフローの効率化を支援する。</p>
+          <p class="news-card__summary">OpenAIは、推論能力、コーディング支援、ツール利用機能を強化した最新モデル「GPT-5.4」および「GPT-5.4 Pro」を公開しました。ChatGPT、API、Codexを通じて提供され、複雑なドキュメント処理やソフトウェア開発ワークフローの効率化を支援します。</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">最近</span>
+            <span class="news-card__tag">一次情報</span>
           </div>
         </div>
         <footer class="news-card__footer">
           <dl class="news-card__details">
             <div>
               <dt>ソース</dt>
-              <dd>Humai</dd>
+              <dd>OpenAI</dd>
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-05T19:00:00+09:00" title="2026-03-05 19:00 JST">03/05 19:00</time></dd>
+              <dd><time datetime="2026-03-06T18:00:00+09:00" title="2026-03-06 18:00 JST">03/06 18:00</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1243,11 +1567,72 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
-              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+            <span class="news-card__trust" aria-label="情報源 一次情報">
+              <span class="news-card__trust-bar" style="--trust-level:95%"></span>
+              情報源 一次情報
             </span>
-            <a class="news-card__cta" href="https://humai.blog" target="_blank" rel="noopener">原文を開く</a>
+            <span class="news-card__trust-note">企業や開発元の公式発表</span>
+            <a class="news-card__cta" href="https://openai.com/news/gpt-5-4-release" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+
+      <article class="news-card"
+        role="listitem"
+        data-category="tools"
+        data-importance="medium"
+        data-score="5.00"
+        data-freshness="21"
+        data-freshness-bucket="168h"
+        data-published-ms="1772524800000"
+        data-rank="7"
+        data-tags="ツール,一次情報"
+        data-source="googleaifordevelopers">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://ai.google.dev/gemini-api/docs/models/gemini-3-1" target="_blank" rel="noopener">GoogleがGemini 3.1 Flash-Lite Previewを公開</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 1週間以内">1週間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">GoogleはGemini 3シリーズの最新モデル「Gemini 3.1 Flash-Lite Preview」をリリースしました。高速かつ高効率な推論に最適化されており、大量のデータ処理や低レイテンシが求められる開発者向けユースケースをサポートします。</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">ツール</span>
+            <span class="news-card__tag">一次情報</span>
+          </div>
+        </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>Google AI for Developers</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-03T17:00:00+09:00" title="2026-03-03 17:00 JST">03/03 17:00</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 一次情報">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 一次情報
+            </span>
+            <span class="news-card__trust-note">企業や開発元の公式発表</span>
+            <a class="news-card__cta" href="https://ai.google.dev/gemini-api/docs/models/gemini-3-1" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -1261,22 +1646,22 @@
         data-freshness="20"
         data-freshness-bucket="168h"
         data-published-ms="1772445600000"
-        data-rank="6"
+        data-rank="8"
         data-tags="ツール"
-        data-source="radicaldatascience">
+        data-source="sakanaai">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
           <div class="news-card__headline">
-            <a class="news-card__title" href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtgDhTYH_Y-DN5TneRsTNCEcWasK_qsRKXxVeOZ2lUPmRcS0URNZ58JZ4pfxUyVHGsySJq8B-kovFmMMBXZa7eCPWwTcNxtFonkTGiebJWFnL9221wvrJ19jm7GMVGi6EGIv4jZmADRa4Jfq_YiRhNijW46Vjfv4nA8HLF4C-QN-sSt_XxY4LMRI131GzgDM6ahMh6ZQrxAQYY0w==" target="_blank" rel="noopener">Sakana AI releases open Doc-to-LoRA and Text-to-LoRA</a>
+            <a class="news-card__title" href="https://sakana.ai/blog/lora-adapters" target="_blank" rel="noopener">Sakana AIが「Doc-to-LoRA」および「Text-to-LoRA」を公開</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 重要度 中">重要度 中</span>
-              <span class="news-card__freshness" aria-label="鮮度 🗂️ 古い">🗂️ 古い</span>
-              <span class="news-card__score" aria-label="重要度スコア 5.0">スコア 5.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 1週間以内">1週間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
         <div class="news-card__body">
-          <p class="news-card__summary">Sakana AIは、大規模言語モデルを再学習させずにLoRAアダプターを生成する「Doc-to-LoRA」と「Text-to-LoRA」を公開。ハイパーネットワークを一度訓練するだけで、単一のフォワードパスでモデルの重みを更新可能にする。</p>
+          <p class="news-card__summary">Sakana AIは、大規模言語モデルを再学習させることなく、単一のフォワードパスでLoRAアダプターを生成する新システムを公開しました。ハイパーネットワークを用いることで、モデルに新しい知識やスキルを即座に追加可能にします。</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">ツール</span>
           </div>
@@ -1285,7 +1670,7 @@
           <dl class="news-card__details">
             <div>
               <dt>ソース</dt>
-              <dd>Radical Data Science</dd>
+              <dd>Sakana AI</dd>
             </div>
             <div>
               <dt>更新</dt>
@@ -1301,11 +1686,12 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 参考情報">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 参考情報
             </span>
-            <a class="news-card__cta" href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtgDhTYH_Y-DN5TneRsTNCEcWasK_qsRKXxVeOZ2lUPmRcS0URNZ58JZ4pfxUyVHGsySJq8B-kovFmMMBXZa7eCPWwTcNxtFonkTGiebJWFnL9221wvrJ19jm7GMVGi6EGIv4jZmADRa4Jfq_YiRhNijW46Vjfv4nA8HLF4C-QN-sSt_XxY4LMRI131GzgDM6ahMh6ZQrxAQYY0w==" target="_blank" rel="noopener">原文を開く</a>
+            <span class="news-card__trust-note">補助的に見るのが向いている情報</span>
+            <a class="news-card__cta" href="https://sakana.ai/blog/lora-adapters" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
@@ -1314,82 +1700,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="8.50"
+        data-importance="medium"
+        data-score="4.00"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772994060000"
+        data-published-ms="1772976983100"
         data-rank="1"
-        data-tags="sns/論文,注目,新着"
-        data-source="gizmodo">
+        data-tags="sns/論文,新着"
+        data-source="xsnsenhanced">
         <header class="news-card__header">
           <span class="news-card__rank" aria-label="順位 1">#01</span>
           <div class="news-card__headline">
-            <a class="news-card__title" href="https://gizmodo.com/ai-company-simile-public-opinion-research-100-million-2026-03-08" target="_blank" rel="noopener">An AI Company Apparently Inspired by 'the Sims' Wants to Revolutionize Public Opinion Research</a>
-            <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 8.5">スコア 8.5</span>
-            </div>
-          </div>
-        </header>
-        <div class="news-card__body">
-          <p class="news-card__summary">AIスタートアップのSimileが、人間の行動を予測する基盤モデル開発で1億ドルの資金調達を実施。個人のインタビューデータから「デジタルツイン」を生成し、世論調査や行動予測に活用する技術で注目を集めている。</p>
-          <div class="news-card__taglist">
-            <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
-            <span class="news-card__tag">新着</span>
-          </div>
-        </div>
-        <footer class="news-card__footer">
-          <dl class="news-card__details">
-            <div>
-              <dt>ソース</dt>
-              <dd>Gizmodo</dd>
-            </div>
-            <div>
-              <dt>更新</dt>
-              <dd><time datetime="2026-03-09T03:21:00+09:00" title="2026-03-09 03:21 JST">03/09 03:21</time></dd>
-            </div>
-            <div>
-              <dt>所要時間</dt>
-              <dd>1分で読めます</dd>
-            </div>
-            <div>
-              <dt>翻訳</dt>
-              <dd>原文: 日本語</dd>
-            </div>
-          </dl>
-          <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
-              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
-            </span>
-            <a class="news-card__cta" href="https://gizmodo.com/ai-company-simile-public-opinion-research-100-million-2026-03-08" target="_blank" rel="noopener">原文を開く</a>
-          </div>
-        </footer>
-      </article>
-
-
-      <article class="news-card"
-        role="listitem"
-        data-category="posts"
-        data-importance="high"
-        data-score="10.00"
-        data-freshness="100"
-        data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="2"
-        data-tags="sns/論文,注目,新着"
-        data-source="xsnsenhanced">
-        <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 2">#02</span>
-          <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/tom_doerr/status/2009977563783794841" target="_blank" rel="noopener">Xポスト tom_doerr</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1397,7 +1723,6 @@
           <p class="news-card__summary">多言語サポートを備えたエージェント構築コース https://t.co/TSgH7rIxni https://t.co/J9wnr2ROW7</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1409,7 +1734,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555059+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100114+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1421,10 +1746,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/tom_doerr/status/2009977563783794841" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1434,22 +1760,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.50"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="3"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="2"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 3">#03</span>
+          <span class="news-card__rank" aria-label="順位 2">#02</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/minchoi/status/2009838886722109854" target="_blank" rel="noopener">Xポスト minchoi</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -1457,7 +1783,6 @@
           <p class="news-card__summary">これは文字通り、Claude Code の作成者 Boris をベースにした Claude Code Setup Cheatsheet です。これを保存します。 https://t.co/hJCbonwVQ0</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1469,7 +1794,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555057+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100111+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1481,10 +1806,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/minchoi/status/2009838886722109854" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1494,22 +1820,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="low"
+        data-score="3.90"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="4"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="3"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 4">#04</span>
+          <span class="news-card__rank" aria-label="順位 3">#03</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/koder_dev/status/2009928217835253936" target="_blank" rel="noopener">Xポスト koder_dev</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--low" aria-label="重要度 参考メモ">参考メモ</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 個人の観測や現場の反応を知るための話題">個人の観測や現場の反応を知るための話題</span>
             </div>
           </div>
         </header>
@@ -1517,7 +1843,6 @@
           <p class="news-card__summary">ここだけの話、エンジニアがデザインの資料探すときにこのリポジトリあれば9割近く解決すると思う https://t.co/BnBGldifiW</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1529,7 +1854,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555054+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100109+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1541,10 +1866,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/koder_dev/status/2009928217835253936" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1554,22 +1880,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="4.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="5"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="4"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 5">#05</span>
+          <span class="news-card__rank" aria-label="順位 4">#04</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/0x0SojalSec/status/2009709579903643768" target="_blank" rel="noopener">Xポスト 0x0SojalSec</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1577,7 +1903,6 @@
           <p class="news-card__summary">完全な AI エージェント A から Z までの 42 の n8n エージェント テンプレートをオープンソースで提供✨ - https://t.co/XUUId3Irsw https://t.co/vyTGRmRzZ1</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1589,7 +1914,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555052+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100105+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1601,10 +1926,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/0x0SojalSec/status/2009709579903643768" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1614,30 +1940,29 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.80"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="6"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="5"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 6">#06</span>
+          <span class="news-card__rank" aria-label="順位 5">#05</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/aiwithmayank/status/2009593715753726256" target="_blank" rel="noopener">Xポスト aiwithmayank</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
         <div class="news-card__body">
-          <p class="news-card__summary">5. セールス ページ + オファー ビルダー " &lt;system_context&gt; あなたは、以下を統合するコンバージョン最適化スペシャリストです。 - Alex Hormozi (価値方程式、オファー デザイン、「グランド スラム オファー」) - David Ogilvy (ヘッドラインの習得、調査に基づいたコピー、長文説得) - Joanna Wiebe (コンバージョン)</p>
+          <p class="news-card__summary">5. セールス ページ + オファー ビルダー " &lt;system_context&gt; あなたは、以下を統合するコンバージョン最適化スペシャリストです。 - Alex Hormozi (価値方程式、オファー デザイン、「グランド スラム オファー」) - David Ogilvy (ヘッドラインの習得、調査に基づいたコピー、長文の説得) - Joanna Wiebe (コンバージョン)</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1649,7 +1974,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555049+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100103+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1661,10 +1986,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/aiwithmayank/status/2009593715753726256" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1674,22 +2000,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="4.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="7"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="6"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 7">#07</span>
+          <span class="news-card__rank" aria-label="順位 6">#06</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/SuguruKun_ai/status/2009589769748226554" target="_blank" rel="noopener">Xポスト SuguruKun_ai</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1697,7 +2023,6 @@
           <p class="news-card__summary">CES 2026 がすごい。 ᅠ AI・XR・ロボット、スマホの世界最先端が一挙に発表されている。 ᅠ 今の時点だけでも、発表内容がやばすぎる : ᅠ 衝撃的な発表10選をまとめました👇🧵 https://t.co/IZqT1juMnx</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1709,7 +2034,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555045+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100101+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1721,10 +2046,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/SuguruKun_ai/status/2009589769748226554" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1734,22 +2060,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.10"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="8"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="7"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 8">#08</span>
+          <span class="news-card__rank" aria-label="順位 7">#07</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/CharlieK_news/status/2009429309002301483" target="_blank" rel="noopener">Xポスト CharlieK_news</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -1757,7 +2083,6 @@
           <p class="news-card__summary">🚨速報: イーロン・マスクは、世界中で言論の自由を擁護した功績で、ノーベル平和賞にノミネートされました。早速腸チェック。本物であれ。今のところ、イーロン・マスクをどの程度信頼していますか? A. 100%です。 B. 75% C.50% D. 25%。 E. 0% 人々に話してもらいましょう。 Xでこれを爆破してください👏🔥 https://t.co/88smOEwStI</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1769,7 +2094,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555042+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100098+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1781,10 +2106,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/CharlieK_news/status/2009429309002301483" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1795,21 +2121,21 @@
         role="listitem"
         data-category="posts"
         data-importance="high"
-        data-score="10.00"
+        data-score="11.20"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="9"
+        data-published-ms="1772976983100"
+        data-rank="8"
         data-tags="sns/論文,注目,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 9">#09</span>
+          <span class="news-card__rank" aria-label="順位 8">#08</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/oikon48/status/2009452552958742751" target="_blank" rel="noopener">Xポスト oikon48</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--high" aria-label="重要度 見逃せない">見逃せない</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 大型アップデートや業界への影響が大きい話題">大型アップデートや業界への影響が大きい話題</span>
             </div>
           </div>
         </header>
@@ -1829,7 +2155,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555039+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100096+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1841,10 +2167,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/oikon48/status/2009452552958742751" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1854,22 +2181,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.50"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="10"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="9"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 10">#10</span>
+          <span class="news-card__rank" aria-label="順位 9">#09</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/j_kun_ml/status/2009037582374519121" target="_blank" rel="noopener">Xポスト j_kun_ml</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -1877,7 +2204,6 @@
           <p class="news-card__summary">海外で、Claude Codeのプラグイン"Ralph Wiggum"がとんでもなくバズっている。笑 この @mattpocockuk の動画きっかけで超絶バズってる。 かなりわかりやすい動画なので、英語苦手な方もNotebookLM等で理解しておくと良いです。 "Ralph Wiggum"は簡単に言うと、jsonファイルでClaude https://t.co/DhTcRxkrLc</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1889,7 +2215,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555036+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100095+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1901,10 +2227,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/j_kun_ml/status/2009037582374519121" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1914,22 +2241,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="6.10"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="11"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="10"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 11">#11</span>
+          <span class="news-card__rank" aria-label="順位 10">#10</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/JulianGoldieSEO/status/2008158167352725977" target="_blank" rel="noopener">Xポスト JulianGoldieSEO</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -1937,7 +2264,6 @@
           <p class="news-card__summary">クロードの子守りはやめて。 AI は実際に仕事が完了するまでコーディングを行うようになりました。それはラルフ・クロード・ループと呼ばれています。その仕組みは次のとおりです: → クロードにタスクを与える → コードを作成し、テストし、バグを見つける → https://t.co/m8epLufnbJ を参照</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -1949,7 +2275,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555033+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100094+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -1961,10 +2287,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/JulianGoldieSEO/status/2008158167352725977" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -1974,22 +2301,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="12"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="11"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 12">#12</span>
+          <span class="news-card__rank" aria-label="順位 11">#11</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/ArjunPatel_AI/status/2008507854475719014" target="_blank" rel="noopener">Xポスト ArjunPatel_AI</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -1997,7 +2324,6 @@
           <p class="news-card__summary">この男は文字通り、クロードにプロンプ​​トを表示する方法をリークします https://t.co/TpBWl3kfNt</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2009,7 +2335,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555030+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100092+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2021,10 +2347,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/ArjunPatel_AI/status/2008507854475719014" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2034,22 +2361,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="4.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="13"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="12"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 13">#13</span>
+          <span class="news-card__rank" aria-label="順位 12">#12</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/rute1203d/status/2007418189525959022" target="_blank" rel="noopener">Xポスト rute1203d</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -2057,7 +2384,6 @@
           <p class="news-card__summary">【バイブコーディング合宿開催したら、来てくれる?】 「Cursor入れたのに使えてない」 「エラーで止まって、そのまま放置」 「AIでラクになるはずの手作業が 毎日そのまま残ってる」 これ、“あなた”のせいじゃないです。 多くの場合、原因はシンプルで—— 詰まった瞬間に聞ける環境がないだけ。 https://t.co/iVZxYhhAeC</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2069,7 +2395,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555027+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100090+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2081,10 +2407,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/rute1203d/status/2007418189525959022" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2094,22 +2421,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="6.15"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="14"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="13"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 14">#14</span>
+          <span class="news-card__rank" aria-label="順位 13">#13</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/ShimmyoLab/status/2008428521279156369" target="_blank" rel="noopener">Xポスト ShimmyoLab</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -2117,7 +2444,6 @@
           <p class="news-card__summary">LLMによるコード生成、本当に「安全」ですか? 生成されたコードにはセキュリティ脆弱性が潜んでいることが多く、そのまま本番環境に投入するのは危険です。特にコード生成AIの利用が急速に広がる中、この問題への対処は急務となっています。 そこで注目したいのが、RAG(Retrieval-Augmented https://t.co/vhZ8xijxEa</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2129,7 +2455,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555022+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100088+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2141,10 +2467,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/ShimmyoLab/status/2008428521279156369" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2154,22 +2481,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="low"
+        data-score="3.50"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="15"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="14"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 15">#15</span>
+          <span class="news-card__rank" aria-label="順位 14">#14</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/Sumanth_077/status/2008532589649465600" target="_blank" rel="noopener">Xポスト Sumanth_077</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--low" aria-label="重要度 参考メモ">参考メモ</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 個人の観測や現場の反応を知るための話題">個人の観測や現場の反応を知るための話題</span>
             </div>
           </div>
         </header>
@@ -2177,7 +2504,6 @@
           <p class="news-card__summary">Acontext Github リポジトリ: https://t.co/tiSkBzJF65 (スターを付けることを忘れないでください 🌟)</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2189,7 +2515,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555014+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100083+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2201,10 +2527,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/Sumanth_077/status/2008532589649465600" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2214,22 +2541,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="4.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="16"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="15"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 16">#16</span>
+          <span class="news-card__rank" aria-label="順位 15">#15</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/aigleeson/status/2008487775272882222" target="_blank" rel="noopener">Xポスト aigleeson</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -2237,7 +2564,6 @@
           <p class="news-card__summary">これが、バイラル Instagram リールのアイデアを生み出すために私が使用しているメガ プロンプトです: STEAL IT: --- あなたは、プラットフォームのアルゴリズム、コンテンツ トレンド、スクロール停止フックに関する深い専門知識を持つ、バイラル Instagram リール ストラテジストです。あなたの目標は、非常に具体的で実用的な https://t.co/dEvgyz3wtR を生成することです。</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2249,7 +2575,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555006+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100082+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2261,10 +2587,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/aigleeson/status/2008487775272882222" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2274,22 +2601,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="5.70"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="17"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="16"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 17">#17</span>
+          <span class="news-card__rank" aria-label="順位 16">#16</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/AlexFinn/status/2008364830114329012" target="_blank" rel="noopener">Xポスト AlexFinn</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -2297,7 +2624,6 @@
           <p class="news-card__summary">Claude Code プロのヒント: Cursor と VS Code で実行するのをやめて、ターミナルで実行するだけです。メモリ効率が大幅に向上します。つまり、コンピュータの動作が速くなり、複数の端末を同時に実行できるということです https://t.co/p5dpdoxHjl を使用すると、カーソルと VScode によってコンピュータの速度が大幅に低下します</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2309,7 +2635,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555003+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100080+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2321,10 +2647,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/AlexFinn/status/2008364830114329012" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2334,22 +2661,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="4.60"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116555"
-        data-rank="18"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="17"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 18">#18</span>
+          <span class="news-card__rank" aria-label="順位 17">#17</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/sora19ai/status/2008438063706628510" target="_blank" rel="noopener">Xポスト sora19ai</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 役立つ更新や注目トピック">役立つ更新や注目トピック</span>
             </div>
           </div>
         </header>
@@ -2357,7 +2684,6 @@
           <p class="news-card__summary">Skillsを理解してない人の共通点は、 「何ができるか」しか見てなくて 「コンテキストをどう設計するか」を見てないこと。 本質的にSkillsは、Task単位でコンテキストを設計し、知識と作業を外部化して、再利用できるコンポーネントとして束ねる仕組みであって、 ・長いプロンプトをSKILL .mdに書く https://t.co/zvMEy0ACw7</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2369,7 +2695,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.555001+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100078+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2381,10 +2707,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/sora19ai/status/2008438063706628510" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2394,22 +2721,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="6.10"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116554"
-        data-rank="19"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="18"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 19">#19</span>
+          <span class="news-card__rank" aria-label="順位 18">#18</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/__SatoshiSsSs__/status/2008337761775042918" target="_blank" rel="noopener">Xポスト __SatoshiSsSs__</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -2417,7 +2744,6 @@
           <p class="news-card__summary">Claude Codeの「UIがダサい問題」を解決するskill見つけたの巻 8年のプロダクトデザイン経験を凝縮したらしい。ダッシュボード系のUIが一発でまともになるとのこと Redditで既に393いいね付いてた👇 https://t.co/Cp2y5MaYHq</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2429,7 +2755,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.554999+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100076+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2441,10 +2767,11 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/__SatoshiSsSs__/status/2008337761775042918" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
@@ -2454,22 +2781,22 @@
       <article class="news-card"
         role="listitem"
         data-category="posts"
-        data-importance="high"
-        data-score="10.00"
+        data-importance="medium"
+        data-score="6.55"
         data-freshness="100"
         data-freshness-bucket="24h"
-        data-published-ms="1772969116554"
-        data-rank="20"
-        data-tags="sns/論文,注目,新着"
+        data-published-ms="1772976983100"
+        data-rank="19"
+        data-tags="sns/論文,新着"
         data-source="xsnsenhanced">
         <header class="news-card__header">
-          <span class="news-card__rank" aria-label="順位 20">#20</span>
+          <span class="news-card__rank" aria-label="順位 19">#19</span>
           <div class="news-card__headline">
             <a class="news-card__title" href="https://twitter.com/rohanpaul_ai/status/2008445933424386074" target="_blank" rel="noopener">Xポスト rohanpaul_ai</a>
             <div class="news-card__meta-top">
-              <span class="news-card__badge news-card__badge--high" aria-label="重要度 重要度 高">重要度 高</span>
-              <span class="news-card__freshness" aria-label="鮮度 🔥 新着">🔥 新着</span>
-              <span class="news-card__score" aria-label="重要度スコア 10.0">スコア 10.0</span>
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
             </div>
           </div>
         </header>
@@ -2477,7 +2804,6 @@
           <p class="news-card__summary">この論文では、AI コンテキストを管理する最良の方法は、すべてをファイル システムのように扱うことだと述べています。現在、モデルの知識は個別のプロンプト、データベース、ツール、ログに保存されているため、コンテキスト エンジニアリングによってこれが一貫したシステムに取り込まれます。この論文では、https://t.co/ZZyV4zRb... となるエージェント ファイル システムを提案しています。</p>
           <div class="news-card__taglist">
             <span class="news-card__tag">SNS/論文</span>
-            <span class="news-card__tag">注目</span>
             <span class="news-card__tag">新着</span>
           </div>
         </div>
@@ -2489,7 +2815,7 @@
             </div>
             <div>
               <dt>更新</dt>
-              <dd><time datetime="2026-03-08T20:25:16.554996+09:00" title="2026-03-08 20:25 JST">03/08 20:25</time></dd>
+              <dd><time datetime="2026-03-08T22:36:23.100073+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
             </div>
             <div>
               <dt>所要時間</dt>
@@ -2501,16 +2827,81 @@
             </div>
           </dl>
           <div class="news-card__footer-meta">
-            <span class="news-card__trust" aria-label="信頼度 50点">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
               <span class="news-card__trust-bar" style="--trust-level:50%"></span>
-              信頼度 50/100
+              情報源 コミュニティ
             </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
             <a class="news-card__cta" href="https://twitter.com/rohanpaul_ai/status/2008445933424386074" target="_blank" rel="noopener">原文を開く</a>
           </div>
         </footer>
       </article>
 
+
+      <article class="news-card"
+        role="listitem"
+        data-category="posts"
+        data-importance="medium"
+        data-score="6.30"
+        data-freshness="100"
+        data-freshness-bucket="24h"
+        data-published-ms="1772976983100"
+        data-rank="20"
+        data-tags="sns/論文,新着"
+        data-source="xsnsenhanced">
+        <header class="news-card__header">
+          <span class="news-card__rank" aria-label="順位 20">#20</span>
+          <div class="news-card__headline">
+            <a class="news-card__title" href="https://twitter.com/AiAircle34052/status/2008395853611102712" target="_blank" rel="noopener">Xポスト AiAircle34052</a>
+            <div class="news-card__meta-top">
+              <span class="news-card__badge news-card__badge--medium" aria-label="重要度 チェック推奨">チェック推奨</span>
+              <span class="news-card__freshness" aria-label="鮮度 24時間以内">24時間以内</span>
+              <span class="news-card__reason" aria-label="注目理由 今日の動向を追うなら押さえたい話題">今日の動向を追うなら押さえたい話題</span>
+            </div>
+          </div>
+        </header>
+        <div class="news-card__body">
+          <p class="news-card__summary">【海外で大バズ】 Claude Code に「無限メモリ」を“後付け”する方法が話題😳 名前は Claude-Mem Claude Codeの最大の欠点だった「前回の文脈が消える問題」これを真正面から潰しに来た。 正直、今までのClaude Code👇 ・セッション切れる ・設計の前提が飛ぶ ・調査結果をまた説明 https://t.co/qwwadBRKTC</p>
+          <div class="news-card__taglist">
+            <span class="news-card__tag">SNS/論文</span>
+            <span class="news-card__tag">新着</span>
+          </div>
         </div>
+        <footer class="news-card__footer">
+          <dl class="news-card__details">
+            <div>
+              <dt>ソース</dt>
+              <dd>X / SNS (Enhanced)</dd>
+            </div>
+            <div>
+              <dt>更新</dt>
+              <dd><time datetime="2026-03-08T22:36:23.100065+09:00" title="2026-03-08 22:36 JST">03/08 22:36</time></dd>
+            </div>
+            <div>
+              <dt>所要時間</dt>
+              <dd>1分で読めます</dd>
+            </div>
+            <div>
+              <dt>翻訳</dt>
+              <dd>原文: 日本語</dd>
+            </div>
+          </dl>
+          <div class="news-card__footer-meta">
+            <span class="news-card__trust" aria-label="情報源 コミュニティ">
+              <span class="news-card__trust-bar" style="--trust-level:50%"></span>
+              情報源 コミュニティ
+            </span>
+            <span class="news-card__trust-note">SNS や投稿ベースの情報</span>
+            <a class="news-card__cta" href="https://twitter.com/AiAircle34052/status/2008395853611102712" target="_blank" rel="noopener">原文を開く</a>
+          </div>
+        </footer>
+      </article>
+
+    </div>
+
+    <div class="tab-content" id="categoryTabContent">
+      <div class="tab-pane fade show active" id="all" role="tabpanel">
+        <div class="row g-4" id="newsGrid"></div>
       </div>
       <div class="tab-pane fade" id="business" role="tabpanel">
         <div class="row g-4" id="businessGrid"></div>
@@ -2522,189 +2913,151 @@
         <div class="row g-4" id="postsGrid"></div>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Bootstrap 5.3 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
       const searchInput = document.getElementById('searchInput');
       const searchTags = document.getElementById('searchTags');
       const importanceFilter = document.getElementById('importanceFilter');
       const freshnessFilter = document.getElementById('freshnessFilter');
       const clearFilters = document.getElementById('clearFilters');
       const resultsCount = document.getElementById('resultsCount');
-      const themeToggle = document.getElementById('themeToggle');
-      const html = document.documentElement;
+      const legacyData = document.getElementById('legacyData');
+      const tabButtons = document.querySelectorAll('#categoryTabs button[data-bs-toggle="tab"]');
 
-      // Wrap news cards in Bootstrap grid columns
-      const newsGrid = document.getElementById('newsGrid');
-      const cards = newsGrid.querySelectorAll('.news-card');
-      cards.forEach(card => {
+      const grids = {
+        all: document.getElementById('newsGrid'),
+        business: document.getElementById('businessGrid'),
+        tools: document.getElementById('toolsGrid'),
+        posts: document.getElementById('postsGrid')
+      };
+
+      const sourceCards = Array.from(legacyData.querySelectorAll('.news-card'));
+
+      function createCol(card) {
         const col = document.createElement('div');
-        col.className = 'col-md-6 col-lg-4';
-        card.parentNode.insertBefore(col, card);
+        col.className = 'col-md-6 col-xl-4';
         col.appendChild(card);
-      });
+        return col;
+      }
 
-      // Populate category tabs with cards
-      function populateCategoryTabs() {
-        const businessGrid = document.getElementById('businessGrid');
-        const toolsGrid = document.getElementById('toolsGrid');
-        const postsGrid = document.getElementById('postsGrid');
+      function populateGrids() {
+        Object.values(grids).forEach((grid) => {
+          grid.innerHTML = '';
+        });
 
-        // Clear existing content
-        businessGrid.innerHTML = '';
-        toolsGrid.innerHTML = '';
-        postsGrid.innerHTML = '';
-
-        // Get all cards and clone them to category tabs
-        const allCards = newsGrid.querySelectorAll('.col-md-6');
-
-        allCards.forEach(colDiv => {
-          const card = colDiv.querySelector('.news-card');
-          if (!card) return;
-
-          const category =
-            card.dataset.categorySlug ||
-            card.dataset.category ||
-            card.getAttribute('data-category');
-
-          // Clone card with its wrapper
-          const clonedCol = colDiv.cloneNode(true);
-
-          // Add to appropriate category grid
-          if (category === 'business') {
-            businessGrid.appendChild(clonedCol);
-          } else if (category === 'tools') {
-            toolsGrid.appendChild(clonedCol);
-          } else if (category === 'posts') {
-            postsGrid.appendChild(clonedCol);
+        sourceCards.forEach((card) => {
+          const category = card.dataset.category || 'all';
+          grids.all.appendChild(createCol(card.cloneNode(true)));
+          if (grids[category]) {
+            grids[category].appendChild(createCol(card.cloneNode(true)));
           }
         });
       }
 
-      // Populate tabs on load
-      populateCategoryTabs();
+      populateGrids();
 
-      // Update visible count when tab changes
-      const tabButtons = document.querySelectorAll('#categoryTabs button[data-bs-toggle="tab"]');
-      tabButtons.forEach(button => {
-        button.addEventListener('shown.bs.tab', (event) => {
-          applyFilters();
-        });
-      });
-
-      // Theme toggle
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = html.getAttribute('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-bs-theme', newTheme);
+      function updateThemeIcon(theme) {
         const icon = themeToggle.querySelector('i');
-        icon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
-        localStorage.setItem('theme', newTheme);
-      });
-
-      // Load saved theme
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        html.setAttribute('data-bs-theme', savedTheme);
-        const icon = themeToggle.querySelector('i');
-        icon.className = savedTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+        icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
       }
 
-      // Search functionality
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        html.setAttribute('data-bs-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+      }
+
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = html.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-bs-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        updateThemeIcon(nextTheme);
+      });
+
       let keywords = [];
 
-      searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          const value = searchInput.value.trim();
-          if (value && !keywords.includes(value)) {
-            keywords.push(value);
-            renderSearchTags();
-            searchInput.value = '';
-            applyFilters();
-          }
-        }
-      });
-
       function renderSearchTags() {
-        searchTags.innerHTML = keywords.map(keyword =>
-          `<span class="badge bg-primary me-2 mb-2" data-keyword="${keyword}">
-            ${keyword} <i class="bi bi-x" style="cursor:pointer"></i>
-          </span>`
-        ).join('');
+        searchTags.innerHTML = keywords.map((keyword) => (
+          `<button type="button" class="btn btn-sm btn-primary me-2 mb-2" data-keyword="${keyword}">${keyword} <i class="bi bi-x"></i></button>`
+        )).join('');
 
-        searchTags.querySelectorAll('.badge').forEach(badge => {
-          badge.addEventListener('click', (e) => {
-            const keyword = badge.dataset.keyword;
-            keywords = keywords.filter(k => k !== keyword);
+        searchTags.querySelectorAll('[data-keyword]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const keyword = button.dataset.keyword;
+            keywords = keywords.filter((item) => item !== keyword);
             renderSearchTags();
             applyFilters();
           });
         });
       }
 
-      function applyFilters() {
-        // Get active tab
+      searchInput.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+        const value = searchInput.value.trim();
+        if (!value || keywords.includes(value)) return;
+        keywords.push(value);
+        searchInput.value = '';
+        renderSearchTags();
+        applyFilters();
+      });
+
+      function matchesFreshness(cardBucket, filterValue) {
+        if (filterValue === 'all') return true;
+        if (filterValue === '24h') return cardBucket === '24h';
+        if (filterValue === '3d') return ['24h', '72h'].includes(cardBucket);
+        if (filterValue === '7d') return ['24h', '72h', '168h'].includes(cardBucket);
+        return true;
+      }
+
+      function activeGrid() {
         const activeTab = document.querySelector('#categoryTabs .nav-link.active');
-        const activeTabId = activeTab ? activeTab.getAttribute('data-bs-target').replace('#', '') : 'all';
+        const category = activeTab ? activeTab.dataset.category : 'all';
+        return grids[category] || grids.all;
+      }
 
-        // Get cards in the active tab
-        let targetGrid;
-        if (activeTabId === 'all') {
-          targetGrid = document.getElementById('newsGrid');
-        } else if (activeTabId === 'business') {
-          targetGrid = document.getElementById('businessGrid');
-        } else if (activeTabId === 'tools') {
-          targetGrid = document.getElementById('toolsGrid');
-        } else if (activeTabId === 'posts') {
-          targetGrid = document.getElementById('postsGrid');
-        }
-
-        if (!targetGrid) return;
-
-        const cards = targetGrid.querySelectorAll('.news-card');
+      function applyFilters() {
         const importance = importanceFilter.value;
         const freshness = freshnessFilter.value;
         let visibleCount = 0;
 
-        cards.forEach(card => {
-          let visible = true;
+        Object.values(grids).forEach((grid) => {
+          grid.querySelectorAll('.news-card').forEach((card) => {
+            let visible = true;
 
-          // Importance filter
-          if (importance !== 'all') {
-            const cardImportance = card.dataset.importance;
-            if (cardImportance !== importance) visible = false;
-          }
+            if (importance !== 'all' && card.dataset.importance !== importance) {
+              visible = false;
+            }
 
-          // Freshness filter
-          if (freshness !== 'all' && visible) {
-            const cardFreshness = card.dataset.freshnessBucket;
-            if (freshness === '24h' && cardFreshness !== '24h') visible = false;
-            if (freshness === '3d' && !['24h', '72h'].includes(cardFreshness)) visible = false;
-            if (freshness === '7d' && !['24h', '72h', '168h'].includes(cardFreshness)) visible = false;
-          }
+            if (visible && !matchesFreshness(card.dataset.freshnessBucket, freshness)) {
+              visible = false;
+            }
 
-          // Keyword filter
-          if (keywords.length > 0 && visible) {
-            const text = card.textContent.toLowerCase();
-            const hasAllKeywords = keywords.every(keyword =>
-              text.includes(keyword.toLowerCase())
-            );
-            if (!hasAllKeywords) visible = false;
-          }
+            if (visible && keywords.length > 0) {
+              const text = card.textContent.toLowerCase();
+              visible = keywords.every((keyword) => text.includes(keyword.toLowerCase()));
+            }
 
-          const colDiv = card.closest('.col-md-6');
-          if (colDiv) {
-            colDiv.style.display = visible ? '' : 'none';
-            if (visible) visibleCount++;
+            const col = card.closest('.col-md-6, .col-xl-4');
+            if (col) {
+              col.style.display = visible ? '' : 'none';
+            }
+          });
+        });
+
+        activeGrid().querySelectorAll('.news-card').forEach((card) => {
+          const col = card.closest('.col-md-6, .col-xl-4');
+          if (col && col.style.display !== 'none') {
+            visibleCount += 1;
           }
         });
 
-        resultsCount.textContent = `${visibleCount} 件の記事を表示中`;
+        resultsCount.textContent = `${visibleCount}件を表示中`;
       }
 
       importanceFilter.addEventListener('change', applyFilters);
@@ -2713,13 +3066,17 @@
       clearFilters.addEventListener('click', () => {
         searchInput.value = '';
         keywords = [];
-        renderSearchTags();
         importanceFilter.value = 'all';
         freshnessFilter.value = 'all';
+        renderSearchTags();
         applyFilters();
       });
 
-      // Initial filter application
+      tabButtons.forEach((button) => {
+        button.addEventListener('shown.bs.tab', applyFilters);
+      });
+
+      renderSearchTags();
       applyFilters();
     });
   </script>
